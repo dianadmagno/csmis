@@ -23,6 +23,9 @@ class User extends Authenticatable
         'middlename',
         'email',
         'password',
+        'photo',
+        'is_superadmin',
+        'is_active'
     ];
 
     /**

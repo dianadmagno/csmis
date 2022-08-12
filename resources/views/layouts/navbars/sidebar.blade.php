@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/foundation/colors.html">
+                    <a class="nav-link" href="{{ route('role.index') }}">
                         <i class="ni ni-palette"></i> Roles and Permissions
                     </a>
                 </li>
