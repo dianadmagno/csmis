@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.headers.cards')
-    
+    @include('users.partials.header', [
+      'title' => __('List of Users')
+    ])   
+
     <div class="container-fluid mt--7">
           <!-- Page content -->
           <div class="container-fluid mt--6">
@@ -11,14 +13,29 @@
                 <div class="card">
                   <!-- Card header -->
                   <div class="card-header border-0">
-                      <div class="row align-items-center">
-                          <div class="col-8">
-                              <h3 class="mb-0">Users</h3>
-                          </div>
-                          <div class="col-4 text-right">
-                              <a href="" class="btn btn-sm btn-primary">Add user</a>
-                          </div>
+                    <div class="row align-items-center">
+                      <div class="col">
+                          <a href="{{ route('user.create') }}" class="btn btn-primary">Add user</a>
                       </div>
+                      <div class="col-3">
+                        <div class="form-group mb-0">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Search" type="text">
+                          </div>
+                        </div>
+                      </div>
+                      @if (session('status'))
+                          <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                              {{ session('status') }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                      @endif
+                    </div>
                   </div>
                   <!-- Light table -->
                   <div class="table-responsive">
@@ -27,79 +44,65 @@
                         <tr>
                           <th scope="col">User</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Status</th>
                           <th scope="col">Role</th>
                           <th scope="col">View</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @foreach($users as $user)
-                          <tr>
-                            <th scope="row">
-                              <div class="media align-items-center">
-                                <a href="#" class="avatar rounded-circle mr-3">
-                                  @if($user->photo)
-                                    <img alt="User Image" src="{{ asset('user images/'.$user->photo.'') }}">
-                                  @else
-                                    <img alt="User Image" src="{{ asset('user images/user.png') }}">
-                                  @endif
-                                </a>
-                                <div class="media-body">
-                                  <span class="name mb-0 text-sm">{{ $user->firstname }} {{ $user->middlename }} {{ $user->lastname }}</span>
+                        @if (count($users) > 0)
+                          @foreach($users as $user)
+                            <tr>
+                              <th scope="row">
+                                <div class="media align-items-center">
+                                  <a href="#" class="avatar rounded-circle mr-3">
+                                    @if($user->photo)
+                                      <img alt="User Image" src="{{ asset('user images/'.$user->photo.'') }}">
+                                    @else
+                                      <img alt="User Image" src="{{ asset('user images/user.png') }}">
+                                    @endif
+                                  </a>
+                                  <div class="media-body">
+                                    <span class="name mb-0 text-sm">{{ $user->firstname }} {{ $user->middlename }} {{ $user->lastname }}</span>
+                                  </div>
                                 </div>
-                              </div>
-                            </th>
-                            <td class="budget">
-                              {{ $user->email }}
-                            </td>
-                            <td>
-                              @if ($user->is_active)
-                                <span class="badge badge-success">Active</span>
-                              @else
-                                <span class="badge badge-danger">Inactive</span>
-                              @endif
-                            </td>
-                            <td>
-                              @if($user->is_superadmin)
-                                <span class="badge badge-primary">Superadmin</span>
-                              @endif
-                            </td>
-                            <td>
-                              <a href="{{ route('user.edit', $user->id) }}" class="btn btn-default" type="button">
-                                View
-                              </a>
-                            </td>
-                          </tr>
-                        @endforeach
+                              </th>
+                              <td class="budget">
+                                {{ $user->email }}
+                              </td>
+                              <td>
+                                @if($user->is_superadmin)
+                                  <span class="badge badge-primary">Superadmin</span>
+                                @elseif (count($user->userRoles) > 0)
+                                @else
+                                  <span class="badge badge-success">Guest</span>
+                                @endif
+                              </td>
+                              <td>
+                                <form action="{{ route('user.destroy', $user->id) }}" method="post">
+                                  @csrf
+                                  @method('delete')
+                                  <a href="{{ route('user.edit', $user->id) }}" class="btn btn-default" type="button">
+                                    View
+                                  </a>
+                                  <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to deactivate this user?')">Deactivate</button>
+                                </form>
+                              </td>
+                            </tr>
+                          @endforeach
+                        @else
+                            <tr class="text-center">
+                                <td colspan="5">No Available Data</td>
+                            </tr>
+                        @endif
                       </tbody>
                     </table>
                   </div>
                   <!-- Card footer -->
-                  <div class="card-footer">
-                    <nav aria-label="...">
-                      <ul class="pagination justify-content-end mb-0">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1">
-                            <i class="fas fa-angle-left"></i>
-                            <span class="sr-only">Previous</span>
-                          </a>
-                        </li>
-                        <li class="page-item active">
-                          <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
-                            <i class="fas fa-angle-right"></i>
-                            <span class="sr-only">Next</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                  @if (count($users) > 0)
+                    <div class="card-footer">
+                      {{ $users->links() }}
+                    </div>
+                  @endif
                 </div>
               </div>
             </div>
