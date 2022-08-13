@@ -83,6 +83,7 @@
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
+                
                 {{-- <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -104,6 +105,18 @@
                         </ul>
                     </div>
                 </li> --}}
+            </ul>
+
+            <hr class="my-3">
+            <!-- Heading -->
+            <h6 class="navbar-heading text-muted">References</h6>
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('ranks.index') }}">
+                        <i class="ni ni-circle-08"></i> Ranks
+                    </a>
+                </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">
