@@ -23,6 +23,23 @@ class UserController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(UserRequest $request)
+    {
+        User::create([
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'email' => $request->email,
+            'password' => Hash::make($request->lastname)
+        ]);
+        return redirect()->route('user.index')->with('status', 'User Created Successfully');
+    }
+
     public function edit($id)
     {
         return view('profile.edit', [
@@ -86,5 +103,25 @@ class UserController extends Controller
                 return back()->with('status', 'User Photo Removed Successfully');
                 break;
         }
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id)->delete();
+        return back()->with('status', 'User Deactivated Successfully');
+    }
+
+    public function deactivated()
+    {
+        $users = User::onlyTrashed()->get();
+        return view('users.deactivated', [
+            'users' => $users
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $user = User::where('id', $id)->restore();
+        return back()->with('status', 'User Restored Successfully');
     }
 }

@@ -1,0 +1,101 @@
+@extends('layouts.app')
+
+@section('content')
+    @include('users.partials.header', [
+      'title' => __('Deactivated Users')
+    ])   
+    
+    <div class="container-fluid mt--7">
+          <!-- Page content -->
+          <div class="container-fluid mt--6">
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <!-- Card header -->
+                  <div class="card-header border-0">
+                      <div class="row align-items-center">
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Search" type="text">
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Light table -->
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">User</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Role</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="list">
+                        @if (count($users) > 0)
+                            @foreach($users as $user)
+                            <tr>
+                                <th scope="row">
+                                <div class="media align-items-center">
+                                    <a href="#" class="avatar rounded-circle mr-3">
+                                    @if($user->photo)
+                                        <img alt="User Image" src="{{ asset('user images/'.$user->photo.'') }}">
+                                    @else
+                                        <img alt="User Image" src="{{ asset('user images/user.png') }}">
+                                    @endif
+                                    </a>
+                                    <div class="media-body">
+                                        <span class="name mb-0 text-sm">{{ $user->firstname }} {{ $user->middlename }} {{ $user->lastname }}</span>
+                                    </div>
+                                </div>
+                                </th>
+                                <td class="budget">
+                                {{ $user->email }}
+                                </td>
+                                <td>
+                                @if($user->is_superadmin)
+                                    <span class="badge badge-primary">Superadmin</span>
+                                @endif
+                                </td>
+                                <td>
+                                    <form action="{{ route('user.restore', $user->id) }}" method="post">
+                                        @csrf
+                                        @method('put')
+                                        <button type="submit" class="btn btn-success" onclick="return alert('Do you really want to restore this user?')">Restore</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr class="text-center">
+                                <td colspan="5">No Available Data</td>
+                            </tr>
+                        @endif
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- Card footer -->
+                  @if (count($users) > 0)
+                    <div class="card-footer">
+                      {{ $users->links() }}
+                    </div>
+                  @endif
+                </div>
+              </div>
+            </div>
+          </div>
+
+        @include('layouts.footers.auth')
+    </div>
+@endsection
+
+@push('js')
+    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+@endpush

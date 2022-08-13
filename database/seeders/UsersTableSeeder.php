@@ -21,7 +21,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('secret123'),
             'is_superadmin' => true,
-            'is_active' => true,
             'created_at' => now(),
             'updated_at' => now()
         ]);

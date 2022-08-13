@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.headers.cards')
+    @include('users.partials.header', [
+        'title' => __('Dashboard')
+    ])   
     
     <div class="container-fluid mt--7">
         <div class="row">

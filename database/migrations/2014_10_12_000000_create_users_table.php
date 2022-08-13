@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_superadmin')->default(false);
-            $table->boolean('is_active')->default(true);
             $table->string('photo')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

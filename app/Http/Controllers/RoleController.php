@@ -62,7 +62,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view('roles.edit', [
+            'role' => $role
+        ]);
     }
 
     /**
@@ -72,9 +75,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role->update($request->all());
+        return redirect()->route('role.index')->with('status', 'Role Updated Successfully'); 
     }
 
     /**
@@ -85,6 +90,12 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id);
+        if (count($role->userRoles) > 0) {
+            return back()->with('status', 'Role cannot be archived');
+        }
+
+        $role->delete();
+        return back()->with('status', 'Role Archived Successfully');
     }
 }
