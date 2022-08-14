@@ -60,7 +60,23 @@
                                                 @endif
                                             </div>
 
-                                            <div class="form-group{{ $errors->has('serial_number') ? ' has-danger' : '' }}">
+                                            <div class="form-group{{ $errors->has('rank') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Rank') }}</label>
+                                                <select name="rank" class="form-control form-control-alternative{{ $errors->has('rank') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Rank</option>
+                                                    @foreach($ranks as $rank)
+                                                        <option value="{{ $rank->id }}">{{ $rank->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('rank'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('rank') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('rank') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Serial Number') }}</label>
                                                 <input type="text" name="serial_number" class="form-control form-control-alternative{{ $errors->has('serial_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Serial Number') }}">
             
@@ -81,7 +97,8 @@
                                                     </span>
                                                 @endif
                                             </div>
-
+                                        </div>
+                                        <div class="col">
                                             <div class="form-group{{ $errors->has('age') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Age') }}</label>
                                                 <input type="text" name="age" class="form-control form-control-alternative{{ $errors->has('age') ? ' is-invalid' : '' }}" placeholder="{{ __('Age') }}">
@@ -103,8 +120,7 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>
-                                        <div class="col">
+
                                             <div class="form-group{{ $errors->has('birthdate') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Birthday') }}</label>
                                                 <input type="date" name="birthdate" class="form-control form-control-alternative{{ $errors->has('birthdate') ? ' is-invalid' : '' }}" placeholder="{{ __('Birthday') }}">
@@ -118,6 +134,7 @@
                                             <div class="form-group{{ $errors->has('blood_type') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Blood Type') }}</label>
                                                 <select name="blood_type" class="form-control form-control-alternative{{ $errors->has('blood_type') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Blood Type</option>
                                                     @foreach($bloodTypes as $bloodType)
                                                         <option value="{{ $bloodType->id }}">{{ $bloodType->description }}</option>
                                                     @endforeach
@@ -133,6 +150,7 @@
                                             <div class="form-group{{ $errors->has('religion') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Religion') }}</label>
                                                 <select name="religion" class="form-control form-control-alternative{{ $errors->has('religion') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Religion</option>
                                                     @foreach($religions as $religion)
                                                         <option value="{{ $religion->id }}">{{ $religion->description }}</option>
                                                     @endforeach
