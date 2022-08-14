@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rf_blood_types', function (Blueprint $table) {
+        Schema::create('rf_religions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_blood_types');
+        Schema::dropIfExists('rf_religions');
     }
 };

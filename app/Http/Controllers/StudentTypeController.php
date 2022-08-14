@@ -12,11 +12,13 @@ class StudentTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $studentType = StudentType::paginate(10);
+        $keyword = $request->keyword;
         return view('references.type.index', [
-            'student_types' => $studentType
+            'types' => StudentType::where('name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10)
         ]);
     }
 
@@ -62,7 +64,7 @@ class StudentTypeController extends Controller
     public function edit($id)
     {
         return view('references.type.edit', [
-            'student_types' => StudentType::find($id)
+            'types' => StudentType::find($id)
         ]);
     }
 
@@ -80,7 +82,7 @@ class StudentTypeController extends Controller
 
         $studentType = StudentType::paginate(10);
         return view('references.type.index', [
-            'student_types' => $studentType
+            'types' => $studentType
         ])->withStatus(__('Student Type successfully updated.'));   
     }
 
@@ -94,8 +96,6 @@ class StudentTypeController extends Controller
     {
         $id = StudentType::find($id);
         $id->delete();
-        return view('references.type.index', [
-            'student_types' => $id
-        ])->withStatus(__('Student Type successfully deleted.'));
+        return redirect()->route('type.index')->with('status', 'Student Enlistment Deleted Successfully');
     }
 }

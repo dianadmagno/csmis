@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Blood Type')
+      'title' => __('List of Religion')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('bloodType.index') }}">
+                  <form action="{{ route('user.index') }}">
                     <div class="card-header border-0">
                       <div class="row align-items-center">
                         <div class="col-3">
@@ -29,7 +29,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('class.create') }}" class="btn btn-primary">Add Blood Type</a>
+                            <a href="{{ route('religion.create') }}" class="btn btn-primary">Add Religion</a>
                         </div>
                         @if (session('status'))
                             <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -53,25 +53,25 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($blood_types) > 0)
-                          @foreach($blood_types as $bloodType)
+                        @if (count($religions) > 0)
+                          @foreach($religions as $religion)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $bloodType->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $religion->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $bloodType->description }}
+                                {{ $religion->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                    <a href="{{ route('bloodType.edit', $bloodType->id) }}" class="btn btn-warning" type="button">
+                                    <a href="{{ route('religion.edit', $religion->id) }}" class="btn btn-warning" type="button">
                                         Edit
                                       </a>
-                                      <form action="{{ route('bloodType.destroy', $bloodType->id) }}" method="post">
+                                      <form action="{{ route('religion.destroy', $religion->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <a type="button" class="btn btn-danger" onclick="confirm('{{ __("Are you sure you want to delete this category?") }}') ? this.parentElement.submit() : ''">
@@ -91,9 +91,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($blood_types) > 0)
+                  @if (count($religions) > 0)
                     <div class="card-footer">
-                      {{ $blood_types->links() }}
+                      {{ $religions->links() }}
                     </div>
                   @endif
                 </div>

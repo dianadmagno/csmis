@@ -122,12 +122,17 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('type.index') }}">
-                                    {{ __('Student Type') }}
+                                    {{ __('Enlistment Type') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('bloodType.index') }}">
                                     {{ __('Blood Type') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('religion.index') }}">
+                                    {{ __('Religion') }}
                                 </a>
                             </li>
                         </ul>

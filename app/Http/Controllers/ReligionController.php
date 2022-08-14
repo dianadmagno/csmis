@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rank;
+use App\Models\Religion;
 use Illuminate\Http\Request;
 
-class RankController extends Controller
+class ReligionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class RankController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.ranks.index', [
-            'ranks' => Rank::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.religion.index', [
+            'religions' => Religion::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -29,7 +29,7 @@ class RankController extends Controller
      */
     public function create(Request $request)
     {
-        return view('references.ranks.create');
+        return view('references.religion.create');
     }
 
     /**
@@ -40,8 +40,8 @@ class RankController extends Controller
      */
     public function store(Request $request)
     {
-        Rank::create($request->all());
-        return redirect()->route('ranks.index')->with('status', 'Rank Created Successfully');
+        Religion::create($request->all());
+        return redirect()->route('religion.index')->with('status', 'Religion Created Successfully');
     }
 
     /**
@@ -63,8 +63,8 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        return view('references.ranks.edit', [
-            'rank' => Rank::find($id)
+        return view('references.religion.edit', [
+            'religions' => Religion::find($id)
         ]);
     }
 
@@ -77,13 +77,13 @@ class RankController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = Rank::find($id);
+        $data = Religion::find($id);
         $data->update($request->all());
 
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
-        ])->withStatus(__('Rank successfully updated.'));   
+        $religions = Religion::paginate(10);
+        return view('references.religion.index', [
+            'religions' => $religions
+        ])->withStatus(__('Religion successfully updated.'));   
     }
 
     /**
@@ -94,8 +94,8 @@ class RankController extends Controller
      */
     public function destroy($id)
     {
-        $id = Rank::find($id);
+        $id = Religion::find($id);
         $id->delete();
-        return redirect()->route('rank.index')->with('status', 'Rank Deleted Successfully');
+        return redirect()->route('religion.index')->with('status', 'Religion Deleted Successfully');
     }
 }

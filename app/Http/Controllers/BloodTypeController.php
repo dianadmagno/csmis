@@ -12,11 +12,13 @@ class BloodTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bloodType = BloodType::paginate(10);
+        $keyword = $request->keyword;
         return view('references.bloodType.index', [
-            'blood_types' => $bloodType
+            'blood_types' => BloodType::where('name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10)
         ]);
     }
 
@@ -62,7 +64,7 @@ class BloodTypeController extends Controller
     public function edit($id)
     {
         return view('references.bloodType.edit', [
-            'blood_type' => BloodType::find($id)
+            'blood_types' => BloodType::find($id)
         ]);
     }
 

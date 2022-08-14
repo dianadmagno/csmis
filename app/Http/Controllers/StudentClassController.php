@@ -12,11 +12,13 @@ class StudentClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $class = StudentClass::paginate(10);
+        $keyword = $request->keyword;
         return view('references.class.index', [
-            'classes' => $class
+            'classes' => StudentClass::where('name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10)
         ]);
     }
 
@@ -94,8 +96,6 @@ class StudentClassController extends Controller
     {
         $id = StudentClass::find($id);
         $id->delete();
-        return view('references.class.index', [
-            'classes' => $id
-        ])->withStatus(__('Class successfully deleted.'));
+        return redirect()->route('class.index')->with('status', 'Class Deleted Successfully');
     }
 }
