@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Religion;
 use Illuminate\Database\Seeder;
+use App\Models\References\Religion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ReligionTableSeeder extends Seeder

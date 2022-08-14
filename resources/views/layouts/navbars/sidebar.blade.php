@@ -97,84 +97,89 @@
                 </li>
             </ul>
 
-            @if (auth()->user()->is_superadmin)
-                <!-- Divider -->
-                <hr class="my-3">
-                <!-- Heading -->
-                <h6 class="navbar-heading text-muted">Administration</h6>
-                <!-- Navigation -->
-                <ul class="navbar-nav mb-md-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#administration" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="administration">
-                            <i class="ni ni-circle-08 text-primary"></i>
-                            <span class="nav-link-text">{{ __('User Management') }}</span>
-                        </a>
+            <hr class="my-3">
+            <!-- Heading -->
+            <h6 class="navbar-heading text-muted">References</h6>
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#references" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
+                        <i class="ni ni-circle-08 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Student References') }}</span>
+                    </a>
 
-                        <div class="collapse" id="administration">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('user.index') }}">
-                                        {{ __('List of Users') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('user.deactivated') }}">
-                                        {{ __('Deactivated Users') }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('role.index') }}">
-                            <i class="ni ni-palette text-primary"></i> Roles and Permissions
-                        </a>
-                    </li>
-                </ul>
+                    <div class="collapse" id="references">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ranks.index') }}">
+                                    {{ __('Ranks') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('class.index') }}">
+                                    {{ __('Class') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('type.index') }}">
+                                    {{ __('Enlistment Type') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('bloodType.index') }}">
+                                    {{ __('Blood Type') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('religion.index') }}">
+                                    {{ __('Religion') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
 
-                <hr class="my-3">
-                <!-- Heading -->
-                <h6 class="navbar-heading text-muted">References</h6>
-                <!-- Navigation -->
-                <ul class="navbar-nav mb-md-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#references" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
-                            <i class="ni ni-circle-08 text-primary"></i>
-                            <span class="nav-link-text">{{ __('Personnel References') }}</span>
-                        </a>
+            {{-- <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('class.index') }}">
+                        <i class="ni ni-circle-08"></i> Class
+                    </a>
+                </li>
+            </ul> --}}
+            <!-- Divider -->
+            <hr class="my-3">
+            <!-- Heading -->
+            <h6 class="navbar-heading text-muted">Administration</h6>
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#administration" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="administration">
+                        <i class="ni ni-circle-08 text-primary"></i>
+                        <span class="nav-link-text">{{ __('User Management') }}</span>
+                    </a>
 
-                        <div class="collapse" id="references">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('ranks.index') }}">
-                                        {{ __('Ranks') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('class.index') }}">
-                                        {{ __('Class') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('type.index') }}">
-                                        {{ __('Enlistment Type') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('bloodType.index') }}">
-                                        {{ __('Blood Type') }}
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('religion.index') }}">
-                                        {{ __('Religion') }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            @endif
+                    <div class="collapse" id="administration">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.index') }}">
+                                    {{ __('List of Users') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.deactivated') }}">
+                                    {{ __('Deactivated Users') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('role.index') }}">
+                        <i class="ni ni-palette text-primary"></i> Roles and Permissions
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.headers.cards')
-    
+    @include('users.partials.header', [
+        'title' => __('Update Ranks')
+    ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
         <div class="container-fluid mt--6">
@@ -10,14 +11,6 @@
                 <div class="col">
                     <div class="card">
                         <!-- Card header -->
-                        <div class="card-header border-0">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h3 class="mb-0">Add Rank</h3>
-                                </div>
-                            </div>
-                        </div>
-                        
                         <div class="card-body">
                             <form method="post" action="{{ route('ranks.update', $rank->id) }}">
                                 @csrf

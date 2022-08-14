@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\StudentType;
 use Illuminate\Database\Seeder;
+use App\Models\References\StudentType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EnlistmentTypeTableSeeder extends Seeder
