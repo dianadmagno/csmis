@@ -117,11 +117,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('class.index') }}">
-                                    {{ __('Class') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('type.index') }}">
                                     {{ __('Enlistment Type') }}
                                 </a>
@@ -144,6 +139,30 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('vaccineName.index') }}">
                                     {{ __('Vaccine Names') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#classReferences" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
+                        <i class="ni ni-circle-08 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Class References') }}</span>
+                    </a>
+
+                    <div class="collapse" id="classReferences">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('class.index') }}">
+                                    {{ __('Class') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('module.index') }}">
+                                    {{ __('Modules') }}
                                 </a>
                             </li>
                         </ul>

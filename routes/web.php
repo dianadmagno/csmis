@@ -48,5 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('religion', 'App\Http\Controllers\References\ReligionController', ['except' => ['show']]);
 	Route::resource('unit', 'App\Http\Controllers\References\UnitController', ['except' => ['show']]);
 	Route::resource('vaccineName', 'App\Http\Controllers\References\VaccineNameController', ['except' => ['show']]);
+	Route::resource('module', 'App\Http\Controllers\References\ModuleController', ['except' => ['show']]);
 });
 
