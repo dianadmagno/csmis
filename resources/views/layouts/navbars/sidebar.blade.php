@@ -80,7 +80,19 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-success"></i> {{ __('Dashboard') }}
+                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                    </a>
+                </li>
+            </ul>
+            <!-- Divider -->
+            <hr class="my-3"> 
+            <!-- Heading -->
+            <h6 class="navbar-heading text-muted">Modules</h6>
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('student.index') }}">
+                        <i class="ni ni-hat-3 text-primary"></i> Students
                     </a>
                 </li>
             </ul>
@@ -138,7 +150,7 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="ni ni-circle-08 text-success"></i>
+                        <i class="ni ni-circle-08 text-primary"></i>
                         <span class="nav-link-text">{{ __('User Management') }}</span>
                     </a>
 
@@ -159,7 +171,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('role.index') }}">
-                        <i class="ni ni-palette text-success"></i> Roles and Permissions
+                        <i class="ni ni-palette text-primary"></i> Roles and Permissions
                     </a>
                 </li>
             </ul>

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.headers.cards')
+    @include('users.partials.header', [
+        'title' => __('Edit Profile')
+    ])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -34,8 +36,8 @@
                             <form method="post" action="{{ route('user.photo', $user->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-                                <input class="ml-4" type="file" name="photo"><br><br>
-                                <div class="row">
+                                <input type="file" class="ml-5" name="photo"><br><br>
+                                <div class="row ml-3">
                                     <button type="submit" name="action" value="upload" class="btn btn-success">Upload Photo</button>
                                     <button type="submit" name="action" value="remove" onclick="alert('Do you really want to delete this photo?')" class="btn btn-danger">Remove Photo</button>
                                 </div>
@@ -46,11 +48,6 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card bg-secondary shadow">
-                    <div class="card-header bg-white border-0">
-                        <div class="row align-items-center">
-                            <h3 class="mb-0">{{ __('Edit Profile') }}</h3>
-                        </div>
-                    </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('user.update', $user->id) }}">
                             @csrf

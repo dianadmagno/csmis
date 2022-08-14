@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\PasswordRequest;
@@ -16,10 +17,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
         return view('users.index', [
-            'users' => $model->paginate(10)
+            'users' => User::where('lastname', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('firstname', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('middlename', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10)
         ]);
     }
 
