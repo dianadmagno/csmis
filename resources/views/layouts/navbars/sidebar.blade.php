@@ -140,6 +140,11 @@
                                     {{ __('Unit') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('vaccineName.index') }}">
+                                    {{ __('Vaccine Names') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
