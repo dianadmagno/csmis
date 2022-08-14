@@ -3,10 +3,13 @@
 @section('content')
     <div class="header bg-gradient-success py-7 py-lg-8">
         <div class="container">
-            <div class="header-body text-center mt-7 mb-7">
+            <div class="header-body text-center mt-4 mb-7">
                 <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-6">
-                        <h1 class="text-white">{{ __('Welcome to Argon Dashboard FREE Laravel Live Preview.') }}</h1>
+                    <div class="col-lg-6 col-md-6">
+                        <img src="{{ asset('logos/scs logo.png') }}" style="width: 103px;" class="mt--3 navbar-brand-img" alt="SCS Logo">
+                        <img src="{{ asset('logos/tradoc logo.png') }}" style="width: 110px;" class="mt--3 navbar-brand-img" alt="Tradoc Logo">
+                        <img src="{{ asset('logos/army logo.png') }}" style="width: 103px;" class="mt--3 navbar-brand-img" alt="Army Logo"><br><br>
+                        <h1 class="text-white">{{ __('CANDIDATE SOLDIER MANAGEMENT INFORMATION SYSTEM') }}</h1>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('logos/scs logo.png') }}" class="mt--3 navbar-brand-img" alt="SCS Logo">
+            <img src="{{ asset('logos/scs logo.png') }}" style="width: 50px;" class="mt--3 navbar-brand-img" alt="SCS Logo">
             <span class="text-white display-3">SCS</span>
         </a>
         <!-- User -->

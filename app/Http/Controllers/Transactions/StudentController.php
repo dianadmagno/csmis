@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
+use App\Models\References\Unit;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
@@ -42,12 +43,14 @@ class StudentController extends Controller
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
         $studentClasses = StudentClass::all();
+        $units = Unit::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
             'ranks' => $ranks,
             'enlistmentTypes' => $enlistmentTypes,
-            'studentClasses' => $studentClasses
+            'studentClasses' => $studentClasses,
+            'units' => $units
         ]);
     }
 

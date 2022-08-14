@@ -1,7 +1,8 @@
 <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
     <div class="container px-4">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/white.png" />
+        <a class="navbar-brand" href="/">
+            {{-- <img src="{{ asset('logos/scs logo.png') }}" class="mb-4" style="width: 70px; height: 60px" />
+            <span class="text-white display-2">SCS</span> --}}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,8 +12,8 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{ route('home') }}">
-                            <img src="{{ asset('argon') }}/img/brand/blue.png">
+                        <a href="#">
+                            <img src="{{ asset('logos/scs logo.png') }}" class="mb-4" style="width: 50px; height: 60px" />
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
