@@ -12,20 +12,24 @@
                 <div class="col">
                     <div class="card">
                         <!-- Card header -->
-                        <div class="card-header border-0">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <a href="{{ route('role.create') }}" class="btn btn-primary">Add Role</a>
-                                </div>
+                        <form action="{{ route('role.index') }}">
+                            <div class="card-header border-0">
+                              <div class="row align-items-center">
                                 <div class="col-3">
-                                    <div class="form-group mb-0">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="Search" type="text">
-                                        </div>
+                                  <div class="form-group mb-0">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                      </div>
+                                      <input name="keyword" class="form-control" placeholder="Search" type="text">
                                     </div>
+                                  </div>
+                                </div>
+                                <div class="col-2">
+                                  <button type="submit" class="btn btn-default">Search</button>
+                                </div>
+                                <div class="col text-right">
+                                    <a href="{{ route('role.create') }}" class="btn btn-primary">Add Role</a>
                                 </div>
                                 @if (session('status'))
                                     <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -35,11 +39,9 @@
                                         </button>
                                     </div>
                                 @endif
+                              </div>
                             </div>
-                        </div>
-                            
-                        
-                        
+                        </form>
                         <!-- Light table -->
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush">
@@ -92,8 +94,3 @@
         @include('layouts.footers.auth')
     </div>
 @endsection
-
-@push('js')
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-@endpush

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Transactions;
 
-use App\Models\Role;
 use Illuminate\Http\Request;
-use App\Http\Requests\RoleRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Transactions\Student;
 
-class RoleController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,12 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('roles.index', [
-            'roles' => Role::where('name', 'like', '%'.$keyword.'%')
-                        ->orWhere('description', 'like', '%'.$keyword.'%')
-                        ->paginate(10)
+        return view('transactions.students.index', [
+            'students' => Student::where('lastname', 'like', '%'.$keyword.'%')
+                                ->orWhere('firstname', 'like', '%'.$keyword.'%')
+                                ->orWhere('middlename', 'like', '%'.$keyword.'%')
+                                ->orWhere('email', 'like', '%'.$keyword.'%')
+                                ->paginate(10)
         ]);
     }
 
@@ -30,7 +32,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        return view('transactions.students.create');
     }
 
     /**
@@ -39,10 +41,9 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request)
+    public function store(Request $request)
     {
-        Role::create($request->all());
-        return redirect()->route('role.index')->with('status', 'Role Created Successfully');
+        //
     }
 
     /**
@@ -64,10 +65,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        return view('roles.edit', [
-            'role' => $role
-        ]);
+        //
     }
 
     /**
@@ -77,11 +75,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->update($request->all());
-        return redirect()->route('role.index')->with('status', 'Role Updated Successfully'); 
+        //
     }
 
     /**
@@ -92,12 +88,6 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-        if (count($role->userRoles) > 0) {
-            return back()->with('status', 'Role cannot be archived');
-        }
-
-        $role->delete();
-        return back()->with('status', 'Role Archived Successfully');
+        //
     }
 }

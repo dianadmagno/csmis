@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Users')
+      'title' => __('List of Students')
     ])   
 
     <div class="container-fluid mt--7">
@@ -29,7 +29,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('user.create') }}" class="btn btn-primary">Add User</a>
+                            <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
                         </div>
                         @if (session('status'))
                             <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -47,40 +47,35 @@
                     <table class="table align-items-center table-flush">
                       <thead class="thead-light">
                         <tr>
-                          <th scope="col">User</th>
+                          <th scope="col">Fullname</th>
+                          <th scope="col">Class</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Role</th>
                           <th scope="col">View</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($users) > 0)
-                          @foreach($users as $user)
+                        @if (count($students) > 0)
+                          @foreach($students as $student)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <a href="#" class="avatar rounded-circle mr-3">
-                                    @if($user->photo)
-                                      <img alt="User Image" src="{{ asset('user images/'.$user->photo.'') }}">
+                                    @if($student->photo)
+                                      <img alt="Student Image" src="{{ asset('student images/'.$student->photo.'') }}">
                                     @else
-                                      <img alt="User Image" src="{{ asset('user images/user.png') }}">
+                                      <img alt="Student Image" src="{{ asset('student images/user.png') }}">
                                     @endif
                                   </a>
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $user->firstname }} {{ $user->middlename }} {{ $user->lastname }}</span>
+                                    <span class="name mb-0 text-sm">{{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}</span>
                                   </div>
                                 </div>
                               </th>
-                              <td class="budget">
-                                {{ $user->email }}
+                              <td>
+                                
                               </td>
                               <td>
-                                @if($user->is_superadmin)
-                                  <span class="badge badge-primary">Superadmin</span>
-                                @elseif (count($user->userRoles) > 0)
-                                @else
-                                  <span class="badge badge-success">Guest</span>
-                                @endif
+                                {{ $student->email }}
                               </td>
                               <td>
                                 <form action="{{ route('user.destroy', $user->id) }}" method="post">
@@ -103,9 +98,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($users) > 0)
+                  @if (count($students) > 0)
                     <div class="card-footer">
-                      {{ $users->links() }}
+                      {{ $students->links() }}
                     </div>
                   @endif
                 </div>
