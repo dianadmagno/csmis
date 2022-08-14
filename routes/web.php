@@ -41,10 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 
 	//References
-	Route::resource('ranks', 'App\Http\Controllers\RankController', ['except' => ['show']]);
-	Route::resource('class', 'App\Http\Controllers\StudentClassController', ['except' => ['show']]);
-	Route::resource('type', 'App\Http\Controllers\StudentTypeController', ['except' => ['show']]);
-	Route::resource('bloodType', 'App\Http\Controllers\BloodTypeController', ['except' => ['show']]);
-	Route::resource('religion', 'App\Http\Controllers\ReligionController', ['except' => ['show']]);
+	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);
+	Route::resource('class', 'App\Http\Controllers\References\StudentClassController', ['except' => ['show']]);
+	Route::resource('type', 'App\Http\Controllers\References\StudentTypeController', ['except' => ['show']]);
+	Route::resource('bloodType', 'App\Http\Controllers\References\BloodTypeController', ['except' => ['show']]);
+	Route::resource('religion', 'App\Http\Controllers\References\ReligionController', ['except' => ['show']]);
 });
 

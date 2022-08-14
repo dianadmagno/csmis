@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Rank;
+use App\Models\References\Rank;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

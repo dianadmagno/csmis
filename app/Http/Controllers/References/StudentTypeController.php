@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\References;
 
-use App\Models\BloodType;
 use Illuminate\Http\Request;
+use App\Models\References\StudentType;
+use App\Http\Controllers\Controller;
 
-class BloodTypeController extends Controller
+class StudentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class BloodTypeController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.bloodType.index', [
-            'blood_types' => BloodType::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.type.index', [
+            'types' => StudentType::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -29,7 +30,7 @@ class BloodTypeController extends Controller
      */
     public function create(Request $request)
     {
-        return view('references.bloodType.create');
+        return view('references.type.create');
     }
 
     /**
@@ -40,8 +41,8 @@ class BloodTypeController extends Controller
      */
     public function store(Request $request)
     {
-        Rank::create($request->all());
-        return redirect()->route('references.bloodType.index')->with('status', 'Blood Type Created Successfully');
+        StudentType::create($request->all());
+        return redirect()->route('type.index')->with('status', 'Student Type Created Successfully');
     }
 
     /**
@@ -63,8 +64,8 @@ class BloodTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('references.bloodType.edit', [
-            'blood_types' => BloodType::find($id)
+        return view('references.type.edit', [
+            'types' => StudentType::find($id)
         ]);
     }
 
@@ -77,13 +78,13 @@ class BloodTypeController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = BloodType::find($id);
+        $data = StudentType::find($id);
         $data->update($request->all());
 
-        $bloodType = BloodType::paginate(10);
-        return view('references.bloodType.index', [
-            'blood_types' => $bloodType
-        ])->withStatus(__('Blood Type successfully updated.'));   
+        $studentType = StudentType::paginate(10);
+        return view('references.type.index', [
+            'types' => $studentType
+        ])->withStatus(__('Student Type successfully updated.'));   
     }
 
     /**
@@ -94,8 +95,8 @@ class BloodTypeController extends Controller
      */
     public function destroy($id)
     {
-        $id = BloodType::find($id);
+        $id = StudentType::find($id);
         $id->delete();
-        return redirect()->route('bloodType.index')->with('status', 'Blood Type Archived Successfully');
+        return redirect()->route('type.index')->with('status', 'Student Enlistment Archived Successfully');
     }
 }

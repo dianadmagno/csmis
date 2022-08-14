@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\References;
 
-use App\Models\Religion;
 use Illuminate\Http\Request;
+use App\Models\References\BloodType;
+use App\Http\Controllers\Controller;
 
-class ReligionController extends Controller
+class BloodTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class ReligionController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.religion.index', [
-            'religions' => Religion::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.bloodType.index', [
+            'blood_types' => BloodType::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -29,7 +30,7 @@ class ReligionController extends Controller
      */
     public function create(Request $request)
     {
-        return view('references.religion.create');
+        return view('references.bloodType.create');
     }
 
     /**
@@ -40,8 +41,8 @@ class ReligionController extends Controller
      */
     public function store(Request $request)
     {
-        Religion::create($request->all());
-        return redirect()->route('religion.index')->with('status', 'Religion Created Successfully');
+        Rank::create($request->all());
+        return redirect()->route('references.bloodType.index')->with('status', 'Blood Type Created Successfully');
     }
 
     /**
@@ -63,8 +64,8 @@ class ReligionController extends Controller
      */
     public function edit($id)
     {
-        return view('references.religion.edit', [
-            'religions' => Religion::find($id)
+        return view('references.bloodType.edit', [
+            'blood_types' => BloodType::find($id)
         ]);
     }
 
@@ -77,13 +78,13 @@ class ReligionController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = Religion::find($id);
+        $data = BloodType::find($id);
         $data->update($request->all());
 
-        $religions = Religion::paginate(10);
-        return view('references.religion.index', [
-            'religions' => $religions
-        ])->withStatus(__('Religion successfully updated.'));   
+        $bloodType = BloodType::paginate(10);
+        return view('references.bloodType.index', [
+            'blood_types' => $bloodType
+        ])->withStatus(__('Blood Type successfully updated.'));   
     }
 
     /**
@@ -94,8 +95,8 @@ class ReligionController extends Controller
      */
     public function destroy($id)
     {
-        $id = Religion::find($id);
+        $id = BloodType::find($id);
         $id->delete();
-        return redirect()->route('religion.index')->with('status', 'Religion Archived Successfully');
+        return redirect()->route('bloodType.index')->with('status', 'Blood Type Archived Successfully');
     }
 }
