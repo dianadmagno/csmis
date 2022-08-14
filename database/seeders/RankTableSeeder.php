@@ -16,6 +16,7 @@ class RankTableSeeder extends Seeder
     public function run()
     {
         $rankName = [
+            'CS',
             'Pvt',
             'PFC',
             'Cpl',
@@ -38,6 +39,7 @@ class RankTableSeeder extends Seeder
         ];
 
         $description = [
+            'Candidate Soldiers',
             'Private',
             'Private First Class',
             'Corporal',
