@@ -43,8 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);
 	Route::resource('class', 'App\Http\Controllers\References\StudentClassController', ['except' => ['show']]);
-	Route::resource('type', 'App\Http\Controllers\References\StudentTypeController', ['except' => ['show']]);
+	Route::resource('type', 'App\Http\Controllers\References\EnlistmentTypeController', ['except' => ['show']]);
 	Route::resource('bloodType', 'App\Http\Controllers\References\BloodTypeController', ['except' => ['show']]);
 	Route::resource('religion', 'App\Http\Controllers\References\ReligionController', ['except' => ['show']]);
+	Route::resource('unit', 'App\Http\Controllers\References\UnitController', ['except' => ['show']]);
 });
 

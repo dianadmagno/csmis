@@ -135,6 +135,11 @@
                                     {{ __('Religion') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('unit.index') }}">
+                                    {{ __('Unit') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

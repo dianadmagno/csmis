@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\StudentType;
+use App\Models\References\EnlistmentType;
 use App\Http\Controllers\Controller;
 
-class StudentTypeController extends Controller
+class EnlistmentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class StudentTypeController extends Controller
     {
         $keyword = $request->keyword;
         return view('references.type.index', [
-            'types' => StudentType::where('name', 'LIKE', '%'.$keyword.'%')
+            'types' => EnlistmentType::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -41,7 +41,7 @@ class StudentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        StudentType::create($request->all());
+        EnlistmentType::create($request->all());
         return redirect()->route('type.index')->with('status', 'Student Type Created Successfully');
     }
 
@@ -65,7 +65,7 @@ class StudentTypeController extends Controller
     public function edit($id)
     {
         return view('references.type.edit', [
-            'types' => StudentType::find($id)
+            'types' => EnlistmentType::find($id)
         ]);
     }
 
@@ -78,10 +78,10 @@ class StudentTypeController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = StudentType::find($id);
+        $data = EnlistmentType::find($id);
         $data->update($request->all());
 
-        $studentType = StudentType::paginate(10);
+        $studentType = EnlistmentType::paginate(10);
         return view('references.type.index', [
             'types' => $studentType
         ])->withStatus(__('Student Type successfully updated.'));   
@@ -95,7 +95,7 @@ class StudentTypeController extends Controller
      */
     public function destroy($id)
     {
-        $id = StudentType::find($id);
+        $id = EnlistmentType::find($id);
         $id->delete();
         return redirect()->route('type.index')->with('status', 'Student Enlistment Archived Successfully');
     }

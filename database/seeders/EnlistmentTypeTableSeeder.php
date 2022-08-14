@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\References\StudentType;
+use App\Models\References\EnlistmentType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EnlistmentTypeTableSeeder extends Seeder
@@ -26,7 +26,7 @@ class EnlistmentTypeTableSeeder extends Seeder
         ];
 
         foreach($enlistmentType as $key => $name) {
-            StudentType::create([
+            EnlistmentType::create([
                 'name' => $name,
                 'description' => $description[$key]
             ]);
