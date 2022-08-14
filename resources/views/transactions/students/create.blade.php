@@ -158,7 +158,7 @@
                                                 @endif
                                             </div>
     
-                                            <div class="form-group{{ $errors->has('rank') ? ' has-danger' : '' }}">
+                                            <div class="form-group{{ $errors->has('serial_number') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Serial Number') }}</label>
                                                 <input type="text" name="serial_number" class="form-control form-control-alternative{{ $errors->has('serial_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Serial Number') }}">
             
@@ -200,10 +200,123 @@
                                                     </span>
                                                 @endif
                                             </div>
+
+                                            <div class="form-group{{ $errors->has('unit') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Unit') }}</label>
+                                                <select name="student_class" class="form-control form-control-alternative{{ $errors->has('unit') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Unit</option>
+                                                    @foreach($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('unit'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('unit') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('bda') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('BDA Size') }}</label>
+                                                <select name="student_class" class="form-control form-control-alternative{{ $errors->has('bda') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose BDA Size</option>
+                                                    <option value="1">Extra Small Short</option>
+                                                    <option value="2">Extra Small Regular</option>
+                                                    <option value="3">Small Short</option>
+                                                    <option value="4">Small Regular</option>
+                                                    <option value="5">Medium Short</option>
+                                                    <option value="6">Medium Regular</option>
+                                                    <option value="7">Large Short</option>
+                                                    <option value="8">Large Regular</option>
+                                                    <option value="9">Extra Large Short</option>
+                                                    <option value="10">Extra Large Regular</option>
+                                                    <option value="11">XXL Short</option>
+                                                    <option value="12">XXL Regular</option>
+                                                </select>
+            
+                                                @if ($errors->has('unit'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('unit') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group{{ $errors->has('ethnic_group') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Ethnic Group') }}</label>
+                                                <select name="ethnic_group" class="form-control form-control-alternative{{ $errors->has('ethnic_group') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Ethnic Group</option>
+                                                    @foreach($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('unit'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('unit') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('headgear') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Headgear Size') }}</label>
+                                                <input type="text" name="headgear" class="form-control form-control-alternative{{ $errors->has('headgear') ? ' is-invalid' : '' }}" placeholder="{{ __('Headgear Size') }}">
+            
+                                                @if ($errors->has('headgear'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('headgear') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('goa_chest') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('GOA Chest Size') }}</label>
+                                                <input type="text" name="goa_chest" class="form-control form-control-alternative{{ $errors->has('goa_chest') ? ' is-invalid' : '' }}" placeholder="{{ __('GOA Chest Size') }}">
+            
+                                                @if ($errors->has('goa_chest'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('goa_chest') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            
+                                            <div class="form-group{{ $errors->has('goa_waist') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('GOA Waist Size') }}</label>
+                                                <input type="text" name="goa_waist" class="form-control form-control-alternative{{ $errors->has('goa_waist') ? ' is-invalid' : '' }}" placeholder="{{ __('GOA Waist Size') }}">
+            
+                                                @if ($errors->has('goa_waist'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('goa_waist') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('shoe_size') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Shoe Size') }}</label>
+                                                <input type="text" name="shoe_size" class="form-control form-control-alternative{{ $errors->has('shoe_size') ? ' is-invalid' : '' }}" placeholder="{{ __('Shoe Size') }}">
+            
+                                                @if ($errors->has('shoe_size'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('shoe_size') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('shoe_width') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Shoe Width') }}</label>
+                                                <input type="text" name="shoe_width" class="form-control form-control-alternative{{ $errors->has('shoe_width') ? ' is-invalid' : '' }}" placeholder="{{ __('Shoe Width') }}">
+            
+                                                @if ($errors->has('shoe_width'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('shoe_width') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('user.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>
