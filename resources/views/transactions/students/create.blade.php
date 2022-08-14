@@ -115,6 +115,35 @@
                                                     </span>
                                                 @endif
                                             </div>
+                                            <div class="form-group{{ $errors->has('blood_type') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Blood Type') }}</label>
+                                                <select name="blood_type" class="form-control form-control-alternative{{ $errors->has('blood_type') ? ' is-invalid' : '' }}">
+                                                    @foreach($bloodTypes as $bloodType)
+                                                        <option value="{{ $bloodType->id }}">{{ $bloodType->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('blood_type'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('blood_type') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('religion') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Religion') }}</label>
+                                                <select name="religion" class="form-control form-control-alternative{{ $errors->has('religion') ? ' is-invalid' : '' }}">
+                                                    @foreach($religions as $religion)
+                                                        <option value="{{ $religion->id }}">{{ $religion->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('religion'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('religion') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Submit') }}</button>
