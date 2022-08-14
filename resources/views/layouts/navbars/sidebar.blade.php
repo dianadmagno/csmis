@@ -103,12 +103,12 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link" href="#references" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
                         <i class="ni ni-circle-08 text-primary"></i>
                         <span class="nav-link-text">{{ __('Student References') }}</span>
                     </a>
 
-                    <div class="collapse" id="navbar-examples">
+                    <div class="collapse" id="references">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('ranks.index') }}">
@@ -159,12 +159,12 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link" href="#administration" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="administration">
                         <i class="ni ni-circle-08 text-primary"></i>
                         <span class="nav-link-text">{{ __('User Management') }}</span>
                     </a>
 
-                    <div class="collapse" id="navbar-examples">
+                    <div class="collapse" id="administration">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.index') }}">
