@@ -96,6 +96,6 @@ class StudentClassController extends Controller
     {
         $id = StudentClass::find($id);
         $id->delete();
-        return redirect()->route('class.index')->with('status', 'Class Deleted Successfully');
+        return redirect()->route('class.index')->with('status', 'Class Archived Successfully');
     }
 }

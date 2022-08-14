@@ -96,6 +96,6 @@ class ReligionController extends Controller
     {
         $id = Religion::find($id);
         $id->delete();
-        return redirect()->route('religion.index')->with('status', 'Religion Deleted Successfully');
+        return redirect()->route('religion.index')->with('status', 'Religion Archived Successfully');
     }
 }

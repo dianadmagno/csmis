@@ -96,6 +96,6 @@ class StudentTypeController extends Controller
     {
         $id = StudentType::find($id);
         $id->delete();
-        return redirect()->route('type.index')->with('status', 'Student Enlistment Deleted Successfully');
+        return redirect()->route('type.index')->with('status', 'Student Enlistment Archived Successfully');
     }
 }

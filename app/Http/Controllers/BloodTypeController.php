@@ -94,10 +94,8 @@ class BloodTypeController extends Controller
      */
     public function destroy($id)
     {
-        $id = Rank::find($id);
+        $id = BloodType::find($id);
         $id->delete();
-        return view('references.bloodType.index', [
-            'blood_types' => $id
-        ])->withStatus(__('Blood Type successfully deleted.'));
+        return redirect()->route('bloodType.index')->with('status', 'Blood Type Archived Successfully');
     }
 }

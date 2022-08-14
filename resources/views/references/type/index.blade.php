@@ -68,16 +68,12 @@
                               </td>
                               <td>
                                 <div class="row">
-                                    <a href="{{ route('type.edit', $type->id) }}" class="btn btn-warning" type="button">
-                                        Edit
-                                      </a>
-                                      <form action="{{ route('type.destroy', $type->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <a type="button" class="btn btn-danger" onclick="confirm('{{ __("Are you sure you want to delete this category?") }}') ? this.parentElement.submit() : ''">
-                                            {{ __('Delete') }}
-                                        </a>
-                                    </form>
+                                  <form action="{{ route('type.destroy', $type->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <a href="{{ route('type.edit', $type->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
+                                  </form>
                                 </div>
                               </td>
                             </tr>

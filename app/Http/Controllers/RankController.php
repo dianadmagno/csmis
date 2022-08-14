@@ -96,6 +96,6 @@ class RankController extends Controller
     {
         $id = Rank::find($id);
         $id->delete();
-        return redirect()->route('rank.index')->with('status', 'Rank Deleted Successfully');
+        return redirect()->route('rank.index')->with('status', 'Rank Archived Successfully');
     }
 }
