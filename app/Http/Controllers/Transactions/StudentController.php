@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
+use App\Models\References\Rank;
+use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
+use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 
 class StudentController extends Controller
@@ -32,7 +35,14 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('transactions.students.create');
+        $bloodTypes = BloodType::all();
+        $religions = Religion::all();
+        $ranks = Rank::all();
+        return view('transactions.students.create', [
+            'bloodTypes' => $bloodTypes,
+            'religions' => $religions,
+            'ranks' => $ranks
+        ]);
     }
 
     /**
