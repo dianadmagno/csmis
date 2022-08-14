@@ -104,8 +104,8 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="ni ni-circle-08 text-success"></i>
-                        <span class="nav-link-text">{{ __('Personnel References') }}</span>
+                        <i class="ni ni-circle-08 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Student References') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples">

@@ -62,10 +62,10 @@ class StudentClassController extends Controller
      * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentClass $studentClass)
+    public function edit(StudentClass $studentClass, $id)
     {
         return view('references.class.edit', [
-            'classes' => StudentClass::find($id)
+            'class' => StudentClass::find($id)
         ]);
     }
 
@@ -76,9 +76,9 @@ class StudentClassController extends Controller
      * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentClass $studentClass)
+    public function update(Request $request, StudentClass $studentClass, $id)
     {
-        $data = Rank::find($id);
+        $data = StudentClass::find($id);
         $data->update($request->all());
 
         $class = StudentClass::paginate(10);
