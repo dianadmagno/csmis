@@ -13,10 +13,10 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">List of Ranks</h3>
+                                    <h3 class="mb-0">List of Blood Types</h3>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <a href="{{ route('ranks.create') }}" class="btn btn-sm btn-primary">Add Rank</a>
+                                    <a href="{{ route('bloodType.create') }}" class="btn btn-sm btn-primary">Add Blood Type</a>
                                 </div>
                             </div>
                             @if (session('status'))
@@ -41,29 +41,31 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach($ranks as $rank)
+                                    @foreach($blood_types as $type)
                                         <tr>
                                             <td>
-                                                {{ $rank->name }}
+                                                {{ $type->name }}
                                             </td>
                                             <td>
-                                                {{ $rank->description }}
+                                                {{ $type->description }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-success" type="button">
-                                                    Edit
-                                                  </a>
-                                                  {{-- <a href="{{ route('ranks.destroy', $rank->id) }}" class="btn btn-danger" type="button" method="delete">
-                                                    
-                                                    Delete
-                                                  </a> --}}
-                                                  <form action="{{ route('ranks.destroy', $rank->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <a type="button" class="btn btn-danger" onclick="confirm('{{ __("Are you sure you want to delete this category?") }}') ? this.parentElement.submit() : ''">
-                                                        {{ __('Delete') }}
-                                                    </a>
-                                                </form>
+                                                <div class="row">
+                                                    <a href="{{ route('bloodType.edit', $type->id) }}" class="btn btn-primary" type="button">
+                                                        Edit
+                                                      </a>
+                                                      {{-- <a href="{{ route('ranks.destroy', $rank->id) }}" class="btn btn-danger" type="button" method="delete">
+                                                        
+                                                        Delete
+                                                      </a> --}}
+                                                      <form action="{{ route('bloodType.destroy', $type->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <a type="button" class="btn btn-danger" onclick="confirm('{{ __("Are you sure you want to delete this category?") }}') ? this.parentElement.submit() : ''">
+                                                            {{ __('Delete') }}
+                                                        </a>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

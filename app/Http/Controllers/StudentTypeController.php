@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rank;
+use App\Models\StudentType;
 use Illuminate\Http\Request;
 
-class RankController extends Controller
+class StudentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class RankController extends Controller
      */
     public function index()
     {
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
+        $studentType = StudentType::paginate(10);
+        return view('references.type.index', [
+            'student_types' => $studentType
         ]);
     }
 
@@ -27,7 +27,7 @@ class RankController extends Controller
      */
     public function create(Request $request)
     {
-        return view('references.ranks.create');
+        return view('references.type.create');
     }
 
     /**
@@ -38,8 +38,8 @@ class RankController extends Controller
      */
     public function store(Request $request)
     {
-        Rank::create($request->all());
-        return redirect()->route('references.ranks.index')->with('status', 'Rank Created Successfully');
+        StudentType::create($request->all());
+        return redirect()->route('type.index')->with('status', 'Student Type Created Successfully');
     }
 
     /**
@@ -61,8 +61,8 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        return view('references.ranks.edit', [
-            'rank' => Rank::find($id)
+        return view('references.type.edit', [
+            'student_types' => StudentType::find($id)
         ]);
     }
 
@@ -75,13 +75,13 @@ class RankController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = Rank::find($id);
+        $data = StudentType::find($id);
         $data->update($request->all());
 
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
-        ])->withStatus(__('Rank successfully updated.'));   
+        $studentType = StudentType::paginate(10);
+        return view('references.type.index', [
+            'student_types' => $studentType
+        ])->withStatus(__('Student Type successfully updated.'));   
     }
 
     /**
@@ -92,10 +92,10 @@ class RankController extends Controller
      */
     public function destroy($id)
     {
-        $id = Rank::find($id);
+        $id = StudentType::find($id);
         $id->delete();
-        return view('references.ranks.index', [
-            'ranks' => $id
-        ])->withStatus(__('Rank successfully deleted.'));
+        return view('references.type.index', [
+            'student_types' => $id
+        ])->withStatus(__('Student Type successfully deleted.'));
     }
 }

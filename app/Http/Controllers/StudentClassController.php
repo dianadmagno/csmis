@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rank;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 
-class RankController extends Controller
+class StudentClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class RankController extends Controller
      */
     public function index()
     {
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
+        $class = StudentClass::paginate(10);
+        return view('references.class.index', [
+            'classes' => $class
         ]);
     }
 
@@ -25,9 +25,9 @@ class RankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('references.ranks.create');
+        return view('references.class.create');
     }
 
     /**
@@ -38,17 +38,17 @@ class RankController extends Controller
      */
     public function store(Request $request)
     {
-        Rank::create($request->all());
-        return redirect()->route('references.ranks.index')->with('status', 'Rank Created Successfully');
+        StudentClass::create($request->all());
+        return redirect()->route('class.index')->with('status', 'Class Created Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(StudentClass $studentClass)
     {
         //
     }
@@ -56,13 +56,13 @@ class RankController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(StudentClass $studentClass)
     {
-        return view('references.ranks.edit', [
-            'rank' => Rank::find($id)
+        return view('references.class.edit', [
+            'classes' => StudentClass::find($id)
         ]);
     }
 
@@ -70,32 +70,32 @@ class RankController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {   
+    public function update(Request $request, StudentClass $studentClass)
+    {
         $data = Rank::find($id);
         $data->update($request->all());
 
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
-        ])->withStatus(__('Rank successfully updated.'));   
+        $class = StudentClass::paginate(10);
+        return view('references.class.index', [
+            'classes' => $class
+        ])->withStatus(__('Class successfully updated.'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = Rank::find($id);
+        $id = StudentClass::find($id);
         $id->delete();
-        return view('references.ranks.index', [
-            'ranks' => $id
-        ])->withStatus(__('Rank successfully deleted.'));
+        return view('references.class.index', [
+            'classes' => $id
+        ])->withStatus(__('Class successfully deleted.'));
     }
 }

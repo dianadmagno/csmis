@@ -91,11 +91,45 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('ranks.index') }}">
-                        <i class="ni ni-circle-08"></i> Ranks
+                    <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                        <i class="ni ni-circle-08 text-success"></i>
+                        <span class="nav-link-text">{{ __('Personnel References') }}</span>
                     </a>
+
+                    <div class="collapse" id="navbar-examples">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ranks.index') }}">
+                                    {{ __('Ranks') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('class.index') }}">
+                                    {{ __('Class') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('type.index') }}">
+                                    {{ __('Student Type') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('bloodType.index') }}">
+                                    {{ __('Blood Type') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
+
+            {{-- <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('class.index') }}">
+                        <i class="ni ni-circle-08"></i> Class
+                    </a>
+                </li>
+            </ul> --}}
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->

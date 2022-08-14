@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rank;
+use App\Models\BloodType;
 use Illuminate\Http\Request;
 
-class RankController extends Controller
+class BloodTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class RankController extends Controller
      */
     public function index()
     {
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
+        $bloodType = BloodType::paginate(10);
+        return view('references.bloodType.index', [
+            'blood_types' => $bloodType
         ]);
     }
 
@@ -27,7 +27,7 @@ class RankController extends Controller
      */
     public function create(Request $request)
     {
-        return view('references.ranks.create');
+        return view('references.bloodType.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class RankController extends Controller
     public function store(Request $request)
     {
         Rank::create($request->all());
-        return redirect()->route('references.ranks.index')->with('status', 'Rank Created Successfully');
+        return redirect()->route('references.bloodType.index')->with('status', 'Blood Type Created Successfully');
     }
 
     /**
@@ -61,8 +61,8 @@ class RankController extends Controller
      */
     public function edit($id)
     {
-        return view('references.ranks.edit', [
-            'rank' => Rank::find($id)
+        return view('references.bloodType.edit', [
+            'blood_type' => BloodType::find($id)
         ]);
     }
 
@@ -75,13 +75,13 @@ class RankController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $data = Rank::find($id);
+        $data = BloodType::find($id);
         $data->update($request->all());
 
-        $ranks = Rank::paginate(10);
-        return view('references.ranks.index', [
-            'ranks' => $ranks
-        ])->withStatus(__('Rank successfully updated.'));   
+        $bloodType = BloodType::paginate(10);
+        return view('references.bloodType.index', [
+            'blood_types' => $bloodType
+        ])->withStatus(__('Blood Type successfully updated.'));   
     }
 
     /**
@@ -94,8 +94,8 @@ class RankController extends Controller
     {
         $id = Rank::find($id);
         $id->delete();
-        return view('references.ranks.index', [
-            'ranks' => $id
-        ])->withStatus(__('Rank successfully deleted.'));
+        return view('references.bloodType.index', [
+            'blood_types' => $id
+        ])->withStatus(__('Blood Type successfully deleted.'));
     }
 }
