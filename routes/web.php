@@ -39,5 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('map', function () {return view('pages.maps');})->name('map');
 	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
+
+	//References
+	Route::resource('ranks', 'App\Http\Controllers\RankController', ['except' => ['show']]);
+	Route::resource('class', 'App\Http\Controllers\StudentClassController', ['except' => ['show']]);
+	Route::resource('type', 'App\Http\Controllers\StudentTypeController', ['except' => ['show']]);
+	Route::resource('bloodType', 'App\Http\Controllers\BloodTypeController', ['except' => ['show']]);
+	Route::resource('religion', 'App\Http\Controllers\ReligionController', ['except' => ['show']]);
 });
 
