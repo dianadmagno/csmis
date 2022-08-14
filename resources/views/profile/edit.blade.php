@@ -107,12 +107,12 @@
                                     @endif
                                 </div>
 
-                                @if ($user->is_superadmin)
+                                @if (auth()->user()->is_superadmin)
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-email">{{ __('Is Superadmin?') }}</label>
                                         <label class="custom-toggle ml-3">
                                             <input type="checkbox" name="is_superadmin" value="1" {{ $user->is_superadmin ? 'checked' : '' }}>
-                                            <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                                            <span class="custom-toggle-slider rounded-circle mb--3 mt-3" data-label-off="No" data-label-on="Yes"></span>
                                         </label>
                                     </div>
                                 @endif

@@ -48,8 +48,10 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $user = User::find($id);
+        $currentUser = auth()->user();
         return view('profile.edit', [
-            'user' => User::find($id)
+            'user' => !$currentUser->is_superadmin ? $currentUser : $user
         ]);
     }
 

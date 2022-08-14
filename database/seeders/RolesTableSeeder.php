@@ -16,7 +16,7 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $roleName = [
-            'Tactical Officer',
+            'Officer',
             'Instructor',
             'Training Model',
             'Registrar'
@@ -24,7 +24,7 @@ class RolesTableSeeder extends Seeder
 
         $description = [
             'Can view all students information and grades and personnel information.',
-            'Can view students information and can add/update grades of students.',
+            'Can view/add/update grades of students.',
             'Can update students information and view grades/standing of specific class.',
             'Can add/update students and personnel information.'
         ];
