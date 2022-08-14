@@ -8,6 +8,8 @@ use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
+use App\Models\References\StudentClass;
+use App\Models\References\EnlistmentType;
 
 class StudentController extends Controller
 {
@@ -38,10 +40,14 @@ class StudentController extends Controller
         $bloodTypes = BloodType::all();
         $religions = Religion::all();
         $ranks = Rank::all();
+        $enlistmentTypes = EnlistmentType::all();
+        $studentClasses = StudentClass::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
-            'ranks' => $ranks
+            'ranks' => $ranks,
+            'enlistmentTypes' => $enlistmentTypes,
+            'studentClasses' => $studentClasses
         ]);
     }
 
