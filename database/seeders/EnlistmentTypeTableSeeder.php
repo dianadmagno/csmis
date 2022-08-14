@@ -22,7 +22,7 @@ class EnlistmentTypeTableSeeder extends Seeder
 
         $description = [
             'Special Enlistment',
-            'Regular Quota'
+            'Regular Enlistment'
         ];
 
         foreach($enlistmentType as $key => $name) {
