@@ -2,7 +2,15 @@
 
 namespace App\Models\Transactions;
 
+use App\Models\References\Rank;
+use App\Models\References\Unit;
+use App\Models\References\Company;
+use App\Models\References\Religion;
+use App\Models\References\BloodType;
+use App\Models\References\EthnicGroup;
+use App\Models\References\StudentClass;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\References\EnlistmentType;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,8 +35,55 @@ class Student extends Model
         'goa_waist',
         'shoe_size',
         'shoe_width',
-        'ethnic_group',
+        'ethnic_group_id',
+        'blood_type_id',
+        'religion_id',
+        'rank_id',
+        'enlistment_type_id',
+        'class_id',
         'gwa',
-        'photo'
+        'photo',
+        'unit_id',
+        'company_id'
     ];
+
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(StudentClass::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function enlistmentType()
+    {
+        return $this->belongsTo(EnlistmentType::class);
+    }
+
+    public function bloodType()
+    {
+        return $this->belongsTo(BloodType::class);
+    }
+
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function ethnicGroup()
+    {
+        return $this->belongsTo(EthnicGroup::class);
+    }
 }

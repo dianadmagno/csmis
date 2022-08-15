@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('user.index') }}">
+                  <form action="{{ route('student.index') }}">
                     <div class="card-header border-0">
                       <div class="row align-items-center">
                         <div class="col-3">
@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Fullname</th>
                           <th scope="col">Class</th>
+                          <th scope="col">Company</th>
                           <th scope="col">Email</th>
                           <th scope="col">View</th>
                         </tr>
@@ -63,28 +64,29 @@
                                     @if($student->photo)
                                       <img alt="Student Image" src="{{ asset('student images/'.$student->photo.'') }}">
                                     @else
-                                      <img alt="Student Image" src="{{ asset('student images/user.png') }}">
+                                      <img alt="Student Image" src="{{ asset('user images/user.png') }}">
                                     @endif
                                   </a>
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}</span>
+                                    <span class="name mb-0 text-sm">{{ $student->rank->name }} {{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td>
-                                
+                                {{ $student->class->description }}
                               </td>
+                              <td>{{ $student->company->description }}</td>
                               <td>
                                 {{ $student->email }}
                               </td>
                               <td>
-                                <form action="{{ route('user.destroy', $user->id) }}" method="post">
+                                <form action="{{ route('student.destroy', $student->id) }}" method="post">
                                   @csrf
                                   @method('delete')
-                                  <a href="{{ route('user.edit', $user->id) }}" class="btn btn-default" type="button">
+                                  <a href="{{ route('student.edit', $student->id) }}" class="btn btn-default" type="button">
                                     View
                                   </a>
-                                  <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to deactivate this user?')">Deactivate</button>
+                                  <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this student?')">Archive</button>
                                 </form>
                               </td>
                             </tr>
