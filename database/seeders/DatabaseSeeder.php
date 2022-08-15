@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([EnlistmentTypeTableSeeder::class]);
         $this->call([RankTableSeeder::class]);
         $this->call([ReligionTableSeeder::class]);
+        $this->call([EthnicGroupTableSeeder::class]);
     }
 }
