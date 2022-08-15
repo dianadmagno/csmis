@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Desription</th>
+                          <th scope="col">Alias</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -65,6 +66,9 @@
                               </th>
                               <td class="budget">
                                 {{ $class->description }}
+                              </td>
+                              <td class="budget">
+                                {{ $class->alias }}
                               </td>
                               <td>
                                 <div class="row">

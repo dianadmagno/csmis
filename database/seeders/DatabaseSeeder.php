@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([RankTableSeeder::class]);
         $this->call([ReligionTableSeeder::class]);
         $this->call([EthnicGroupTableSeeder::class]);
+        $this->call([UnitTableSeeder::class]);
+        $this->call([ClassTableSeeder::class]);
     }
 }

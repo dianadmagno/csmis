@@ -14,6 +14,7 @@ class StudentClass extends Model
     protected $table = 'rf_classes';
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'alias'
     ];
 }

@@ -46,6 +46,16 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('alias') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Alias') }}</label>
+                                        <input type="text" name="alias" id="input-name" class="form-control form-control-alternative{{ $errors->has('alias') ? ' is-invalid' : '' }}" placeholder="{{ __('Alias')}}">
+    
+                                        @if ($errors->has('alias'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('alias') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Submit') }}</button>
                                 </div>
                             </form>

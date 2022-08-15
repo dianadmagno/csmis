@@ -71,7 +71,7 @@
                                   <form action="{{ route('ethnicGroup.destroy', $ethnicGroup->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('ethnicGroup.edit', $rank->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <a href="{{ route('ethnicGroup.edit', $ethnicGroup->id) }}" class="btn btn-success" type="button">Edit</a>
                                     <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>

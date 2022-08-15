@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\References\EthnicGroup;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EthnicGroupTableSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class EthnicGroupTableSeeder extends Seeder
      */
     public function run()
     {
-        $enlistmentType = [
+        $ethnicGroup = [
             'Tagalog',
             'Ilokano',
             'Kapampangan',
