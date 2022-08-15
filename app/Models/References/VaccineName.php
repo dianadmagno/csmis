@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class VaccineName extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'rf_vaccine_names';
     protected $fillable = [

@@ -13,7 +13,7 @@ class VaccineNameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $keyword = $request->keyword;
         return view('references.vaccineName.index', [
@@ -62,7 +62,7 @@ class VaccineNameController extends Controller
      * @param  \App\Models\References\VaccineName  $vaccineName
      * @return \Illuminate\Http\Response
      */
-    public function edit(VaccineName $vaccineName)
+    public function edit($id)
     {
         return view('references.vaccineName.edit', [
             'vaccineName' => VaccineName::find($id)
