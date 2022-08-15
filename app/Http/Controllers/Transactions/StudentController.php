@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Transactions;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
+use App\Models\References\Company;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
+use App\Models\References\EthnicGroup;
 use App\Models\References\StudentClass;
 use App\Models\References\EnlistmentType;
+use App\Http\Requests\Transactions\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -27,6 +30,12 @@ class StudentController extends Controller
                                 ->orWhere('firstname', 'like', '%'.$keyword.'%')
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
                                 ->orWhere('email', 'like', '%'.$keyword.'%')
+                                ->orWhereHas('class', function($query) use($keyword) {
+                                    $query->where('description', 'like', '%'.$keyword.'%');
+                                })
+                                ->orWhereHas('company', function($query) use($keyword) {
+                                    $query->where('description', 'like', '%'.$keyword.'%');
+                                })
                                 ->paginate(10)
         ]);
     }
@@ -44,13 +53,17 @@ class StudentController extends Controller
         $enlistmentTypes = EnlistmentType::all();
         $studentClasses = StudentClass::all();
         $units = Unit::all();
+        $ethnicGroups = EthnicGroup::all();
+        $companies = Company::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
             'ranks' => $ranks,
             'enlistmentTypes' => $enlistmentTypes,
             'studentClasses' => $studentClasses,
-            'units' => $units
+            'units' => $units,
+            'ethnicGroups' => $ethnicGroups,
+            'companies' => $companies
         ]);
     }
 
@@ -60,9 +73,10 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        //
+        Student::create($request->all());
+        return redirect()->route('student.index')->with('status', 'Student Created Successfully');
     }
 
     /**
@@ -73,7 +87,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -84,7 +98,26 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bloodTypes = BloodType::all();
+        $religions = Religion::all();
+        $ranks = Rank::all();
+        $enlistmentTypes = EnlistmentType::all();
+        $studentClasses = StudentClass::all();
+        $units = Unit::all();
+        $ethnicGroups = EthnicGroup::all();
+        $companies = Company::all();
+        $student = Student::find($id);
+        return view('transactions.students.edit', [
+            'bloodTypes' => $bloodTypes,
+            'religions' => $religions,
+            'ranks' => $ranks,
+            'enlistmentTypes' => $enlistmentTypes,
+            'studentClasses' => $studentClasses,
+            'units' => $units,
+            'ethnicGroups' => $ethnicGroups,
+            'companies' => $companies,
+            'student' => $student
+        ]);
     }
 
     /**

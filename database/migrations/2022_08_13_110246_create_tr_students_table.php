@@ -29,7 +29,14 @@ return new class extends Migration
             $table->string('goa_waist');
             $table->string('shoe_size');
             $table->string('shoe_width');
-            $table->string('ethnic_group');
+            $table->foreignId('ethnic_group_id')->constrained('rf_ethnic_groups');
+            $table->foreignId('unit_id')->constrained('rf_units');
+            $table->foreignId('rank_id')->constrained('rf_ranks');
+            $table->foreignId('enlistment_type_id')->constrained('rf_enlistment_types');
+            $table->foreignId('class_id')->constrained('rf_classes');
+            $table->foreignId('blood_type_id')->constrained('rf_blood_types');
+            $table->foreignId('religion_id')->constrained('rf_religions');
+            $table->foreignId('company_id')->constrained('rf_companies');
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();
             $table->softDeletes();
