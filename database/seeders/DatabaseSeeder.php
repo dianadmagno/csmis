@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call([EthnicGroupTableSeeder::class]);
         $this->call([UnitTableSeeder::class]);
         $this->call([ClassTableSeeder::class]);
+        $this->call([CompanyTableSeeder::class]);
     }
 }

@@ -166,6 +166,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('company.index') }}">
+                                    {{ __('Companies') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('module.index') }}">
                                     {{ __('Modules') }}
                                 </a>
