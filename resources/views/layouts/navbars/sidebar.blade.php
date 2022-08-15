@@ -180,6 +180,11 @@
                                     {{ __('Sub Modules') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('subject.index') }}">
+                                    {{ __('Subjects') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
