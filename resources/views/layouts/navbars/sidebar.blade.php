@@ -132,6 +132,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ethnicGroup.index') }}">
+                                    {{ __('Ethnic Group') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('unit.index') }}">
                                     {{ __('Unit') }}
                                 </a>
