@@ -175,6 +175,11 @@
                                     {{ __('Modules') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('subModule.index') }}">
+                                    {{ __('Sub Modules') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
