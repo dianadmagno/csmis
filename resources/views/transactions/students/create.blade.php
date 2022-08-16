@@ -25,7 +25,7 @@
     
     
                                 <div class="pl-lg-4">
-                                    <h6 class="heading-small text-muted mb-4">{{ __('Personal information') }}</h6>
+                                    <h6 class="heading-small text-muted mb-4">{{ __('Personal Information') }}</h6>
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
@@ -78,6 +78,50 @@
                                                 @if ($errors->has('age'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('age') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('civil_status') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Civil Status') }}</label>
+                                                <select name="civil_status" class="form-control form-control-alternative{{ $errors->has('civil_status') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Civil Status</option>
+                                                    <option value="1">Single</option>
+                                                    <option value="2">Married</option>
+                                                    <option value="3">Widowed</option>
+                                                    <option value="4">Separated</option>
+                                                    <option value="5">Divorced</option>
+                                                </select>
+            
+                                                @if ($errors->has('civil_status'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('civil_status') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+    
+                                            <div class="form-group{{ $errors->has('sex') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Sex') }}</label>
+                                                <select name="sex" class="form-control form-control-alternative{{ $errors->has('sex') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Sex</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                </select>
+            
+                                                @if ($errors->has('sex'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('sex') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+    
+                                            <div class="form-group{{ $errors->has('mobile_number') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Mobile Number') }}</label>
+                                                <input type="text" value="{{ old('mobile_number') }}" name="mobile_number" class="form-control form-control-alternative{{ $errors->has('mobile_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Mobile Number') }}">
+            
+                                                @if ($errors->has('mobile_number'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('mobile_number') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -139,7 +183,7 @@
                                     </div>
 
                                     <hr class="my-3">
-                                    <h6 class="heading-small text-muted mb-4">{{ __('Student information') }}</h6>
+                                    <h6 class="heading-small text-muted mb-4">{{ __('Student Information') }}</h6>
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group{{ $errors->has('rank_id') ? ' has-danger' : '' }}">

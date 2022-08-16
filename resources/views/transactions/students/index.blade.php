@@ -14,6 +14,14 @@
                   <!-- Card header -->
                   <form action="{{ route('student.index') }}">
                     <div class="card-header border-0">
+                      @if (session('status'))
+                        <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                      @endif
                       <div class="row align-items-center">
                         <div class="col-3">
                           <div class="form-group mb-0">
@@ -31,14 +39,6 @@
                         <div class="col text-right">
                             <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
                         </div>
-                        @if (session('status'))
-                            <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('status') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
                       </div>
                     </div>
                   </form>

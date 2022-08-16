@@ -127,9 +127,11 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->update($request->all());
+        return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
 
     /**

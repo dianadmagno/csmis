@@ -14,6 +14,14 @@
                         <!-- Card header -->
                         <form action="{{ route('role.index') }}">
                             <div class="card-header border-0">
+                                @if (session('status'))
+                                    <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('status') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                               <div class="row align-items-center">
                                 <div class="col-3">
                                   <div class="form-group mb-0">
@@ -31,14 +39,6 @@
                                 <div class="col text-right">
                                     <a href="{{ route('role.create') }}" class="btn btn-primary">Add Role</a>
                                 </div>
-                                @if (session('status'))
-                                    <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('status') }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
                               </div>
                             </div>
                         </form>
