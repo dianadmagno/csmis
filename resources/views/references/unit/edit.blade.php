@@ -47,7 +47,8 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Submit') }}</button>
+                                    <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
+                                    <a type="button" href="{{ route('unit.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>
