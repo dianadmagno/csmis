@@ -29,6 +29,12 @@ return new class extends Migration
             $table->string('goa_waist');
             $table->string('shoe_size');
             $table->string('shoe_width');
+            $table->integer('civil_status');
+            $table->integer('sex');
+            $table->string('mobile_number');
+            $table->integer('educational_attainment');
+            $table->string('course')->nullable();
+            $table->integer('physical_profile');
             $table->foreignId('ethnic_group_id')->constrained('rf_ethnic_groups');
             $table->foreignId('unit_id')->constrained('rf_units');
             $table->foreignId('rank_id')->constrained('rf_ranks');

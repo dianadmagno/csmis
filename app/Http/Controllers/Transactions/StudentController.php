@@ -12,6 +12,7 @@ use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
 use App\Models\References\StudentClass;
+use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Http\Requests\Transactions\StudentRequest;
 
@@ -143,5 +144,39 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadPhoto(UploadPhotoRequest $request, $id)
+    {
+        $student = Student::find($id);
+        if ($request->photo) {
+            switch ($request->input('action')) {
+                case 'upload':
+                    $photo = $student->id.'_'.time().'.'.$request->photo->getClientOriginalExtension();
+    
+                    if ($student->photo) {
+                        if (file_exists(public_path('/student images/'.$student->photo))) {
+                            unlink(public_path('/student images/'.$student->photo));
+                        }
+                    }
+    
+                    $request->photo->move(public_path('student images'), $photo);
+                    $student->update([
+                        'photo' => $photo
+                    ]);
+                    return back()->with('status', 'Student Photo Uploaded Successfully');
+                    break;
+                
+                case 'remove':
+                    unlink(public_path('/student images/'.$student->photo));
+                    $student->update([
+                        'photo' => null
+                    ]);
+                    return back()->with('status', 'Student Photo Removed Successfully');
+                    break;
+            }
+        } else {
+            return back()->with('error', 'Please choose a file before upload');
+        }
     }
 }
