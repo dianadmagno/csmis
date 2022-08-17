@@ -53,5 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('company', 'App\Http\Controllers\References\CompanyController', ['except' => ['show']]);
 	Route::resource('subModule', 'App\Http\Controllers\References\SubModuleController', ['except' => ['show']]);
 	Route::resource('subject', 'App\Http\Controllers\References\SubjectController', ['except' => ['show']]);
+	Route::resource('personnelCategory', 'App\Http\Controllers\References\PersonnelCategoryController', ['except' => ['show']]);
 });
 
