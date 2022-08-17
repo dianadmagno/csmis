@@ -146,6 +146,11 @@
                                     {{ __('Vaccine Names') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('demeritReport.index') }}">
+                                    {{ __('Demerit Report Type') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
