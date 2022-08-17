@@ -84,32 +84,35 @@ class UserController extends Controller
 
     public function uploadPhoto(UploadPhotoRequest $request, $id)
     {
-        switch ($request->input('action')) {
-            case 'upload':
-                $user = User::find($id);
-                $photo = $user->id.'_'.time().'.'.$request->photo->getClientOriginalExtension();
+        $user = User::find($id);
+        if ($request->photo) {
+            switch ($request->input('action')) {
+                case 'upload':
+                    $photo = $user->id.'_'.time().'.'.$request->photo->getClientOriginalExtension();
 
-                if ($user->photo) {
-                    if (file_exists(public_path('/user images/'.$user->photo))) {
-                        unlink(public_path('/user images/'.$user->photo));
+                    if ($user->photo) {
+                        if (file_exists(public_path('/user images/'.$user->photo))) {
+                            unlink(public_path('/user images/'.$user->photo));
+                        }
                     }
-                }
 
-                $request->photo->move(public_path('user images'), $photo);
-                $user->update([
-                    'photo' => $photo
-                ]);
-                return back()->with('status', 'User Photo Uploaded Successfully');
-                break;
-            
-            case 'remove':
-                $user = User::find($id);
-                unlink(public_path('/user images/'.$user->photo));
-                $user->update([
-                    'photo' => null
-                ]);
-                return back()->with('status', 'User Photo Removed Successfully');
-                break;
+                    $request->photo->move(public_path('user images'), $photo);
+                    $user->update([
+                        'photo' => $photo
+                    ]);
+                    return back()->with('status', 'User Photo Uploaded Successfully');
+                    break;
+                
+                case 'remove':
+                    unlink(public_path('/user images/'.$user->photo));
+                    $user->update([
+                        'photo' => null
+                    ]);
+                    return back()->with('status', 'User Photo Removed Successfully');
+                    break;
+            }
+        } else {
+            return back()->with('error', 'Please choose a file before upload');
         }
     }
 

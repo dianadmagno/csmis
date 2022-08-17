@@ -31,13 +31,21 @@
                                 <i class="ni education_hat mr-2"></i>{{ $student->enlistmentType->description }}
                             </div>
                             <hr class="my-4">
-                            <form method="post" action="{{ route('user.photo', $student->id) }}" enctype="multipart/form-data">
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            <form method="post" action="{{ route('student.photo', $student->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 <input type="file" class="ml-5" name="photo"><br><br>
                                 <div class="row ml-3">
                                     <button type="submit" name="action" value="upload" class="btn btn-success">Upload Photo</button>
-                                    <button type="submit" name="action" value="remove" onclick="alert('Do you really want to delete this photo?')" class="btn btn-danger">Remove Photo</button>
+                                    <button type="submit" name="action" value="remove" onclick="return confirm('Do you really want to delete this photo?')" class="btn btn-danger">Remove Photo</button>
                                 </div>
                             </form>
                         </div>
@@ -124,11 +132,11 @@
                                             <label class="form-control-label" for="input-name">{{ __('Civil Status') }}</label>
                                             <select name="civil_status" class="form-control form-control-alternative{{ $errors->has('civil_status') ? ' is-invalid' : '' }}">
                                                 <option value="">Choose Civil Status</option>
-                                                <option value="1">Single</option>
-                                                <option value="2">Married</option>
-                                                <option value="3">Widowed</option>
-                                                <option value="4">Separated</option>
-                                                <option value="5">Divorced</option>
+                                                <option value="1" {{ $student->civil_status == '1' ? 'selected' : '' }}>Single</option>
+                                                <option value="2" {{ $student->civil_status == '2' ? 'selected' : '' }}>Married</option>
+                                                <option value="3" {{ $student->civil_status == '3' ? 'selected' : '' }}>Widowed</option>
+                                                <option value="4" {{ $student->civil_status == '4' ? 'selected' : '' }}>Separated</option>
+                                                <option value="5" {{ $student->civil_status == '5' ? 'selected' : '' }}>Divorced</option>
                                             </select>
         
                                             @if ($errors->has('civil_status'))
@@ -142,8 +150,8 @@
                                             <label class="form-control-label" for="input-name">{{ __('Sex') }}</label>
                                             <select name="sex" class="form-control form-control-alternative{{ $errors->has('sex') ? ' is-invalid' : '' }}">
                                                 <option value="">Choose Sex</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
+                                                <option value="1" {{ $student->sex == '1' ? 'selected' : '' }}>Male</option>
+                                                <option value="2" {{ $student->sex == '2' ? 'selected' : '' }}>Female</option>
                                             </select>
         
                                             @if ($errors->has('sex'))
@@ -152,7 +160,8 @@
                                                 </span>
                                             @endif
                                         </div>
-
+                                    </div>
+                                    <div class="col">
                                         <div class="form-group{{ $errors->has('mobile_number') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Mobile Number') }}</label>
                                             <input type="text" value="{{ old('mobile_number', $student->mobile_number) }}" name="mobile_number" class="form-control form-control-alternative{{ $errors->has('mobile_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Mobile Number') }}">
@@ -163,8 +172,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="col">
+
                                         <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Address') }}</label>
                                             <input type="text" value="{{ old('address', $student->address) }}" name="address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('Address') }}">
@@ -214,6 +222,34 @@
                                             @if ($errors->has('religion_id'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('religion_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('educational_attainment') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Highest Educational Attainment') }}</label>
+                                            <select name="educational_attainment" class="form-control form-control-alternative{{ $errors->has('educational_attainment') ? ' is-invalid' : '' }}">
+                                                <option value="">Choose Highest Educational Attainment</option>
+                                                <option value="1" {{ $student->educational_attainment == '1' ? 'selected' : '' }}>Elementary</option>
+                                                <option value="2" {{ $student->educational_attainment == '2' ? 'selected' : '' }}>Highschool</option>
+                                                <option value="3" {{ $student->educational_attainment == '3' ? 'selected' : '' }}>College</option>
+                                                <option value="4" {{ $student->educational_attainment == '4' ? 'selected' : '' }}>Undergraduate</option>
+                                            </select>
+        
+                                            @if ($errors->has('educational_attainment'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('educational_attainment') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Course') }}</label>
+                                            <input type="text" value="{{ old('course', $student->course) }}" name="course" class="form-control form-control-alternative{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Course (if applicable)') }}">
+        
+                                            @if ($errors->has('course'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('course') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -341,6 +377,23 @@
                                         </div>
                                     </div>
                                     <div class="col">
+                                        <div class="form-group{{ $errors->has('physical_profile') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Physical Profile') }}</label>
+                                            <select name="physical_profile" class="form-control form-control-alternative{{ $errors->has('physical_profile') ? ' is-invalid' : '' }}">
+                                                <option value="">Choose Physical Profile</option>
+                                                <option value="1" {{ $student->physical_profile == '1' ? 'selected' : '' }}>P1</option>
+                                                <option value="2" {{ $student->physical_profile == '2' ? 'selected' : '' }}>P2</option>
+                                                <option value="3" {{ $student->physical_profile == '3' ? 'selected' : '' }}>P3</option>
+                                                <option value="4" {{ $student->physical_profile == '4' ? 'selected' : '' }}>P4</option>
+                                            </select>
+        
+                                            @if ($errors->has('physical_profile'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('physical_profile') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
                                         <div class="form-group{{ $errors->has('ethnic_group_id') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Ethnic Group') }}</label>
                                             <select name="ethnic_group_id" class="form-control form-control-alternative{{ $errors->has('ethnic_group_id') ? ' is-invalid' : '' }}">
@@ -414,9 +467,8 @@
                                     </div>
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
-                                </div>
+                                <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
+                                <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                             </div>
                         </form>
                     </div>
