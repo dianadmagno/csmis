@@ -190,6 +190,25 @@
                 </li>
             </ul>
 
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#personnelReferences" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
+                        <i class="ni ni-circle-08 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Personnel References') }}</span>
+                    </a>
+
+                    <div class="collapse" id="personnelReferences">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('personnelCategory.index') }}">
+                                    {{ __('Personnel Categories') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
             {{-- <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('class.index') }}">

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Add Unit')
+        'title' => __('Add Personnel Category')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('unit.store') }}">
+                            <form method="post" action="{{ route('personnelCategory.store') }}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -47,7 +47,7 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('unit.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('personnelCategory.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>
