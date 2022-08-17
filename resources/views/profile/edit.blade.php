@@ -33,13 +33,21 @@
                                 @endif
                             </div>
                             <hr class="my-4">
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
                             <form method="post" action="{{ route('user.photo', $user->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 <input type="file" class="ml-5" name="photo"><br><br>
                                 <div class="row ml-3">
                                     <button type="submit" name="action" value="upload" class="btn btn-success">Upload Photo</button>
-                                    <button type="submit" name="action" value="remove" onclick="alert('Do you really want to delete this photo?')" class="btn btn-danger">Remove Photo</button>
+                                    <button type="submit" name="action" value="remove" onclick="return confirm('Do you really want to delete this photo?')" class="btn btn-danger">Remove Photo</button>
                                 </div>
                             </form>
                         </div>
@@ -117,9 +125,7 @@
                                     </div>
                                 @endif
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
-                                </div>
+                                <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
                             </div>
                         </form>
                         <hr class="my-4" />
@@ -155,9 +161,7 @@
                                     <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control form-control-alternative" placeholder="{{ __('Confirm New Password') }}">
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Change password') }}</button>
-                                </div>
+                                <button type="submit" class="btn btn-success mt-4">{{ __('Change password') }}</button>
                             </div>
                         </form>
                     </div>

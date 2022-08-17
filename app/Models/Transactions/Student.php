@@ -44,7 +44,13 @@ class Student extends Model
         'gwa',
         'photo',
         'unit_id',
-        'company_id'
+        'company_id',
+        'civil_status',
+        'sex',
+        'mobile_number',
+        'educational_attainment',
+        'course',
+        'physical_profile'
     ];
 
     public function rank()
