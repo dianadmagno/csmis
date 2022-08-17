@@ -105,7 +105,7 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#references" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
-                        <i class="ni ni-circle-08 text-primary"></i>
+                        <i class="ni ni-hat-3 text-primary"></i>
                         <span class="nav-link-text">{{ __('Student References') }}</span>
                     </a>
 
@@ -159,7 +159,7 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#classReferences" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="references">
-                        <i class="ni ni-circle-08 text-primary"></i>
+                        <i class="ni ni-shop text-primary"></i>
                         <span class="nav-link-text">{{ __('Class References') }}</span>
                     </a>
 

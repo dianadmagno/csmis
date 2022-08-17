@@ -42,7 +42,7 @@ class EnlistmentTypeController extends Controller
     public function store(Request $request)
     {
         EnlistmentType::create($request->all());
-        return redirect()->route('type.index')->with('status', 'Student Type Created Successfully');
+        return back()->with('status', 'Student Type Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class EnlistmentTypeController extends Controller
         $studentType = EnlistmentType::paginate(10);
         return view('references.type.index', [
             'types' => $studentType
-        ])->withStatus(__('Student Type successfully updated.'));   
+        ])->back()->with('Student Type successfully updated.');   
     }
 
     /**
@@ -97,6 +97,6 @@ class EnlistmentTypeController extends Controller
     {
         $id = EnlistmentType::find($id);
         $id->delete();
-        return redirect()->route('type.index')->with('status', 'Student Enlistment Archived Successfully');
+        return back()->with('status', 'Student Enlistment Archived Successfully');
     }
 }

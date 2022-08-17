@@ -42,7 +42,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         Company::create($request->all());
-        return redirect()->route('company.index')->with('status', 'Company Created Successfully');
+        return back()->with('status', 'Company Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class CompanyController extends Controller
         $companies = Company::paginate(10);
         return view('references.company.index', [
             'companies' => $companies
-        ])->withStatus(__('Company successfully updated.'));
+        ])->back()->with('Company successfully updated.');
     }
 
     /**
@@ -97,6 +97,6 @@ class CompanyController extends Controller
     {
         $id = Company::find($id);
         $id->delete();
-        return redirect()->route('company.index')->with('status', 'Company Archived Successfully');
+        return back()->with('status', 'Company Archived Successfully');
     }
 }

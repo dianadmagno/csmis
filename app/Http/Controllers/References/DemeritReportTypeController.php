@@ -42,7 +42,7 @@ class DemeritReportTypeController extends Controller
     public function store(Request $request)
     {
         DemeritReportType::create($request->all());
-        return redirect()->route('demeritReport.index')->with('status', 'Demerit Report Type Created Successfully');
+        return back()->with('status', 'Demerit Report Type Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class DemeritReportTypeController extends Controller
         $demeritReports = DemeritTypeReport::paginate(10);
         return view('references.demeritReport.index', [
             'demeritReports' => $demeritReports
-        ])->withStatus(__('Demerit Report Type successfully updated.'));
+        ])->back()->with('Demerit Report Type successfully updated.');
     }
 
     /**
@@ -97,6 +97,6 @@ class DemeritReportTypeController extends Controller
     {
         $id = DemeritTypeReport::find($id);
         $id->delete();
-        return redirect()->route('demeritType.index')->with('status', 'Demerit Report Type Archived Successfully');
+        return back()->with('status', 'Demerit Report Type Archived Successfully');
     }
 }

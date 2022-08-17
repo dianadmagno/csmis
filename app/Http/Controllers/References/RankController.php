@@ -42,7 +42,7 @@ class RankController extends Controller
     public function store(Request $request)
     {
         Rank::create($request->all());
-        return redirect()->route('ranks.index')->with('status', 'Rank Created Successfully');
+        return back()->with('status', 'Rank Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class RankController extends Controller
         $ranks = Rank::paginate(10);
         return view('references.ranks.index', [
             'ranks' => $ranks
-        ])->withStatus(__('Rank successfully updated.'));   
+        ])->back()->with('Rank successfully updated.');   
     }
 
     /**
@@ -97,6 +97,6 @@ class RankController extends Controller
     {
         $id = Rank::find($id);
         $id->delete();
-        return redirect()->route('rank.index')->with('status', 'Rank Archived Successfully');
+        return back()->with('status', 'Rank Archived Successfully');
     }
 }

@@ -42,7 +42,7 @@ class ReligionController extends Controller
     public function store(Request $request)
     {
         Religion::create($request->all());
-        return redirect()->route('religion.index')->with('status', 'Religion Created Successfully');
+        return back()->with('status', 'Religion Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class ReligionController extends Controller
         $religions = Religion::paginate(10);
         return view('references.religion.index', [
             'religions' => $religions
-        ])->withStatus(__('Religion successfully updated.'));   
+        ])->back()->with('Religion successfully updated.');   
     }
 
     /**
@@ -97,6 +97,6 @@ class ReligionController extends Controller
     {
         $id = Religion::find($id);
         $id->delete();
-        return redirect()->route('religion.index')->with('status', 'Religion Archived Successfully');
+        return back()->with('status', 'Religion Archived Successfully');
     }
 }

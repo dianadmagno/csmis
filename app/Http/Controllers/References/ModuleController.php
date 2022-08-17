@@ -42,7 +42,7 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
         Module::create($request->all());
-        return redirect()->route('module.index')->with('status', 'Module Created Successfully');
+        return back()->with('status', 'Module Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class ModuleController extends Controller
         $modules = Module::paginate(10);
         return view('references.module.index', [
             'modules' => $modules
-        ])->withStatus(__('Module successfully updated.')); 
+        ])->back()->with('Module successfully updated.'); 
     }
 
     /**
@@ -97,6 +97,6 @@ class ModuleController extends Controller
     {
         $id = Module::find($id);
         $id->delete();
-        return redirect()->route('module.index')->with('status', 'Module Archived Successfully');
+        return back()->with('status', 'Module Archived Successfully');
     }
 }

@@ -48,7 +48,7 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Desription</th>
+                          <th scope="col">Description</th>
                           <th scope="col">Alias</th>
                           <th scope="col">Action</th>
                         </tr>

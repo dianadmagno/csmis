@@ -42,7 +42,7 @@ class VaccineNameController extends Controller
     public function store(Request $request)
     {
         VaccineName::create($request->all());
-        return redirect()->route('vaccineName.index')->with('status', 'Vaccine Name Created Successfully');
+        return back()->with('status', 'Vaccine Name Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class VaccineNameController extends Controller
         $vaccineNames = VaccineName::paginate(10);
         return view('references.vaccineName.index', [
             'vaccineNames' => $vaccineNames
-        ])->withStatus(__('Vaccine Name successfully updated.'));  
+        ])->back()->with('Vaccine Name successfully updated.');  
     }
 
     /**
@@ -97,6 +97,6 @@ class VaccineNameController extends Controller
     {
         $id = VaccineName::find($id);
         $id->delete();
-        return redirect()->route('vaccineName.index')->with('status', 'Vaccine Name Archived Successfully');
+        return back()->with('status', 'Vaccine Name Archived Successfully');
     }
 }

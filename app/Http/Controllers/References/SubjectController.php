@@ -45,7 +45,7 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         Subject::create($request->all());
-        return redirect()->route('subject.index')->with('status', 'Subject Created Successfully');
+        return back()->with('status', 'Subject Created Successfully');
     }
 
     /**
@@ -88,7 +88,7 @@ class SubjectController extends Controller
         $subjects = Subject::paginate(10);
         return view('references.subject.index', [
             'subjects' => $subjects
-        ])->withStatus(__('Subject successfully updated.'));
+        ])->back()->with('Subject successfully updated.');
     }
 
     /**
@@ -101,6 +101,6 @@ class SubjectController extends Controller
     {
         $id = Subject::find($id);
         $id->delete();
-        return redirect()->route('subject.index')->with('status', 'Subject Archived Successfully');
+        return back()->with('status', 'Subject Archived Successfully');
     }
 }

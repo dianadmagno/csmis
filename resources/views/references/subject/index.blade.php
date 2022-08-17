@@ -48,7 +48,7 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Desription</th>
+                          <th scope="col">Description</th>
                           <th scope="col">Sub Module</th>
                           <th scope="col">Number of Points</th>
                           <th scope="col">Number of PDS</th>

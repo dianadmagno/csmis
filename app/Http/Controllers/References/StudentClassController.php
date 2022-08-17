@@ -42,7 +42,7 @@ class StudentClassController extends Controller
     public function store(Request $request)
     {
         StudentClass::create($request->all());
-        return redirect()->route('class.index')->with('status', 'Class Created Successfully');
+        return back()->with('status', 'Class Created Successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class StudentClassController extends Controller
         $class = StudentClass::paginate(10);
         return view('references.class.index', [
             'classes' => $class
-        ])->withStatus(__('Class successfully updated.'));
+        ])->back()->with('Class successfully updated.');
     }
 
     /**
@@ -97,6 +97,6 @@ class StudentClassController extends Controller
     {
         $id = StudentClass::find($id);
         $id->delete();
-        return redirect()->route('class.index')->with('status', 'Class Archived Successfully');
+        return back()->with('status', 'Class Archived Successfully');
     }
 }
