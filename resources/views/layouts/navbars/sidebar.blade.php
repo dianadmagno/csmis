@@ -204,6 +204,11 @@
                                     {{ __('Personnel Categories') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('personnelType.index') }}">
+                                    {{ __('Personnel Types') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
