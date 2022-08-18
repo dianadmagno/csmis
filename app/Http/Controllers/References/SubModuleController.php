@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Module;
 use App\Http\Controllers\Controller;
 use App\Models\References\SubModule;
+use App\Http\Requests\References\SubModuleRequest;
 
 class SubModuleController extends Controller
 {

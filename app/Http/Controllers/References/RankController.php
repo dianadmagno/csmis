@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\References\RankRequest;
 
 class RankController extends Controller
 {

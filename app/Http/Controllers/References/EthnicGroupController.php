@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\References;
 
-use App\Models\References\EthnicGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\References\EthnicGroup;
+use App\Http\Requests\References\EthnicGroupRequest;
 
 class EthnicGroupController extends Controller
 {

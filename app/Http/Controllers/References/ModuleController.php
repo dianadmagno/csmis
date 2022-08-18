@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\References;
 
-use App\Models\References\Module;
 use Illuminate\Http\Request;
+use App\Models\References\Module;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\References\ModuleRequest;
 
 class ModuleController extends Controller
 {

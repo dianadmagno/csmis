@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\StudentClass;
 use App\Http\Controllers\Controller;
+use App\Models\References\StudentClass;
+use App\Http\Requests\References\StudentClassRequest;
 
 class StudentClassController extends Controller
 {

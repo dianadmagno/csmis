@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Subject;
 use Illuminate\Routing\Controller;
 use App\Models\References\SubModule;
+use App\Http\Requests\References\SubjectRequest;
 
 class SubjectController extends Controller
 {

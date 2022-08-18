@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\References\DemeritReportType;
+use App\Http\Requests\References\DemeritReportTypeRequest;
 
 class DemeritReportTypeController extends Controller
 {

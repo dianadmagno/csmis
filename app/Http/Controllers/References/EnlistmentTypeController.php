@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\EnlistmentType;
 use App\Http\Controllers\Controller;
+use App\Models\References\EnlistmentType;
+use App\Http\Requests\References\EnlistmentTypeRequest;
 
 class EnlistmentTypeController extends Controller
 {

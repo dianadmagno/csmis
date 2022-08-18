@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\References\ReligionRequest;
 
 class ReligionController extends Controller
 {

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\BloodType;
 use App\Http\Controllers\Controller;
+use App\Models\References\BloodType;
+use App\Http\Requests\References\BloodTypeRequest;
 
 class BloodTypeController extends Controller
 {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\References\PersonnelCategory;
+use App\Http\Requests\References\PersonnelCategoryRequest;
 
 class PersonnelCategoryController extends Controller
 {

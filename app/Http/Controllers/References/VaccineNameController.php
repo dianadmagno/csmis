@@ -76,10 +76,10 @@ class VaccineNameController extends Controller
      * @param  \App\Models\References\VaccineName  $vaccineName
      * @return \Illuminate\Http\Response
      */
-    public function update(VaccineRequest $vaccineRequest, VaccineName $vaccineName)
+    public function update(VaccineNameRequest $vaccineNameRequest, VaccineName $vaccineName)
     {
         $data = VaccineName::find($id);
-        $data->update($vaccineRequest->all());
+        $data->update($vaccineNameRequest->all());
 
         $vaccineNames = VaccineName::paginate(10);
         return view('references.vaccineName.index', [

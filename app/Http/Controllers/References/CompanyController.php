@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\References;
 
-use App\Models\References\Company;
 use Illuminate\Http\Request;
+use App\Models\References\Company;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\References\CompanyRequest;
 
 class CompanyController extends Controller
 {
