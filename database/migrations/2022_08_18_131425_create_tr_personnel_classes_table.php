@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rf_personnel_types', function (Blueprint $table) {
+        Schema::create('tr_personnel_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->foreignId('personnel_id')->constrained('tr_personnels');
+            $table->foreignId('class_id')->constrained('tr_classes');;
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_personnel_types');
+        Schema::dropIfExists('tr_personnel_classes');
     }
 };
