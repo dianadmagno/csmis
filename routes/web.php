@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('map', function () {return view('pages.maps');})->name('map');
 	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
+	Route::resource('personnel', 'App\Http\Controllers\Transactions\PersonnelController', ['except' => ['show']]);
 
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);

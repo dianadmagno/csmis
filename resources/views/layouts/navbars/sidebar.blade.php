@@ -96,6 +96,11 @@
                         <i class="ni ni-hat-3 text-primary"></i> Students
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('personnel.index') }}">
+                        <i class="ni ni-hat-3 text-primary"></i> Personnels
+                    </a>
+                </li>
             </ul>
 
             <hr class="my-3">
