@@ -29,7 +29,7 @@ class Personnel extends Model
         return $this->belongsTo(Rank::class);
     }
 
-    public function personnelCategories()
+    public function personnelCategory()
     {
         return $this->belongsTo(PersonnelCategory::class);
     }

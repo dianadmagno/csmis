@@ -48,7 +48,6 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Assigned Class</th>
                           <th scope="col">Category</th>
                           <th scope="col">View</th>
                         </tr>
@@ -71,16 +70,7 @@
                                   </div>
                                 </div>
                               </th>
-                              <td>
-                                @foreach($personnel->classes as $class)
-                                    {{ $class->description }}
-                                @endforeach
-                              </td>
-                              <td>
-                                @foreach($personnel->personnelCategories as $personnelCategory)
-                                    {{ $personnelCategory->description }}
-                                @endforeach
-                              </td>
+                              <td>{{ $personnel->personnelCategory->description }}</td>
                               <td>
                                 <form action="{{ route('personnel.destroy', $personnel->id) }}" method="post">
                                   @csrf

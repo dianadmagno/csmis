@@ -54,7 +54,7 @@ class PersonnelController extends Controller
     public function store(PersonnelRequest $request)
     {
         Personnel::create($request->all());
-        return redirect()->route('personnel.index');
+        return redirect()->route('personnel.index')->with('status', 'Personnel Added Successfully');
     }
 
     /**

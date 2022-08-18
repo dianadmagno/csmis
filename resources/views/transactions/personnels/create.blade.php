@@ -28,7 +28,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Lastname') }}</label>
-                                        <input type="text" name="lastname" id="input-name" class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('Lastname') }}" autofocus>
+                                        <input type="text" value="{{ old('lastname') }}" name="lastname" id="input-name" class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('Lastname') }}" autofocus>
     
                                         @if ($errors->has('lastname'))
                                             <span class="invalid-feedback" role="alert">
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('firstname') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Firstname') }}</label>
-                                        <input type="text" name="firstname" class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('Firstname') }}">
+                                        <input type="text" value="{{ old('firstname') }}" name="firstname" class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('Firstname') }}">
     
                                         @if ($errors->has('firstname'))
                                             <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
 
                                     <div class="form-group{{ $errors->has('middlename') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Middlename') }}</label>
-                                        <input type="text" name="middlename" class="form-control form-control-alternative{{ $errors->has('middlename') ? ' is-invalid' : '' }}" placeholder="{{ __('Middlename') }}">
+                                        <input type="text" value="{{ old('middlename') }}" name="middlename" class="form-control form-control-alternative{{ $errors->has('middlename') ? ' is-invalid' : '' }}" placeholder="{{ __('Middlename') }}">
     
                                         @if ($errors->has('middlename'))
                                             <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
 
                                     <div class="form-group{{ $errors->has('serial_number') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Serial Number') }}</label>
-                                        <input type="text" name="serial_number" class="form-control form-control-alternative{{ $errors->has('serial_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Serial Number') }}">
+                                        <input type="text" value="{{ old('serial_number') }}" name="serial_number" class="form-control form-control-alternative{{ $errors->has('serial_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Serial Number') }}">
     
                                         @if ($errors->has('serial_number'))
                                             <span class="invalid-feedback" role="alert">

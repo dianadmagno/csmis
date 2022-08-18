@@ -28,7 +28,7 @@ class PersonnelRequest extends FormRequest
             'firstname' => 'required',
             'serial_number' => 'required|unique:tr_personnels,serial_number,'.$this->personnel,
             'rank_id' => 'required',
-            'personnel_ category_id' => 'required'
+            'personnel_category_id' => 'required'
         ];
     }
 }
