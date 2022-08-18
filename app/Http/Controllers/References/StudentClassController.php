@@ -77,7 +77,7 @@ class StudentClassController extends Controller
      * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentClassRequest $studentClassRequest, StudentClass $studentClass, $id)
+    public function update(StudentClassRequest $studentClassRequest, $id)
     {
         $data = StudentClass::find($id);
         $data->update($studentClassRequest->all());

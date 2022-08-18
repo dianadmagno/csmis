@@ -40,7 +40,7 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $companyRequest, Request $request)
+    public function store(CompanyRequest $companyRequest)
     {
         Company::create($companyRequest->all());
         return back()->with('status', 'Company Created Successfully');
@@ -63,7 +63,7 @@ class CompanyController extends Controller
      * @param  \App\Models\References\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(Company $company, $id)
     {
         return view('references.company.edit', [
             'company' => Company::find($id)
@@ -77,7 +77,7 @@ class CompanyController extends Controller
      * @param  \App\Models\References\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyRequest $companyRequest)
+    public function update(CompanyRequest $companyRequest, $id)
     {
         $data = Company::find($id);
         $data->update($companyRequest->all());
@@ -94,7 +94,7 @@ class CompanyController extends Controller
      * @param  \App\Models\References\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Company $company, $id)
     {
         $id = Company::find($id);
         $id->delete();

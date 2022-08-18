@@ -40,7 +40,7 @@ class BloodTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BloodTypeRequest $bloodTypeRequest, Request $request)
+    public function store(BloodTypeRequest $bloodTypeRequest)
     {
         Rank::create($bloodTypeRequest->all());
         return back()->with('status', 'Blood Type Created Successfully');
@@ -77,7 +77,7 @@ class BloodTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BloodTypeRequest $bloodTypeRequest, Request $request, $id)
+    public function update(BloodTypeRequest $bloodTypeRequest, $id)
     {   
         $data = BloodType::find($id);
         $data->update($bloodTypeRequest->all());

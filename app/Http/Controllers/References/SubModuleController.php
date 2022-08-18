@@ -83,7 +83,7 @@ class SubModuleController extends Controller
      * @param  \App\Models\References\SubModule  $subModule
      * @return \Illuminate\Http\Response
      */
-    public function update(SubModuleRequest $subModuleRequest, SubModule $subModule)
+    public function update(SubModuleRequest $subModuleRequest, $id)
     {
         $data = SubModule::find($id);
         $data->update($subModuleRequest->all());

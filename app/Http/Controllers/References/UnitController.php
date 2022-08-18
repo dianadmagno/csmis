@@ -77,7 +77,7 @@ class UnitController extends Controller
      * @param  \App\Models\References\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(UnitRequest $unitRequest, Unit $unit)
+    public function update(UnitRequest $unitRequest, $id)
     {
         $data = Unit::find($id);
         $data->update($unitRequest->all());

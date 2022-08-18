@@ -40,7 +40,7 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ModuleRequest $moduleRequest, Request $request)
+    public function store(ModuleRequest $moduleRequest)
     {
         Module::create($moduleRequest->all());
         return back()->with('status', 'Module Created Successfully');
@@ -63,7 +63,7 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module)
+    public function edit(Module $module, $id)
     {
         return view('references.module.edit', [
             'module' => Module::find($id)
@@ -77,7 +77,7 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function update(ModuleRequest $moduleRequest, Request $request)
+    public function update(ModuleRequest $moduleRequest, $id)
     {
         $data = Module::find($id);
         $data->update($moduleRequest->all());

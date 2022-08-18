@@ -40,7 +40,7 @@ class EthnicGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EthnicGroupRequest $ethnicGroupRequest, Request $request)
+    public function store(EthnicGroupRequest $ethnicGroupRequest)
     {
         EthnicGroup::create($ethnicGroupRequest->all());
         return back()->with('status', 'Ethnic Group Created Successfully');
@@ -63,7 +63,7 @@ class EthnicGroupController extends Controller
      * @param  \App\Models\References\EthnicGroup  $ethnicGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(EthnicGroup $ethnicGroup)
+    public function edit(EthnicGroup $ethnicGroup, $id)
     {
         return view('references.ethnicGroup.edit', [
             'ethnicGroup' => EthnicGroup::find($id)
@@ -77,7 +77,7 @@ class EthnicGroupController extends Controller
      * @param  \App\Models\References\EthnicGroup  $ethnicGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EthnicGroupRequest $ethnicGroupRequest, $id)
+    public function update(EthnicGroupRequest $ethnicGroupRequest, $id)
     {
         $data = EthnicGroup::find($id);
         $data->update($ethnicGroupRequest->all());

@@ -40,7 +40,7 @@ class PersonnelCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PersonnelCategoryRequest $personnelCategoryRequest, Request $request)
+    public function store(PersonnelCategoryRequest $personnelCategoryRequest)
     {
         PersonnelCategory::create($personnelCategoryRequest->all());
         return back()->with('status', 'Personnel Category Created Successfully');
@@ -77,7 +77,7 @@ class PersonnelCategoryController extends Controller
      * @param  \App\Models\References\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(PersonnelCategoryRequest $personnelCategoryRequest, Request $request, $id)
+    public function update(PersonnelCategoryRequest $personnelCategoryRequest, $id)
     {
         $data = PersonnelCategory::find($id);
         $data->update($personnelCategoryRequest->all());
