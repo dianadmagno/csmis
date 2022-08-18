@@ -39,9 +39,9 @@ class StudentClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentClassRequest $studentClassRequest)
     {
-        StudentClass::create($request->all());
+        StudentClass::create($studentClassRequest->all());
         return back()->with('status', 'Class Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class StudentClassController extends Controller
      * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentClass $studentClass, $id)
+    public function update(StudentClassRequest $studentClassRequest, StudentClass $studentClass, $id)
     {
         $data = StudentClass::find($id);
-        $data->update($request->all());
+        $data->update($studentClassRequest->all());
 
         $class = StudentClass::paginate(10);
         return view('references.class.index', [

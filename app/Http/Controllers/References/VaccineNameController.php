@@ -39,9 +39,9 @@ class VaccineNameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VaccineRequest $vaccineRequest)
     {
-        VaccineName::create($request->all());
+        VaccineName::create($vaccineRequest->all());
         return back()->with('status', 'Vaccine Name Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class VaccineNameController extends Controller
      * @param  \App\Models\References\VaccineName  $vaccineName
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VaccineName $vaccineName)
+    public function update(VaccineRequest $vaccineRequest, VaccineName $vaccineName)
     {
         $data = VaccineName::find($id);
-        $data->update($request->all());
+        $data->update($vaccineRequest->all());
 
         $vaccineNames = VaccineName::paginate(10);
         return view('references.vaccineName.index', [

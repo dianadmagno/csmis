@@ -39,9 +39,9 @@ class EnlistmentTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnlistmentTypeRequest $enlistmentRequest, Request $request)
     {
-        EnlistmentType::create($request->all());
+        EnlistmentType::create($enlistmentRequest->all());
         return back()->with('status', 'Student Type Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class EnlistmentTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EnlistmentTypeRequest $enlistmentRequest, Request $request, $id)
     {   
         $data = EnlistmentType::find($id);
-        $data->update($request->all());
+        $data->update($enlistmentRequest->all());
 
         $studentType = EnlistmentType::paginate(10);
         return view('references.type.index', [

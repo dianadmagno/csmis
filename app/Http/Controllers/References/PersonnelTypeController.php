@@ -39,9 +39,9 @@ class PersonnelTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PersonnelTypeRequest $personnelRequest)
     {
-        PersonnelType::create($request->all());
+        PersonnelType::create($personnelRequest->all());
         return back()->with('status', 'Personnel Type Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class PersonnelTypeController extends Controller
      * @param  \App\Models\References\PersonnelType  $personnelType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonnelTypeRequest $personnelRequest, $id)
     {
         $data = PersonnelType::find($id);
-        $data->update($request->all());
+        $data->update($personnelRequest->all());
 
         $personnelTypes = PersonnelType::paginate(10);
         return view('references.personnelType.index', [

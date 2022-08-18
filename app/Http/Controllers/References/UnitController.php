@@ -39,9 +39,9 @@ class UnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnitRequest $unitRequest)
     {
-        Unit::create($request->all());
+        Unit::create($unitRequest->all());
         return back()->with('status', 'Unit Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class UnitController extends Controller
      * @param  \App\Models\References\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unit $unit)
+    public function update(UnitRequest $unitRequest, Unit $unit)
     {
         $data = Unit::find($id);
-        $data->update($request->all());
+        $data->update($unitRequest->all());
 
         $units = Unit::paginate(10);
         return view('references.unit.index', [

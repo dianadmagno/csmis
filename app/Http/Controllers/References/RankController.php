@@ -39,9 +39,9 @@ class RankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RankRequest $rankRequest)
     {
-        Rank::create($request->all());
+        Rank::create($rankRequest->all());
         return back()->with('status', 'Rank Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class RankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RankRequest $rankRequest, $id)
     {   
         $data = Rank::find($id);
-        $data->update($request->all());
+        $data->update($rankRequest->all());
 
         $ranks = Rank::paginate(10);
         return view('references.ranks.index', [

@@ -39,9 +39,9 @@ class ReligionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReligionRequest $religionRequest)
     {
-        Religion::create($request->all());
+        Religion::create($religionRequest->all());
         return back()->with('status', 'Religion Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class ReligionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReligionRequest $religionRequest, $id)
     {   
         $data = Religion::find($id);
-        $data->update($request->all());
+        $data->update($religionRequest->all());
 
         $religions = Religion::paginate(10);
         return view('references.religion.index', [

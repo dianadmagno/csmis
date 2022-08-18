@@ -39,9 +39,9 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ModuleRequest $moduleRequest, Request $request)
     {
-        Module::create($request->all());
+        Module::create($moduleRequest->all());
         return back()->with('status', 'Module Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Module $module)
+    public function update(ModuleRequest $moduleRequest, Request $request)
     {
         $data = Module::find($id);
-        $data->update($request->all());
+        $data->update($moduleRequest->all());
 
         $modules = Module::paginate(10);
         return view('references.module.index', [

@@ -39,9 +39,9 @@ class DemeritReportTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DemeritReportTypeRequest $demeritReportTypeRequest, Request $request)
     {
-        DemeritReportType::create($request->all());
+        DemeritReportType::create($demeritReportTypeRequest->all());
         return back()->with('status', 'Demerit Report Type Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class DemeritReportTypeController extends Controller
      * @param  \App\Models\References\DemeritReportType  $demeritReportType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DemeritReportTypeRequest $demeritReportTypeRequest, Request $request, $id)
     {
         $data = DemeritTypeReport::find($id);
-        $data->update($request->all());
+        $data->update($demeritReportTypeRequest->all());
 
         $demeritReports = DemeritTypeReport::paginate(10);
         return view('references.demeritReport.index', [

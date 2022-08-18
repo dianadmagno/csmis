@@ -42,9 +42,9 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $subjectRequest)
     {
-        Subject::create($request->all());
+        Subject::create($subjectRequest->all());
         return back()->with('status', 'Subject Created Successfully');
     }
 
@@ -80,10 +80,10 @@ class SubjectController extends Controller
      * @param  \App\Models\References\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubjectRequest $subjectRequest, $id)
     {
         $data = Subject::find($id);
-        $data->update($request->all());
+        $data->update($subjectRequest->all());
 
         $subjects = Subject::paginate(10);
         return view('references.subject.index', [

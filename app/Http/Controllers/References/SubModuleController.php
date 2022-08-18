@@ -44,9 +44,9 @@ class SubModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubModuleRequest $subModuleRequest)
     {
-        SubModule::create($request->all());
+        SubModule::create($subModuleRequest->all());
         return back()->with('status', 'Sub Module Created Successfully');
     }
 
@@ -82,10 +82,10 @@ class SubModuleController extends Controller
      * @param  \App\Models\References\SubModule  $subModule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubModule $subModule)
+    public function update(SubModuleRequest $subModuleRequest, SubModule $subModule)
     {
         $data = SubModule::find($id);
-        $data->update($request->all());
+        $data->update($subModuleRequest->all());
 
         $subModules = SubModule::paginate(10);
         return view('references.subModule.index', [

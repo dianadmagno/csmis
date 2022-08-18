@@ -39,9 +39,9 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $companyRequest, Request $request)
     {
-        Company::create($request->all());
+        Company::create($companyRequest->all());
         return back()->with('status', 'Company Created Successfully');
     }
 
@@ -76,10 +76,10 @@ class CompanyController extends Controller
      * @param  \App\Models\References\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, CompanyRequest $companyRequest)
     {
         $data = Company::find($id);
-        $data->update($request->all());
+        $data->update($companyRequest->all());
 
         $companies = Company::paginate(10);
         return view('references.company.index', [
