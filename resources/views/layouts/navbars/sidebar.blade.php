@@ -101,6 +101,11 @@
                         <i class="ni ni-hat-3 text-primary"></i> Personnels
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('class.index') }}">
+                    <i class="ni ni-shop text-primary"></i>Class
+                    </a>
+                </li>
             </ul>
 
             <hr class="my-3">
@@ -170,11 +175,6 @@
 
                     <div class="collapse" id="classReferences">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('class.index') }}">
-                                    {{ __('Class') }}
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('company.index') }}">
                                     {{ __('Companies') }}

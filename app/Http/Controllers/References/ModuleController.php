@@ -5,6 +5,8 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use App\Models\References\Module;
 use App\Http\Controllers\Controller;
+use App\Models\References\SubModule;
+use App\Models\References\StudentClass;
 use App\Http\Requests\References\ModuleRequest;
 
 class ModuleController extends Controller
@@ -99,5 +101,40 @@ class ModuleController extends Controller
         $id = Module::find($id);
         $id->delete();
         return back()->with('status', 'Module Archived Successfully');
+    }
+
+    public function getModulePerClass(Request $request, $id)
+    {   
+        $keyword = $request->keyword;
+        $modules = Module::where('id', '=', $id)
+                        ->where('name', 'LIKE', '%'.$keyword.'%')
+                        //->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10);
+                        
+        return view('references.module.class', [
+            'modules' => $modules, 
+            'class' => StudentClass::find($id)
+        ]);
+    }
+
+    public function assignModule(Request $request)
+    {
+        return view('references.module.add', [
+            'modules' => Module::all()
+        ]);
+    }
+
+    public function assignSubModule(Request $request, $id)
+    {
+        $keyword = $request->keyword;
+        $subModules = SubModule::where('id', '=', $id)
+                        ->where('name', 'LIKE', '%'.$keyword.'%')
+                        //->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10);
+                        
+        return view('references.module.subModule', [
+            'subModules' => $subModules, 
+            'modules' => Module::find($id)
+        ]);
     }
 }

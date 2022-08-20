@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('map', function () {return view('pages.maps');})->name('map');
 	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
+	Route::get('class/module/{id}', ['as' => 'module.class', 'uses' => 'App\Http\Controllers\References\ModuleController@getModulePerClass']);
+	Route::get('assign/module/{id}', ['as' => 'assign.module', 'uses' => 'App\Http\Controllers\References\ModuleController@assignModule']);
+	Route::get('assign/subModule/{id}', ['as' => 'assign.subModule', 'uses' => 'App\Http\Controllers\References\ModuleController@assignSubModule']);
 	Route::resource('personnel', 'App\Http\Controllers\Transactions\PersonnelController', ['except' => ['show']]);
 
 	//References

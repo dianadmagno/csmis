@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Classes')
+      'title' => __('List of Sub Modules')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('class.index') }}">
+                  <form action="{{ route('ranks.index') }}">
                     <div class="card-header border-0">
                       <div class="row align-items-center">
                         <div class="col-3">
@@ -29,7 +29,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('class.create') }}" class="btn btn-primary">Add Class</a>
+                            <a href="{{ route('subModule.create') }}" class="btn btn-primary">Add Sub Module</a>
                         </div>
                         @if (session('status'))
                             <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -49,34 +49,33 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Class Name</th>
+                          <th scope="col">Module</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($classes) > 0)
-                          @foreach($classes as $class)
+                        @if (count($subModules) > 0)
+                          @foreach($subModules as $subModule)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $class->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $subModule->module_name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $class->description }}
+                                {{ $subModule->sub_module_name }}
                               </td>
                               <td class="budget">
-                                {{ $class->alias }}
+                                {{ $subModule->module_description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('class.destroy', $class->id) }}" method="post">
+                                  <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <a href="{{ route('module.class', $class->id) }}" class="btn btn-primary" type="button">Assign Module</a>
+                                    <a href="{{ route('subModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
                                     <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
@@ -92,9 +91,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($classes) > 0)
+                  @if (count($subModules) > 0)
                     <div class="card-footer">
-                      {{ $classes->links() }}
+                      {{ $subModules->links() }}
                     </div>
                   @endif
                 </div>
