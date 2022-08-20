@@ -8,9 +8,9 @@ use App\Models\References\Company;
 use App\Models\References\Religion;
 use App\Models\References\BloodType;
 use App\Models\References\EthnicGroup;
-use App\Models\References\StudentClass;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\References\EnlistmentType;
+use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\References;
+namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\References\StudentClass;
+use App\Models\Transactions\StudentClass;
 use App\Http\Requests\References\StudentClassRequest;
 
 class StudentClassController extends Controller
@@ -17,7 +17,7 @@ class StudentClassController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.class.index', [
+        return view('transactions.class.index', [
             'classes' => StudentClass::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
@@ -31,7 +31,7 @@ class StudentClassController extends Controller
      */
     public function create()
     {
-        return view('references.class.create');
+        return view('transactions.class.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class StudentClassController extends Controller
      */
     public function edit(StudentClass $studentClass, $id)
     {
-        return view('references.class.edit', [
+        return view('transactions.class.edit', [
             'class' => StudentClass::find($id)
         ]);
     }
@@ -83,7 +83,7 @@ class StudentClassController extends Controller
         $data->update($studentClassRequest->all());
 
         $class = StudentClass::paginate(10);
-        return view('references.class.index', [
+        return view('transactions.class.index', [
             'classes' => $class
         ])->back()->with('Class successfully updated.');
     }
