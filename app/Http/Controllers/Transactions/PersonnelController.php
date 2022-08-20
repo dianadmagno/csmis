@@ -23,9 +23,6 @@ class PersonnelController extends Controller
             'personnels' => Personnel::where('lastname', 'like', '%'.$keyword.'%')
                                 ->orWhere('firstname', 'like', '%'.$keyword.'%')
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
-                                // ->orWhereHas('classes', function($query) use($keyword) {
-                                //     $query->where('description', 'like', '%'.$keyword.'%');
-                                // })
                                 ->paginate(10)
         ]);
     }
@@ -76,7 +73,14 @@ class PersonnelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $personnel = Personnel::find($id);
+        $ranks = Rank::all();
+        $personnelCategories = PersonnelCategory::all();
+        return view('transactions.personnels.edit', [
+            'personnel' => $personnel,
+            'ranks' => $ranks,
+            'personnelCategories' => $personnelCategories
+        ]);
     }
 
     /**
@@ -86,9 +90,11 @@ class PersonnelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonnelRequest $request, $id)
     {
-        //
+        $personnel = Personnel::find($id);
+        $personnel->update($request->all());
+        return back()->with('status', 'Personnel Updated Successfully');
     }
 
     /**
