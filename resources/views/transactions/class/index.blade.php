@@ -76,6 +76,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <a href="{{ route('assigned.personnels', $class->id) }}" class="btn btn-default" type="button">Assign Personnel</a>
                                     <a href="{{ route('module.class', $class->id) }}" class="btn btn-primary" type="button">Assign Module</a>
                                     <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
                                 </form>

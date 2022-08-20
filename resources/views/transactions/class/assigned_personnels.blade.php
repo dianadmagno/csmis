@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Personnels')
+      'title' => __('List of Assigned Personnels to '.$class->description.'')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,15 +12,15 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('personnel.index') }}">
+                  <form action="{{ route('assigned.personnels', $class->id) }}">
                     <div class="card-header border-0">
                       @if (session('status'))
-                        <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                          <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                              {{ session('status') }}
+                              <button typse="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
                       @endif
                       <div class="row align-items-center">
                         <div class="col-3">
@@ -37,7 +37,8 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('personnel.create') }}" class="btn btn-primary">Add Personnel</a>
+                            <a href="{{ route('assign.personnel', $class->id) }}" class="btn btn-primary">Assign Personnel</a>
+                            <a href="{{ route('class.index') }}" class="btn btn-danger">Back</a>
                         </div>
                       </div>
                     </div>
@@ -49,8 +50,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Category</th>
-                          <th scope="col">Assigned Class</th>
-                          <th scope="col">View</th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
@@ -59,36 +59,22 @@
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
-                                  <a href="#" class="avatar rounded-circle mr-3">
-                                    @if($personnel->photo)
-                                      <img alt="Personnel Image" src="{{ asset('personnel images/'.$personnel->photo.'') }}">
-                                    @else
-                                      <img alt="Personnel Image" src="{{ asset('user images/user.png') }}">
-                                    @endif
-                                  </a>
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $personnel->rank->name }} {{ $personnel->firstname }} {{ $personnel->middlename }} {{ $personnel->lastname }} {{ $personnel->serial_number }}</span>
+                                    <span class="name mb-0 text-sm">{{ $personnel->rank->name }} {{ $personnel->firstname }} {{ $personnel->middlename }} {{ $personnel->lastname }}</span>
                                   </div>
                                 </div>
                               </th>
-                              <td>{{ $personnel->personnelCategory->description }}</td>
-                              <td>
-                                @foreach($personnel->personnelClasses as $personnelClass)
-                                  {{ $personnelClass->studentClass->description }}<br>
-                                @endforeach
+                              <td class="budget">
+                                {{ $personnel->personnelCategory->description }}
                               </td>
                               <td>
-                                <form action="{{ route('personnel.destroy', $personnel->id) }}" method="post">
-                                  @csrf
-                                  @method('delete')
-                                  <a href="{{ route('personnel.edit', $personnel->id) }}" class="btn btn-default" type="button">
-                                    View
-                                  </a>
-                                  <a href="{{ route('assign.class', $personnel->id) }}" class="btn btn-primary" type="button">
-                                    Assign Class
-                                  </a>
-                                  <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this personnel?')">Archive</button>
+                                <div class="row">
+                                  <form action="{{ route('assign.personnel.destroy', $personnel->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" onclick="return confirm('Do you really want to remove this personnel?')" class="btn btn-danger">Remove</button>
                                 </form>
+                                </div>
                               </td>
                             </tr>
                           @endforeach

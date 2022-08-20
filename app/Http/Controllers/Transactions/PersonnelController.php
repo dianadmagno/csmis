@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
+use App\Models\Transactions\StudentClass;
+use App\Models\Transactions\PersonnelClass;
 use App\Models\References\PersonnelCategory;
 use App\Http\Requests\Transactions\PersonnelRequest;
 
@@ -23,6 +25,12 @@ class PersonnelController extends Controller
             'personnels' => Personnel::where('lastname', 'like', '%'.$keyword.'%')
                                 ->orWhere('firstname', 'like', '%'.$keyword.'%')
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
+                                ->orWhereHas('personnelClasses', function($query) use($keyword) {
+                                    $query->whereHas('studentClass', function($query) use($keyword) {
+                                        $query->where('description', 'like', '%'.$keyword.'%')
+                                            ->orWhere('alias', 'like', '%'.$keyword.'%');
+                                    });
+                                })
                                 ->paginate(10)
         ]);
     }
@@ -106,5 +114,24 @@ class PersonnelController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function assignClass($id)
+    {
+        $classes = StudentClass::all();
+        $personnel = Personnel::find($id);
+        return view('transactions.personnels.assign_class', [
+            'classes' => $classes,
+            'personnel' => $personnel
+        ]);
+    }
+
+    public function storeAssignClass(Request $request, $id)
+    {
+        PersonnelClass::create([
+            'personnel_id' => $id,
+            'class_id' => $request->class_id
+        ]);
+        return redirect()->route('personnel.index')->with('status', 'Class Assigned Successfully');
     }
 }
