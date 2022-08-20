@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\References;
+namespace App\Models\Transactions;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

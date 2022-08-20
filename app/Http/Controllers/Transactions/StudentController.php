@@ -11,9 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
-use App\Models\References\StudentClass;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
+use App\Models\Transactions\StudentClass;
 use App\Http\Requests\Transactions\StudentRequest;
 
 class StudentController extends Controller
