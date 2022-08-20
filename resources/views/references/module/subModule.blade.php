@@ -28,9 +28,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
+                        <!-- <div class="col text-right">
                             <a href="{{ route('subModule.create') }}" class="btn btn-primary">Add Sub Module</a>
-                        </div>
+                        </div> -->
                         @if (session('status'))
                             <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('status') }}
