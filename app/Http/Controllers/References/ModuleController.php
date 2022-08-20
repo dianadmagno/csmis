@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Module;
 use App\Http\Controllers\Controller;
 use App\Models\References\SubModule;
-use App\Models\References\StudentClass;
+use App\Models\Transactions\StudentClass;
 use App\Http\Requests\References\ModuleRequest;
 
 class ModuleController extends Controller

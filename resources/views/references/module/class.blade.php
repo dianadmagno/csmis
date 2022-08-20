@@ -28,9 +28,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <!-- <div class="col text-right">
+                        <div class="col text-right">
                             <a href="{{ route('assign.module', $class->id) }}" class="btn btn-primary">Assign Module</a>
-                        </div> -->
+                        </div>
                         @if (session('status'))
                             <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('status') }}
@@ -72,7 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('assign.subModule', $module->id) }}" class="btn btn-success" type="button">Sub Module</a>
-                                    <!-- <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button> -->
+                                    <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>
