@@ -66,7 +66,7 @@
                                     @endif
                                   </a>
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $personnel->rank->name }} {{ $personnel->firstname }} {{ $personnel->middlename }} {{ $personnel->lastname }}</span>
+                                    <span class="name mb-0 text-sm">{{ $personnel->rank->name }} {{ $personnel->firstname }} {{ $personnel->middlename }} {{ $personnel->lastname }} {{ $personnel->serial_number }}</span>
                                   </div>
                                 </div>
                               </th>
