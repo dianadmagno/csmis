@@ -52,7 +52,7 @@ class StudentController extends Controller
         $religions = Religion::all();
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::all();
+        $studentClasses = StudentClass::where('is_active', true)->get();
         $units = Unit::all();
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
@@ -103,7 +103,7 @@ class StudentController extends Controller
         $religions = Religion::all();
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::all();
+        $studentClasses = StudentClass::where('is_active', true)->get();
         $units = Unit::all();
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();

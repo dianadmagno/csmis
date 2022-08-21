@@ -48,7 +48,7 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Description</th>
+                          <th scope="col">Company</th>
                           <th scope="col">Class Name</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
@@ -61,12 +61,15 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $class->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $class->description }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $class->description }}
+                                @php $companies = App\Models\References\Company::whereIn('id', $class->students()->pluck('company_id'))->get() @endphp
+                                @foreach($companies as $company)
+                                  {{ $company->description }}<br>
+                                @endforeach
                               </td>
                               <td class="budget">
                                 {{ $class->alias }}
