@@ -27,7 +27,21 @@ class CompanyTableSeeder extends Seeder
             'I',
             'J',
             'K',
-            'L'
+            'L',
+            'M',
+            'N',
+            'O',
+            'P',
+            'Q',
+            'R',
+            'S',
+            'T',
+            'U',
+            'V',
+            'W',
+            'X',
+            'Y',
+            'Z'
         ];
 
         $description = [
@@ -42,7 +56,21 @@ class CompanyTableSeeder extends Seeder
             'India',
             'Juliet',
             'Kilo',
-            'Lima'
+            'Lima',
+            'Mike',
+            'November',
+            'Oscar',
+            'Papa',
+            'Quebec',
+            'Romeo',
+            'Sierra',
+            'Tango',
+            'Uniform',
+            'Victor',
+            'Whiskey',
+            'Xray',
+            'Yankee',
+            'Zulu'
         ];
 
         foreach($companies as $key => $name) {
