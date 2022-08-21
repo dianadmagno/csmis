@@ -51,7 +51,7 @@
                           <th scope="col">Class</th>
                           <th scope="col">Company</th>
                           <th scope="col">Email</th>
-                          <th scope="col">View</th>
+                          <th scope="col">Actions</th>
                         </tr>
                       </thead>
                       <tbody class="list">
@@ -85,6 +85,9 @@
                                   @method('delete')
                                   <a href="{{ route('student.edit', $student->id) }}" class="btn btn-default" type="button">
                                     View
+                                  </a>
+                                  <a href="{{ route('student.edit', $student->id) }}" class="btn btn-primary" type="button">
+                                    Academic
                                   </a>
                                   <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this student?')">Archive</button>
                                 </form>

@@ -2,6 +2,7 @@
 
 namespace App\Models\Transactions;
 
+use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\PersonnelClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,5 +22,10 @@ class StudentClass extends Model
     public function personnelClasses()
     {
         return $this->hasMany(PersonnelClass::class, 'class_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'class_id');
     }
 }
