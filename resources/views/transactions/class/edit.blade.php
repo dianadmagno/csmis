@@ -48,7 +48,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group{{ $errors->has('alias') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Alias') }}</label>
+                                        <label class="form-control-label" for="input-name">{{ __('Class Name') }}</label>
                                         <input type="text" name="alias" id="input-name" class="form-control form-control-alternative{{ $errors->has('alias') ? ' is-invalid' : '' }}" placeholder="{{ __('Alias')}}" value="{{ old('alias', $class->alias) }}">
     
                                         @if ($errors->has('alias'))
@@ -56,6 +56,13 @@
                                                 <strong>{{ $errors->first('alias') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">{{ __('Is Active?') }}</label>
+                                        <label class="custom-toggle ml-3">
+                                            <input type="checkbox" name="is_active" value="1" {{ $class->is_active ? 'checked' : '' }}>
+                                            <span class="custom-toggle-slider rounded-circle mb--3 mt-3" data-label-off="No" data-label-on="Yes"></span>
+                                        </label>
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('class.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>

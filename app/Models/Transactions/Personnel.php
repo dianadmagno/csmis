@@ -33,4 +33,9 @@ class Personnel extends Model
     {
         return $this->belongsTo(PersonnelCategory::class);
     }
+
+    public function personnelClasses()
+    {
+        return $this->hasMany(PersonnelClass::class);
+    }
 }

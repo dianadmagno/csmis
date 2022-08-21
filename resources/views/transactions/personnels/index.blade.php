@@ -78,6 +78,9 @@
                                   <a href="{{ route('personnel.edit', $personnel->id) }}" class="btn btn-default" type="button">
                                     View
                                   </a>
+                                  <a href="{{ route('assigned.classes', $personnel->id) }}" class="btn btn-primary" type="button">
+                                    Assign Class
+                                  </a>
                                   <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this personnel?')">Archive</button>
                                 </form>
                               </td>

@@ -2,8 +2,9 @@
 
 namespace App\Models\Transactions;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transactions\PersonnelClass;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentClass extends Model
 {
@@ -13,6 +14,12 @@ class StudentClass extends Model
     protected $fillable = [
         'name',
         'description',
-        'alias'
+        'alias',
+        'is_active'
     ];
+
+    public function personnelClasses()
+    {
+        return $this->hasMany(PersonnelClass::class, 'class_id');
+    }
 }

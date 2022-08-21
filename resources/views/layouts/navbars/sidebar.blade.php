@@ -98,7 +98,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('personnel.index') }}">
-                        <i class="ni ni-hat-3 text-primary"></i> Personnels
+                        <i class="ni ni-circle-08 text-primary"></i> Personnels
                     </a>
                 </li>
                 <li class="nav-item">

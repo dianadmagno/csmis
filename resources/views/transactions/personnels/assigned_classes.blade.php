@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Classes')
+      'title' => __('List of Assigned Classes to '.$personnel->rank->name.' '.$personnel->firstname.' '.$personnel->middlename.' '.$personnel->lastname.'')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,12 +12,12 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('class.index') }}">
+                  <form action="{{ route('assigned.classes', $personnel->id) }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                           <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
                               {{ session('status') }}
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <button typse="button" class="close" data-dismiss="alert" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                               </button>
                           </div>
@@ -37,7 +37,8 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('class.create') }}" class="btn btn-primary">Add Class</a>
+                            <a href="{{ route('assign.class', $personnel->id) }}" class="btn btn-primary">Assign Class</a>
+                            <a href="{{ route('personnel.index') }}" class="btn btn-danger">Back</a>
                         </div>
                       </div>
                     </div>
@@ -80,13 +81,10 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('class.destroy', $class->id) }}" method="post">
+                                  <form action="{{ route('assign.personnel.destroy', $class->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <a href="{{ route('assigned.personnels', $class->id) }}" class="btn btn-default" type="button">Assign Personnel</a>
-                                    <a href="{{ route('module.class', $class->id) }}" class="btn btn-primary" type="button">Assign Module</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
+                                    <button type="submit" onclick="return confirm('Do you really want to remove this class?')" class="btn btn-danger">Remove</button>
                                 </form>
                                 </div>
                               </td>

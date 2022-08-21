@@ -131,7 +131,7 @@
                                 </div>
 
                                 <div class="form-group{{ $errors->has('personnel_category_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Rank') }}</label>
+                                    <label class="form-control-label" for="input-name">{{ __('Category') }}</label>
                                     <select name="personnel_category_id" class="form-control form-control-alternative{{ $errors->has('personnel_category_id') ? ' is-invalid' : '' }}">
                                         <option value="">Choose Category</option>
                                         @foreach($personnelCategories as $personnelCategory)
