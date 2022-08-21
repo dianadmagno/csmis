@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('nr_of_points');
             $table->integer('nr_of_pds');
+            $table->integer('nr_of_items');
             $table->foreignId('sub_module_id')
                     ->constraints('rf_sub_modules')
                     ->onDelete('cascade');

@@ -15,6 +15,7 @@ class Subject extends Model
         'description',
         'sub_module_id',
         'nr_of_points',
-        'nr_of_pds'
+        'nr_of_pds',
+        'nr_of_items'
     ];
 }

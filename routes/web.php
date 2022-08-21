@@ -42,11 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::get('class/module/{id}', ['as' => 'module.class', 'uses' => 'App\Http\Controllers\References\ModuleController@getModulePerClass']);
 	Route::get('assign/module/{id}', ['as' => 'assign.module', 'uses' => 'App\Http\Controllers\References\ModuleController@assignModule']);
-	Route::get('assigned/module/{id}', ['as' => 'assigned.module', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedModule']);
+	Route::post('assigned/module/{id}', ['as' => 'assigned.module', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedModule']);
 	Route::get('assign/subModule/{id}', ['as' => 'assign.subModule', 'uses' => 'App\Http\Controllers\References\ModuleController@assignSubModule']);
 	Route::get('assign/subjects/{id}', ['as' => 'assigned.subject', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedSubjects']);
 	Route::get('assign/instructor/{id}', ['as' => 'assigned.instructor', 'uses' => 'App\Http\Controllers\References\ModuleController@updateInstructor']);
-	Route::get('add/instructor/{id}', ['as' => 'instructor.add', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedInstructor']);
+	Route::post('add/instructor/{id}', ['as' => 'instructor.add', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedInstructor']);
 	Route::resource('personnel', 'App\Http\Controllers\Transactions\PersonnelController', ['except' => ['show']]);
 	Route::get('assign/class/{id}', ['as' => 'assign.class', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@assignClass']);
 	Route::post('assign/class/{id}', ['as' => 'assign.class.store', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@storeAssignClass']);

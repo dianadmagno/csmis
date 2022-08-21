@@ -48,7 +48,9 @@ class ModuleController extends Controller
     public function store(ModuleRequest $moduleRequest)
     {
         Module::create($moduleRequest->all());
-        return back()->with('status', 'Module Created Successfully');
+        return view('references.module.class', [ 
+            'modules' => Module::all()
+        ]);
     }
 
     /**
@@ -109,9 +111,11 @@ class ModuleController extends Controller
     public function getModulePerClass(Request $request, $id)
     {   
         $keyword = $request->keyword;
-        $modules = ClassSubjectInstructor::select('tr_classes.id as class_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_desc')
+        $modules = ClassSubjectInstructor::select('tr_classes.id as class_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_desc', 'rf_modules.id as module_id')
                         ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
                         ->join('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
+                        ->join('rf_sub_modules', 'rf_sub_modules.id', '=', 'rf_subjects.sub_module_id')
+                        ->join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
                         ->where('class_id', '=', $id)
                         //->where('name', 'LIKE', '%'.$keyword.'%')
                         //->orWhere('description', 'LIKE', '%'.$keyword.'%')
@@ -139,7 +143,7 @@ class ModuleController extends Controller
         // }
 
         return view('references.module.add', [
-            'modules' => ClassSubjectInstructor::where('class_id', '=', $id)->get(),
+            'modules' => Module::all(),
             'class' => StudentClass::find($id)
         ]);
     }
@@ -159,8 +163,9 @@ class ModuleController extends Controller
             }
         }
 
-        return view('references.module.add', [
-            'modules' => Module::all()
+        return view('references.module.class', [
+            'modules' => Module::all(),
+            'class' => StudentClass::find($id)  
         ]);
     }
 
@@ -168,24 +173,28 @@ class ModuleController extends Controller
     {
         $keyword = $request->keyword;
         $subModules = SubModule::join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
-                        ->select('rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_name')
+                        ->select('rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_description', 'rf_sub_modules.name as sub_module_name')
                         ->where('rf_modules.name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('rf_modules.description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10);
+        $class = StudentClass::find($id);
                         
         return view('references.module.subModule', [
             'subModules' => $subModules, 
-            'modules' => Module::find($id)
+            'class' => $class,
+            'module' => StudentClass::find($class->module_id)
         ]);
     }
 
     public function assignedSubjects(Request $request, $id)
     {   
         $keyword = $request->keyword;
-        $subjects = Subject::where('id', '=', $id)
-                        ->where('name', 'LIKE', '%'.$keyword.'%')
-                        //->orWhere('description', 'LIKE', '%'.$keyword.'%')
-                        ->paginate(10);
+        $subjects = ClassSubjectInstructor::select('rf_subjects.id as subject_id', 'rf_subjects.name as subject_name', 'rf_subjects.description as subject_desc', 'tr_personnels.firstname', 'tr_personnels.middlename', 'tr_personnels.lastname')
+                            ->where('class_id', '=', $id)
+                            ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
+                            ->join('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
+                            ->leftjoin('tr_personnels', 'tr_personnels.id', '=', 'tr_class_subject_instructors.instructor_id')
+                            ->paginate(10);
                         
         return view('references.module.subject', [
             'subjects' => $subjects, 
@@ -207,11 +216,20 @@ class ModuleController extends Controller
     {   
         $keyword = $request->keyword;
         $data = ClassSubjectInstructor::find($id);
+        $request['class_id'] = $data->class_id;
+        $request['subject_id'] = $data->subject_id;
         $data->update($request->all());
+
+        $subjects = ClassSubjectInstructor::select('rf_subjects.id as subject_id', 'rf_subjects.name as subject_name', 'rf_subjects.description as subject_desc', 'tr_personnels.firstname', 'tr_personnels.middlename', 'tr_personnels.lastname')
+                            ->where('class_id', '=',$data->id)
+                            ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
+                            ->join('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
+                            ->join('tr_personnels', 'tr_personnels.id', '=', 'tr_class_subject_instructors.instructor_id')
+                            ->paginate(10);
                         
         return view('references.module.subject', [
             'subjects' => $subjects, 
-            'subModules' => SubModule::find($id)
+            //'subModules' => SubModule::find($id)
         ]);
     }
 }

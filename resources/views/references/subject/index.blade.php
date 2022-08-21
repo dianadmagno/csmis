@@ -49,9 +49,9 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Sub Module</th>
                           <th scope="col">Number of Points</th>
                           <th scope="col">Number of PDS</th>
+                          <th scope="col">Number of Items</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -76,7 +76,7 @@
                                 {{ $subject->nr_of_pds }}
                               </td>
                               <td class="budget">
-                                {{ $subject->sub_module_id }}
+                                {{ $subject->nr_of_items }}
                               </td>
                               <td>
                                 <div class="row">

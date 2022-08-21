@@ -60,12 +60,12 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $subModule->module_name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $subModule->sub_module_name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $subModule->sub_module_name }}
+                                {{ $subModule->sub_module_description }}
                               </td>
                               <td class="budget">
                                 {{ $subModule->module_description }}

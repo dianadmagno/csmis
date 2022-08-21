@@ -59,16 +59,16 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $module->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $module->module_name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $module->description }}
+                                {{ $module->module_desc }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <a href="{{ route('assign.subModule', $module->id) }}" class="btn btn-success" type="button">Sub Module</a>
+                                  <a href="{{ route('assign.subModule', $module->module_id) }}" class="btn btn-success" type="button">Sub Module</a>
                                 </div>
                               </td>
                             </tr>

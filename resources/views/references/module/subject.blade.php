@@ -49,7 +49,6 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Module</th>
                           <th scope="col">Instructor</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -61,19 +60,19 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $subject->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $subject->subject_name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $subject->description }}
+                                {{ $subject->subject_desc }}
                               </td>
                               <td class="budget">
-                              
+                                {{ $subject->firstname }} {{ $subject->middlename }} {{ $subject->lastname }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <a href="{{ route('assigned.instructor', $subject->id) }}" class="btn btn-success" type="button">Assign Instructor</a>
+                                  <a href="{{ route('assigned.instructor', $subject->subject_id) }}" class="btn btn-success" type="button">Assign Instructor</a>
                                 </div>
                               </td>
                             </tr>
