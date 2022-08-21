@@ -72,12 +72,12 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
+                                  <!-- <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
                                     @csrf
-                                    @method('delete')
-                                    <a href="{{ route('subModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
-                                </form>
+                                    @method('delete') -->
+                                    <a href="{{ route('assigned.subject', $subModule->module_id) }}" class="btn btn-success" type="button">Subjects</a>
+                                    <!-- <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button> -->
+                                <!-- </form> -->
                                 </div>
                               </td>
                             </tr>

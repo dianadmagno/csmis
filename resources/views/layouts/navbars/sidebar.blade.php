@@ -103,7 +103,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('class.index') }}">
-                    <i class="ni ni-shop text-primary"></i>Class
+                    <i class="ni ni-shop text-primary"></i>Classes
                     </a>
                 </li>
             </ul>
