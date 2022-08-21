@@ -37,7 +37,9 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('assign.personnel', $class->id) }}" class="btn btn-primary">Assign Personnel</a>
+                            @if($class->is_active)
+                              <a href="{{ route('assign.personnel', $class->id) }}" class="btn btn-primary">Assign Personnel</a>
+                            @endif
                             <a href="{{ route('class.index') }}" class="btn btn-danger">Back</a>
                         </div>
                       </div>

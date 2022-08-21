@@ -118,7 +118,7 @@ class PersonnelController extends Controller
 
     public function assignClass($id)
     {
-        $classes = StudentClass::all();
+        $classes = StudentClass::where('is_active', true)->get();
         $personnel = Personnel::find($id);
         return view('transactions.personnels.assign_class', [
             'classes' => $classes,
@@ -126,8 +126,25 @@ class PersonnelController extends Controller
         ]);
     }
 
+    public function assignedClasses($id)
+    {
+        $classes = StudentClass::whereHas('personnelClasses', function($query) use($id) {
+            $query->where('personnel_id', $id);
+        })->paginate(10);
+        $personnel = Personnel::find($id);
+        return view('transactions.personnels.assigned_classes', [
+            'classes' => $classes,
+            'personnel' => $personnel
+        ]);
+    }
+
     public function storeAssignClass(Request $request, $id)
     {
+        $personnelClass = PersonnelClass::where('class_id', $request->class_id)->where('personnel_id', $id)->first();
+        if ($personnelClass) {
+            return back()->with('status', 'Class already assigned to this personnel');
+        }
+
         PersonnelClass::create([
             'personnel_id' => $id,
             'class_id' => $request->class_id

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\PersonnelClass;
-use App\Http\Requests\References\StudentClassRequest;
+use App\Http\Requests\Transactions\StudentClassRequest;
 
 class StudentClassController extends Controller
 {
@@ -22,6 +22,8 @@ class StudentClassController extends Controller
         return view('transactions.class.index', [
             'classes' => StudentClass::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('alias', 'LIKE', '%'.$keyword.'%')
+                        ->latest()
                         ->paginate(10)
         ]);
     }
@@ -45,7 +47,7 @@ class StudentClassController extends Controller
     public function store(StudentClassRequest $studentClassRequest)
     {
         StudentClass::create($studentClassRequest->all());
-        return back()->with('status', 'Class Created Successfully');
+        return redirect()->route('class.index')->with('status', 'Class Created Successfully');
     }
 
     /**
@@ -79,15 +81,18 @@ class StudentClassController extends Controller
      * @param  \App\Models\StudentClass  $studentClass
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentClassRequest $studentClassRequest, $id)
+    public function update(StudentClassRequest $request, $id)
     {
         $data = StudentClass::find($id);
-        $data->update($studentClassRequest->all());
+        $data->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'alias' => $request->alias,
+            'is_active' => $request->is_active ? true : false
+        ]);
 
         $class = StudentClass::paginate(10);
-        return view('transactions.class.index', [
-            'classes' => $class
-        ])->back()->with('Class successfully updated.');
+        return redirect()->route('class.index')->with('status', 'Class successfully updated.');
     }
 
     /**

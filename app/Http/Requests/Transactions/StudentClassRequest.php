@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\References;
+namespace App\Http\Requests\Transactions;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class StudentClassRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:tr_classes,name,'.$this->studentClass,
+            'name' => 'required|unique:tr_classes,name,'.$this->class,
             'description' => 'required',
         ];
     }

@@ -56,6 +56,13 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">{{ __('Is Active?') }}</label>
+                                        <label class="custom-toggle ml-3">
+                                            <input type="checkbox" name="is_active" value="1">
+                                            <span class="custom-toggle-slider rounded-circle mb--3 mt-3" data-label-off="No" data-label-on="Yes"></span>
+                                        </label>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('class.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>

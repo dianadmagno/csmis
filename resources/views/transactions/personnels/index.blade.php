@@ -49,7 +49,6 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Category</th>
-                          <th scope="col">Assigned Class</th>
                           <th scope="col">View</th>
                         </tr>
                       </thead>
@@ -73,18 +72,13 @@
                               </th>
                               <td>{{ $personnel->personnelCategory->description }}</td>
                               <td>
-                                @foreach($personnel->personnelClasses as $personnelClass)
-                                  {{ $personnelClass->studentClass->description }}<br>
-                                @endforeach
-                              </td>
-                              <td>
                                 <form action="{{ route('personnel.destroy', $personnel->id) }}" method="post">
                                   @csrf
                                   @method('delete')
                                   <a href="{{ route('personnel.edit', $personnel->id) }}" class="btn btn-default" type="button">
                                     View
                                   </a>
-                                  <a href="{{ route('assign.class', $personnel->id) }}" class="btn btn-primary" type="button">
+                                  <a href="{{ route('assigned.classes', $personnel->id) }}" class="btn btn-primary" type="button">
                                     Assign Class
                                   </a>
                                   <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this personnel?')">Archive</button>

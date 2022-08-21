@@ -42,7 +42,7 @@
                                     @endif
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                <a type="button" href="{{ route('personnel.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                <a type="button" href="{{ route('assigned.classes', $personnel->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                             </div>
                         </form>
                     </div>
