@@ -50,6 +50,7 @@
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
                           <th scope="col">Module</th>
+                          <th scope="col">Instructor</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -67,17 +68,12 @@
                               <td class="budget">
                                 {{ $subject->description }}
                               </td>
-                              <!-- <td class="budget">
-                                {{ $subModule->module_description }}
-                              </td> -->
+                              <td class="budget">
+                              
+                              </td>
                               <td>
                                 <div class="row">
-                                  <!-- <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
-                                    @csrf
-                                    @method('delete') -->
-                                    <a href="{{ route('subModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <!-- <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button> -->
-                                <!-- </form> -->
+                                  <a href="{{ route('assigned.instructor', $subject->id) }}" class="btn btn-success" type="button">Assign Instructor</a>
                                 </div>
                               </td>
                             </tr>

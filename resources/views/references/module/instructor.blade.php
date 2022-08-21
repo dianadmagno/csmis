@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('assigned.module', $class->id) }}">
+                            <form method="post" action="{{ route('instructor.add', $class->id) }}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -25,23 +25,23 @@
                                 @endif
     
     
-                                <div class="form-group{{ $errors->has('module_id') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Module') }}</label>
-                                        <select name="module_id" class="form-control form-control-alternative{{ $errors->has('module_id') ? ' is-invalid' : '' }}">
-                                            <option value="">Choose Module</option>
-                                            @foreach($modules as $module)
-                                                <option value="{{ $module->id }}">{{ $module->description }}</option>
+                                <div class="form-group{{ $errors->has('instructor_id') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Instructor') }}</label>
+                                        <select name="instructor_id" class="form-control form-control-alternative{{ $errors->has('instructor_id') ? ' is-invalid' : '' }}">
+                                            <option value="">Choose Instructors</option>
+                                            @foreach($instructors as $instructor)
+                                                <option value="{{ $instructor->id }}">{{ $instructor->firstname }} {{ $instructor->lastname }}</option>
                                             @endforeach
                                         </select>
     
-                                        @if ($errors->has('module_id'))
+                                        @if ($errors->has('instructor_id'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('module_id') }}</strong>
+                                                <strong>{{ $errors->first('instructor_id') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('assign.module', $class->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('assigned.subject', $class->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

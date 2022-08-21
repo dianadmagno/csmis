@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Modules per Class')
+      'title' => __('List of Modules of '. $class->description )
     ])   
 
     <div class="container-fluid mt--7">
@@ -68,12 +68,7 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('module.destroy', $module->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <a href="{{ route('assign.subModule', $module->id) }}" class="btn btn-success" type="button">Sub Module</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button>
-                                </form>
+                                  <a href="{{ route('assign.subModule', $module->id) }}" class="btn btn-success" type="button">Sub Module</a>
                                 </div>
                               </td>
                             </tr>
