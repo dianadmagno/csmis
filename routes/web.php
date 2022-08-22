@@ -72,5 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('personnelCategory', 'App\Http\Controllers\References\PersonnelCategoryController', ['except' => ['show']]);
 	Route::resource('personnelType', 'App\Http\Controllers\References\PersonnelTypeController', ['except' => ['show']]);
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);
+	Route::resource('activity', 'App\Http\Controllers\References\ActivityController', ['except' => ['show']]);
 });
 
