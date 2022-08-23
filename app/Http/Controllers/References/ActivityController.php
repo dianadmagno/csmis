@@ -31,7 +31,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('references.activities.index');
+        return view('references.activities.create');
     }
 
     /**
@@ -65,7 +65,10 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::find($id);
+        return view('references.activities.edit', [
+            'activity' => $activity
+        ]);
     }
 
     /**
@@ -75,9 +78,11 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActivityRequest $request, $id)
     {
-        //
+        $activity = Activity::find($id);
+        $activity->update($request->all());
+        return redirect()->route('activity.index')->with('status', 'Activity Updated Successfully');
     }
 
     /**

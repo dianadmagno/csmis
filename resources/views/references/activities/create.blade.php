@@ -28,8 +28,8 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="name" id="input-name" placeholder="{{ __('Name') }}" autofocus>
-    
+                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
+       
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('name') }}</strong>
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Description') }}</label>
-                                        <input type="text" name="description" placeholder="{{ __('Description') }}">
+                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}">
     
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('activity.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('company.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

@@ -1,4 +1,5 @@
-<div class="header bg-gradient-success py-7 py-lg-8">
+<div class="header d-flex align-items-center py-7 py-lg-8" style="background-image: url(../images/scs.jpg); background-size: cover; background-position: center;">
+    <span class="mask bg-gradient-default opacity-7"></span>
     <div class="container">
         <div class="header-body text-center mb-7">
             <div class="row justify-content-center">
