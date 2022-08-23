@@ -105,7 +105,7 @@ class ModuleController extends Controller
     {
         $id = Module::find($id);
         $id->delete();
-        return back()->with('status', 'Module Archived Successfully');
+        return back()->with('status', 'Module Deleted Successfully');
     }
 
     public function getModulePerClass(Request $request, $id)

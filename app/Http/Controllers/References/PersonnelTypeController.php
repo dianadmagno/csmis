@@ -98,6 +98,6 @@ class PersonnelTypeController extends Controller
     {
         $id = PersonnelType::find($id);
         $id->delete();
-        return back()->with('status', 'Personnel Type Archived Successfully');
+        return back()->with('status', 'Personnel Type Deleted Successfully');
     }
 }

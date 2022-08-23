@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\References\BloodType;
-use App\Http\Requests\References\BloodTypeRequest;
+use App\Models\References\Venue;
+use Illuminate\Routing\Controller;
+use App\Http\Requests\References\VenueRequest;
 
-class BloodTypeController extends Controller
+class VenueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class BloodTypeController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.bloodType.index', [
-            'blood_types' => BloodType::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.venue.index', [
+            'venues' => Venue::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -29,9 +29,9 @@ class BloodTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('references.bloodType.create');
+        return view('references.venue.create');
     }
 
     /**
@@ -40,19 +40,19 @@ class BloodTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BloodTypeRequest $bloodTypeRequest)
+    public function store(VenueRequest $venueRequest)
     {
-        BloodType::create($bloodTypeRequest->all());
-        return redirect()->route('bloodType.index')->with('status', 'Blood Type Created Successfully');
+        Venue::create($venueRequest->all());
+        return redirect()->route('venue.index')->with('status', 'Venue Created Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\References\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Venue $venue)
     {
         //
     }
@@ -60,13 +60,13 @@ class BloodTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\References\Venue  $venue
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('references.bloodType.edit', [
-            'blood_types' => BloodType::find($id)
+        return view('references.venue.edit', [
+            'venue' => Venue::find($id)
         ]);
     }
 
@@ -74,30 +74,30 @@ class BloodTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\References\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function update(BloodTypeRequest $bloodTypeRequest, $id)
-    {   
-        $data = BloodType::find($id);
-        $data->update($bloodTypeRequest->all());
+    public function update(VenueRequest $venueRequest, $id)
+    {
+        $data = Venue::find($id);
+        $data->update($venueRequest->all());
 
-        $bloodType = BloodType::paginate(10);
-        return redirect()->route('bloodType.index', [
-            'blood_types' => $bloodType
-        ])->with('Blood Type Updated Successfully.');   
+        $venues = Venue::paginate(10);
+        return redirect()->route('venue.index', [
+            'venues' => $venues
+        ])->with('Venue Updated Successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\References\Venue  $venue
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = BloodType::find($id);
+        $id = Venue::find($id);
         $id->delete();
-        return back()->with('status', 'Blood Type Deleted Successfully');
+        return back()->with('status', 'Venue Deleted Successfully');
     }
 }

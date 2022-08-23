@@ -98,6 +98,6 @@ class RankController extends Controller
     {
         $id = Rank::find($id);
         $id->delete();
-        return back()->with('status', 'Rank Archived Successfully');
+        return back()->with('status', 'Rank Deleted Successfully');
     }
 }

@@ -72,7 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('religion.edit', $religion->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this religion?')" class="btn btn-danger">Archive</button>
+                                    <button type="submit" onclick="return alert('Do you really want to delete this religion?')" class="btn btn-danger">Delete</button>
                                   </form>
                                 </div>
                               </td>

@@ -98,6 +98,6 @@ class DemeritReportTypeController extends Controller
     {
         $id = DemeritTypeReport::find($id);
         $id->delete();
-        return back()->with('status', 'Demerit Report Type Archived Successfully');
+        return back()->with('status', 'Demerit Report Type Deleted Successfully');
     }
 }

@@ -97,6 +97,6 @@ class VaccineNameController extends Controller
     {
         $id = VaccineName::find($id);
         $id->delete();
-        return back()->with('status', 'Vaccine Name Archived Successfully');
+        return back()->with('status', 'Vaccine Name Deleted Successfully');
     }
 }

@@ -98,6 +98,6 @@ class EthnicGroupController extends Controller
     {
         $id = EthnicGroup::find($id);
         $id->delete();
-        return back()->with('status', 'Ethnic Group Archived Successfully');
+        return back()->with('status', 'Ethnic Group Deleted Successfully');
     }
 }

@@ -102,6 +102,6 @@ class SubjectController extends Controller
     {
         $id = Subject::find($id);
         $id->delete();
-        return back()->with('status', 'Subject Archived Successfully');
+        return back()->with('status', 'Subject Deleted Successfully');
     }
 }

@@ -104,6 +104,6 @@ class SubModuleController extends Controller
     {
         $id = SubModule::find($id);
         $id->delete();
-        return back()->with('status', 'Sub Module Archived Successfully');
+        return back()->with('status', 'Sub Module Deleted Successfully');
     }
 }

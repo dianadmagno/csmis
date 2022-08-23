@@ -98,6 +98,6 @@ class CompanyController extends Controller
     {
         $id = Company::find($id);
         $id->delete();
-        return back()->with('status', 'Company Archived Successfully');
+        return back()->with('status', 'Company Deleted Successfully');
     }
 }

@@ -98,6 +98,6 @@ class UnitController extends Controller
     {
         $id = Unit::find($id);
         $id->delete();
-        return back()->with('status', 'Unit Archived Successfully');
+        return back()->with('status', 'Unit Deleted Successfully');
     }
 }

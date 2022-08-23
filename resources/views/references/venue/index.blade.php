@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Vaccine Names')
+      'title' => __('List of Venue')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
-                  <form action="{{ route('vaccineName.index') }}">
+                  <form action="{{ route('venue.index') }}">
                       <div class="card-header border-0">
                           @if (session('status'))
                               <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
                           <div class="col text-right">
-                              <a href="{{ route('vaccineName.create') }}" class="btn btn-primary">Add Vaccine Name</a>
+                              <a href="{{ route('venue.create') }}" class="btn btn-primary">Add Venue</a>
                           </div>
                         </div>
                       </div>
@@ -53,26 +53,26 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($vaccineNames) > 0)
-                          @foreach($vaccineNames as $vaccineName)
+                        @if (count($venues) > 0)
+                          @foreach($venues as $venue)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $vaccineName->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $venue->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $vaccineName->description }}
+                                {{ $venue->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('ranks.destroy', $vaccineName->id) }}" method="post">
+                                  <form action="{{ route('venue.destroy', $venue->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('vaccineName.edit', $vaccineName->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to delete this vaccine name?')" class="btn btn-danger">Delete</button>
+                                    <a href="{{ route('venue.edit', $venue->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <button type="submit" onclick="return alert('Do you really want to delete this venue?')" class="btn btn-danger">Delete</button>
                                 </form>
                                 </div>
                               </td>
@@ -87,9 +87,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($vaccineNames) > 0)
+                  @if (count($venues) > 0)
                     <div class="card-footer">
-                      {{ $vaccineNames->links() }}
+                      {{ $venues->links() }}
                     </div>
                   @endif
                 </div>

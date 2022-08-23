@@ -98,6 +98,6 @@ class EnlistmentTypeController extends Controller
     {
         $id = EnlistmentType::find($id);
         $id->delete();
-        return back()->with('status', 'Student Enlistment Archived Successfully');
+        return back()->with('status', 'Student Enlistment Deleted Successfully');
     }
 }

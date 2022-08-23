@@ -98,6 +98,6 @@ class ReligionController extends Controller
     {
         $id = Religion::find($id);
         $id->delete();
-        return back()->with('status', 'Religion Archived Successfully');
+        return back()->with('status', 'Religion Deleted Successfully');
     }
 }

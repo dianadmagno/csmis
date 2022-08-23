@@ -161,6 +161,11 @@
                                     {{ __('Demerit Report Type') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('venue.index') }}">
+                                    {{ __('Venue') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

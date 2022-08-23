@@ -98,6 +98,6 @@ class PersonnelCategoryController extends Controller
     {
         $id = PersonnelCategory::find($id);
         $id->delete();
-        return back()->with('status', 'Personnel Category Archived Successfully');
+        return back()->with('status', 'Personnel Category Deleted Successfully');
     }
 }
