@@ -43,7 +43,7 @@ class PersonnelCategoryController extends Controller
     public function store(PersonnelCategoryRequest $personnelCategoryRequest)
     {
         PersonnelCategory::create($personnelCategoryRequest->all());
-        return back()->with('status', 'Personnel Category Created Successfully');
+        return redirect()->route('personnelCategory.index')->with('status', 'Personnel Category Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class PersonnelCategoryController extends Controller
         $data->update($personnelCategoryRequest->all());
 
         $personnelCategories = PersonnelCategory::paginate(10);
-        return view('references.personnelCategory.index', [
+        return redirect()->route('personnelCategory.index', [
             'personnelCategories' => $personnelCategories
-        ])->back()->with('Personnel Category successfully updated.'); 
+        ])->with('Personnel Category Updated Successfully.'); 
     }
 
     /**

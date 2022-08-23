@@ -43,7 +43,7 @@ class EnlistmentTypeController extends Controller
     public function store(EnlistmentTypeRequest $enlistmentRequest)
     {
         EnlistmentType::create($enlistmentRequest->all());
-        return back()->with('status', 'Student Type Created Successfully');
+        return redirect()->route('type.index')->with('status', 'Enlistment Type Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class EnlistmentTypeController extends Controller
         $data->update($enlistmentRequest->all());
 
         $studentType = EnlistmentType::paginate(10);
-        return view('references.type.index', [
+        return redirect()->route('type.index', [
             'types' => $studentType
-        ])->back()->with('Student Type successfully updated.');   
+        ])->back()->with('EnlistmentType Type Updated Successfully.');   
     }
 
     /**

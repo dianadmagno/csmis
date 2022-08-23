@@ -43,7 +43,7 @@ class EthnicGroupController extends Controller
     public function store(EthnicGroupRequest $ethnicGroupRequest)
     {
         EthnicGroup::create($ethnicGroupRequest->all());
-        return back()->with('status', 'Ethnic Group Created Successfully');
+        return redirect()->route('ethnicGroup.index')->with('status', 'Ethnic Group Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class EthnicGroupController extends Controller
         $data->update($ethnicGroupRequest->all());
 
         $ethnicGroups = EthnicGroup::paginate(10);
-        return view('references.ethnicGroup.index', [
+        return redirect()->route('ethnicGroup.index', [
             'ethnicGroups' => $ethnicGroups
-        ])->back()->with('Ethnic Group successfully updated.');  
+        ])->back()->with('Ethnic Group Updated Successfully.');   
     }
 
     /**

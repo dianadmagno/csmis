@@ -43,7 +43,7 @@ class UnitController extends Controller
     public function store(UnitRequest $unitRequest)
     {
         Unit::create($unitRequest->all());
-        return back()->with('status', 'Unit Created Successfully');
+        return redirect()->route('unit.index')->with('status', 'Unit Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class UnitController extends Controller
         $data->update($unitRequest->all());
 
         $units = Unit::paginate(10);
-        return view('references.unit.index', [
+        return redirect()->route('unit.index', [
             'units' => $units
-        ])->back()->with('Unit successfully updated.'); 
+        ])->with('Unit Updated Successfully.'); 
     }
 
     /**

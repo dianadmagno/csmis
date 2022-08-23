@@ -48,9 +48,9 @@ class ModuleController extends Controller
     public function store(ModuleRequest $moduleRequest)
     {
         Module::create($moduleRequest->all());
-        return view('references.module.class', [ 
+        return redirect()->route('module.index',[
             'modules' => Module::all()
-        ]);
+        ])->with('status', 'Module Created Successfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class ModuleController extends Controller
         $data->update($moduleRequest->all());
 
         $modules = Module::paginate(10);
-        return view('references.module.index', [
+        return redirect()->route('module.index', [
             'modules' => $modules
         ])->back()->with('Module successfully updated.'); 
     }

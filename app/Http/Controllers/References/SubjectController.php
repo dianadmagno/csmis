@@ -46,7 +46,7 @@ class SubjectController extends Controller
     public function store(SubjectRequest $subjectRequest)
     {
         Subject::create($subjectRequest->all());
-        return back()->with('status', 'Subject Created Successfully');
+        return redirect()->route('subject.index')->with('status', 'Subject Created Successfully');
     }
 
     /**
@@ -87,9 +87,9 @@ class SubjectController extends Controller
         $data->update($subjectRequest->all());
 
         $subjects = Subject::paginate(10);
-        return view('references.subject.index', [
+        return redirect()->route('subject.index', [
             'subjects' => $subjects
-        ])->back()->with('Subject successfully updated.');
+        ])->with('Subject Updated Successfully.');
     }
 
     /**

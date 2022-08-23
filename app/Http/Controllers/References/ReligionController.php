@@ -43,7 +43,7 @@ class ReligionController extends Controller
     public function store(ReligionRequest $religionRequest)
     {
         Religion::create($religionRequest->all());
-        return back()->with('status', 'Religion Created Successfully');
+        return redirect()->route('religion.index')->with('status', 'Religion Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class ReligionController extends Controller
         $data->update($religionRequest->all());
 
         $religions = Religion::paginate(10);
-        return view('references.religion.index', [
+        return redirect()->route('religion.index', [
             'religions' => $religions
-        ])->back()->with('Religion successfully updated.');   
+        ])->with('Religion Updated Successfully.');   
     }
 
     /**

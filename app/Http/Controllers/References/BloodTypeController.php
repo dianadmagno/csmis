@@ -42,8 +42,8 @@ class BloodTypeController extends Controller
      */
     public function store(BloodTypeRequest $bloodTypeRequest)
     {
-        Rank::create($bloodTypeRequest->all());
-        return back()->with('status', 'Blood Type Created Successfully');
+        BloodType::create($bloodTypeRequest->all());
+        return redirect()->route('bloodType.index')->with('status', 'Blood Type Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class BloodTypeController extends Controller
         $data->update($bloodTypeRequest->all());
 
         $bloodType = BloodType::paginate(10);
-        return view('references.bloodType.index', [
+        return redirect()->route('bloodType.index', [
             'blood_types' => $bloodType
-        ])->back()->with('Blood Type successfully updated.');   
+        ])->with('Blood Type Updated Successfully.');   
     }
 
     /**

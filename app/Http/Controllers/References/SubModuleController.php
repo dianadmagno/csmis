@@ -48,7 +48,7 @@ class SubModuleController extends Controller
     public function store(SubModuleRequest $subModuleRequest)
     {
         SubModule::create($subModuleRequest->all());
-        return back()->with('status', 'Sub Module Created Successfully');
+        return redirect()->route('subModule.index')->with('status', 'Sub Module Created Successfully');
     }
 
     /**
@@ -89,9 +89,9 @@ class SubModuleController extends Controller
         $data->update($subModuleRequest->all());
 
         $subModules = SubModule::paginate(10);
-        return view('references.subModule.index', [
+        return redirect()->route('subModule.index', [
             'subModules' => $subModules
-        ])->back()->with('Sub Module successfully updated.');
+        ])->with('Sub Module Updated Successfully.');
     }
 
     /**

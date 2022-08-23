@@ -43,7 +43,7 @@ class PersonnelTypeController extends Controller
     public function store(PersonnelTypeRequest $personnelRequest)
     {
         PersonnelType::create($personnelRequest->all());
-        return back()->with('status', 'Personnel Type Created Successfully');
+        return redirect()->route('personnelType.index')->with('status', 'Personnel Type Created Successfully');
     }
 
     /**
@@ -83,9 +83,9 @@ class PersonnelTypeController extends Controller
         $data->update($personnelRequest->all());
 
         $personnelTypes = PersonnelType::paginate(10);
-        return view('references.personnelType.index', [
+        return redirect()->route('personnelType.index', [
             'personnelTypes' => $personnelTypes
-        ])->back()->with('Personnel Type successfully updated.');
+        ])->with('Personnel Type Updated Successfully.');
     }
 
     /**
