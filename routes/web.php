@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('user/photo/{id}', ['as' => 'user.photo', 'uses' => 'App\Http\Controllers\UserController@uploadPhoto']);
 	Route::put('user/photo/remove/{id}', ['as' => 'user.photo.remove', 'uses' => 'App\Http\Controllers\UserController@removePhoto']);
 	Route::get('user/deactivated', ['as' => 'user.deactivated', 'uses' => 'App\Http\Controllers\UserController@deactivated']);
+	Route::get('subModule/{id}', ['as' => 'subModule.subIndex', 'uses' => 'App\Http\Controllers\References\SubModuleController@index']);
+	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show']]);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);

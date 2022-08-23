@@ -15,14 +15,14 @@ class SubModuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         $keyword = $request->keyword;
         return view('references.subModule.index', [
             'subModules' => SubModule::join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
-                        ->select('rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_name')
+                        ->select('rf_sub_modules.id as sub_module_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_name')
+                        ->where('module_id', $id)
                         ->where('rf_modules.name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('rf_modules.description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
     }

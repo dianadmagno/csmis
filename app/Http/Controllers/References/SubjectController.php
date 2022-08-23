@@ -15,12 +15,12 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         $keyword = $request->keyword;
         return view('references.subject.index', [
-            'subjects' => Subject::where('name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+            'subjects' => Subject::where('sub_module_id', $id)
+                        ->where('name', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
     }

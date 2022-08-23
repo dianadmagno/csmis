@@ -72,6 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('module.edit', $module->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <a href="{{ route('subModule.subIndex', $module->id) }}" class="btn btn-default" type="button">Sub Modules</a>
                                     <button type="submit" onclick="return alert('Do you really want to delete this module?')" class="btn btn-danger">Delete</button>
                                 </form>
                                 </div>

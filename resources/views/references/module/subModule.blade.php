@@ -75,7 +75,7 @@
                                   <!-- <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
                                     @csrf
                                     @method('delete') -->
-                                    <a href="{{ route('assigned.subject', $subModule->module_id) }}" class="btn btn-success" type="button">Subjects</a>
+                                    <a href="{{ route('assigned.subject', $subModule->sub_module_id) }}" class="btn btn-success" type="button">Subjects</a>
                                     <!-- <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="btn btn-danger">Archive</button> -->
                                 <!-- </form> -->
                                 </div>

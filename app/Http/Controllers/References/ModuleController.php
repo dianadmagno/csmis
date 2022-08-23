@@ -109,16 +109,15 @@ class ModuleController extends Controller
     }
 
     public function getModulePerClass(Request $request, $id)
-    {   
+    {    
         $keyword = $request->keyword;
-        $modules = ClassSubjectInstructor::select('tr_classes.id as class_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_desc', 'rf_modules.id as module_id')
+        $modules = ClassSubjectInstructor::select('tr_class_subject_instructors.class_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_desc')
                         ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
-                        ->join('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
-                        ->join('rf_sub_modules', 'rf_sub_modules.id', '=', 'rf_subjects.sub_module_id')
-                        ->join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
+                        ->leftjoin('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
+                        ->leftjoin('rf_sub_modules', 'rf_sub_modules.id', '=', 'rf_subjects.sub_module_id')
+                        ->leftjoin('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
                         ->where('class_id', '=', $id)
-                        //->where('name', 'LIKE', '%'.$keyword.'%')
-                        //->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->groupBy('class_id')
                         ->paginate(10);
                         
         return view('references.module.class', [
@@ -143,7 +142,7 @@ class ModuleController extends Controller
         // }
 
         return view('references.module.add', [
-            'modules' => Module::all(),
+            'modules' => Module::paginate(10),
             'class' => StudentClass::find($id)
         ]);
     }
@@ -164,7 +163,7 @@ class ModuleController extends Controller
         }
 
         return view('references.module.class', [
-            'modules' => Module::all(),
+            'modules' => Module::paginate(10),
             'class' => StudentClass::find($id)  
         ]);
     }
@@ -173,9 +172,9 @@ class ModuleController extends Controller
     {
         $keyword = $request->keyword;
         $subModules = SubModule::join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
-                        ->select('rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_description', 'rf_sub_modules.name as sub_module_name')
+                        ->select('rf_sub_modules.id as sub_module_id','rf_sub_modules.module_id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_description', 'rf_sub_modules.name as sub_module_name')
+                        ->where('module_id', $id)
                         ->where('rf_modules.name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('rf_modules.description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10);
         $class = StudentClass::find($id);
                         
@@ -190,7 +189,7 @@ class ModuleController extends Controller
     {   
         $keyword = $request->keyword;
         $subjects = ClassSubjectInstructor::select('rf_subjects.id as subject_id', 'rf_subjects.name as subject_name', 'rf_subjects.description as subject_desc', 'tr_personnels.firstname', 'tr_personnels.middlename', 'tr_personnels.lastname')
-                            ->where('class_id', '=', $id)
+                            ->where('sub_module_id', '=', $id)
                             ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
                             ->join('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
                             ->leftjoin('tr_personnels', 'tr_personnels.id', '=', 'tr_class_subject_instructors.instructor_id')
