@@ -100,7 +100,7 @@ class SubModuleController extends Controller
      * @param  \App\Models\References\SubModule  $subModule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubModule $subModule, $id)
+    public function destroy($id)
     {
         $id = SubModule::find($id);
         $id->delete();

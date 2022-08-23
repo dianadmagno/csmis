@@ -94,7 +94,7 @@ class CompanyController extends Controller
      * @param  \App\Models\References\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company, $id)
+    public function destroy($id)
     {
         $id = Company::find($id);
         $id->delete();

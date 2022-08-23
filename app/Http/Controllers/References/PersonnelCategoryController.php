@@ -94,7 +94,7 @@ class PersonnelCategoryController extends Controller
      * @param  \App\Models\References\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PersonnelCategory $personnelCategory, $id)
+    public function destroy($id)
     {
         $id = PersonnelCategory::find($id);
         $id->delete();

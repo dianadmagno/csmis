@@ -94,7 +94,7 @@ class EthnicGroupController extends Controller
      * @param  \App\Models\References\EthnicGroup  $ethnicGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EthnicGroup $ethnicGroup, $id)
+    public function destroy($id)
     {
         $id = EthnicGroup::find($id);
         $id->delete();

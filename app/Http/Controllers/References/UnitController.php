@@ -94,7 +94,7 @@ class UnitController extends Controller
      * @param  \App\Models\References\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unit $unit)
+    public function destroy($id)
     {
         $id = Unit::find($id);
         $id->delete();

@@ -93,7 +93,7 @@ class VaccineNameController extends Controller
      * @param  \App\Models\References\VaccineName  $vaccineName
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VaccineName $vaccineName)
+    public function destroy($id)
     {
         $id = VaccineName::find($id);
         $id->delete();

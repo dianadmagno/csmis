@@ -101,7 +101,7 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Module $module)
+    public function destroy($id)
     {
         $id = Module::find($id);
         $id->delete();

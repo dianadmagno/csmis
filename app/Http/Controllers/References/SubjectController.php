@@ -98,7 +98,7 @@ class SubjectController extends Controller
      * @param  \App\Models\References\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject, $id)
+    public function destroy($id)
     {
         $id = Subject::find($id);
         $id->delete();
