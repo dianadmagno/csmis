@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show']]);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
+	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
 	Route::resource('role', 'App\Http\Controllers\RoleController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);

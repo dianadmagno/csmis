@@ -97,8 +97,7 @@
                                         <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="dropdown-item">Archive</button>
                                       </div>
                                     </div>
-                                    
-                                </form>
+                                  </form>
                                 </div>
                               </td>
                             </tr>

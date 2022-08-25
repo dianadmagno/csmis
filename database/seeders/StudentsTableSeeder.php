@@ -15,6 +15,6 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = Student::factory()->count(126)->create();
+        // $users = Student::factory()->count(126)->create();
     }
 }

@@ -15,6 +15,7 @@ use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Http\Requests\Transactions\StudentRequest;
+use App\Models\Transactions\ClassSubjectInstructor;
 
 class StudentController extends Controller
 {
@@ -178,5 +179,14 @@ class StudentController extends Controller
         } else {
             return back()->with('error', 'Please choose a file before upload');
         }
+    }
+
+    public function academic($id)
+    {
+        $student = Student::find($id);
+        $classSubjectInstructors = ClassSubjectInstructor::where('class_id', $student->class_id)->paginate(10);
+        return view('transactions.students.academic', [
+            'classSubjectInstructors' => $classSubjectInstructors
+        ]);
     }
 }

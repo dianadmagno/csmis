@@ -80,17 +80,26 @@
                                 {{ $student->email }}
                               </td>
                               <td>
-                                <form action="{{ route('student.destroy', $student->id) }}" method="post">
-                                  @csrf
-                                  @method('delete')
-                                  <a href="{{ route('student.edit', $student->id) }}" class="btn btn-default" type="button">
-                                    View
-                                  </a>
-                                  <a href="{{ route('student.edit', $student->id) }}" class="btn btn-primary" type="button">
-                                    Academic
-                                  </a>
-                                  <button type="submit" class="btn btn-danger" onclick="return alert('Do you really want to archive this student?')">Archive</button>
-                                </form>
+                                <div class="row">
+                                  <form action="{{ route('student.destroy', $student->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="dropdown">
+                                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a href="{{ route('student.edit', $student->id) }}" class="dropdown-item" type="button">
+                                          View
+                                        </a>
+                                        <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
+                                          Academic
+                                        </a>
+                                        <button type="submit" class="dropdown-item" onclick="return alert('Do you really want to archive this student?')">Archive</button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
                               </td>
                             </tr>
                           @endforeach
