@@ -162,8 +162,17 @@ class ModuleController extends Controller
             }
         }
 
+        $modules = ClassSubjectInstructor::select('tr_class_subject_instructors.class_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_desc')
+                        ->join('tr_classes', 'tr_classes.id', '=', 'tr_class_subject_instructors.class_id')
+                        ->leftjoin('rf_subjects', 'rf_subjects.id', '=', 'tr_class_subject_instructors.subject_id')
+                        ->leftjoin('rf_sub_modules', 'rf_sub_modules.id', '=', 'rf_subjects.sub_module_id')
+                        ->leftjoin('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
+                        ->where('class_id', '=', $id)
+                        ->groupBy('class_id')
+                        ->paginate(10);
+
         return view('references.module.class', [
-            'modules' => Module::paginate(10),
+            'modules' => $modules,
             'class' => StudentClass::find($id)  
         ]);
     }
