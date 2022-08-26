@@ -21,7 +21,13 @@ return new class extends Migration
             $table->string('email');
             $table->string('serial_number')->nullable();
             $table->string('age');
+            $table->string('emergency_contact_person');
+            $table->string('emergency_contact_number');
+            $table->string('emergency_contact_relationship');
             $table->date('birthdate');
+            $table->string('birthplace');
+            $table->string('region');
+            $table->string('tesda');
             $table->string('address');
             $table->string('headgear');
             $table->string('bda');

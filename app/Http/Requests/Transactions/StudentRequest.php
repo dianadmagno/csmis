@@ -43,7 +43,15 @@ class StudentRequest extends FormRequest
             'goa_waist' => 'required|numeric',
             'shoe_size' => 'required|numeric',
             'shoe_width' => 'required|numeric',
-            'company_id' => 'required'
+            'company_id' => 'required',
+            'emergency_contact_person' => 'required',
+            'emergency_contact_number' => 'required|unique:tr_students,emergency_contact_number,'.$this->student,
+            'emergency_contact_relationship' => 'required',
+            'mobile_number' => 'required|unique:tr_students,mobile_number,'.$this->student,
+            'civil_status' => 'required',
+            'educational_attainment' => 'required',
+            'sex' => 'required',
+            'physical_profile' => 'required'
         ];
     }
 }

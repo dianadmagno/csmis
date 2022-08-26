@@ -4,6 +4,7 @@ namespace App\Models\Transactions;
 
 use App\Models\References\Subject;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transactions\StudentGrade;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassSubjectInstructor extends Model
@@ -20,5 +21,10 @@ class ClassSubjectInstructor extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+    public function studentGrade()
+    {
+        return $this->belongsTo(StudentGrade::class, 'subject_id');
     }
 }

@@ -50,7 +50,13 @@ class Student extends Model
         'mobile_number',
         'educational_attainment',
         'course',
-        'physical_profile'
+        'physical_profile',
+        'emergency_contact_person',
+        'emergency_contact_number',
+        'emergency_contact_relationship',
+        'birthplace',
+        'region',
+        'tesda'
     ];
 
     public function rank()

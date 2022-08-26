@@ -36,9 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
-                            <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
-                        </div>
                       </div>
                     </div>
                   </form>
@@ -55,9 +52,9 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($classSubjectInstructors) > 0)
-                          @foreach($classSubjectInstructors as $classSubjectInstructor)
-                            <tr>
+                          @if (count($classSubjectInstructors) > 0)
+                            @foreach($classSubjectInstructors as $classSubjectInstructor)
+                              <tr>
                                 <td>
                                     {{ $classSubjectInstructor->subject->description }}
                                 </td>
@@ -66,28 +63,24 @@
                                 </td>
                                 <td>{{ $classSubjectInstructor->subject->nr_of_items }}</td>
                                 <td>
-                                    {{ $classSubjectInstructor->subject->nr_of_items }}
+                                    @php
+                                      $studentGrade = App\Models\Transactions\StudentGrade::where('student_id', $student->id)->where('subject_id', $classSubjectInstructor->subject->id)->first();
+                                    @endphp
+                                    @if (isset($studentGrade))
+                                      {{ $studentGrade->average }}%
+                                    @endif
                                 </td>
                                 <td>
-                                    <form action="{{ route('student.destroy', $classSubjectInstructor->id) }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="input-group mb-4">
-                                                <input class="form-control" placeholder="Input Grade" type="number">
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-primary"><i class="ni ni-check-bold"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    @csrf
+                                    <a href="{{ route('student.academic.input_grade', [$student->id, $classSubjectInstructor->subject_id]) }}" class="btn btn-primary">Input Grade</a>
                                 </td>
-                            </tr>
-                          @endforeach
-                        @else
+                              </tr>
+                            @endforeach
+                          @else
                             <tr class="text-center">
-                                <td colspan="5">No Available Data</td>
+                              <td colspan="5">No Available Data</td>
                             </tr>
-                        @endif
+                          @endif
                       </tbody>
                     </table>
                   </div>
