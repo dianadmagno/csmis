@@ -32,10 +32,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user/deactivated', ['as' => 'user.deactivated', 'uses' => 'App\Http\Controllers\UserController@deactivated']);
 	Route::get('subModule/{id}', ['as' => 'subModule.subIndex', 'uses' => 'App\Http\Controllers\References\SubModuleController@index']);
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
+	Route::get('task/{id}', ['as' => 'task.subIndex', 'uses' => 'App\Http\Controllers\References\TaskController@index']);
+	Route::get('task/create/{id}', ['as' => 'task.create', 'uses' => 'App\Http\Controllers\References\TaskController@create']);
+	Route::post('task/store/{id}', ['as' => 'task.store', 'uses' => 'App\Http\Controllers\References\TaskController@store']);
+	Route::delete('task/destroy/{id}', ['as' => 'task.destroy', 'uses' => 'App\Http\Controllers\References\TaskController@destroy']);
+	Route::put('task/edit/{id}', ['as' => 'task.edit', 'uses' => 'App\Http\Controllers\References\TaskController@edit']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show']]);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
+	Route::get('student/nonacademic/{id}', ['as' => 'student.nonacademic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademic']);
 	Route::resource('role', 'App\Http\Controllers\RoleController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);

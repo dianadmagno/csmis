@@ -189,4 +189,9 @@ class StudentController extends Controller
             'classSubjectInstructors' => $classSubjectInstructors
         ]);
     }
+
+    public function nonAcademic($id)
+    {
+        return view('transactions.students.academic');
+    }
 }

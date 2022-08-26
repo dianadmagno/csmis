@@ -72,7 +72,6 @@
                                         @csrf
                                         @method('delete')
                                         <a href="{{ route('activity.edit', $activity->id) }}" class="btn btn-success" type="button">Edit</a>
-                                        <a href="{{ route('task.subIndex', $activity->id) }}" class="btn btn-default" type="button">Activity List</a>
                                         <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
                                     </form>
                                 </div>
