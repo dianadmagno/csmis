@@ -84,13 +84,7 @@ class StudentClassController extends Controller
     public function update(StudentClassRequest $request, $id)
     {
         $data = StudentClass::find($id);
-        $data->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'alias' => $request->alias,
-            'is_active' => $request->is_active ? true : false
-        ]);
-
+        $data->update($request->all());
         $class = StudentClass::paginate(10);
         return redirect()->route('class.index')->with('status', 'Class successfully updated.');
     }

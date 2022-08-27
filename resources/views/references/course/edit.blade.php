@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Update Class')
+        'title' => __('Update Course')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('class.update', $class->id) }}">
+                            <form method="post" action="{{ route('course.update', $course->id) }}">
                                 @csrf
                                 @method('put')
                                 
@@ -29,7 +29,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $class->name) }}">
+                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $course->name) }}">
        
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Description') }}</label>
-                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}" value="{{ old('description', $class->description) }}">
+                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}" value="{{ old('description', $course->description) }}">
     
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -47,28 +47,8 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="form-group{{ $errors->has('alias') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Class Name') }}</label>
-                                        <input type="text" name="alias" id="input-name" class="form-control form-control-alternative{{ $errors->has('alias') ? ' is-invalid' : '' }}" placeholder="{{ __('Alias')}}" value="{{ old('alias', $class->alias) }}">
-    
-                                        @if ($errors->has('alias'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('alias') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group{{ $errors->has('graduation_date') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Date of Graduation') }}</label>
-                                        <input type="date" name="graduation_date" id="input-name" class="form-control form-control-alternative{{ $errors->has('graduation_date') ? ' is-invalid' : '' }}" placeholder="{{ __('Date of Graduation')}}" value="{{ old('graduation_date', $class->graduation_date) }}">
-    
-                                        @if ($errors->has('graduation_date'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('graduation_date') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
-                                    <a type="button" href="{{ route('class.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('course.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

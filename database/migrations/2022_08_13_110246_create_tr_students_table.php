@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('goa_waist');
             $table->string('shoe_size');
             $table->string('shoe_width');
+            $table->string('termination_remarks')->nullable();
             $table->integer('civil_status');
             $table->integer('sex');
             $table->string('mobile_number');

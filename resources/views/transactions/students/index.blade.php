@@ -50,7 +50,7 @@
                           <th scope="col">Fullname</th>
                           <th scope="col">Class</th>
                           <th scope="col">Company</th>
-                          <th scope="col">Email</th>
+                          <th scope="col">Courses Taken</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -77,7 +77,9 @@
                               </td>
                               <td>{{ $student->company->description }}</td>
                               <td>
-                                {{ $student->email }}
+                                @foreach($student->studentCourses as $studentCourse)
+                                  {{ $studentCourse->course->description }}
+                                @endforeach
                               </td>
                               <td>
                                 <div class="row">
@@ -94,6 +96,9 @@
                                         </a>
                                         <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
                                           Academic
+                                        </a>
+                                        <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
+                                          Terminate
                                         </a>
                                         <button type="submit" class="dropdown-item" onclick="return alert('Do you really want to archive this student?')">Archive</button>
                                       </div>

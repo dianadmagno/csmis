@@ -290,6 +290,22 @@
                                                 @endif
                                             </div>
 
+                                            <div class="form-group{{ $errors->has('course_id') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Training Course') }}</label>
+                                                <select name="course_id" class="form-control form-control-alternative{{ $errors->has('course_id') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Training Course</option>
+                                                    @foreach($courses as $course)
+                                                        <option value="{{ $course->id }}">{{ $course->description }}</option>
+                                                    @endforeach
+                                                </select>
+            
+                                                @if ($errors->has('course_id'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('course_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
                                             <div class="form-group{{ $errors->has('company_id') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Company') }}</label>
                                                 <select name="company_id" class="form-control form-control-alternative{{ $errors->has('company_id') ? ' is-invalid' : '' }}">
@@ -299,9 +315,9 @@
                                                     @endforeach
                                                 </select>
             
-                                                @if ($errors->has('unit_id'))
+                                                @if ($errors->has('company_id'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('unit_id') }}</strong>
+                                                        <strong>{{ $errors->first('company_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -366,7 +382,7 @@
                                             </div>
 
                                             <div class="form-group{{ $errors->has('headgear') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('Headgear Size') }}</label>
+                                                <label class="form-control-label" for="input-name">{{ __('Headgear Size (cms)') }}</label>
                                                 <input type="text" value="{{ old('headgear') }}" name="headgear" class="form-control form-control-alternative{{ $errors->has('headgear') ? ' is-invalid' : '' }}" placeholder="{{ __('Headgear Size') }}">
             
                                                 @if ($errors->has('headgear'))
@@ -377,7 +393,7 @@
                                             </div>
 
                                             <div class="form-group{{ $errors->has('goa_chest') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('GOA Chest Size') }}</label>
+                                                <label class="form-control-label" for="input-name">{{ __('GOA Chest Size (inch)') }}</label>
                                                 <input type="text" value="{{ old('goa_chest') }}" name="goa_chest" class="form-control form-control-alternative{{ $errors->has('goa_chest') ? ' is-invalid' : '' }}" placeholder="{{ __('GOA Chest Size') }}">
             
                                                 @if ($errors->has('goa_chest'))
@@ -388,7 +404,7 @@
                                             </div>
                                             
                                             <div class="form-group{{ $errors->has('goa_waist') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('GOA Waist Size') }}</label>
+                                                <label class="form-control-label" for="input-name">{{ __('GOA Waist Size (inch)') }}</label>
                                                 <input type="text" value="{{ old('goa_waist') }}" name="goa_waist" class="form-control form-control-alternative{{ $errors->has('goa_waist') ? ' is-invalid' : '' }}" placeholder="{{ __('GOA Waist Size') }}">
             
                                                 @if ($errors->has('goa_waist'))
@@ -399,7 +415,7 @@
                                             </div>
 
                                             <div class="form-group{{ $errors->has('shoe_size') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('Shoe Size') }}</label>
+                                                <label class="form-control-label" for="input-name">{{ __('Shoe Size (inch)') }}</label>
                                                 <input type="text" value="{{ old('shoe_size') }}" name="shoe_size" class="form-control form-control-alternative{{ $errors->has('shoe_size') ? ' is-invalid' : '' }}" placeholder="{{ __('Shoe Size') }}">
             
                                                 @if ($errors->has('shoe_size'))
@@ -411,7 +427,11 @@
 
                                             <div class="form-group{{ $errors->has('shoe_width') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Shoe Width') }}</label>
-                                                <input type="text" value="{{ old('shoe_width') }}" name="shoe_width" class="form-control form-control-alternative{{ $errors->has('shoe_width') ? ' is-invalid' : '' }}" placeholder="{{ __('Shoe Width') }}">
+                                                <select name="shoe_width" class="form-control form-control-alternative{{ $errors->has('shoe_width') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Shoe Width</option>
+                                                    <option value="1">Regular</option>
+                                                    <option value="2">Wide</option>
+                                                </select>
             
                                                 @if ($errors->has('shoe_width'))
                                                     <span class="invalid-feedback" role="alert">

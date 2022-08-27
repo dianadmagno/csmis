@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Transactions;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
+use App\Models\References\Course;
 use App\Models\References\Company;
 use App\Models\References\Subject;
 use App\Models\References\Religion;
@@ -17,6 +19,7 @@ use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\StudentGrade;
+use App\Models\Transactions\StudentCourse;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
@@ -57,11 +60,12 @@ class StudentController extends Controller
         $religions = Religion::all();
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::where('is_active', true)->get();
+        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::now())->orWhereNull('graduation_date')->get();
         $units = Unit::all();
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
         $vaccines = VaccineName::all();
+        $courses = Course::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
@@ -71,7 +75,8 @@ class StudentController extends Controller
             'units' => $units,
             'ethnicGroups' => $ethnicGroups,
             'companies' => $companies,
-            'vaccines' => $vaccines
+            'vaccines' => $vaccines,
+            'courses' => $courses
         ]);
     }
 
@@ -110,11 +115,12 @@ class StudentController extends Controller
         $religions = Religion::all();
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::where('is_active', true)->get();
+        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::now())->orWhereNull('graduation_date')->get();
         $units = Unit::all();
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
         $student = Student::find($id);
+        $courses = Course::all();
         return view('transactions.students.edit', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
@@ -124,7 +130,8 @@ class StudentController extends Controller
             'units' => $units,
             'ethnicGroups' => $ethnicGroups,
             'companies' => $companies,
-            'student' => $student
+            'student' => $student,
+            'courses' => $courses
         ]);
     }
 
@@ -139,6 +146,10 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $student->update($request->all());
+        
+        StudentCourse::where('student_id', $id)->update([
+            'course_id' => $request->course_id
+        ]);
         return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
 
@@ -247,5 +258,21 @@ class StudentController extends Controller
             'grade' => $request->grade
         ]);
         return redirect()->route('student.academic', $studentGrade->student_id)->with('status', 'Grade Updated Successfully'); 
+    }
+
+    public function terminate($id)
+    {
+        $student = Student::find($id);
+        return view('transactions.students.terminate', [
+            'student' => $student
+        ]);
+    }
+
+    public function storeTermination(Request $request, $id)
+    {
+        Student::find($id)->update([
+            'termination_remarks' => $request->termination_remarks
+        ]);
+        return redirect()->route('student.index')->with('status', 'Student Terminated Successfully');
     }
 }
