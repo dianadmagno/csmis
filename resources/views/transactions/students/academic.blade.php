@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('Input Grades for Academic')
+      'title' => __('Academic Subjects for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('student.index') }}">
+                  <form action="{{ route('student.academic', $student->id) }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                         <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -36,9 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
-                            <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
-                        </div>
                       </div>
                     </div>
                   </form>
@@ -50,14 +47,19 @@
                           <th scope="col">Subject</th>
                           <th scope="col">Nr of Points</th>
                           <th scope="col">Nr of Items</th>
+                          <th scope="col">Grade/Score</th>
                           <th scope="col">Average</th>
+                          <th scope="col">Allocated Points</th>
                           <th scope="col">Input Grade</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($classSubjectInstructors) > 0)
-                          @foreach($classSubjectInstructors as $classSubjectInstructor)
-                            <tr>
+                          @if (count($classSubjectInstructors) > 0)
+                            @foreach($classSubjectInstructors as $classSubjectInstructor)
+                              @php
+                                $studentGrade = App\Models\Transactions\StudentGrade::where('student_id', $student->id)->where('subject_id', $classSubjectInstructor->subject->id)->first();
+                              @endphp
+                              <tr>
                                 <td>
                                     {{ $classSubjectInstructor->subject->description }}
                                 </td>
@@ -66,28 +68,36 @@
                                 </td>
                                 <td>{{ $classSubjectInstructor->subject->nr_of_items }}</td>
                                 <td>
-                                    {{ $classSubjectInstructor->subject->nr_of_items }}
+                                  @if (isset($studentGrade))
+                                    {{ $studentGrade->grade }}
+                                  @endif
                                 </td>
                                 <td>
-                                    <form action="{{ route('student.destroy', $classSubjectInstructor->id) }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="input-group mb-4">
-                                                <input class="form-control" placeholder="Input Grade" type="number">
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-primary"><i class="ni ni-check-bold"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                  @if (isset($studentGrade))
+                                    @php $average = $studentGrade->grade / $classSubjectInstructor->subject->nr_of_items * 100 @endphp
+                                    {{ $average }}%
+                                  @endif
                                 </td>
-                            </tr>
-                          @endforeach
-                        @else
+                                <td>
+                                  @if (isset($studentGrade))
+                                    {{ $average / 100 * $classSubjectInstructor->subject->nr_of_points }}
+                                  @endif
+                                </td>
+                                <td>
+                                    @csrf
+                                    @if(!isset($studentGrade->grade))
+                                      <a href="{{ route('student.academic.input_grade', [$student->id, $classSubjectInstructor->subject_id]) }}" class="btn btn-primary">Input Grade</a>
+                                    @else
+                                      <a href="{{ route('student.academic.edit', $studentGrade->id) }}" class="btn btn-success">Edit</a>
+                                    @endif
+                                </td>
+                              </tr>
+                            @endforeach
+                          @else
                             <tr class="text-center">
-                                <td colspan="5">No Available Data</td>
+                              <td colspan="5">No Available Data</td>
                             </tr>
-                        @endif
+                          @endif
                       </tbody>
                     </table>
                   </div>

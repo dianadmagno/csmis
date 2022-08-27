@@ -174,7 +174,7 @@
                                         </div>
 
                                         <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-name">{{ __('Address') }}</label>
+                                            <label class="form-control-label" for="input-name">{{ __('Present Address') }}</label>
                                             <input type="text" value="{{ old('address', $student->address) }}" name="address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('Address') }}">
         
                                             @if ($errors->has('address'))
@@ -466,6 +466,47 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <hr class="my-3">
+                                <h6 class="heading-small text-muted mb-4">{{ __('Emergency Contact Person') }}</h6>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group{{ $errors->has('emergency_contact_person') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
+                                            <input type="text" value="{{ old('shoe_width', $student->emergency_contact_person) }}" name="emergency_contact_person" class="form-control form-control-alternative{{ $errors->has('emergency_contact_person') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
+        
+                                            @if ($errors->has('emergency_contact_person'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('emergency_contact_person') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group{{ $errors->has('emergency_contact_number') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Contact Number') }}</label>
+                                            <input type="text" value="{{ old('emergency_contact_number', $student->emergency_contact_number) }}" name="emergency_contact_number" class="form-control form-control-alternative{{ $errors->has('emergency_contact_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Contact Number') }}">
+        
+                                            @if ($errors->has('emergency_contact_number'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('emergency_contact_number') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                        <div class="col">
+                                            <div class="form-group{{ $errors->has('emergency_contact_relationship') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Relationship') }}</label>
+                                                <input type="text" value="{{ old('emergency_contact_relationship', $student->emergency_contact_relationship) }}" name="emergency_contact_relationship" class="form-control form-control-alternative{{ $errors->has('emergency_contact_relationship') ? ' is-invalid' : '' }}" placeholder="{{ __('Relationship') }}">
+            
+                                                @if ($errors->has('emergency_contact_relationship'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('emergency_contact_relationship') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                                 <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>

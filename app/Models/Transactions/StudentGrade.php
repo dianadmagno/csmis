@@ -3,19 +3,20 @@
 namespace App\Models\Transactions;
 
 use App\Models\References\Subject;
+use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Transactions\StudentGrade;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ClassSubjectInstructor extends Model
+class StudentGrade extends Model
 {
     use HasFactory;
 
-    protected $table = 'tr_class_subject_instructors';
+    protected $table = 'tr_student_grades';
+
     protected $fillable = [
-        'class_id',
+        'student_id',
         'subject_id',
-        'instructor_id'
+        'grade'
     ];
 
     public function subject()
@@ -23,8 +24,8 @@ class ClassSubjectInstructor extends Model
         return $this->belongsTo(Subject::class, 'subject_id');
     }
 
-    public function studentGrade()
+    public function student()
     {
-        return $this->belongsTo(StudentGrade::class, 'subject_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }

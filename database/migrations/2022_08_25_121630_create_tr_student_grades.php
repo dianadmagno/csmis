@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tr_student_class_subjects', function (Blueprint $table) {
+        Schema::create('tr_student_grades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('tr_students');
-            $table->foreignId('class_id')->constrained('tr_classes');
             $table->foreignId('subject_id')->constrained('rf_subjects');
-            $table->integer('average');
+            $table->tinyInteger('grade');
             $table->timestamps();
         });
     }

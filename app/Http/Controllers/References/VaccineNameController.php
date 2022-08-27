@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\References\VaccineName;
+use App\Http\Requests\References\VaccineNameRequest;
 
 class VaccineNameController extends Controller
 {
@@ -39,7 +40,7 @@ class VaccineNameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VaccineNameRequest $vaccineNameRequest)
+    public function store(VaccinewNameRequest $vaccineNameRequest)
     {
         VaccineName::create($vaccineNameRequest->all());
         return redirect()->route('vaccineName.index')->with('status', 'Vaccine Name Created Successfully');
