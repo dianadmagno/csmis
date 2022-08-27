@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('tr_students');
             $table->foreignId('subject_id')->constrained('rf_subjects');
-            $table->tinyInteger('average');
+            $table->tinyInteger('grade');
             $table->timestamps();
         });
     }

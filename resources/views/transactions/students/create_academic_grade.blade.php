@@ -12,11 +12,11 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('student.academic.store', [$student->id, $subjectId]) }}">
+                            <form method="post" action="{{ route('student.academic.store', [$student->id, $subject->id]) }}">
                                 @csrf
                                 
                                 @if (session('status'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         {{ session('status') }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -24,10 +24,9 @@
                                     </div>
                                 @endif
     
-    
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('grade') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Input Grade') }}</label>
+                                        <label class="form-control-label" for="input-name">{{ $subject->description }}</label>
                                         <input type="number" name="grade" id="input-name" class="form-control form-control-alternative{{ $errors->has('grade') ? ' is-invalid' : '' }}" placeholder="{{ __('Input Grade') }}">
        
                                         @if ($errors->has('grade'))

@@ -19,6 +19,7 @@ use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\StudentGrade;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
+use App\Http\Requests\Transactions\AcademicGradeRequest;
 
 class StudentController extends Controller
 {
@@ -186,10 +187,16 @@ class StudentController extends Controller
         }
     }
 
-    public function academic($id)
+    public function academic(Request $request, $id)
     {
+        $keyword = $request->keyword;
         $student = Student::find($id);
-        $classSubjectInstructors = ClassSubjectInstructor::where('class_id', $student->class_id)->paginate(10);
+        $classSubjectInstructors = ClassSubjectInstructor::where('class_id', $student->class_id)
+                                                        ->whereHas('subject', function($query) use($keyword) {
+                                                            $query->where('name', 'like', '%'.$keyword.'%')
+                                                                ->orWhere('description', 'like', '%'.$keyword.'%');
+                                                        })
+                                                        ->paginate(10);
         return view('transactions.students.academic', [
             'classSubjectInstructors' => $classSubjectInstructors,
             'student' => $student
@@ -199,20 +206,46 @@ class StudentController extends Controller
     public function academicInputGrade($studentId, $subjectId)
     {
         $student = Student::find($studentId);
-        return view('transactions.students.academic_input_grade', [
+        $subject = Subject::find($subjectId);
+        return view('transactions.students.create_academic_grade', [
             'student' => $student,
-            'subjectId' => $subjectId
+            'subject' => $subject
         ]);
     }
 
-    public function storeAcademicGrade(Request $request, $studentId, $subjectId)
+    public function storeAcademicGrade(AcademicGradeRequest $request, $studentId, $subjectId)
     {
         $subject = Subject::find($subjectId);
+        if ($request->grade > $subject->nr_of_items) {
+            return back()->with('status', 'You cannot input grade more than the number of items');
+        }
         StudentGrade::create([
             'student_id' => $studentId,
             'subject_id' => $subjectId,
-            'average' => $request->grade / $subject->nr_of_items * 100
+            'average' => $request->grade / $subject->nr_of_items * 100,
+            'grade' => $request->grade
         ]);
         return redirect()->route('student.academic', $studentId)->with('status', 'Grade Submitted Successfully');
+    }
+
+    public function editAcademicGrade($id)
+    {
+        $studentGrade = StudentGrade::find($id);
+        return view('transactions.students.edit_academic_grade', [
+            'studentGrade' => $studentGrade
+        ]);
+    }
+
+    public function updateAcademicGrade(AcademicGradeRequest $request, $id)
+    {
+        $studentGrade = StudentGrade::find($id);
+        $subject = Subject::find($studentGrade->subject_id);
+        if ($request->grade > $studentGrade->subject->nr_of_items) {
+            return back()->with('status', 'You cannot update grade more than the number of items');
+        }
+        $studentGrade->update([
+            'grade' => $request->grade
+        ]);
+        return redirect()->route('student.academic', $studentGrade->student_id)->with('status', 'Grade Updated Successfully'); 
     }
 }
