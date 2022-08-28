@@ -23,14 +23,6 @@ class ClassTableSeeder extends Seeder
             '758-2022',
         ];
 
-        $description = [
-            'CSC Class 754-2022',
-            'CSC Class 755-2022',
-            'CSC Class 756-2022',
-            'CSC Class 757-2022',
-            'CSC Class 758-2022'
-        ];
-
         $alias = [
             'Kabisig',
             'Madasig',
@@ -42,9 +34,8 @@ class ClassTableSeeder extends Seeder
         foreach($class as $key => $name) {
             StudentClass::create([
                 'name' => $name,
-                'description' => $description[$key],
                 'alias' => $alias[$key],
-                'is_active' => true
+                'course_id' => 1
             ]);
         }
     }

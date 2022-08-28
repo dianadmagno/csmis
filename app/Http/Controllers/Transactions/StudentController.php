@@ -19,7 +19,6 @@ use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\StudentGrade;
-use App\Models\Transactions\StudentCourse;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
@@ -40,7 +39,7 @@ class StudentController extends Controller
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
                                 ->orWhere('email', 'like', '%'.$keyword.'%')
                                 ->orWhereHas('class', function($query) use($keyword) {
-                                    $query->where('description', 'like', '%'.$keyword.'%');
+                                    $query->where('name', 'like', '%'.$keyword.'%');
                                 })
                                 ->orWhereHas('company', function($query) use($keyword) {
                                     $query->where('description', 'like', '%'.$keyword.'%');
@@ -60,7 +59,7 @@ class StudentController extends Controller
         $religions = Religion::all();
         $ranks = Rank::all();
         $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::now())->orWhereNull('graduation_date')->get();
+        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::parse()->format('Y-m-d'))->orWhereNull('graduation_date')->get();
         $units = Unit::all();
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
@@ -146,10 +145,6 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $student->update($request->all());
-        
-        StudentCourse::where('student_id', $id)->update([
-            'course_id' => $request->course_id
-        ]);
         return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
 

@@ -263,7 +263,7 @@
                                                 <select name="class_id" class="form-control form-control-alternative{{ $errors->has('class_id') ? ' is-invalid' : '' }}">
                                                     <option value="">Choose Class</option>
                                                     @foreach($studentClasses as $studentClass)
-                                                        <option value="{{ $studentClass->id }}" {{ old('class_id') == $studentClass->id ? 'selected' : '' }}>{{ $studentClass->description }}</option>
+                                                        <option value="{{ $studentClass->id }}" {{ old('class_id') == $studentClass->id ? 'selected' : '' }}>{{ $studentClass->course->name }} Class {{ $studentClass->name }}</option>
                                                     @endforeach
                                                 </select>
             
@@ -286,22 +286,6 @@
                                                 @if ($errors->has('unit_id'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('unit_id') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-
-                                            <div class="form-group{{ $errors->has('course_id') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('Training Course') }}</label>
-                                                <select name="course_id" class="form-control form-control-alternative{{ $errors->has('course_id') ? ' is-invalid' : '' }}">
-                                                    <option value="">Choose Training Course</option>
-                                                    @foreach($courses as $course)
-                                                        <option value="{{ $course->id }}">{{ $course->description }}</option>
-                                                    @endforeach
-                                                </select>
-            
-                                                @if ($errors->has('course_id'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('course_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
+use App\Models\References\Course;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
 use App\Models\Transactions\StudentClass;
@@ -21,7 +22,10 @@ class StudentClassController extends Controller
         $keyword = $request->keyword;
         return view('transactions.class.index', [
             'classes' => StudentClass::where('name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->orWhereHas('course', function($query) use($keyword) {
+                            $query->where('name', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like', '%'.$keyword.'%');
+                        })
                         ->orWhere('alias', 'LIKE', '%'.$keyword.'%')
                         ->latest()
                         ->paginate(10)
@@ -35,7 +39,9 @@ class StudentClassController extends Controller
      */
     public function create()
     {
-        return view('transactions.class.create');
+        return view('transactions.class.create', [
+            'courses' => Course::all()
+        ]);
     }
 
     /**
@@ -70,7 +76,8 @@ class StudentClassController extends Controller
     public function edit(StudentClass $studentClass, $id)
     {
         return view('transactions.class.edit', [
-            'class' => StudentClass::find($id)
+            'class' => StudentClass::find($id),
+            'courses' => Course::all()
         ]);
     }
 

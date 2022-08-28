@@ -24,8 +24,8 @@ class StudentClassRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:tr_classes,name,'.$this->class,
-            'description' => 'required',
+            'name' => 'required|alpha_dash',
+            'course_id' => 'required'
         ];
     }
 }

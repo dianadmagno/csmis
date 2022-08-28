@@ -50,7 +50,7 @@
                           <th scope="col">Fullname</th>
                           <th scope="col">Class</th>
                           <th scope="col">Company</th>
-                          <th scope="col">Courses Taken</th>
+                          <th scope="col">Status</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -73,13 +73,15 @@
                                 </div>
                               </th>
                               <td>
-                                {{ $student->class->description }}
+                                {{ $student->class->course->name }} Class {{ $student->class->name }}
                               </td>
                               <td>{{ $student->company->description }}</td>
                               <td>
-                                @foreach($student->studentCourses as $studentCourse)
-                                  {{ $studentCourse->course->description }}
-                                @endforeach
+                                @if($student->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$student->class->graduation_date)
+                                  <span class="badge badge-primary">Active</span>
+                                @else
+                                  <span class="badge badge-success">Graduated</span>
+                                @endif
                               </td>
                               <td>
                                 <div class="row">

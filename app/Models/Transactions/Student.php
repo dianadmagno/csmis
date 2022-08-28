@@ -12,7 +12,6 @@ use App\Models\References\EthnicGroup;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
-use App\Models\Transactions\StudentCourse;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -99,10 +98,5 @@ class Student extends Model
     public function ethnicGroup()
     {
         return $this->belongsTo(EthnicGroup::class);
-    }
-
-    public function studentCourses()
-    {
-        return $this->hasMany(StudentCourse::class, 'student_id');
     }
 }

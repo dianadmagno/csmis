@@ -63,7 +63,7 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $class->description }}</span>
+                                    <span class="name mb-0 text-sm">{{ $class->course->name }} Class {{ $class->name }}</span>
                                   </div>
                                 </div>
                               </th>
@@ -80,10 +80,10 @@
                                 {{ count($class->students) > 0 ? count($class->students) : '' }}
                               </td>
                               <td class="budget">
-                                @if($class->graduation_date > Carbon\Carbon::now())
-                                  <span class="badge badge-danger">Inactive</span>
-                                @else
+                                @if($class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$class->graduation_date)
                                   <span class="badge badge-primary">Active</span>
+                                @else
+                                  <span class="badge badge-success">Graduated</span>
                                 @endif
                               </td>
                               <td class="budget">
