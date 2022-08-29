@@ -56,7 +56,8 @@ class Student extends Model
         'emergency_contact_relationship',
         'birthplace',
         'region',
-        'tesda'
+        'tesda',
+        'termination_remarks'
     ];
 
     public function rank()

@@ -48,8 +48,9 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Fullname</th>
-                          <th scope="col">Class/Status</th>
+                          <th scope="col">Class</th>
                           <th scope="col">Company</th>
+                          <th scope="col">Status</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -74,15 +75,19 @@
                               <td>
                                 @foreach($student->studentClasses as $studentClass)
                                   {{ $studentClass->class->course->name }} Class {{ $studentClass->class->name }}
-                                  @if($studentClass->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$studentClass->class->graduation_date)
-                                    <span class="badge badge-primary ml-2">Active</span>
-                                  @else
-                                    <span class="badge badge-success">Graduated</span>
-                                  @endif
                                   <br>
                                 @endforeach
                               </td>
                               <td>{{ $student->company->description }}</td>
+                              <td>
+                                @if($student->termination_remarks)
+                                  <span class="badge badge-danger">Terminated</span>
+                                @elseif($student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$student->studentClasses()->latest()->first()->class->graduation_date)
+                                  <span class="badge badge-primary">Active</span>
+                                @else
+                                  <span class="badge badge-success">Graduated</span>
+                                @endif
+                              </td>
                               <td>
                                 <div class="row">
                                   <form action="{{ route('student.destroy', $student->id) }}" method="post">
@@ -101,11 +106,13 @@
                                             Add Course
                                           </a>
                                         @endif
-                                        <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
-                                          Academic
-                                        </a>
+                                        @if(!$student->termination_remarks)
+                                          <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
+                                            Academic
+                                          </a>
+                                        @endif
                                         <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
-                                          Terminate
+                                          Termination
                                         </a>
                                         <button type="submit" class="dropdown-item" onclick="return alert('Do you really want to archive this student?')">Archive</button>
                                       </div>

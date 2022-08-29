@@ -28,7 +28,15 @@
                                 <i class="ni business_briefcase-24 mr-2"></i>{{ $student->rank->name }} {{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}
                             </div>
                             <div class="h5">
-                                <i class="ni education_hat mr-2"></i>{{ $student->enlistmentType->description }}
+                                <i class="ni education_hat mr-2"></i>
+                                Status: 
+                                @if($student->termination_remarks)
+                                  <span class="badge badge-danger">Terminated</span>
+                                @elseif($student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$student->studentClasses()->latest()->first()->class->graduation_date)
+                                  <span class="badge badge-primary">Active</span>
+                                @else
+                                  <span class="badge badge-success">Graduated</span>
+                                @endif
                             </div>
                             <hr class="my-4">
                             @if (session('error'))
@@ -304,11 +312,11 @@
                                         </div>
 
                                         <div class="form-group{{ $errors->has('class_id') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-name">{{ __('Class') }}</label>
+                                            <label class="form-control-label" for="input-name">{{ __('Current Class') }}</label>
                                             <select name="class_id" class="form-control form-control-alternative{{ $errors->has('class_id') ? ' is-invalid' : '' }}">
                                                 <option value="">Choose Class</option>
                                                 @foreach($studentClasses as $studentClass)
-                                                    <option value="{{ $studentClass->id }}" {{ $student->class->id == $studentClass->id ? 'selected' : '' }}>{{ $studentClass->course->name }} Class {{ $studentClass->name }}</option>
+                                                    <option value="{{ $studentClass->id }}" {{ $student->studentClasses()->latest()->first()->class_id == $studentClass->id ? 'selected' : '' }}>{{ $studentClass->course->name }} Class {{ $studentClass->name }}</option>
                                                 @endforeach
                                             </select>
         

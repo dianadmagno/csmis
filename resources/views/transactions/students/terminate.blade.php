@@ -28,7 +28,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('termination_remarks') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Remarks for Termination') }}</label>
-                                        <textarea name="termination_remarks" rows="10" class="form-control" required></textarea>
+                                        <textarea name="termination_remarks" rows="10" class="form-control">{{ $student->termination_remarks }}</textarea>
        
                                         @if ($errors->has('termination_remarks'))
                                             <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-4">{{ __('Terminate Student') }}</button>
+                                    <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>

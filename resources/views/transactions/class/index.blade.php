@@ -48,7 +48,6 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Company</th>
                           <th scope="col">Class Name</th>
                           <th scope="col">No. of Students</th>
                           <th scope="col">Status</th>
@@ -67,12 +66,6 @@
                                   </div>
                                 </div>
                               </th>
-                              <td class="budget">
-                                {{-- @php $companies = App\Models\References\Company::whereIn('id', $class->students()->pluck('company_id'))->get() @endphp
-                                @foreach($companies as $company)
-                                  {{ $company->description }}<br>
-                                @endforeach --}}
-                              </td>
                               <td class="budget">
                                 {{ $class->alias }}
                               </td>
@@ -100,7 +93,7 @@
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a href="{{ route('class.edit', $class->id) }}" class="dropdown-item" type="button">Edit</a>
-                                        <a href="/student?keyword={{ $class->name }}" class="dropdown-item" type="button">View Students</a>
+                                        <a href="/student?keyword={{ str_replace(' ', '+', $class->description) }}" class="dropdown-item" type="button">View Students</a>
                                         <a href="{{ route('assigned.personnels', $class->id) }}" class="dropdown-item" type="button">Assign Personnel</a>
                                         <a href="{{ route('module.class', $class->id) }}" class="dropdown-item" type="button">Assign Module</a>
                                         <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="dropdown-item">Archive</button>

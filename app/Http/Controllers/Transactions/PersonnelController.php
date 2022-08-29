@@ -12,7 +12,7 @@ use App\Models\References\PersonnelCategory;
 use App\Http\Requests\Transactions\PersonnelRequest;
 
 class PersonnelController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +27,7 @@ class PersonnelController extends Controller
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
                                 ->orWhereHas('personnelClasses', function($query) use($keyword) {
                                     $query->whereHas('studentClass', function($query) use($keyword) {
-                                        $query->where('description', 'like', '%'.$keyword.'%')
+                                        $query->where('name', 'like', '%'.$keyword.'%')
                                             ->orWhere('alias', 'like', '%'.$keyword.'%');
                                     });
                                 })

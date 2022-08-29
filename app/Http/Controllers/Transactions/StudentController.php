@@ -39,9 +39,13 @@ class StudentController extends Controller
             'students' => Student::where('lastname', 'like', '%'.$keyword.'%')
                                 ->orWhere('firstname', 'like', '%'.$keyword.'%')
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
-                                ->orWhere('email', 'like', '%'.$keyword.'%')
                                 ->orWhereHas('company', function($query) use($keyword) {
                                     $query->where('description', 'like', '%'.$keyword.'%');
+                                })
+                                ->orWhereHas('studentClasses', function($query) use($keyword) {
+                                    $query->whereHas('class', function($query) use($keyword) {
+                                        $query->where('description', 'like', '%'.$keyword.'%');
+                                    });
                                 })
                                 ->paginate(10)
         ]);

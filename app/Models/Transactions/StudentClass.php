@@ -17,7 +17,8 @@ class StudentClass extends Model
         'name',
         'alias',
         'course_id',
-        'graduation_date'
+        'graduation_date',
+        'description'
     ];
 
     public function personnelClasses()

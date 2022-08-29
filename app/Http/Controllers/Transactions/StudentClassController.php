@@ -27,6 +27,7 @@ class StudentClassController extends Controller
                                 ->orWhere('description', 'like', '%'.$keyword.'%');
                         })
                         ->orWhere('alias', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->latest()
                         ->paginate(10)
         ]);
@@ -50,9 +51,16 @@ class StudentClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentClassRequest $studentClassRequest)
+    public function store(StudentClassRequest $request)
     {
-        StudentClass::create($studentClassRequest->all());
+        $course = Course::find($request->course_id);
+        StudentClass::create([
+            'name' => $request->name,
+            'alias' => $request->alias,
+            'course_id' => $request->course_id,
+            'graduation_date' => $request->graduation_date,
+            'description' => $course->name.' Class '.$request->name
+        ]);
         return redirect()->route('class.index')->with('status', 'Class Created Successfully');
     }
 
@@ -90,8 +98,15 @@ class StudentClassController extends Controller
      */
     public function update(StudentClassRequest $request, $id)
     {
+        $course = Course::find($request->course_id);
         $data = StudentClass::find($id);
-        $data->update($request->all());
+        $data->update([
+            'name' => $request->name,
+            'alias' => $request->alias,
+            'course_id' => $request->course_id,
+            'graduation_date' => $request->graduation_date,
+            'description' => $course->name.' Class '.$request->name
+        ]);
         $class = StudentClass::paginate(10);
         return redirect()->route('class.index')->with('status', 'Class successfully updated.');
     }
