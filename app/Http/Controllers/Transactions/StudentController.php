@@ -9,6 +9,7 @@ use App\Models\References\Unit;
 use App\Models\References\Course;
 use App\Models\References\Company;
 use App\Models\References\Subject;
+use Illuminate\Support\Facades\DB;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
@@ -19,6 +20,7 @@ use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\StudentGrade;
+use App\Models\Transactions\StudentClasses;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
@@ -38,9 +40,6 @@ class StudentController extends Controller
                                 ->orWhere('firstname', 'like', '%'.$keyword.'%')
                                 ->orWhere('middlename', 'like', '%'.$keyword.'%')
                                 ->orWhere('email', 'like', '%'.$keyword.'%')
-                                ->orWhereHas('class', function($query) use($keyword) {
-                                    $query->where('name', 'like', '%'.$keyword.'%');
-                                })
                                 ->orWhereHas('company', function($query) use($keyword) {
                                     $query->where('description', 'like', '%'.$keyword.'%');
                                 })
@@ -87,7 +86,11 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        Student::create($request->all());
+        $student = Student::create($request->all());
+        StudentClasses::create([
+            'student_id' => $student->id,
+            'class_id' => $request->class_id
+        ]);
         return redirect()->route('student.index')->with('status', 'Student Created Successfully');
     }
 
@@ -269,5 +272,22 @@ class StudentController extends Controller
             'termination_remarks' => $request->termination_remarks
         ]);
         return redirect()->route('student.index')->with('status', 'Student Terminated Successfully');
+    }
+
+    public function addClass($id)
+    {
+        return view('transactions.students.add_class', [
+            'student' => Student::find($id),
+            'classes' => StudentClass::where('graduation_date', '<=', Carbon::parse()->format('Y-m-d'))->orWhereNull('graduation_date')->get()
+        ]);
+    }
+
+    public function storeClass(Request $request, $id)
+    {
+        StudentClasses::create([
+            'student_id' => $id,
+            'class_id' => $request->class_id
+        ]);
+        return redirect()->route('student.index')->with('status', 'Class Added Successfully');
     }
 }

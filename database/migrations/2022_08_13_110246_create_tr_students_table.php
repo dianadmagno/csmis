@@ -46,7 +46,6 @@ return new class extends Migration
             $table->foreignId('unit_id')->constrained('rf_units');
             $table->foreignId('rank_id')->constrained('rf_ranks');
             $table->foreignId('enlistment_type_id')->constrained('rf_enlistment_types');
-            $table->foreignId('class_id')->constrained('tr_classes');
             $table->foreignId('blood_type_id')->constrained('rf_blood_types');
             $table->foreignId('religion_id')->constrained('rf_religions');
             $table->foreignId('company_id')->constrained('rf_companies');

@@ -68,16 +68,16 @@
                                 </div>
                               </th>
                               <td class="budget">
-                                @php $companies = App\Models\References\Company::whereIn('id', $class->students()->pluck('company_id'))->get() @endphp
+                                {{-- @php $companies = App\Models\References\Company::whereIn('id', $class->students()->pluck('company_id'))->get() @endphp
                                 @foreach($companies as $company)
                                   {{ $company->description }}<br>
-                                @endforeach
+                                @endforeach --}}
                               </td>
                               <td class="budget">
                                 {{ $class->alias }}
                               </td>
                               <td class="budget">
-                                {{ count($class->students) > 0 ? count($class->students) : '' }}
+                                {{ count($class->studentClasses) > 0 ? count($class->studentClasses) : '' }}
                               </td>
                               <td class="budget">
                                 @if($class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$class->graduation_date)

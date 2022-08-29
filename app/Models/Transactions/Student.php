@@ -41,7 +41,6 @@ class Student extends Model
         'religion_id',
         'rank_id',
         'enlistment_type_id',
-        'class_id',
         'gwa',
         'photo',
         'unit_id',
@@ -63,11 +62,6 @@ class Student extends Model
     public function rank()
     {
         return $this->belongsTo(Rank::class);
-    }
-
-    public function class()
-    {
-        return $this->belongsTo(StudentClass::class);
     }
 
     public function company()
@@ -98,5 +92,10 @@ class Student extends Model
     public function ethnicGroup()
     {
         return $this->belongsTo(EthnicGroup::class);
+    }
+
+    public function studentClasses()
+    {
+        return $this->hasMany(StudentClasses::class, 'student_id');
     }
 }

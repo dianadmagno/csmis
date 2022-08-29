@@ -25,13 +25,13 @@ class StudentClass extends Model
         return $this->hasMany(PersonnelClass::class, 'class_id');
     }
 
-    public function students()
-    {
-        return $this->hasMany(Student::class, 'class_id');
-    }
-
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    public function studentClasses()
+    {
+        return $this->hasMany(StudentClasses::class, 'class_id');
     }
 }
