@@ -21,6 +21,9 @@ return new class extends Migration
             $table->foreignId('subject_id')
                 ->constraints('rf_subjects')
                 ->onDelete('cascade');
+            $table->foreignId('module_id')
+                ->constaraints('rf_modules')
+                ->onDelete('cascade');
             $table->integer('instructor_id')->nullable();
             $table->timestamps();
         });
