@@ -36,9 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
+                        <!-- <div class="col text-right">
                             <a href="{{ route('activity.create') }}" class="btn btn-primary">Add Activity</a>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </form>
@@ -71,8 +71,7 @@
                                   <form action="{{ route('activity.destroy', $activity->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('activity.edit', $activity->id) }}" class="btn btn-success" type="button">Edit</a>
-                                        <a href="{{ route('task.subIndex', $activity->id) }}" class="btn btn-default" type="button">Activity List</a>
+                                        <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
                                         <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
                                     </form>
                                 </div>

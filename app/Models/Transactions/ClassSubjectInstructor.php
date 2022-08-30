@@ -15,6 +15,7 @@ class ClassSubjectInstructor extends Model
     protected $fillable = [
         'class_id',
         'subject_id',
+        'module_id',
         'instructor_id'
     ];
 

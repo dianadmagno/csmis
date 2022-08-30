@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
-                  <form action="{{ route('subModule.index') }}">
+                  <form action="{{ route('sbModule.subCreate', $module->id) }}">
                       <div class="card-header border-0">
                           @if (session('status'))
                               <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
                           <div class="col text-right">
-                              <a href="{{ route('subModule.create') }}" class="btn btn-primary">Add Sub Module</a>
+                              <a href="{{ route('sbModule.subCreate', $module->id) }}" class="btn btn-primary">Add Sub Module</a>
                           </div>
                         </div>
                       </div>
@@ -72,10 +72,10 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('subModule.destroy', $subModule->module_id) }}" method="post">
+                                  <form action="{{ route('sbModule.destroy', $subModule->module_id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('subModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <a href="{{ route('sbModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
                                     <a href="{{ route('subject.subIndex', $subModule->sub_module_id) }}" class="btn btn-default" type="button">Subjects</a>
                                     <button type="submit" onclick="return alert('Do you really want to delete this sub module?')" class="btn btn-danger">Delete</button>
                                 </form>

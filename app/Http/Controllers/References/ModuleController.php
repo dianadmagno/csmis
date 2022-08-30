@@ -70,7 +70,7 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module, $id)
+    public function edit($id)
     {
         return view('references.module.edit', [
             'module' => Module::find($id)
@@ -149,7 +149,7 @@ class ModuleController extends Controller
 
     public function assignedModule(Request $request, $id)
     {
-        $subModules = SubModule::where('module_id', '=', $id)
+        $subModules = SubModule::where('module_id', '=', $request->module_id)
                         ->get();
 
         foreach($subModules as $subModule) {
@@ -157,7 +157,8 @@ class ModuleController extends Controller
             foreach($subjects as $subject) {
                 $sub = ClassSubjectInstructor::create([
                     'class_id' => $id,
-                    'subject_id' => $subject['id']
+                    'subject_id' => $subject['id'],
+                    'module_id' => $request->module_id
                 ]);
             }
         }
@@ -168,7 +169,7 @@ class ModuleController extends Controller
                         ->leftjoin('rf_sub_modules', 'rf_sub_modules.id', '=', 'rf_subjects.sub_module_id')
                         ->leftjoin('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
                         ->where('class_id', '=', $id)
-                        ->groupBy('class_id')
+                        ->groupBy('module_id')
                         ->paginate(10);
 
         return view('references.module.class', [

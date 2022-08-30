@@ -8,6 +8,7 @@ use App\Models\References\Rank;
 use App\Models\References\Unit;
 use App\Models\References\Course;
 use App\Models\References\Company;
+use App\Models\References\Activity;
 use App\Models\References\Subject;
 use Illuminate\Support\Facades\DB;
 use App\Models\References\Religion;
@@ -268,6 +269,14 @@ class StudentController extends Controller
             'grade' => $request->grade
         ]);
         return redirect()->route('student.academic', $studentGrade->student_id)->with('status', 'Grade Updated Successfully'); 
+    }
+    
+    public function nonAcademic($id)
+    {
+        return view('transactions.students.nonacademic', [
+            'activities' => Activity::paginate(10),
+            'student' => Student::find($id)
+        ]);
     }
 
     public function terminate($id)

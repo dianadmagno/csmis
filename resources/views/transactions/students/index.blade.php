@@ -114,6 +114,9 @@
                                         <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
                                           Termination
                                         </a>
+                                        <a href="{{ route('student.nonacademic', $student->id) }}" class="dropdown-item" type="button">
+                                          Non Academic
+                                        </a>
                                         <button type="submit" class="dropdown-item" onclick="return alert('Do you really want to archive this student?')">Archive</button>
                                       </div>
                                     </div>

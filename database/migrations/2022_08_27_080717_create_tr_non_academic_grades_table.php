@@ -13,18 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tr_class_subject_instructors', function (Blueprint $table) {
+        Schema::create('tr_non_academic_grades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')
-                ->constraints('tr_classes')
+            $table->foreignId('event_id')
+                ->constrained('rf_tasks')
                 ->onDelete('cascade');
-            $table->foreignId('subject_id')
-                ->constraints('rf_subjects')
+            $table->foreignId('student_id')
+                ->constrained('tr_students')
                 ->onDelete('cascade');
-            $table->foreignId('module_id')
-                ->constaraints('rf_modules')
+            $table->foreignId('activity_id')
+                ->constrained('rf_activities')
                 ->onDelete('cascade');
-            $table->integer('instructor_id')->nullable();
+            $table->integer('grades')->nullable();
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tr_class_subject_instructors');
+        Schema::dropIfExists('tr_non_academic_grades');
     }
 };
