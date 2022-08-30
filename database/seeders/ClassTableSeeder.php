@@ -31,6 +31,14 @@ class ClassTableSeeder extends Seeder
             'Na'
         ];
 
+        $descriptions = [
+            'CSC Class 754-2022',
+            'CSC Class 755-2022',
+            'CSC Class 756-2022',
+            'CSC Class 757-2022',
+            'CSC Class 758-2022'
+        ];
+
         foreach($class as $key => $name) {
             StudentClass::create([
                 'name' => $name,

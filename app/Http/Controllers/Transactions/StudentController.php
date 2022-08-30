@@ -205,7 +205,8 @@ class StudentController extends Controller
     {
         $keyword = $request->keyword;
         $student = Student::find($id);
-        $classSubjectInstructors = ClassSubjectInstructor::where('class_id', $student->class_id)
+        $classId = $student->studentClasses()->latest()->pluck('class_id')->first();
+        $classSubjectInstructors = ClassSubjectInstructor::where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first())
                                                         ->whereHas('subject', function($query) use($keyword) {
                                                             $query->where('name', 'like', '%'.$keyword.'%')
                                                                 ->orWhere('description', 'like', '%'.$keyword.'%');
@@ -213,7 +214,12 @@ class StudentController extends Controller
                                                         ->paginate(10);
         return view('transactions.students.academic', [
             'classSubjectInstructors' => $classSubjectInstructors,
-            'student' => $student
+            'student' => $student,
+            'totalAllocatedPoints' => StudentGrade::where('student_id', $student->id)
+                                                ->whereHas('classSubjectInstructor', function($query) use($classId) {
+                                                    $query->where('class_id', $classId);
+                                                })
+                                                ->sum('allocated_points')
         ]);
     }
 
@@ -233,11 +239,13 @@ class StudentController extends Controller
         if ($request->grade > $subject->nr_of_items) {
             return back()->with('status', 'You cannot input grade more than the number of items');
         }
+        $average = $request->grade / $subject->nr_of_items * 100;
         StudentGrade::create([
             'student_id' => $studentId,
             'subject_id' => $subjectId,
-            'average' => $request->grade / $subject->nr_of_items * 100,
-            'grade' => $request->grade
+            'average' => $average,
+            'grade' => $request->grade,
+            'allocated_points' => $average / 100 * $subject->nr_of_points
         ]);
         return redirect()->route('student.academic', $studentId)->with('status', 'Grade Submitted Successfully');
     }

@@ -36,6 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
+                        <div class="col-5">
+                          <small>Total Points: <b>{{ round($totalAllocatedPoints) }} / {{ App\Models\References\Subject::whereIn('id', $classSubjectInstructors->pluck('subject_id')->toArray())->sum('nr_of_points') }}</b></small> 
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -45,8 +48,6 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Subject</th>
-                          <th scope="col">Nr of Points</th>
-                          <th scope="col">Nr of Items</th>
                           <th scope="col">Grade/Score</th>
                           <th scope="col">Average</th>
                           <th scope="col">Allocated Points</th>
@@ -64,10 +65,6 @@
                                     {{ $classSubjectInstructor->subject->description }}
                                 </td>
                                 <td>
-                                    {{ $classSubjectInstructor->subject->nr_of_points }}
-                                </td>
-                                <td>{{ $classSubjectInstructor->subject->nr_of_items }}</td>
-                                <td>
                                   @if (isset($studentGrade))
                                     {{ $studentGrade->grade }}
                                   @endif
@@ -80,10 +77,10 @@
                                 </td>
                                 <td>
                                   @if (isset($studentGrade))
-                                    {{ $average / 100 * $classSubjectInstructor->subject->nr_of_points }}
+                                    {{ round($studentGrade->allocated_points) }}
                                   @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @csrf
                                     @if(!isset($studentGrade->grade))
                                       <a href="{{ route('student.academic.input_grade', [$student->id, $classSubjectInstructor->subject_id]) }}" class="btn btn-primary">Input Grade</a>
