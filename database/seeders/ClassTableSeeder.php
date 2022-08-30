@@ -43,7 +43,8 @@ class ClassTableSeeder extends Seeder
             StudentClass::create([
                 'name' => $name,
                 'alias' => $alias[$key],
-                'course_id' => 1
+                'course_id' => 1,
+                'description' => $descriptions[$key]
             ]);
         }
     }
