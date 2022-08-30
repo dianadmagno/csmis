@@ -5,6 +5,7 @@ namespace App\Models\Transactions;
 use App\Models\References\Subject;
 use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transactions\ClassSubjectInstructor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentGrade extends Model
@@ -16,7 +17,8 @@ class StudentGrade extends Model
     protected $fillable = [
         'student_id',
         'subject_id',
-        'grade'
+        'grade',
+        'allocated_points'
     ];
 
     public function subject()
@@ -27,5 +29,10 @@ class StudentGrade extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function classSubjectInstructor()
+    {
+        return $this->hasOne(ClassSubjectInstructor::class, 'subject_id', 'subject_id');
     }
 }
