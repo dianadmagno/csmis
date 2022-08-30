@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('subModule.update', $subModule->id) }}">
+                            <form method="post" action="{{ route('sbModule.update', $subModule->id) }}">
                                 @csrf
                                 @method('put')
                                 

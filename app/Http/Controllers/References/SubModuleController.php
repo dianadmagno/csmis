@@ -20,7 +20,7 @@ class SubModuleController extends Controller
         $keyword = $request->keyword;
         return view('references.subModule.index', [
             'subModules' => SubModule::join('rf_modules', 'rf_modules.id', '=', 'rf_sub_modules.module_id')
-                        ->select('rf_sub_modules.id as sub_module_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_name')
+                        ->select('rf_sub_modules.id as sub_module_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.name as sub_module_name', 'rf_sub_modules.description as sub_module_desc')
                         ->where('module_id', $id)
                         ->where('rf_modules.name', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10),
@@ -37,7 +37,7 @@ class SubModuleController extends Controller
     {
         return view('references.subModule.create', [
             'modules' => Module::all(),
-            'module' => Module::find($id)
+            'moduleId' => Module::find($id)
         ]);
     }
 

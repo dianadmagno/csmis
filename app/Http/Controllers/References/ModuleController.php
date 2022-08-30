@@ -92,7 +92,7 @@ class ModuleController extends Controller
         $modules = Module::paginate(10);
         return redirect()->route('module.index', [
             'modules' => $modules
-        ])->back()->with('Module successfully updated.'); 
+        ])->with('Module successfully updated.'); 
     }
 
     /**

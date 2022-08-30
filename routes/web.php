@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subModule/{id}', ['as' => 'subModule.subIndex', 'uses' => 'App\Http\Controllers\References\SubModuleController@index']);
 	Route::get('subModule/create/{id}', ['as' => 'sbModule.subCreate', 'uses' => 'App\Http\Controllers\References\SubModuleController@create']);
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
+	Route::get('subject/create/{id}', ['as' => 'subject.create', 'uses' => 'App\Http\Controllers\References\SubjectController@create']);
 	Route::get('task/{id}', ['as' => 'task.subIndex', 'uses' => 'App\Http\Controllers\References\TaskController@index']);
 	Route::get('task/create/{id}', ['as' => 'task.create', 'uses' => 'App\Http\Controllers\References\TaskController@create']);
 	Route::post('task/store/{id}', ['as' => 'task.store', 'uses' => 'App\Http\Controllers\References\TaskController@store']);
@@ -88,7 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('ethnicGroup', 'App\Http\Controllers\References\EthnicGroupController', ['except' => ['show']]);
 	Route::resource('company', 'App\Http\Controllers\References\CompanyController', ['except' => ['show']]);
 	Route::resource('sbModule', 'App\Http\Controllers\References\SubModuleController', ['except' => ['show']]);
-	Route::resource('subject', 'App\Http\Controllers\References\SubjectController', ['except' => ['show']]);
+	Route::resource('subjects', 'App\Http\Controllers\References\SubjectController', ['except' => ['show']]);
 	Route::resource('personnelCategory', 'App\Http\Controllers\References\PersonnelCategoryController', ['except' => ['show']]);
 	Route::resource('personnelType', 'App\Http\Controllers\References\PersonnelTypeController', ['except' => ['show']]);
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);

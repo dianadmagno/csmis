@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('subject.update', $subject->id) }}">
+                            <form method="post" action="{{ route('subjects.update', $subject->id) }}">
                                 @csrf
                                 @method('put')
                                 
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                <a type="button" href="{{ route('subject.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                <a type="button" href="{{ route('subjects.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

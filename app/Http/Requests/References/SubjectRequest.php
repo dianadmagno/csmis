@@ -24,7 +24,7 @@ class SubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:rf_subjects,name,'.$this->subject,
+            'name' => 'required|unique:rf_subjects,name,NULL,id,sub_module_id,'.request('sub_module_id'),
             'description' => 'required',
             'sub_module_id' => 'required|integer',
             'nr_of_points' => 'required|integer',

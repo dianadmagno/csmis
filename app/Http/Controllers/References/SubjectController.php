@@ -21,7 +21,8 @@ class SubjectController extends Controller
         return view('references.subject.index', [
             'subjects' => Subject::where('sub_module_id', $id)
                         ->where('name', 'LIKE', '%'.$keyword.'%')
-                        ->paginate(10)
+                        ->paginate(10),
+            'subModule' => SubModule::find($id)
         ]);
     }
 
@@ -30,10 +31,11 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         return view('references.subject.create', [
-            'subModules' => SubModule::all()
+            'subModules' => SubModule::all(),
+            'subModuleId' => SubModule::find($id)
         ]);
     }
 
@@ -46,7 +48,7 @@ class SubjectController extends Controller
     public function store(SubjectRequest $subjectRequest)
     {
         Subject::create($subjectRequest->all());
-        return redirect()->route('subject.index')->with('status', 'Subject Created Successfully');
+        return redirect()->route('subjects.index')->with('status', 'Subject Created Successfully');
     }
 
     /**
@@ -87,7 +89,7 @@ class SubjectController extends Controller
         $data->update($subjectRequest->all());
 
         $subjects = Subject::paginate(10);
-        return redirect()->route('subject.index', [
+        return redirect()->route('subjects.index', [
             'subjects' => $subjects
         ])->with('Subject Updated Successfully.');
     }

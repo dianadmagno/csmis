@@ -24,7 +24,7 @@ class SubModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:rf_sub_modules,name,'.$this->subModule,
+            'name' => 'required|unique:rf_sub_modules,name,NULL,id,module_id,'.request('module_id'),
             'description' => 'required',
             'module_id' => 'required|integer'
         ];
