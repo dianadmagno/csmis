@@ -21,7 +21,13 @@ return new class extends Migration
             $table->string('email');
             $table->string('serial_number')->nullable();
             $table->string('age');
+            $table->string('emergency_contact_person');
+            $table->string('emergency_contact_number');
+            $table->string('emergency_contact_relationship');
             $table->date('birthdate');
+            $table->string('birthplace');
+            $table->string('region');
+            $table->string('tesda');
             $table->string('address');
             $table->string('headgear');
             $table->string('bda');
@@ -29,6 +35,7 @@ return new class extends Migration
             $table->string('goa_waist');
             $table->string('shoe_size');
             $table->string('shoe_width');
+            $table->string('termination_remarks')->nullable();
             $table->integer('civil_status');
             $table->integer('sex');
             $table->string('mobile_number');
@@ -39,7 +46,6 @@ return new class extends Migration
             $table->foreignId('unit_id')->constrained('rf_units');
             $table->foreignId('rank_id')->constrained('rf_ranks');
             $table->foreignId('enlistment_type_id')->constrained('rf_enlistment_types');
-            $table->foreignId('class_id')->constrained('tr_classes');
             $table->foreignId('blood_type_id')->constrained('rf_blood_types');
             $table->foreignId('religion_id')->constrained('rf_religions');
             $table->foreignId('company_id')->constrained('rf_companies');

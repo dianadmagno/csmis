@@ -48,9 +48,10 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Name</th>
-                          <th scope="col">Company</th>
                           <th scope="col">Class Name</th>
+                          <th scope="col">No. of Students</th>
                           <th scope="col">Status</th>
+                          <th scope="col">Date of Graduation</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -61,25 +62,25 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $class->description }}</span>
+                                    <span class="name mb-0 text-sm">{{ $class->course->name }} Class {{ $class->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                @php $companies = App\Models\References\Company::whereIn('id', $class->students()->pluck('company_id'))->get() @endphp
-                                @foreach($companies as $company)
-                                  {{ $company->description }}<br>
-                                @endforeach
-                              </td>
-                              <td class="budget">
                                 {{ $class->alias }}
                               </td>
                               <td class="budget">
-                                @if($class->is_active)
+                                {{ count($class->studentClasses) > 0 ? count($class->studentClasses) : '' }}
+                              </td>
+                              <td class="budget">
+                                @if($class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$class->graduation_date)
                                   <span class="badge badge-primary">Active</span>
                                 @else
-                                  <span class="badge badge-danger">Inactive</span>
+                                  <span class="badge badge-success">Graduated</span>
                                 @endif
+                              </td>
+                              <td class="budget">
+                                {{ $class->graduation_date ? Carbon\Carbon::parse($class->graduation_date)->format('d M Y') : '' }}
                               </td>
                               <td>
                                 <div class="row">
@@ -92,6 +93,7 @@
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a href="{{ route('class.edit', $class->id) }}" class="dropdown-item" type="button">Edit</a>
+                                        <a href="/student?keyword={{ str_replace(' ', '+', $class->description) }}" class="dropdown-item" type="button">View Students</a>
                                         <a href="{{ route('assigned.personnels', $class->id) }}" class="dropdown-item" type="button">Assign Personnel</a>
                                         <a href="{{ route('module.class', $class->id) }}" class="dropdown-item" type="button">Assign Module</a>
                                         <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="dropdown-item">Archive</button>

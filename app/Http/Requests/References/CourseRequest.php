@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Transactions;
+namespace App\Http\Requests\References;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StudentClassRequest extends FormRequest
+class CourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class StudentClassRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha_dash',
-            'course_id' => 'required'
+            'name' => 'required|alpha_dash|unique:rf_courses,name,'.$this->course,
+            'description' => 'required'
         ];
     }
 }

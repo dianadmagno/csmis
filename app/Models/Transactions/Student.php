@@ -4,6 +4,7 @@ namespace App\Models\Transactions;
 
 use App\Models\References\Rank;
 use App\Models\References\Unit;
+use App\Models\References\Course;
 use App\Models\References\Company;
 use App\Models\References\Religion;
 use App\Models\References\BloodType;
@@ -40,7 +41,6 @@ class Student extends Model
         'religion_id',
         'rank_id',
         'enlistment_type_id',
-        'class_id',
         'gwa',
         'photo',
         'unit_id',
@@ -50,17 +50,19 @@ class Student extends Model
         'mobile_number',
         'educational_attainment',
         'course',
-        'physical_profile'
+        'physical_profile',
+        'emergency_contact_person',
+        'emergency_contact_number',
+        'emergency_contact_relationship',
+        'birthplace',
+        'region',
+        'tesda',
+        'termination_remarks'
     ];
 
     public function rank()
     {
         return $this->belongsTo(Rank::class);
-    }
-
-    public function class()
-    {
-        return $this->belongsTo(StudentClass::class);
     }
 
     public function company()
@@ -91,5 +93,10 @@ class Student extends Model
     public function ethnicGroup()
     {
         return $this->belongsTo(EthnicGroup::class);
+    }
+
+    public function studentClasses()
+    {
+        return $this->hasMany(StudentClasses::class, 'student_id');
     }
 }

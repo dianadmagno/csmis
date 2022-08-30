@@ -2,6 +2,7 @@
 
 namespace App\Models\Transactions;
 
+use App\Models\References\Course;
 use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\PersonnelClass;
@@ -14,9 +15,10 @@ class StudentClass extends Model
     protected $table = 'tr_classes';
     protected $fillable = [
         'name',
-        'description',
         'alias',
-        'is_active'
+        'course_id',
+        'graduation_date',
+        'description'
     ];
 
     public function personnelClasses()
@@ -24,8 +26,13 @@ class StudentClass extends Model
         return $this->hasMany(PersonnelClass::class, 'class_id');
     }
 
-    public function students()
+    public function course()
     {
-        return $this->hasMany(Student::class, 'class_id');
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    public function studentClasses()
+    {
+        return $this->hasMany(StudentClasses::class, 'class_id');
     }
 }

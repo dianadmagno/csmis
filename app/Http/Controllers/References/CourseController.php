@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\Venue;
-use Illuminate\Routing\Controller;
-use App\Http\Requests\References\VenueRequest;
+use App\Models\References\Course;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\References\CourseRequest;
 
-class VenueController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class VenueController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.venue.index', [
-            'venues' => Venue::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.course.index', [
+            'courses' => Course::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -31,7 +31,7 @@ class VenueController extends Controller
      */
     public function create()
     {
-        return view('references.venue.create');
+        return view('references.course.create');
     }
 
     /**
@@ -40,33 +40,33 @@ class VenueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VenueRequest $venueRequest)
+    public function store(CourseRequest $request)
     {
-        Venue::create($venueRequest->all());
-        return redirect()->route('venue.index')->with('status', 'Venue Created Successfully');
+        Course::create($request->all());
+        return redirect()->route('course.index')->with('status', 'Course Created Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\References\Venue  $venue
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Venue $venue)
+    public function show($id)
     {
-        //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\References\Venue  $venue
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('references.venue.edit', [
-            'venue' => Venue::find($id)
+        return view('references.course.edit', [
+            'course' => Course::find($id)
         ]);
     }
 
@@ -74,30 +74,26 @@ class VenueController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\References\Venue  $venue
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(VenueRequest $venueRequest, $id)
+    public function update(CourseRequest $request, $id)
     {
-        $data = Venue::find($id);
-        $data->update($venueRequest->all());
-
-        $venues = Venue::paginate(10);
-        return redirect()->route('venue.index', [
-            'venues' => $venues
-        ])->with('Venue Updated Successfully.');
+        $course = Course::find($id);
+        $course->update($request->all());
+        return redirect()->route('course.index')->with('status', 'Course Updated Successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\References\Venue  $venue
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = Venue::find($id);
-        $id->delete();
-        return back()->with('status', 'Venue Deleted Successfully');
+        $course = Course::find($id);
+        $course->delete();
+        return back()->with('status', 'Course Deleted Successfully');
     }
 }
