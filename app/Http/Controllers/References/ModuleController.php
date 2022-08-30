@@ -70,7 +70,7 @@ class ModuleController extends Controller
      * @param  \App\Models\References\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module, $id)
+    public function edit($id)
     {
         return view('references.module.edit', [
             'module' => Module::find($id)

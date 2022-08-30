@@ -23,7 +23,8 @@ class SubModuleController extends Controller
                         ->select('rf_sub_modules.id as sub_module_id', 'rf_modules.id as module_id', 'rf_modules.name as module_name', 'rf_modules.description as module_description', 'rf_sub_modules.description as sub_module_name')
                         ->where('module_id', $id)
                         ->where('rf_modules.name', 'LIKE', '%'.$keyword.'%')
-                        ->paginate(10)
+                        ->paginate(10),
+            'module' => Module::find($id)
         ]);
     }
 
@@ -32,10 +33,11 @@ class SubModuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         return view('references.subModule.create', [
-            'modules' => Module::all()
+            'modules' => Module::all(),
+            'module' => Module::find($id)
         ]);
     }
 
