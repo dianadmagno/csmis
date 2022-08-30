@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
 	Route::get('student/nonacademic/{id}', ['as' => 'student.nonacademic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademic']);
+	Route::get('student/nonacad/{studId}/{activityId}', ['as' => 'student.nonacad', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@index']);
+	Route::post('nonacad/store/{studId}{eventId}', ['as' => 'nonacad.store', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@store']);
 	Route::resource('role', 'App\Http\Controllers\RoleController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);

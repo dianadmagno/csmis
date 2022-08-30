@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
 use App\Models\References\Company;
+use App\Models\References\Activity;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
@@ -192,6 +193,9 @@ class StudentController extends Controller
 
     public function nonAcademic($id)
     {
-        return view('transactions.students.academic');
+        return view('transactions.students.nonacademic', [
+            'activities' => Activity::paginate(10),
+            'student' => Student::find($id)
+        ]);
     }
 }
