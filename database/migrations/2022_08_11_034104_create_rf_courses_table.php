@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tr_classes', function (Blueprint $table) {
+        Schema::create('rf_courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('alias')->nullable();
-            $table->foreignId('course_id')->constrained('rf_courses');
-            $table->date('graduation_date')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_classes');
+        Schema::dropIfExists('rf_courses');
     }
 };

@@ -50,7 +50,7 @@
                           <th scope="col">Fullname</th>
                           <th scope="col">Class</th>
                           <th scope="col">Company</th>
-                          <th scope="col">Email</th>
+                          <th scope="col">Status</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -73,11 +73,20 @@
                                 </div>
                               </th>
                               <td>
-                                {{ $student->class->description }}
+                                @foreach($student->studentClasses as $studentClass)
+                                  {{ $studentClass->class->course->name }} Class {{ $studentClass->class->name }}
+                                  <br>
+                                @endforeach
                               </td>
                               <td>{{ $student->company->description }}</td>
                               <td>
-                                {{ $student->email }}
+                                @if($student->termination_remarks)
+                                  <span class="badge badge-danger">Terminated</span>
+                                @elseif($student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d') || !$student->studentClasses()->latest()->first()->class->graduation_date)
+                                  <span class="badge badge-primary">Active</span>
+                                @else
+                                  <span class="badge badge-success">Graduated</span>
+                                @endif
                               </td>
                               <td>
                                 <div class="row">
@@ -90,10 +99,20 @@
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a href="{{ route('student.edit', $student->id) }}" class="dropdown-item" type="button">
-                                          View
+                                          Edit
                                         </a>
-                                        <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
-                                          Academic
+                                        @if($student->studentClasses()->latest()->first()->class->graduation_date || $student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d'))
+                                          <a href="{{ route('student.class.add', $student->id) }}" class="dropdown-item" type="button">
+                                            Add Course
+                                          </a>
+                                        @endif
+                                        @if(!$student->termination_remarks)
+                                          <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
+                                            Academic
+                                          </a>
+                                        @endif
+                                        <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
+                                          Termination
                                         </a>
                                         <!-- <a href="{{ route('student.nonacademic', $student->id) }}" class="dropdown-item" type="button">
                                           Non Academic

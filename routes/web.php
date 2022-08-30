@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
 	Route::get('student/academic/edit/{id}', ['as' => 'student.academic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editAcademicGrade']);
 	Route::put('student/academic/{id}', ['as' => 'student.academic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateAcademicGrade']);
+	Route::get('student/terminate/{id}', ['as' => 'student.terminate', 'uses' => 'App\Http\Controllers\Transactions\StudentController@terminate']);
+	Route::put('student/terminate/{id}', ['as' => 'student.terminate.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeTermination']);
+	Route::get('student/add-class/{id}', ['as' => 'student.class.add', 'uses' => 'App\Http\Controllers\Transactions\StudentController@addClass']);
+	Route::post('student/store-class/{id}', ['as' => 'student.class.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeClass']);
 	Route::resource('role', 'App\Http\Controllers\RoleController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -86,6 +90,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('personnelType', 'App\Http\Controllers\References\PersonnelTypeController', ['except' => ['show']]);
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);
 	Route::resource('activity', 'App\Http\Controllers\References\ActivityController', ['except' => ['show']]);
-	Route::resource('venue', 'App\Http\Controllers\References\VenueController', ['except' => ['show']]);
+	Route::resource('course', 'App\Http\Controllers\References\CourseController', ['except' => ['show']]);
 });
 

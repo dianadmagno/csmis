@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
+use App\Models\References\Course;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
 use App\Models\Transactions\StudentClass;
@@ -21,8 +22,12 @@ class StudentClassController extends Controller
         $keyword = $request->keyword;
         return view('transactions.class.index', [
             'classes' => StudentClass::where('name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+                        ->orWhereHas('course', function($query) use($keyword) {
+                            $query->where('name', 'like', '%'.$keyword.'%')
+                                ->orWhere('description', 'like', '%'.$keyword.'%');
+                        })
                         ->orWhere('alias', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->latest()
                         ->paginate(10)
         ]);
@@ -35,7 +40,9 @@ class StudentClassController extends Controller
      */
     public function create()
     {
-        return view('transactions.class.create');
+        return view('transactions.class.create', [
+            'courses' => Course::all()
+        ]);
     }
 
     /**
@@ -44,9 +51,16 @@ class StudentClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentClassRequest $studentClassRequest)
+    public function store(StudentClassRequest $request)
     {
-        StudentClass::create($studentClassRequest->all());
+        $course = Course::find($request->course_id);
+        StudentClass::create([
+            'name' => $request->name,
+            'alias' => $request->alias,
+            'course_id' => $request->course_id,
+            'graduation_date' => $request->graduation_date,
+            'description' => $course->name.' Class '.$request->name
+        ]);
         return redirect()->route('class.index')->with('status', 'Class Created Successfully');
     }
 
@@ -70,7 +84,8 @@ class StudentClassController extends Controller
     public function edit(StudentClass $studentClass, $id)
     {
         return view('transactions.class.edit', [
-            'class' => StudentClass::find($id)
+            'class' => StudentClass::find($id),
+            'courses' => Course::all()
         ]);
     }
 
@@ -83,14 +98,15 @@ class StudentClassController extends Controller
      */
     public function update(StudentClassRequest $request, $id)
     {
+        $course = Course::find($request->course_id);
         $data = StudentClass::find($id);
         $data->update([
             'name' => $request->name,
-            'description' => $request->description,
             'alias' => $request->alias,
-            'is_active' => $request->is_active ? true : false
+            'course_id' => $request->course_id,
+            'graduation_date' => $request->graduation_date,
+            'description' => $course->name.' Class '.$request->name
         ]);
-
         $class = StudentClass::paginate(10);
         return redirect()->route('class.index')->with('status', 'Class successfully updated.');
     }

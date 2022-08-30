@@ -162,8 +162,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('venue.index') }}">
-                                    {{ __('Venue') }}
+                                <a class="nav-link" href="{{ route('course.index') }}">
+                                    {{ __('Training Courses') }}
                                 </a>
                             </li>
                         </ul>
