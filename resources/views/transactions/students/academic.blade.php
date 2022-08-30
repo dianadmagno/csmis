@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Points: <b>{{ round($totalAllocatedPoints) }} / {{ App\Models\References\Subject::whereIn('id', $classSubjectInstructors->pluck('subject_id')->toArray())->sum('nr_of_points') }}</b></small> 
+                          <small>Total Academic Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
                         </div>
                       </div>
                     </div>
