@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Events for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
+      'title' => __('Assigned Activities for '.$class->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('activity.index') }}">
+                  <form action="{{ route('class.index') }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                           <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -36,9 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <!-- <div class="col text-right">
-                            <a href="{{ route('activity.create') }}" class="btn btn-primary">Add Activity</a>
-                        </div> -->
+                        <div class="col text-right">
+                            <a href="{{ route('assign.activity', $class->id) }}" class="btn btn-primary">Add Activity</a>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -53,22 +53,26 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($activities) > 0)
-                          @foreach($activities as $activity)
+                        @if (count($classActivities) > 0)
+                          @foreach($classActivities as $classActivity)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $activity->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $classActivity->activity->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $activity->description }}
+                                {{ $classActivity->activity->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
+                                    {{-- <form action="{{ route('assign.personnel.destroy', $classA->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" onclick="return confirm('Do you really want to remove this personnel?')" class="btn btn-danger">Remove</button>
+                                    </form> --}}
                                 </div>
                               </td>
                             </tr>
@@ -82,9 +86,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($activities) > 0)
+                  @if (count($classActivities) > 0)
                     <div class="card-footer">
-                      {{ $activities->links() }}
+                      {{ $classActivities->links() }}
                     </div>
                   @endif
                 </div>

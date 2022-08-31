@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
 use App\Models\References\Course;
+use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
 use App\Models\Transactions\StudentClass;
+use App\Models\Transactions\ClassActivity;
 use App\Models\Transactions\PersonnelClass;
 use App\Http\Requests\Transactions\StudentClassRequest;
 
@@ -169,5 +171,35 @@ class StudentClassController extends Controller
     {
         PersonnelClass::where('personnel_id', $id)->delete();
         return back()->with('status', 'Personnel Removed Successfully');
+    }
+
+    public function assignedActivities(Request $request, $id)
+    {
+        $class = StudentClass::find($id);
+        $keyword = $request->keyword;
+        $classActivities = ClassActivity::where('class_id', $id)->paginate(10);
+        return view('transactions.class.assigned_activities', [
+            'class' => $class,
+            'classActivities' => $classActivities
+        ]);
+    }
+
+    public function assignActivity($id)
+    {
+        $class = StudentClass::find($id);
+        $activities = Activity::all();
+        return view('transactions.class.assign_activity', [
+            'class' => $class,
+            'activities' => $activities
+        ]);
+    }
+
+    public function storeAssignActivity(Request $request, $id)
+    {
+        ClassActivity::create([
+            'class_id' => $id,
+            'activity_id' => $request->activity_id
+        ]);
+        return redirect()->route('assigned.activities', $id)->with('status', 'Activity Assigned Successfully');
     }
 }

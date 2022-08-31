@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tr_non_academic_grades', function (Blueprint $table) {
+        Schema::create('tr_academic_grades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')
-                ->constrained('rf_events')
-                ->onDelete('cascade');
-            $table->foreignId('student_id')
-                ->constrained('tr_students')
-                ->onDelete('cascade');
-            $table->integer('grades')->nullable();
+            $table->foreignId('student_id')->constrained('tr_students');
+            $table->foreignId('subject_id')->constrained('rf_subjects');
+            $table->tinyInteger('grade');
+            $table->decimal('allocated_points');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tr_non_academic_grades');
+        Schema::dropIfExists('tr_student_class_subjects');
     }
 };

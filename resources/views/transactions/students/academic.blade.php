@@ -58,34 +58,34 @@
                           @if (count($classSubjectInstructors) > 0)
                             @foreach($classSubjectInstructors as $classSubjectInstructor)
                               @php
-                                $studentGrade = App\Models\Transactions\StudentGrade::where('student_id', $student->id)->where('subject_id', $classSubjectInstructor->subject->id)->first();
+                                $AcademicGrade = App\Models\Transactions\AcademicGrade::where('student_id', $student->id)->where('subject_id', $classSubjectInstructor->subject->id)->first();
                               @endphp
                               <tr>
                                 <td>
                                     {{ $classSubjectInstructor->subject->description }}
                                 </td>
                                 <td>
-                                  @if (isset($studentGrade))
-                                    {{ $studentGrade->grade }}
+                                  @if (isset($AcademicGrade))
+                                    {{ $AcademicGrade->grade }}
                                   @endif
                                 </td>
                                 <td>
-                                  @if (isset($studentGrade))
-                                    @php $average = $studentGrade->grade / $classSubjectInstructor->subject->nr_of_items * 100 @endphp
+                                  @if (isset($AcademicGrade))
+                                    @php $average = $AcademicGrade->grade / $classSubjectInstructor->subject->nr_of_items * 100 @endphp
                                     {{ $average }}%
                                   @endif
                                 </td>
                                 <td>
-                                  @if (isset($studentGrade))
-                                    {{ round($studentGrade->allocated_points) }}
+                                  @if (isset($AcademicGrade))
+                                    {{ round($AcademicGrade->allocated_points) }}
                                   @endif
                                 </td>
                                 <td class="text-center">
                                     @csrf
-                                    @if(!isset($studentGrade->grade))
+                                    @if(!isset($AcademicGrade->grade))
                                       <a href="{{ route('student.academic.input_grade', [$student->id, $classSubjectInstructor->subject_id]) }}" class="btn btn-primary">Input Grade</a>
                                     @else
-                                      <a href="{{ route('student.academic.edit', $studentGrade->id) }}" class="btn btn-success">Edit</a>
+                                      <a href="{{ route('student.academic.edit', $AcademicGrade->id) }}" class="btn btn-success">Edit</a>
                                     @endif
                                 </td>
                               </tr>

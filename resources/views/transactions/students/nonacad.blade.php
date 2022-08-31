@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('Input Grades for Non Academic')
+      'title' => __('Events for '.$activity->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -48,7 +48,9 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Event</th>
-                          <th scope="col">Grades/Remarks</th>
+                          <th scope="col">Grade</th>
+                          <th scope="col">Average</th>
+                          <th scope="col">Input Grade</th>
                         </tr>
                       </thead>
                       <tbody class="list">
@@ -58,33 +60,10 @@
                                 <td>
                                     {{ $event->description }}
                                 </td>
+                                <td>{{ $event->grade }}</td>
+                                <td></td>
                                 <td>
-                                    <form action="{{ route('nonacad.store', [$student->id, $activity->id]) }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="input-group mb-6">
-                                                <input name="grades" id="grades" class="form-control" placeholder="Input Grade" type="number">
-                                                <!-- <div class="form-group{{ $errors->has('sex') ? ' has-danger' : '' }}"> -->
-                                                <!-- <label class="form-control-label" for="input-name">{{ __('Sex') }}</label> -->
-                                                <select name="remarks" class="form-control form-control-alternative{{ $errors->has('remarks') ? ' is-invalid' : '' }}">
-                                                    <option value="">Remarks</option>
-                                                    <option value="Go">Go</option>
-                                                    <option value="No Go">No Go</option>
-                                                </select>
-            
-                                                @if ($errors->has('remarks'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('remarks') }}</strong>
-                                                    </span>
-                                                @endif
-                                            <!-- </div> -->
-                                        <!-- </div> -->
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-primary"><i class="ni ni-check-bold"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                  <a href="{{ route('student.academic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Grade</a>
                                 </td>
                             </tr>
                           @endforeach

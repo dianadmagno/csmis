@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transactions;
 use Illuminate\Http\Request;
 use App\Models\References\Event;
 use Illuminate\Routing\Controller;
+use App\Models\References\Activity;
 use App\Models\Transactions\Student;
 use App\Models\Transactions\NonAcademicGrade;
 use App\Models\Transactions\ClassSubjectInstructor;
@@ -18,14 +19,12 @@ class NonAcademicGradeController extends Controller
      */
     public function index(Request $request, $studId, $activityId)
     {
-        $nonAcad = NonAcademicGrade::join('rf_events', 'rf_events.id', '=', 'tr_non_academic_grades.event_id')
-                        ->where('student_id', $studId)
-                        ->where('event_id', $activityId)
-                        ->paginate(10);
-
+        $nonAcad = Event::where('activity_id', $activityId)->paginate(10);
+        $activity = Activity::find($activityId);
         return view('transactions.students.nonacad', [
             'events' => $nonAcad,
             'student' => Student::find($studId),
+            'activity' => $activity
         ]);
     }
 

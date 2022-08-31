@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ClassSubjectInstructor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StudentGrade extends Model
+class AcademicGrade extends Model
 {
     use HasFactory;
 
-    protected $table = 'tr_student_grades';
+    protected $table = 'tr_academic_grades';
 
     protected $fillable = [
         'student_id',

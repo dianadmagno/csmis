@@ -21,10 +21,12 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-3 mb-0 text-muted text-sm">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ $totalNewStudents / $totalPrevStudents * 100 }}%</span>
-                            <span class="text-nowrap">Since Last Batch</span>
-                        </p>
+                        @if($totalNewStudents)
+                            <p class="mt-3 mb-0 text-muted text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ $totalNewStudents / $totalPrevStudents * 100}}%</span>
+                                <span class="text-nowrap">Since Last Batch</span>
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -111,7 +113,7 @@
                                         <td>{{ $studentsByClass->total }}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                @php $studentsByClassPercent = $studentsByClass->total / $totalNewStudents * 100 @endphp
+                                                @php $studentsByClassPercent = $studentsByClass ? $studentsByClass->total / $totalNewStudents * 100 : '' @endphp
                                                 <span class="mr-2">{{ $studentsByClassPercent }}%</span>
                                                 <div>
                                                     <div class="progress">

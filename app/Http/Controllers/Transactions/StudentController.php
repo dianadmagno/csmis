@@ -20,7 +20,7 @@ use App\Models\References\VaccineName;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
-use App\Models\Transactions\StudentGrade;
+use App\Models\Transactions\AcademicGrade;
 use App\Models\Transactions\StudentClasses;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
@@ -215,7 +215,7 @@ class StudentController extends Controller
         return view('transactions.students.academic', [
             'classSubjectInstructors' => $classSubjectInstructors,
             'student' => $student,
-            'totalAllocatedPoints' => StudentGrade::where('student_id', $student->id)
+            'totalAllocatedPoints' => AcademicGrade::where('student_id', $student->id)
                                                 ->whereHas('classSubjectInstructor', function($query) use($classId) {
                                                     $query->where('class_id', $classId);
                                                 })
@@ -240,7 +240,7 @@ class StudentController extends Controller
             return back()->with('status', 'You cannot input grade more than the number of items');
         }
         $average = $request->grade / $subject->nr_of_items * 100;
-        StudentGrade::create([
+        AcademicGrade::create([
             'student_id' => $studentId,
             'subject_id' => $subjectId,
             'average' => $average,
@@ -252,30 +252,33 @@ class StudentController extends Controller
 
     public function editAcademicGrade($id)
     {
-        $studentGrade = StudentGrade::find($id);
+        $AcademicGrade = AcademicGrade::find($id);
         return view('transactions.students.edit_academic_grade', [
-            'studentGrade' => $studentGrade
+            'AcademicGrade' => $AcademicGrade
         ]);
     }
 
     public function updateAcademicGrade(AcademicGradeRequest $request, $id)
     {
-        $studentGrade = StudentGrade::find($id);
-        $subject = Subject::find($studentGrade->subject_id);
-        if ($request->grade > $studentGrade->subject->nr_of_items) {
+        $AcademicGrade = AcademicGrade::find($id);
+        $subject = Subject::find($AcademicGrade->subject_id);
+        if ($request->grade > $AcademicGrade->subject->nr_of_items) {
             return back()->with('status', 'You cannot update grade more than the number of items');
         }
-        $studentGrade->update([
+        $AcademicGrade->update([
             'grade' => $request->grade
         ]);
-        return redirect()->route('student.academic', $studentGrade->student_id)->with('status', 'Grade Updated Successfully'); 
+        return redirect()->route('student.academic', $AcademicGrade->student_id)->with('status', 'Grade Updated Successfully'); 
     }
     
     public function nonAcademic($id)
     {
+        $student = Student::find($id);
         return view('transactions.students.nonacademic', [
-            'activities' => Activity::paginate(10),
-            'student' => Student::find($id)
+            'activities' => Activity::whereHas('classActivities', function($query) use($student) {
+                $query->where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first());
+            })->paginate(10),
+            'student' => $student
         ]);
     }
 

@@ -74,6 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('assign/personnel/{id}', ['as' => 'assign.personnel', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignPersonnel']);
 	Route::post('assign/personnel/{id}', ['as' => 'assign.personnel.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeAssignPersonnel']);
 	Route::delete('assign/personnel/remove/{id}', ['as' => 'assign.personnel.destroy', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@removeAssignedPersonnel']);
+	Route::get('assigned/activities/{id}', ['as' => 'assigned.activities', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignedActivities']);
+	Route::post('assign/activity/{id}', ['as' => 'assign.activity.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeAssignActivity']);
+	Route::get('assign/activity/{id}', ['as' => 'assign.activity', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignActivity']);
 
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);

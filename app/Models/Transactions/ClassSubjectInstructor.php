@@ -4,7 +4,7 @@ namespace App\Models\Transactions;
 
 use App\Models\References\Subject;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Transactions\StudentGrade;
+use App\Models\Transactions\AcademicGrade;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassSubjectInstructor extends Model
@@ -24,8 +24,8 @@ class ClassSubjectInstructor extends Model
         return $this->belongsTo(Subject::class, 'subject_id');
     }
 
-    public function studentGrade()
+    public function AcademicGrade()
     {
-        return $this->belongsTo(StudentGrade::class, 'subject_id');
+        return $this->belongsTo(AcademicGrade::class, 'subject_id');
     }
 }
