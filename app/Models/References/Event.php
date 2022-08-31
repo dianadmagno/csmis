@@ -5,11 +5,11 @@ namespace App\Models\References;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Event extends Model
 {
     use HasFactory;
     
-    protected $table = 'rf_tasks';
+    protected $table = 'rf_events';
     protected $fillable = [
         'name',
         'description',

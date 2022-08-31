@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rf_tasks', function (Blueprint $table) {
+        Schema::create('rf_events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_tasks');
+        Schema::dropIfExists('rf_events');
     }
 };

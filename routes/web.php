@@ -31,11 +31,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subModule/create/{id}', ['as' => 'sbModule.subCreate', 'uses' => 'App\Http\Controllers\References\SubModuleController@create']);
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
 	Route::get('subject/create/{id}', ['as' => 'subject.create', 'uses' => 'App\Http\Controllers\References\SubjectController@create']);
-	Route::get('task/{id}', ['as' => 'task.subIndex', 'uses' => 'App\Http\Controllers\References\TaskController@index']);
-	Route::get('task/create/{id}', ['as' => 'task.create', 'uses' => 'App\Http\Controllers\References\TaskController@create']);
-	Route::post('task/store/{id}', ['as' => 'task.store', 'uses' => 'App\Http\Controllers\References\TaskController@store']);
-	Route::delete('task/destroy/{id}', ['as' => 'task.destroy', 'uses' => 'App\Http\Controllers\References\TaskController@destroy']);
-	Route::put('task/edit/{id}', ['as' => 'task.edit', 'uses' => 'App\Http\Controllers\References\TaskController@edit']);
+	Route::get('event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\EventController@index']);
+	Route::get('event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\EventController@create']);
+	Route::post('event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\EventController@store']);
+	Route::delete('event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\EventController@destroy']);
+	Route::put('event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\EventController@edit']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show']]);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Task')
+      'title' => __('List of Events')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('task.subIndex', $activity->id) }}">
+                  <form action="{{ route('event.subIndex', $activity->id) }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                           <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('task.create', $activity->id) }}" class="btn btn-primary">Add Task</a>
+                            <a href="{{ route('event.create', $activity->id) }}" class="btn btn-primary">Add Event</a>
                         </div>
                       </div>
                     </div>
@@ -53,25 +53,25 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($tasks) > 0)
-                          @foreach($tasks as $task)
+                        @if (count($events) > 0)
+                          @foreach($events as $event)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $task->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $event->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $task->description }}
+                                {{ $event->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('task.destroy', $task->id) }}" method="post">
+                                  <form action="{{ route('event.destroy', $event->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <!-- <a href="{{ route('task.edit', $task->id) }}" class="btn btn-success" type="button">Edit</a> -->
+                                        <!-- <a href="{{ route('event.edit', $event->id) }}" class="btn btn-success" type="button">Edit</a> -->
                                         <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
                                     </form>
                                 </div>
@@ -87,9 +87,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($tasks) > 0)
+                  @if (count($events) > 0)
                     <div class="card-footer">
-                      {{ $tasks->links() }}
+                      {{ $events->links() }}
                     </div>
                   @endif
                 </div>

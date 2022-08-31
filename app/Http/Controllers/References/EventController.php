@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\Task;
+use App\Models\References\Event;
 use Illuminate\Routing\Controller;
 use App\Models\References\Activity;
-use App\Http\Requests\References\TaskRequest;
+use App\Http\Requests\References\EventRequest;
 
-class TaskController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class TaskController extends Controller
     public function index(Request $request, $id)
     {
         $keyword = $request->keyword;
-        return view('references.activities.task', [
-            'tasks' => Task::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.activities.event', [
+            'events' => Event::where('name', 'LIKE', '%'.$keyword.'%')
                         ->where('activity_id', $id)
                         ->paginate(10),
 
@@ -34,7 +34,7 @@ class TaskController extends Controller
      */
     public function create($id)
     {
-        return view('references.activities.createTask',[
+        return view('references.activities.createEvent',[
             'activity' => Activity::find($id)
         ]);
     }
@@ -45,28 +45,28 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskRequest $taskRequest, $id)
+    public function store(EventRequest $eventRequest, $id)
     {
         
-        Task::create([
-            'name' => $taskRequest->name,
-            'description' => $taskRequest->description,
+        Event::create([
+            'name' => $eventRequest->name,
+            'description' => $eventRequest->description,
             'activity_id' => $id
         ]);
 
-        return view('references.activities.task', [
+        return view('references.activities.event', [
             'activity' => Activity::find($id),
-            'tasks' => Task::paginate(10)
-        ])->with('Task Created Successfully.');
+            'events' => Event::paginate(10)
+        ])->with('Event Created Successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\References\Task  $task
+     * @param  \App\Models\References\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(Event $event)
     {
         //
     }
@@ -74,13 +74,13 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\References\Task  $task
+     * @param  \App\Models\References\Event  $event
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('references.activities.taskEdit', [
-            'task' => Task::find($id)
+        return view('references.activities.eventEdit', [
+            'event' => Event::find($id)
         ]);
     }
 
@@ -88,31 +88,31 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\References\Task  $task
+     * @param  \App\Models\References\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskRequest $taskRequest, $id)
+    public function update(EventRequest $eventRequest, $id)
     {
-        $data = Task::find($id);
-        $data->update($taskRequest->all());
+        $data = Event::find($id);
+        $data->update($eventRequest->all());
 
-        $tasks = Task::paginate(10);
-        return redirect()->route('task.subIndex', [
+        $events = Event::paginate(10);
+        return redirect()->route('event.subIndex', [
             'activity' => Activity::find($id),
-            'tasks' => $tasks
-        ])->with('Task Updated Successfully.'); 
+            'events' => $events
+        ])->with('Event Updated Successfully.'); 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\References\Task  $task
+     * @param  \App\Models\References\Event  $event
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = Task::find($id);
+        $id = Event::find($id);
         $id->delete();
-        return back()->with('status', 'Task Deleted Successfully');
+        return back()->with('status', 'Event Deleted Successfully');
     }
 }

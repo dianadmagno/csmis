@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Add Task')
+        'title' => __('Add Event')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('task.store', $activity->id) }}">
+                            <form method="post" action="{{ route('event.store', $activity->id) }}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -47,7 +47,7 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('task.subIndex', $activity->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('event.subIndex', $activity->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>
