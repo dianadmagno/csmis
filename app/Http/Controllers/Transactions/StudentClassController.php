@@ -7,6 +7,7 @@ use App\Models\References\Course;
 use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
+use App\Models\Transactions\ActivityRun;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\ClassActivity;
 use App\Models\Transactions\PersonnelClass;
@@ -201,5 +202,41 @@ class StudentClassController extends Controller
             'activity_id' => $request->activity_id
         ]);
         return redirect()->route('assigned.activities', $id)->with('status', 'Activity Assigned Successfully');
+    }
+
+    public function squadRun($classId, $activityId)
+    {
+        return view('transactions.class.squad_run', [
+            'class' => StudentClass::find($classId),
+            'activity' => Activity::find($activityId)
+        ]);
+    }
+
+    public function storeSquadRun(Request $request, $classId, $activityId)
+    {
+        ActivityRun::create([
+            'class_id' => $classId,
+            'activity_id' => $activityId,
+            'group' => $request->group,
+            'time' => $request->time
+        ]);
+        return redirect()->route('assigned.activities', $classId)->with('status', 'Time Submitted Successfully');
+    }
+
+    public function editSquadRun($classId, $activityId)
+    {
+        return view('transactions.class.edit_run', [
+            'activityRun' => ActivityRun::where('activity_id', $activityId)->first(),
+            'class' => StudentClass::find($classId)
+        ]);
+    }
+
+    public function updateRun(Request $request, $classId, $activityId)
+    {
+        ActivityRun::where('activity_id', $activityId)->where('class_id', $classId)->update([
+            'group' => $request->group,
+            'time' => $request->time
+        ]);
+        return redirect()->route('assigned.activities', $classId)->with('status', 'Time Updated Successfully');
     }
 }

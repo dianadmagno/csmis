@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('nonacad/store/{studId}{eventId}', ['as' => 'nonacad.store', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@store']);
 	Route::post('student/academic/{studentId}/{subjectId}', ['as' => 'student.academic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeAcademicGrade']);
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
+	Route::get('student/nonacademic/input-grade/{studentId}/{eventId}', ['as' => 'student.nonacademic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@create']);
 	Route::get('student/academic/edit/{id}', ['as' => 'student.academic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editAcademicGrade']);
 	Route::put('student/academic/{id}', ['as' => 'student.academic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateAcademicGrade']);
 	Route::get('student/terminate/{id}', ['as' => 'student.terminate', 'uses' => 'App\Http\Controllers\Transactions\StudentController@terminate']);
@@ -77,6 +78,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('assigned/activities/{id}', ['as' => 'assigned.activities', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignedActivities']);
 	Route::post('assign/activity/{id}', ['as' => 'assign.activity.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeAssignActivity']);
 	Route::get('assign/activity/{id}', ['as' => 'assign.activity', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignActivity']);
+	Route::get('class/squad-run/{classId}/{activityId}', ['as' => 'class.squadrun', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@squadRun']);
+	Route::post('class/squad-run/{classId}/{activityId}', ['as' => 'class.squadrun.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeSquadRun']);
+	Route::get('class/squad-run/edit/{classId}/{activityId}', ['as' => 'class.squadrun.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@editSquadRun']);
+	Route::put('class/squad-run/update/{classId}/{activityId}', ['as' => 'class.squadrun.update', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@updateRun']);
 
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Transactions\Student;
+use App\Models\Transactions\ActivityRun;
+use App\Models\Transactions\AcademicGrade;
 use App\Models\Transactions\StudentClasses;
 
 class DashboardController extends Controller
@@ -66,12 +68,40 @@ class DashboardController extends Controller
         ->select('class_id', DB::raw('count(*) as total'))
         ->groupBy('class_id')
         ->get();
+
+        $squadRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
+            $query->whereNull('graduation_date')
+                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+        })->where('activity_id', 3)->orderBy('time', 'asc')->get();
+
+        $platoonRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
+            $query->whereNull('graduation_date')
+                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+        })->where('activity_id', 4)->orderBy('time', 'asc')->get();
+
+        $companyRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
+            $query->whereNull('graduation_date')
+                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+        })->where('activity_id', 4)->orderBy('time', 'asc')->get();
+
+        $topAcademicStudent = AcademicGrade::whereHas('student', function($query) {
+            $query->whereHas('studentClasses', function($query) {
+                $query->whereHas('class', function($query) {
+                    $query->whereNull('graduation_date')
+                        ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+                });
+            });
+        })->orderBy('allocated_points', 'desc')->first();
         return view('dashboard', [
             'sex' => $sex,
             'religions' => $religions,
             'totalNewStudents' => $totalNewStudents,
             'totalPrevStudents' => $totalPrevStudents,
-            'studentsByClasses' => $studentsByClasses
+            'studentsByClasses' => $studentsByClasses,
+            'squadRunByClasses' => $squadRunByClasses,
+            'platoonRunByClasses' => $platoonRunByClasses,
+            'companyRunByClasses' => $companyRunByClasses,
+            'topAcademicStudent' => $topAcademicStudent
         ]);
     }
 }

@@ -33,9 +33,12 @@ class NonAcademicGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($studentId, $eventId)
     {
-        //
+        return view('transactions.students.create_nonacademic_grade', [
+            'student' => Student::find($studentId),
+            'event' => Event::find($eventId)
+        ]);
     }
 
     /**
@@ -46,15 +49,21 @@ class NonAcademicGradeController extends Controller
      */
     public function store(Request $request, $studId, $eventId)
     {
+        $event = Event::find($eventId);
+        $student = Student::find($studId);
+        $m = 70;
+        if ($student->age < 35 && $student->sex == 1) {
+            for($n = 41; $n <= 80; $n++) {
+                var_dump($m+=2, $n);
+            }
+        }
+        return;
         NonAcademicGrade::create([
             'student_id' => $studId,
             'event_id' => $eventId,
-            'grades' => $request->grades,
-            'remarks' => $request->remarks
+            'grades' => $request->grade,
         ]);
-        return redirect()->route('nonacad.index', [
-            'non_acad' => NonAcademicGrade::find($studId)
-        ])->with('status', 'Added Grade and Remarks Successfully');
+        return redirect()->route('student.nonacad', [$studId, $event->activity_id])->with('status', 'Grade Submitted Successfully');
     }
 
     /**
