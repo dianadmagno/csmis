@@ -49,7 +49,7 @@
                         <tr>
                           <th scope="col">Event</th>
                           <th scope="col">Average</th>
-                          <th scope="col">Input Average</th>
+                          <th scope="col">Input Score</th>
                         </tr>
                       </thead>
                       <tbody class="list">
@@ -63,9 +63,9 @@
                                 <td>{{ isset($nonAcademicGrade) ? $nonAcademicGrade->average : '' }}</td>
                                 <td>
                                   @if(!$nonAcademicGrade)
-                                    <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Average</a>
+                                    <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Score</a>
                                   @else
-                                    <a href="" class="btn btn-success">Edit Average</a>
+                                    <a href="" class="btn btn-success">Edit Score</a>
                                   @endif
                                 </td>
                             </tr>

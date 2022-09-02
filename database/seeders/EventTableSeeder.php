@@ -24,7 +24,10 @@ class EventTableSeeder extends Seeder
             'km-run',
             'sit-ups',
             'pushups',
-            'km-run'
+            'km-run',
+            'rate-by-student',
+            'rate-by-course-director',
+            'rate-by-tactical-officer'
         ];
 
         $description = [
@@ -36,7 +39,10 @@ class EventTableSeeder extends Seeder
             '3.2 Kilometer Run',
             'Sit ups',
             'Push ups',
-            '3.2 Kilometer Run'
+            '3.2 Kilometer Run',
+            'Rate By Student',
+            'Rate By Course Director',
+            'Rate By Tactical Officer'
         ];
 
         $activityId = [
@@ -48,7 +54,10 @@ class EventTableSeeder extends Seeder
             2,
             3,
             3,
-            3
+            3,
+            4,
+            4,
+            4
         ];
 
         foreach($event as $key => $name) {

@@ -277,7 +277,7 @@ class StudentController extends Controller
         return view('transactions.students.nonacademic', [
             'activities' => Activity::whereHas('classActivities', function($query) use($student) {
                 $query->where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first());
-            })->whereNotIn('id', [3,4,5])->paginate(10),
+            })->whereNotIn('id', [7,8,9])->paginate(10),
             'student' => $student
         ]);
     }
