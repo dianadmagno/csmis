@@ -71,12 +71,14 @@
                                     <form action="{{ route('assign.personnel.destroy', $class->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        @php $activityRun = App\Models\Transactions\ActivityRun::where('class_id', $class->id)->where('activity_id', $classActivity->activity_id)->first(); @endphp
-                                        @if($activityRun)
-                                          <a href="{{ route('class.squadrun.edit', [$classActivity->class_id, $classActivity->activity_id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        @else
-                                          <a href="{{ route('class.squadrun', [$class->id, $classActivity->activity_id]) }}" type="button" class="btn btn-primary">Input Best Time</a>
-                                        @endif  
+                                        @if($classActivity->activity_id == 3 || $classActivity->activity_id == 4 || $classActivity->activity_id == 5)
+                                          @php $activityRun = App\Models\Transactions\ActivityRun::where('class_id', $class->id)->where('activity_id', $classActivity->activity_id)->first(); @endphp
+                                          @if($activityRun)
+                                            <a href="{{ route('class.squadrun.edit', [$classActivity->class_id, $classActivity->activity_id]) }}" type="button" class="btn btn-success">Edit</a>
+                                          @else
+                                            <a href="{{ route('class.squadrun', [$class->id, $classActivity->activity_id]) }}" type="button" class="btn btn-primary">Input Best Time</a>
+                                          @endif
+                                        @endif
                                         <button type="submit" onclick="return confirm('Do you really want to remove this personnel?')" class="btn btn-danger">Remove</button>
                                     </form>
                                 </div>

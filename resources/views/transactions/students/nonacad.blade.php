@@ -36,6 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
+                        <div class="col-5">
+                          <small>Total Allocation Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -45,23 +48,25 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Event</th>
-                          <th scope="col">Grade</th>
                           <th scope="col">Average</th>
-                          <th scope="col">Input Grade</th>
+                          <th scope="col">Input Average</th>
                         </tr>
                       </thead>
                       <tbody class="list">
                         @if (count($events) > 0)
                           @foreach($events as $event)
                             <tr>
-                                <@php $nonAcademicGrade = App\Models\Transactions\NonAcademicGrade::where('event_id', $event->id)->first() @endphp
+                                @php $nonAcademicGrade = App\Models\Transactions\NonAcademicGrade::where('event_id', $event->id)->first() @endphp
                                 <td>
                                     {{ $event->description }}
                                 </td>
-                                <td>{{ $nonAcademicGrade->grades }}</td>
-                                <td></td>
+                                <td>{{ isset($nonAcademicGrade) ? $nonAcademicGrade->average : '' }}</td>
                                 <td>
-                                  <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Grade</a>
+                                  @if(!$nonAcademicGrade)
+                                    <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Average</a>
+                                  @else
+                                    <a href="" class="btn btn-success">Edit Average</a>
+                                  @endif
                                 </td>
                             </tr>
                           @endforeach

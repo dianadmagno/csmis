@@ -16,12 +16,16 @@ return new class extends Migration
         Schema::create('tr_non_academic_grades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')
+                ->nullable()
                 ->constrained('rf_events')
+                ->onDelete('cascade');
+            $table->foreignId('activity_id')
+                ->nullable()
+                ->constrained('rf_activities')
                 ->onDelete('cascade');
             $table->foreignId('student_id')
                 ->constrained('tr_students')
                 ->onDelete('cascade');
-            $table->integer('grades');
             $table->integer('average');
             $table->timestamps();
         });
