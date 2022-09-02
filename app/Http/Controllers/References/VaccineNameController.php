@@ -40,7 +40,7 @@ class VaccineNameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VaccinewNameRequest $vaccineNameRequest)
+    public function store(VaccineNameRequest $vaccineNameRequest)
     {
         VaccineName::create($vaccineNameRequest->all());
         return redirect()->route('vaccineName.index')->with('status', 'Vaccine Name Created Successfully');

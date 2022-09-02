@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('List of Blood Type')
+        'title' => __('List of Vaccines of ' .$student->firstname.' '.$student->middlename[0].' ' .$student->lastname)
     ])
     
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
-                  <form action="{{ route('bloodType.index') }}">
+                  <form action="{{ route('student.vaccine', $student->id) }}">
                       <div class="card-header border-0">
                           @if (session('status'))
                               <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
                           <div class="col text-right">
-                              <a href="{{ route('bloodType.create') }}" class="btn btn-primary">Add Blood Type</a>
+                              <a href="{{ route('vaccine.create', $student->id) }}" class="btn btn-primary">Add Vaccine</a>
                           </div>
                         </div>
                       </div>
@@ -47,32 +47,44 @@
                     <table class="table align-items-center table-flush">
                       <thead class="thead-light">
                         <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Description</th>
+                          <th scope="col">Vaccine Type</th>
+                          <th scope="col">Vaccine Name</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Place of Vaccine</th>
+                          <th scope="col">Remarks</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($blood_types) > 0)
-                          @foreach($blood_types as $bloodType)
+                        @if (count($vaccines) > 0)
+                          @foreach($vaccines as $vaccine)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $bloodType->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $vaccine->vaccine_type }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $bloodType->description }}
+                                {{ $vaccine->vaccine_name }}
+                              </td>
+                              <td class="budget">
+                                {{ $vaccine->date }}
+                              </td>
+                              <td class="budget">
+                                {{ $vaccine->place }}
+                              </td>
+                              <td class="budget">
+                                {{ $vaccine->remarks }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('bloodType.destroy', $bloodType->id) }}" method="post">
+                                  <form action="{{ route('vaccine.destroy', $vaccine->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('bloodType.edit', $bloodType->id) }}" class="btn btn-success" type="button">Edit</a>
-                                        <button type="submit" onclick="return alert('Do you really want to delete this blood type?')" class="btn btn-danger">Delete</button>
+                                        {{-- <a href="{{ route('vaccine.edit', $vaccine->id) }}" class="btn btn-success" type="button">Edit</a> --}}
+                                        <button type="submit" onclick="return alert('Do you really want to delete this Vaccine?')" class="btn btn-danger">Delete</button>
                                     </form>
                                 </div>
                               </td>
@@ -87,9 +99,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($blood_types) > 0)
+                  @if (count($vaccines) > 0)
                     <div class="card-footer">
-                      {{ $blood_types->links() }}
+                      {{ $vaccines->links() }}
                     </div>
                   @endif
                 </div>
