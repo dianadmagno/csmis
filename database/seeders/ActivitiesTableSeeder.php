@@ -16,23 +16,29 @@ class ActivitiesTableSeeder extends Seeder
     public function run()
     {
         $names = [
-            'pft',
+            '1st-pft',
+            '2nd-pft',
+            '3rd-pft',
             'pawft',
             'squad_run',
             'platoon_run',
             'company_run',
             'obstacle_course',
-            'aptitude'
+            'aptitude',
+            'conduct'
         ];
 
         $descriptions = [
-            'Physical Fitness Test',
+            '1st Physical Fitness Test',
+            '2nd Physical Fitness Test',
+            '3rd Physical Fitness Test',
             'Philippine Army Warrior Fitness Test',
             'Squad Run',
             'Platoon Run',
             'Company Run',
             'Obstacle Course',
-            'Aptitude Test'
+            'Aptitude Test',
+            'Conduct'
         ];
 
         foreach($names as $key => $name) {
