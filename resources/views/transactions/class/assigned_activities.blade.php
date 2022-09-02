@@ -71,7 +71,7 @@
                                     <form action="{{ route('assign.personnel.destroy', $class->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        @if($classActivity->activity_id == 3 || $classActivity->activity_id == 4 || $classActivity->activity_id == 5)
+                                        @if($classActivity->activity_id == 7 || $classActivity->activity_id == 8 || $classActivity->activity_id == 10)
                                           @php $activityRun = App\Models\Transactions\ActivityRun::where('class_id', $class->id)->where('activity_id', $classActivity->activity_id)->first(); @endphp
                                           @if($activityRun)
                                             <a href="{{ route('class.squadrun.edit', [$classActivity->class_id, $classActivity->activity_id]) }}" type="button" class="btn btn-success">Edit</a>
