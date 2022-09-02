@@ -68,20 +68,7 @@
                               </td>
                               <td>
                                 <div class="row">
-                                    @if ($activity->id != 7)
-                                      <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
-                                    @else
-                                      <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Rate
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a href="" class="dropdown-item" type="button">By Student</a>
-                                          <a href="" class="dropdown-item" type="button">By Course Director</a>
-                                          <a href="" class="dropdown-item" type="button">By Tactical Officer</a>
-                                        </div>
-                                      </div>
-                                    @endif
+                                    <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
                                 </div>
                               </td>
                             </tr>

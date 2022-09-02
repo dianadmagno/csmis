@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Allocation Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
+                          <small>Total Allocation Points: <b>{{ $totalAllocatedPoints ? round($totalAllocatedPoints) : '0' }}</b></small> 
                         </div>
                       </div>
                     </div>
