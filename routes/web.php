@@ -100,5 +100,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);
 	Route::resource('activity', 'App\Http\Controllers\References\ActivityController', ['except' => ['show']]);
 	Route::resource('course', 'App\Http\Controllers\References\CourseController', ['except' => ['show']]);
+	Route::resource('vaccineType', 'App\Http\Controllers\References\VaccineTypeController', ['except' => ['show']]);
 });
 
