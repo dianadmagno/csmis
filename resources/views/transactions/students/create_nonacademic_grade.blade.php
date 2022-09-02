@@ -25,13 +25,13 @@
                                 @endif
     
                                 <div class="pl-lg-4">
-                                    <div class="form-group{{ $errors->has('grade') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('average') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ $event->description }}</label>
-                                        <input type="number" name="grade" id="input-name" class="form-control form-control-alternative{{ $errors->has('grade') ? ' is-invalid' : '' }}" placeholder="{{ __('Input Grade') }}">
+                                        <input type="number" name="average" id="input-name" class="form-control form-control-alternative{{ $errors->has('average') ? ' is-invalid' : '' }}" placeholder="{{ __('Input Average') }}">
        
-                                        @if ($errors->has('grade'))
+                                        @if ($errors->has('average'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('grade') }}</strong>
+                                                <strong>{{ $errors->first('average') }}</strong>
                                             </span>
                                         @endif
                                     </div>

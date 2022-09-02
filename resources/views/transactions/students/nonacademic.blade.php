@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Events for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
+      'title' => __('List of Activities for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
     ])   
 
     <div class="container-fluid mt--7">
@@ -68,7 +68,20 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
+                                    @if ($activity->id != 7)
+                                      <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
+                                    @else
+                                      <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Rate
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a href="" class="dropdown-item" type="button">By Student</a>
+                                          <a href="" class="dropdown-item" type="button">By Course Director</a>
+                                          <a href="" class="dropdown-item" type="button">By Tactical Officer</a>
+                                        </div>
+                                      </div>
+                                    @endif
                                 </div>
                               </td>
                             </tr>

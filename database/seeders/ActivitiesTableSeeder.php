@@ -21,7 +21,8 @@ class ActivitiesTableSeeder extends Seeder
             'squad_run',
             'platoon_run',
             'company_run',
-            'obstacle_course'
+            'obstacle_course',
+            'aptitude'
         ];
 
         $descriptions = [
@@ -30,7 +31,8 @@ class ActivitiesTableSeeder extends Seeder
             'Squad Run',
             'Platoon Run',
             'Company Run',
-            'Obstacle Course'
+            'Obstacle Course',
+            'Aptitude Test'
         ];
 
         foreach($names as $key => $name) {
