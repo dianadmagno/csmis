@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignId('student_id')
                 ->constrained('tr_students')
                 ->onDelete('cascade');
-            $table->integer('grades')->nullable();
+            $table->integer('grades');
+            $table->integer('average');
             $table->timestamps();
         });
     }

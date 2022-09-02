@@ -15,6 +15,6 @@ class NonAcademicGrade extends Model
         'student_id',
         'activity_id',
         'grades',
-        'remarks'
+        'average'
     ];
 }

@@ -36,9 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <!-- <div class="col text-right">
-                            <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
-                        </div> -->
                       </div>
                     </div>
                   </form>
@@ -57,13 +54,14 @@
                         @if (count($events) > 0)
                           @foreach($events as $event)
                             <tr>
+                                <@php $nonAcademicGrade = App\Models\Transactions\NonAcademicGrade::where('event_id', $event->id)->first() @endphp
                                 <td>
                                     {{ $event->description }}
                                 </td>
-                                <td>{{ $event->grade }}</td>
+                                <td>{{ $nonAcademicGrade->grades }}</td>
                                 <td></td>
                                 <td>
-                                  <a href="{{ route('student.academic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Grade</a>
+                                  <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Grade</a>
                                 </td>
                             </tr>
                           @endforeach
