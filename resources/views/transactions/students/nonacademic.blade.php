@@ -67,7 +67,7 @@
                                 {{ $activity->description }}
                               </td>
                               <td>
-                                @if($activity->id == 10)
+                                @if($activity->id == 5)
                                   <div class="row">
                                     <a href="{{ route('student.drIndex', $student->id) }}" class="btn btn-primary">Deliquency Report</a>
                                   </div>
