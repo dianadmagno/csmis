@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Allocated Points</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -56,6 +57,24 @@
                         @if (count($activities) > 0)
                           @foreach($activities as $activity)
                             <tr>
+                              @php 
+                                if($activity->id == 5){
+                                  $totalAllocatedPoints = 120;
+                                  $drs = App\Models\Transactions\StudentDeliquencyReport::where('student_id', $student->id)->get()->pluck('demerit_points'); 
+                                  if(count($drs) > 0) {
+                                      foreach ($drs as $key=>$value) {
+                                          $totalAllocatedPoints = $totalAllocatedPoints - $value;
+                                      }
+                                  }
+                                } else {
+                                  $totalAllocatedPoints = NonAcademicGrade::where('student_id', $studId)->where('activity_id', $activityId);
+                                  if($activity->id == 4) {
+                                    $totalAllocatedPoints = $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') + count($totalAllocatedPoints->get()) : '';
+                                  } else {
+                                    $totalAllocatedPoints = $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') / count($totalAllocatedPoints->get()) : '';
+                                  }
+                                }
+                                @endphp
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
@@ -65,6 +84,9 @@
                               </th>
                               <td class="budget">
                                 {{ $activity->description }}
+                              </td>
+                              <td class="budget">
+                                {{ $totalAllocatedPoints }}
                               </td>
                               <td>
                                 @if($activity->id == 5)

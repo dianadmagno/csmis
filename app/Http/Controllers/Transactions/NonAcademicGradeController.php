@@ -27,6 +27,7 @@ class NonAcademicGradeController extends Controller
         } else {
             $total = $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') + count($totalAllocatedPoints->get()) : '';
         }
+
         return view('transactions.students.nonacad', [
             'events' => $nonAcad,
             'student' => Student::find($studId),

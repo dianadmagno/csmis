@@ -274,6 +274,7 @@ class StudentController extends Controller
     public function nonAcademic($id)
     {
         $student = Student::find($id);
+        
         return view('transactions.students.nonacademic', [
             'activities' => Activity::whereHas('classActivities', function($query) use($student) {
                 $query->where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first());
