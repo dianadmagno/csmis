@@ -2,6 +2,7 @@
 
 namespace App\Models\References;
 
+use App\Models\References\Activity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\NonAcademicGrade;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,5 +21,10 @@ class Event extends Model
     public function nonAcademicGrades()
     {
         return $this->hasMany(NonAcademicGrade::class, 'event_id');
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 }

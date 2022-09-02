@@ -21,12 +21,12 @@ class NonAcademicGradeController extends Controller
     {
         $nonAcad = Event::where('activity_id', $activityId)->paginate(10);
         $activity = Activity::find($activityId);
-        $totalAllocatedPoints = NonAcademicGrade::where('student_id', $studId);
+        $totalAllocatedPoints = NonAcademicGrade::where('student_id', $studId)->where('activity_id', $activityId);
         return view('transactions.students.nonacad', [
             'events' => $nonAcad,
             'student' => Student::find($studId),
             'activity' => $activity,
-            'totalAllocatedPoints' => $totalAllocatedPoints->sum('average') / count($totalAllocatedPoints->get())
+            'totalAllocatedPoints' => $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') / count($totalAllocatedPoints->get()) : ''
         ]);
     }
 
@@ -56,6 +56,7 @@ class NonAcademicGradeController extends Controller
             'student_id' => $studId,
             'event_id' => $eventId,
             'average' => $request->average,
+            'activity_id' => $event->activity_id
         ]);
         return redirect()->route('student.nonacad', [$studId, $event->activity_id])->with('status', 'Average Submitted Successfully');
     }
