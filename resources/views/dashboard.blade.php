@@ -30,28 +30,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
-                <div class="card card-stats mb-4 mb-xl-0">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Top Academic Student</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $topAcademicStudent->student->rank->name }} {{ $topAcademicStudent->student->firstname }} {{ $topAcademicStudent->student->middlename }} {{ $topAcademicStudent->student->lastname }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                    <i class="fas fa-users"></i>
+            @if(isset($topAcademicStudent))
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Top Academic Student</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ $topAcademicStudent->student->rank->name }} {{ $topAcademicStudent->student->firstname }} {{ $topAcademicStudent->student->middlename }} {{ $topAcademicStudent->student->lastname }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                        <i class="fas fa-users"></i>
+                                    </div>
                                 </div>
                             </div>
+                            @if($totalNewStudents)
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    <span class="text-nowrap">{{ App\Models\Transactions\StudentClass::find($topAcademicStudent->student->studentClasses()->latest()->pluck('class_id')->first())->description }}</span>
+                                </p>
+                            @endif
                         </div>
-                        @if($totalNewStudents)
-                            <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-nowrap">{{ App\Models\Transactions\StudentClass::find($topAcademicStudent->student->studentClasses()->latest()->pluck('class_id')->first())->description }}</span>
-                            </p>
-                        @endif
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
         <div class="row mt-5">
             <div class="col-xl-8 mb-5 mb-xl-0">
