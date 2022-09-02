@@ -67,7 +67,7 @@
                                       }
                                   }
                                 } else {
-                                  $totalAllocatedPoints = NonAcademicGrade::where('student_id', $studId)->where('activity_id', $activityId);
+                                  $totalAllocatedPoints = App\Models\Transactions\NonAcademicGrade::where('student_id', $student->id)->where('activity_id', $activity->id);
                                   if($activity->id == 4) {
                                     $totalAllocatedPoints = $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') + count($totalAllocatedPoints->get()) : '';
                                   } else {
