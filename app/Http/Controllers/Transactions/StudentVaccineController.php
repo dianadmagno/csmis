@@ -25,7 +25,9 @@ class StudentVaccineController extends Controller
                         ->select('rf_vaccine_names.description as vaccine_name', 'rf_vaccine_types.description as vaccine_type', 'date', 'place', 'student_id', 'tr_student_vaccines.id as id', 'remarks')
                         ->where('student_id', $id)
                         ->paginate(10),
-            'student' => Student::find($id)
+            'student' => Student::where('tr_students.id', $id)
+                        ->join('rf_ranks', 'rf_ranks.id', 'tr_students.rank_id')
+                        ->first()
         ]);
     }
 

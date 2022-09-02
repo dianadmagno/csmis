@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('List of Vaccines of ' .$student->firstname.' '.$student->middlename[0].' ' .$student->lastname)
+        'title' => __('List of Vaccines of '.$student->name.' '.$student->firstname.' '.$student->middlename[0].' '.$student->lastname)
     ])
     
     <div class="container-fluid mt--7">
