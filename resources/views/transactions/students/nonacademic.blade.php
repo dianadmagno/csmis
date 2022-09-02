@@ -67,9 +67,15 @@
                                 {{ $activity->description }}
                               </td>
                               <td>
-                                <div class="row">
+                                @if($activity->id == 10)
+                                  <div class="row">
+                                    <a href="{{ route('student.drIndex', $student->id) }}" class="btn btn-primary">Deliquency Report</a>
+                                  </div>
+                                @else
+                                  <div class="row">
                                     <a href="{{ route('student.nonacad', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
-                                </div>
+                                  </div>
+                                @endif
                               </td>
                             </tr>
                           @endforeach

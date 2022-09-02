@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('tr_student_deliquency_reports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')
+                    ->constraints('tr_students')
+                    ->onDelete('cascade');
             $table->string('dr_type');
             $table->integer('demerit_points');
             $table->string('remarks');

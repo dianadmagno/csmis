@@ -11,6 +11,7 @@ class StudentDeliquencyReport extends Model
 
     protected $table = 'tr_student_deliquency_reports';
     protected $fillable = [
+        'student_id',
         'dr_type',
         'demerit_points',
         'remarks'

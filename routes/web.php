@@ -56,7 +56,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/vaccine-create/{id}', ['as' => 'vaccine.create', 'uses' => 'App\Http\Controllers\Transactions\StudentVaccineController@create']);
 	Route::post('student/vaccine-store/{id}', ['as' => 'vaccine.store', 'uses' => 'App\Http\Controllers\Transactions\StudentVaccineController@store']);
 	Route::delete('student/vaccine-destroy/{id}', ['as' => 'vaccine.destroy', 'uses' => 'App\Http\Controllers\Transactions\StudentVaccineController@destroy']);
+	Route::get('student/deliquency-report/{id}', ['as' => 'student.drIndex', 'uses' => 'App\Http\Controllers\Transactions\StudentDeliquencyReportController@index']);
 	Route::resource('role', 'App\Http\Controllers\RoleController', ['except' => ['show']]);
+	Route::get('student/deliquency-report-create/{id}', ['as' => 'student.drCreate', 'uses' => 'App\Http\Controllers\Transactions\StudentDeliquencyReportController@create']);
+	Route::post('student/deliquency-report-store/{id}', ['as' => 'student.drStore', 'uses' => 'App\Http\Controllers\Transactions\StudentDeliquencyReportController@store']);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
