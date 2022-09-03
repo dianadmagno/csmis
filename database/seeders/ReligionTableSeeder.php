@@ -19,14 +19,34 @@ class ReligionTableSeeder extends Seeder
             'RC',
             'INC',
             'Aglipay',
-            'Born Again'
+            'Born Again',
+            'Methodist',
+            'Islam',
+            'ZLTM',
+            'IDBCJ',
+            'UCCP',
+            'Baptist',
+            'Aglipay',
+            'Anglican',
+            'CAMACOP',
+            'Church of Christ'
         ];
 
         $description = [
             'Roman Catholic',
             'Iglesia ni Cristo',
             'Aglipay',
-            'Born Again'
+            'Born Again',
+            'Methodist',
+            'Islam',
+            'ZLTM',
+            'IDBCJ',
+            'UCCP',
+            'Baptist',
+            'Aglipay',
+            'Anglican',
+            'CAMACOP',
+            'Church of Christ'
         ];
 
         foreach($religionName as $key => $name) {
