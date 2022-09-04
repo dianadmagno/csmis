@@ -37,7 +37,23 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Allocation Points: <b>{{ $totalAllocatedPoints ? round($totalAllocatedPoints) : '0' }}</b></small> 
+                          @if($activity->id == 4)
+                            @php $aptitudeStudent = App\Models\Transactions\NonAcademicGrade::where('event_id', 10)->where('student_id', $student->id)->first() @endphp
+                            @php $aptitudeDirector = App\Models\Transactions\NonAcademicGrade::where('event_id', 11)->where('student_id', $student->id)->first() @endphp
+                            @php $aptitudeTacO = App\Models\Transactions\NonAcademicGrade::where('event_id', 12)->where('student_id', $student->id)->first() @endphp
+                            @if($aptitudeStudent)
+                              @php $totalAptitudeStudent = $aptitudeStudent->average * .50 @endphp
+                            @endif
+                            @if($aptitudeDirector)
+                              @php $totalAptitudeDirector = $aptitudeDirector->average * .25 @endphp
+                            @endif
+                            @if($aptitudeTacO)
+                              @php $totalAptitudeTacO = $aptitudeTacO->average * .25 @endphp
+                            @endif
+                            <small>Total Allocation Points: <b>{{ $totalAptitudeStudent + $totalAptitudeDirector + $totalAptitudeTacO }}</b></small>
+                          @else
+                            <small>Total Allocation Points: <b>{{ $totalAllocatedPoints ? round($totalAllocatedPoints) : '0' }}</b></small>
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -56,11 +72,21 @@
                         @if (count($events) > 0)
                           @foreach($events as $event)
                             <tr>
-                                @php $nonAcademicGrade = App\Models\Transactions\NonAcademicGrade::where('event_id', $event->id)->first() @endphp
+                                @php $nonAcademicGrade = App\Models\Transactions\NonAcademicGrade::where('event_id', $event->id)->where('student_id', $student->id)->first() @endphp
                                 <td>
-                                    {{ $event->description }}
+                                  {{ $event->description }}
                                 </td>
-                                <td>{{ isset($nonAcademicGrade) ? $nonAcademicGrade->average : '' }}</td>
+                                <td>
+                                  @if(isset($nonAcademicGrade))
+                                    @if($event->id == 10)
+                                      {{ $nonAcademicGrade->average * .50 }}
+                                    @elseif($event->id == 11 || $event->id == 12)
+                                      {{ $nonAcademicGrade->average * .25 }}
+                                    @else
+                                      {{ $nonAcademicGrade->average }}
+                                    @endif
+                                  @endif
+                                </td>
                                 <td>
                                   @if(!$nonAcademicGrade)
                                     <a href="{{ route('student.nonacademic.input_grade', [$student->id, $event->id]) }}" class="btn btn-primary">Input Score</a>
