@@ -16,4 +16,9 @@ class NonAcademicGrade extends Model
         'activity_id',
         'average'
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
 }

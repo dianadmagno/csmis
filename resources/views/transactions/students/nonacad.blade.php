@@ -36,25 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col-5">
-                          @if($activity->id == 4)
-                            @php $aptitudeStudent = App\Models\Transactions\NonAcademicGrade::where('event_id', 10)->where('student_id', $student->id)->first() @endphp
-                            @php $aptitudeDirector = App\Models\Transactions\NonAcademicGrade::where('event_id', 11)->where('student_id', $student->id)->first() @endphp
-                            @php $aptitudeTacO = App\Models\Transactions\NonAcademicGrade::where('event_id', 12)->where('student_id', $student->id)->first() @endphp
-                            @if($aptitudeStudent)
-                              @php $totalAptitudeStudent = $aptitudeStudent->average * .50 @endphp
-                            @endif
-                            @if($aptitudeDirector)
-                              @php $totalAptitudeDirector = $aptitudeDirector->average * .25 @endphp
-                            @endif
-                            @if($aptitudeTacO)
-                              @php $totalAptitudeTacO = $aptitudeTacO->average * .25 @endphp
-                            @endif
-                            <small>Total Allocation Points: <b>{{ $totalAptitudeStudent + $totalAptitudeDirector + $totalAptitudeTacO }}</b></small>
-                          @else
-                            <small>Total Allocation Points: <b>{{ $totalAllocatedPoints ? round($totalAllocatedPoints) : '0' }}</b></small>
-                          @endif
-                        </div>
                       </div>
                     </div>
                   </form>

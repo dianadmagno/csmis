@@ -37,7 +37,8 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          @php 
+                          @php
+                            $totalAllocatedPoints = 0;
                             $classActivity3 = App\Models\Transactions\ClassActivity::where('class_id', $student->studentClasses()->latest()->pluck('class_id')->toArray())->where('activity_id', 3)->first();
                             $classActivity2 = App\Models\Transactions\ClassActivity::where('class_id', $student->studentClasses()->latest()->pluck('class_id')->toArray())->where('activity_id', 2)->first();
                             $classActivity1 = App\Models\Transactions\ClassActivity::where('class_id', $student->studentClasses()->latest()->pluck('class_id')->toArray())->where('activity_id', 1)->first();
@@ -127,9 +128,12 @@
                                   @endforeach
                                 @endif
                               @elseif($activity->id == 4)
-                                @php $aptitudeStudent = App\Models\Transactions\NonAcademicGrade::where('event_id', 10)->first() @endphp
-                                @php $aptitudeDirector = App\Models\Transactions\NonAcademicGrade::where('event_id', 11)->first() @endphp
-                                @php $aptitudeTacO = App\Models\Transactions\NonAcademicGrade::where('event_id', 12)->first() @endphp
+                                @php $aptitudeStudent = App\Models\Transactions\NonAcademicGrade::where('event_id', 10)->where('student_id', $student->id)->first() @endphp
+                                @php $aptitudeDirector = App\Models\Transactions\NonAcademicGrade::where('event_id', 11)->where('student_id', $student->id)->first() @endphp
+                                @php $aptitudeTacO = App\Models\Transactions\NonAcademicGrade::where('event_id', 12)->where('student_id', $student->id)->first() @endphp
+                                @php $totalAptitudeStudent = 0 @endphp
+                                @php $totalAptitudeDirector = 0 @endphp
+                                @php $totalAptitudeTacO = 0 @endphp
                                 @if($aptitudeStudent)
                                   @php $totalAptitudeStudent = $aptitudeStudent->average * .50 @endphp
                                 @endif
@@ -141,6 +145,12 @@
                                 @endif
                                 @php $totalAllocatedPoints = $totalAptitudeStudent + $totalAptitudeDirector + $totalAptitudeTacO @endphp
                                 @php $totalAllocatedPoints = $totalAllocatedPoints * .80 @endphp
+                              @elseif($activity->id == 3)
+                                @php $totalAllocatedPoints = $totalAllocatedPoints->sum('average') / 3 * .50 @endphp
+                              @elseif($activity->id == 2)
+                                @php $totalAllocatedPoints = $totalAllocatedPoints->sum('average') / 3 * .30 @endphp
+                              @elseif($activity->id == 1)
+                                @php $totalAllocatedPoints = $totalAllocatedPoints->sum('average') / 3 * .20 @endphp
                               @else
                                 @php $totalAllocatedPoints = $totalAllocatedPoints->sum('average') ? $totalAllocatedPoints->sum('average') / count($totalAllocatedPoints->get()) : ''; @endphp
                               @endif
