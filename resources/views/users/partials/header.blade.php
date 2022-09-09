@@ -1,4 +1,4 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url(../images/scs.jpg); background-size: cover; background-position: center;">
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url(../images/background.jpg); background-size: cover; background-position: center;">
     <!-- Mask -->
     <span class="mask bg-gradient-default opacity-8"></span>
     <!-- Header container -->
