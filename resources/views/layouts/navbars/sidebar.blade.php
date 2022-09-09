@@ -137,6 +137,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('islandGroup.index') }}">
+                                    {{ __('Island Group') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('religion.index') }}">
                                     {{ __('Religion') }}
                                 </a>
