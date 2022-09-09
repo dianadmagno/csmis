@@ -136,6 +136,105 @@
         </div> --}}
         
         <div class="row mt-5">
+            <div class="col-xl-6 mb-5 mb-xl-0">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0">Squad Run By Class</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Squad</th>
+                                    <th scope="col">Best Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($squadRunByClasses as $squadRunByClass)
+                                    <tr>
+                                        <td>{{ $squadRunByClass->studentClass->description }}</td>
+                                        <td>{{ $squadRunByClass->group }}</td>
+                                        <td>{{ $squadRunByClass->time }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 mb-5 mb-xl-0">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0">Platoon Run By Class</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Platoon</th>
+                                    <th scope="col">Best Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($platoonRunByClasses as $platoonRunByClass)
+                                    <tr>
+                                        <td>{{ $platoonRunByClass->studentClass->description }}</td>
+                                        <td>{{ $platoonRunByClass->group }}</td>
+                                        <td>{{ $platoonRunByClass->time }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-xl-3 mb-5 mb-xl-0">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0">Company Run By Class</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Best Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($companyRunByClasses as $companyRunByClass)
+                                    <tr>
+                                        <td>{{ $companyRunByClass->studentClass->description }}</td>
+                                        <td>{{ $companyRunByClass->time }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
             <div class="col-md-6 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header border-0">
@@ -230,104 +329,6 @@
                                     <tr>
                                         <td>{{ App\Models\References\Religion::where('id', $religion->religion_id)->first()->description }}</td>
                                         <td>{{ $religion->total }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-xl-6 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">Squad Run By Class</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <!-- Projects table -->
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Class</th>
-                                    <th scope="col">Squad</th>
-                                    <th scope="col">Best Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($squadRunByClasses as $squadRunByClass)
-                                    <tr>
-                                        <td>{{ $squadRunByClass->studentClass->description }}</td>
-                                        <td>{{ $squadRunByClass->group }}</td>
-                                        <td>{{ $squadRunByClass->time }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">Platoon Run By Class</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <!-- Projects table -->
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Class</th>
-                                    <th scope="col">Platoon</th>
-                                    <th scope="col">Best Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($platoonRunByClasses as $platoonRunByClass)
-                                    <tr>
-                                        <td>{{ $platoonRunByClass->studentClass->description }}</td>
-                                        <td>{{ $platoonRunByClass->group }}</td>
-                                        <td>{{ $platoonRunByClass->time }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-xl-3 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">Company Run By Class</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <!-- Projects table -->
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Class</th>
-                                    <th scope="col">Best Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($companyRunByClasses as $companyRunByClass)
-                                    <tr>
-                                        <td>{{ $companyRunByClass->studentClass->description }}</td>
-                                        <td>{{ $companyRunByClass->time }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -48,7 +48,7 @@
                               $drs = App\Models\Transactions\StudentDeliquencyReport::where('student_id', $student->id)->get()->pluck('demerit_points'); 
                               if(count($drs) > 0) {
                                   foreach ($drs as $key=>$value) {
-                                      $totalConductPoints = $totalConductPointsz - $value;
+                                      $totalConductPoints = $totalConductPoints - $value;
                                   }
                               }
                             } else {

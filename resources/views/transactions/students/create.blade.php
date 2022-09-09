@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Add Student')
+        'title' => __('Student Registration')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -475,7 +475,7 @@
                 </div>
             </div>
         </div>
-        @include('layouts.footers.auth')
+        {{-- @include('layouts.footers.auth') --}}
     </div>
 @endsection
 

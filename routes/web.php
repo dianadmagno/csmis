@@ -20,6 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('home');
+Route::get('student/create', ['as' => 'student.create', 'uses' => 'App\Http\Controllers\Transactions\StudentController@create']);
+Route::post('student', ['as' => 'student.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@store']);
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
@@ -31,18 +33,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subModule/create/{id}', ['as' => 'sbModule.subCreate', 'uses' => 'App\Http\Controllers\References\SubModuleController@create']);
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
 	Route::get('subject/create/{id}', ['as' => 'subject.create', 'uses' => 'App\Http\Controllers\References\SubjectController@create']);
+	Route::get('subject/edit/{id}/{subModId}', ['as' => 'subject.edit', 'uses' => 'App\Http\Controllers\References\SubjectController@edit']);
 	Route::get('event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\EventController@index']);
 	Route::get('event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\EventController@create']);
 	Route::post('event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\EventController@store']);
 	Route::delete('event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\EventController@destroy']);
 	Route::put('event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\EventController@edit']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
-	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show']]);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
 	Route::get('student/nonacademic/{id}', ['as' => 'student.nonacademic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademic']);
 	Route::get('student/nonacad/{studId}/{activityId}', ['as' => 'student.nonacad', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@index']);
 	Route::post('nonacad/store/{studId}/{eventId}', ['as' => 'nonacad.store', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@store']);
+	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show', 'create', 'store']]);
 	Route::post('student/academic/{studentId}/{subjectId}', ['as' => 'student.academic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeAcademicGrade']);
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
 	Route::get('student/nonacademic/input-grade/{studentId}/{eventId}', ['as' => 'student.nonacademic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@create']);

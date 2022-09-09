@@ -68,11 +68,12 @@ class SubjectController extends Controller
      * @param  \App\Models\References\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $subModId)
     {
         return view('references.subject.edit', [
             'subject' => Subject::find($id),
-            'subModules' => SubModule::all()
+            'subModules' => SubModule::all(),
+            'subModule' => SubModule::find($subModId)
         ]);
     }
 

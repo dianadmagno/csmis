@@ -63,7 +63,7 @@ class UnitController extends Controller
      * @param  \App\Models\References\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit $unit)
+    public function edit($id)
     {
         return view('references.unit.edit', [
             'unit' => Unit::find($id)

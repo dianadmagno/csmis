@@ -58,7 +58,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group{{ $errors->has('nr_of_pds') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Number of Points') }}</label>
+                                        <label class="form-control-label" for="input-name">{{ __('Number of PDS') }}</label>
                                         <input type="text" name="nr_of_pds" id="input-name" class="form-control form-control-alternative{{ $errors->has('nr_of_pds') ? ' is-invalid' : '' }}" placeholder="{{ __('Number of PDS')}}" value="{{ old('nr_of_pds', $subject->nr_of_pds) }}">
     
                                         @if ($errors->has('nr_of_pds'))
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                <a type="button" href="{{ route('subjects.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                <a type="button" href="{{ route('subject.subIndex', $subModule->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

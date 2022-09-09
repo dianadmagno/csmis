@@ -29,7 +29,9 @@ class ReligionTableSeeder extends Seeder
             'Aglipay',
             'Anglican',
             'CAMACOP',
-            'Church of Christ'
+            'Church of Christ',
+            'Seventh Day Adventist',
+            'Protrestant'
         ];
 
         $description = [
@@ -46,7 +48,9 @@ class ReligionTableSeeder extends Seeder
             'Aglipay',
             'Anglican',
             'CAMACOP',
-            'Church of Christ'
+            'Church of Christ',
+            'Seventh Day Adventist',
+            'Protrestant'
         ];
 
         foreach($religionName as $key => $name) {
