@@ -27,6 +27,7 @@ return new class extends Migration
                 ->constrained('tr_students')
                 ->onDelete('cascade');
             $table->integer('average');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

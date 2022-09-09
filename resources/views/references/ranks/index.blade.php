@@ -72,7 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('ranks.edit', $rank->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to delete this rank?')" class="btn btn-danger">Delete</button>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this rank?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>

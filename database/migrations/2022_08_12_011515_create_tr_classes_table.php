@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alias')->nullable();
             $table->foreignId('course_id')->constrained('rf_courses');
             $table->date('graduation_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('activity_id')
                 ->constrained('rf_activities')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

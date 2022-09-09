@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('sub_module_id')
                     ->constraints('rf_sub_modules')
                     ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

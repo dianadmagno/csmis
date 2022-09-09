@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('place');
             $table->string('remarks')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

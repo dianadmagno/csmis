@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('rank_id')->constrained('rf_ranks');
             $table->foreignId('personnel_category_id')->constrained('rf_personnel_categories');
             $table->string('photo')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

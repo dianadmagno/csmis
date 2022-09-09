@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\PersonnelClass;
 use App\Models\References\PersonnelCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Personnel extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'tr_personnels';
 
