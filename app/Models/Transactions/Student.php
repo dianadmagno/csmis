@@ -57,7 +57,11 @@ class Student extends Model
         'birthplace',
         'region',
         'tesda',
-        'termination_remarks'
+        'termination_remarks',
+        'region_id',
+        'liscense_id',
+        'course_id',
+        'island_group_id'
     ];
 
     public function rank()
