@@ -157,6 +157,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('liscenseExam.index') }}">
+                                    {{ __('Liscense Exam') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('unit.index') }}">
                                     {{ __('Unit') }}
                                 </a>

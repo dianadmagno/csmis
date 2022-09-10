@@ -110,5 +110,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('vaccineType', 'App\Http\Controllers\References\VaccineTypeController', ['except' => ['show']]);
 	Route::resource('islandGroup', 'App\Http\Controllers\References\IslandGroupController', ['except' => ['show']]);
 	Route::resource('collegeCourse', 'App\Http\Controllers\References\CollegeCourseController', ['except' => ['show']]);
+	Route::resource('liscenseExam', 'App\Http\Controllers\References\LiscenseExamController', ['except' => ['show']]);
 });
 
