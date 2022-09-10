@@ -55,6 +55,10 @@ return new class extends Migration
             $table->integer('liscense_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();
+            $table->string('philhealth')->nullable();
+            $table->string('tin')->nullable();
+            $table->string('pagibig')->nullable();
+            $table->string('gsis')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

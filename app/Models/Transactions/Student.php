@@ -61,7 +61,11 @@ class Student extends Model
         'region_id',
         'liscense_id',
         'course_id',
-        'island_group_id'
+        'island_group_id',
+        'pagibig',
+        'tin',
+        'gsis',
+        'philhealth'
     ];
 
     public function rank()

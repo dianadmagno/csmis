@@ -130,6 +130,39 @@
                                                     </span>
                                                 @endif
                                             </div>
+
+                                            <div class="form-group{{ $errors->has('philhealth') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Philhealth Number') }}</label>
+                                                <input type="text" value="{{ old('philhealth') }}" name="philhealth" class="form-control form-control-alternative{{ $errors->has('philhealth') ? ' is-invalid' : '' }}" placeholder="{{ __('Philhealth Number') }}">
+            
+                                                @if ($errors->has('philhealth'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('philhealth') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('tin') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('TIN') }}</label>
+                                                <input type="text" value="{{ old('tin') }}" name="tin" class="form-control form-control-alternative{{ $errors->has('tin') ? ' is-invalid' : '' }}" placeholder="{{ __('TIN') }}">
+            
+                                                @if ($errors->has('tin'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('tin') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('gsis') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('GSIS Number') }}</label>
+                                                <input type="text" value="{{ old('gsis') }}" name="gsis" class="form-control form-control-alternative{{ $errors->has('gsis') ? ' is-invalid' : '' }}" placeholder="{{ __('GSIS Number') }}">
+            
+                                                @if ($errors->has('gsis'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('gsis') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group{{ $errors->has('mobile_number') ? ' has-danger' : '' }}">
@@ -258,6 +291,17 @@
                                                 @if ($errors->has('course_id'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('course_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('pagibig') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Pagibig Number') }}</label>
+                                                <input type="text" value="{{ old('pagibig') }}" name="pagibig" class="form-control form-control-alternative{{ $errors->has('pagibig') ? ' is-invalid' : '' }}" placeholder="{{ __('Pagibig Number') }}">
+            
+                                                @if ($errors->has('pagibig'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('pagibig') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
