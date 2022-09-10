@@ -109,5 +109,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('course', 'App\Http\Controllers\References\CourseController', ['except' => ['show']]);
 	Route::resource('vaccineType', 'App\Http\Controllers\References\VaccineTypeController', ['except' => ['show']]);
 	Route::resource('islandGroup', 'App\Http\Controllers\References\IslandGroupController', ['except' => ['show']]);
+	Route::resource('collegeCourse', 'App\Http\Controllers\References\CollegeCourseController', ['except' => ['show']]);
 });
 

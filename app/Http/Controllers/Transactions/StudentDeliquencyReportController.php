@@ -18,7 +18,7 @@ class StudentDeliquencyReportController extends Controller
     {
         $keyword = $request->keyword;
         $totalAllocatedPoints = 120;
-       $drs = StudentDeliquencyReport::where('student_id', $id)->get()->pluck('demerit_points');
+        $drs = StudentDeliquencyReport::where('student_id', $id)->get()->pluck('demerit_points');
 
         if(count($drs) > 0) {
             foreach ($drs as $key=>$value) {

@@ -152,6 +152,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('collegeCourse.index') }}">
+                                    {{ __('Courses') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('unit.index') }}">
                                     {{ __('Unit') }}
                                 </a>
