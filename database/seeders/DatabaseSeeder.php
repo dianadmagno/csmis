@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivitiesTableSeeder::class);
         $this->call(EventTableSeeder::class);
         $this->call(IslandGroupTableSeeder::class);
+        $this->call(RegionTableSeeder::class);
     }
 }

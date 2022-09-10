@@ -146,6 +146,11 @@
                                     {{ __('Religion') }}
                                 </a>
                             </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('region.index') }}">
+                                    {{ __('Region') }}
+                                </a>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('ethnicGroup.index') }}">
                                     {{ __('Ethnic Group') }}
