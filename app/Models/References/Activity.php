@@ -12,7 +12,7 @@ class Activity extends Model
 
     protected $table = 'rf_activities';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'percentage', 'nr_of_points', 'parent_id'];
 
     public function classActivities()
     {

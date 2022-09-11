@@ -46,6 +46,16 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('percentage') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Percentage') }}</label>
+                                        <input type="number" name="percentage" id="input-name" class="form-control form-control-alternative{{ $errors->has('percentage') ? ' is-invalid' : '' }}" placeholder="{{ __('Percentage')}}">
+    
+                                        @if ($errors->has('percentage'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('percentage') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('event.subIndex', $activity->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>

@@ -42,15 +42,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
-	Route::get('student/nonacademic/{id}', ['as' => 'student.nonacademic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademic']);
-	Route::get('student/nonacad/{studId}/{activityId}', ['as' => 'student.nonacad', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@index']);
-	Route::post('nonacad/store/{studId}/{eventId}', ['as' => 'nonacad.store', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@store']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show', 'create', 'store']]);
 	Route::post('student/academic/{studentId}/{subjectId}', ['as' => 'student.academic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeAcademicGrade']);
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
-	Route::get('student/nonacademic/input-grade/{studentId}/{eventId}', ['as' => 'student.nonacademic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\NonAcademicGradeController@create']);
 	Route::get('student/academic/edit/{id}', ['as' => 'student.academic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editAcademicGrade']);
 	Route::put('student/academic/{id}', ['as' => 'student.academic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateAcademicGrade']);
+	Route::get('student/nonacademics/{id}', ['as' => 'student.nonacademics', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademics']);
+	Route::get('student/nonacademics/events/{studentId}/{activityId}', ['as' => 'student.nonacademics.events', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademicEvents']);
+	Route::get('student/nonacademics/events/create/{studentId}/{eventId}', ['as' => 'student.nonacademiceventgrade.create', 'uses' => 'App\Http\Controllers\Transactions\StudentController@createNonAcademicEventGrade']);
+	Route::post('student/nonacademics/events/{studentId}/{eventId}', ['as' => 'student.nonacademiceventgrade.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeNonAcademicEventGrade']);
 	Route::get('student/terminate/{id}', ['as' => 'student.terminate', 'uses' => 'App\Http\Controllers\Transactions\StudentController@terminate']);
 	Route::put('student/terminate/{id}', ['as' => 'student.terminate.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeTermination']);
 	Route::get('student/add-class/{id}', ['as' => 'student.class.add', 'uses' => 'App\Http\Controllers\Transactions\StudentController@addClass']);
@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('personnelType', 'App\Http\Controllers\References\PersonnelTypeController', ['except' => ['show']]);
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);
 	Route::resource('activity', 'App\Http\Controllers\References\ActivityController', ['except' => ['show']]);
+	Route::resource('sub-activity', 'App\Http\Controllers\References\SubActivityController', ['except' => ['index']]);
 	Route::resource('course', 'App\Http\Controllers\References\CourseController', ['except' => ['show']]);
 	Route::resource('vaccineType', 'App\Http\Controllers\References\VaccineTypeController', ['except' => ['show']]);
 });

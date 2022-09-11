@@ -51,7 +51,8 @@ class EventController extends Controller
         Event::create([
             'name' => $eventRequest->name,
             'description' => $eventRequest->description,
-            'activity_id' => $id
+            'activity_id' => $id,
+            'percentage' => $eventRequest->percentage
         ]);
 
         return view('references.activities.event', [

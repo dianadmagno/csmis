@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Events')
+      'title' => __('List of Sub Activities for '.$activity->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('event.subIndex', $activity->id) }}">
+                  <form action="{{ route('activity.index') }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                           <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('event.create', $activity->id) }}" class="btn btn-primary">Add Event</a>
+                            <a href="{{ route('activity.create') }}" class="btn btn-primary">Add Sub Activity</a>
                         </div>
                       </div>
                     </div>
@@ -54,30 +54,38 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($events) > 0)
-                          @foreach($events as $event)
+                        @if (count($subActivities) > 0)
+                          @foreach($subActivities as $subActivity)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $event->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $subActivity->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $event->description }}
+                                {{ $subActivity->description }}
                               </td>
                               <td class="budget">
-                                {{ $event->percentage }}
+                                {{ $subActivity->percentage }}%
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('event.destroy', $event->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <!-- <a href="{{ route('event.edit', $event->id) }}" class="btn btn-success" type="button">Edit</a> -->
-                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
-                                    </form>
+                                  <form action="{{ route('activity.destroy', $subActivity->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="dropdown">
+                                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a href="{{ route('activity.edit', $subActivity->id) }}" class="dropdown-item" type="button">Edit</a>
+                                        <a href="{{ route('event.subIndex', $subActivity->id) }}" class="dropdown-item" type="button">Events</a>
+                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="dropdown-item">Archive</button>
+                                      </div>
+                                    </div>
+                                  </form>
                                 </div>
                               </td>
                             </tr>
@@ -91,9 +99,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($events) > 0)
+                  @if (count($subActivities) > 0)
                     <div class="card-footer">
-                      {{ $events->links() }}
+                      {{ $subActivities->links() }}
                     </div>
                   @endif
                 </div>

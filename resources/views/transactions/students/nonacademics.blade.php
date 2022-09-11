@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Events')
+      'title' => __('List of Non Academic Activities for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
               <div class="col">
                 <div class="card">
                   <!-- Card header -->
-                  <form action="{{ route('event.subIndex', $activity->id) }}">
+                  <form action="{{ route('activity.index') }}">
                     <div class="card-header border-0">
                       @if (session('status'))
                           <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -36,9 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
-                            <a href="{{ route('event.create', $activity->id) }}" class="btn btn-primary">Add Event</a>
-                        </div>
                       </div>
                     </div>
                   </form>
@@ -49,35 +46,39 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Percentage</th>
+                          <th scope="col">Allocated Points</th>
+                          <th scope="col">Average</th>
+                          <th scope="col">Total Points</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($events) > 0)
-                          @foreach($events as $event)
+                        @if (count($activities) > 0)
+                          @foreach($activities as $activity)
                             <tr>
+                              @php $eventAverageScore = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)->where('activity_id', $activity->id)->sum('average') @endphp
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $event->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $activity->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $event->description }}
+                                {{ $activity->description }}
                               </td>
                               <td class="budget">
-                                {{ $event->percentage }}
+                                {{ $activity->nr_of_points }}
+                              </td>
+                              <td class="budget">
+                                {{ $eventAverageScore }}
+                              </td>
+                              <td class="budget">
+                                {{ $eventAverageScore / 100 * $activity->nr_of_points }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('event.destroy', $event->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <!-- <a href="{{ route('event.edit', $event->id) }}" class="btn btn-success" type="button">Edit</a> -->
-                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
-                                    </form>
+                                  <a href="{{ route('student.nonacademics.events', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
                                 </div>
                               </td>
                             </tr>
@@ -91,9 +92,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($events) > 0)
+                  @if (count($activities) > 0)
                     <div class="card-footer">
-                      {{ $events->links() }}
+                      {{ $activities->links() }}
                     </div>
                   @endif
                 </div>

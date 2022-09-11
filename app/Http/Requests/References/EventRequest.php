@@ -25,7 +25,8 @@ class EventRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:rf_events,name,'.$this->event,
-            'description' => 'required'
+            'description' => 'required',
+            'percentage' => 'numeric|nullable'
         ];
     }
 }

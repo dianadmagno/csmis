@@ -5,6 +5,7 @@ namespace App\Models\References;
 use App\Models\References\Activity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\NonAcademicGrade;
+use App\Models\Transactions\EventAverageScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
@@ -15,7 +16,8 @@ class Event extends Model
     protected $fillable = [
         'name',
         'description',
-        'activity_id'
+        'activity_id',
+        'percentage'
     ];
 
     public function nonAcademicGrades()
@@ -26,5 +28,10 @@ class Event extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'activity_id');
+    }
+
+    public function eventAverageScore()
+    {
+        return $this->hasOne(EventAverageScore::class, 'event_id');
     }
 }

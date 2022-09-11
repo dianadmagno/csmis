@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
+use App\Models\References\Event;
 use App\Models\References\Course;
 use App\Models\References\Company;
-use App\Models\References\Activity;
 use App\Models\References\Subject;
 use Illuminate\Support\Facades\DB;
+use App\Models\References\Activity;
 use App\Models\References\Religion;
 use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
@@ -22,6 +23,7 @@ use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\AcademicGrade;
 use App\Models\Transactions\StudentClasses;
+use App\Models\Transactions\EventAverageScore;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
@@ -270,17 +272,53 @@ class StudentController extends Controller
         ]);
         return redirect()->route('student.academic', $AcademicGrade->student_id)->with('status', 'Grade Updated Successfully'); 
     }
-    
-    public function nonAcademic($id)
+
+    public function nonAcademics(Request $request, $id)
     {
         $student = Student::find($id);
-        
-        return view('transactions.students.nonacademic', [
+        $keyword = $request->keyword;
+        return view('transactions.students.nonacademics', [
+            'student' => $student,
             'activities' => Activity::whereHas('classActivities', function($query) use($student) {
                 $query->where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first());
-            })->whereNotIn('id', [7,8,9])->paginate(10),
-            'student' => $student
+            })->where('name', 'like', '%'.$keyword.'%')->orWhere('description', 'like', '%'.$keyword.'%')->paginate(10),
         ]);
+    }
+
+    public function nonAcademicEvents(Request $request, $studentId, $activityId)
+    {
+        $keyword = $request->keyword;
+        return view('transactions.students.non_academic_events', [
+            'student' => Student::find($studentId),
+            'events' => Event::where('activity_id', $activityId)
+                            ->where('name', 'like', '%'.$keyword.'%')
+                            ->orWhere('description', 'like', '%'.$keyword.'%')
+                            ->paginate(10)
+        ]);
+    }
+
+    public function createNonAcademicEventGrade($studentId, $eventId)
+    {
+        return view('transactions.students.create_non_academic_event_grade', [
+            'student' => Student::find($studentId),
+            'event' => Event::find($eventId)
+        ]);
+    }
+
+    public function storeNonAcademicEventGrade(Request $request, $studentId, $eventId)
+    {
+        $student = Student::find($studentId);
+        $event = Event::find($eventId);
+
+        EventAverageScore::create([
+            'student_id' => $studentId,
+            'event_id' => $eventId,
+            'score' => $request->score,
+            'average' => $event->percentage ? $request->score * ('.'.$event->percentage) : null,
+            'activity_id' => $event->activity_id
+        ]);
+
+        return redirect()->route('student.nonacademics.events', [$studentId, $eventId])->with('status', 'Event Scored Successfully');
     }
 
     public function terminate($id)

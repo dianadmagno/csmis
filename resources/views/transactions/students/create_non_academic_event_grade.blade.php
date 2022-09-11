@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('nonacad.store', [$student->id, $event->id]) }}">
+                            <form method="post" action="{{ route('student.nonacademiceventgrade.store', [$student->id, $event->id]) }}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -25,18 +25,18 @@
                                 @endif
     
                                 <div class="pl-lg-4">
-                                    <div class="form-group{{ $errors->has('average') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('score') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ $event->description }}</label>
-                                        <input type="number" name="average" id="input-name" class="form-control form-control-alternative{{ $errors->has('average') ? ' is-invalid' : '' }}" placeholder="{{ __('Input Score') }}">
+                                        <input type="number" name="score" id="input-name" class="form-control form-control-alternative{{ $errors->has('score') ? ' is-invalid' : '' }}" placeholder="{{ __('Input Score') }}" required>
        
-                                        @if ($errors->has('average'))
+                                        @if ($errors->has('score'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('average') }}</strong>
+                                                <strong>{{ $errors->first('score') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('student.nonacademic', $student->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('student.nonacademics.events', [$student->id, $event->activity_id]) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

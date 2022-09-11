@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rf_activities', function (Blueprint $table) {
+        Schema::create('tr_activity_average', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('nr_of_points');
+            $table->integer('average');
+            $table->foreignId('student_id')->constrained('tr_students');
+            $table->foreignId('activity_id')->constrained('rf_activities');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_activities');
+        Schema::dropIfExists('activity_average');
     }
 };

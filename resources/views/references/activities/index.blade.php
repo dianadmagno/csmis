@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Allocated Points</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -66,15 +67,26 @@
                               <td class="budget">
                                 {{ $activity->description }}
                               </td>
+                              <td class="budget">
+                                {{ $activity->nr_of_points }}
+                              </td>
                               <td>
                                 <div class="row">
                                   <form action="{{ route('activity.destroy', $activity->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <a href="{{ route('activity.edit', $activity->id) }}" class="btn btn-success" type="button">Edit</a>
-                                        <a href="{{ route('event.subIndex', $activity->id) }}" class="btn btn-default" type="button">Activity List</a>
-                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="btn btn-danger">Archive</button>
-                                    </form>
+                                    @csrf
+                                    @method('delete')
+                                    <div class="dropdown">
+                                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a href="{{ route('activity.edit', $activity->id) }}" class="dropdown-item" type="button">Edit</a>
+                                        <a href="{{ route('sub-activity.show', $activity->id) }}" class="dropdown-item" type="button">Sub Activities</a>
+                                        <a href="{{ route('event.subIndex', $activity->id) }}" class="dropdown-item" type="button">Events</a>
+                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="dropdown-item">Archive</button>
+                                      </div>
+                                    </div>
+                                  </form>
                                 </div>
                               </td>
                             </tr>
