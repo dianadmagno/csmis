@@ -34,11 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
 	Route::get('subject/create/{id}', ['as' => 'subject.create', 'uses' => 'App\Http\Controllers\References\SubjectController@create']);
 	Route::get('subject/edit/{id}/{subModId}', ['as' => 'subject.edit', 'uses' => 'App\Http\Controllers\References\SubjectController@edit']);
-	Route::get('event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\EventController@index']);
-	Route::get('event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\EventController@create']);
-	Route::post('event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\EventController@store']);
-	Route::delete('event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\EventController@destroy']);
-	Route::put('event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\EventController@edit']);
+	Route::get('event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\ActivityEventController@index']);
+	Route::get('event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\ActivityEventController@create']);
+	Route::post('event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\ActivityEventController@store']);
+	Route::delete('event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\ActivityEventController@destroy']);
+	Route::put('event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\ActivityEventController@edit']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
@@ -109,8 +109,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('personnelType', 'App\Http\Controllers\References\PersonnelTypeController', ['except' => ['show']]);
 	Route::resource('demeritReport', 'App\Http\Controllers\References\DemeritReportTypeController', ['except' => ['show']]);
 	Route::resource('activity', 'App\Http\Controllers\References\ActivityController', ['except' => ['show']]);
-	Route::resource('sub-activity', 'App\Http\Controllers\References\SubActivityController', ['except' => ['index']]);
 	Route::resource('course', 'App\Http\Controllers\References\CourseController', ['except' => ['show']]);
 	Route::resource('vaccineType', 'App\Http\Controllers\References\VaccineTypeController', ['except' => ['show']]);
+	Route::get('sub-activity/create/{id}', ['as' => 'sub-activity.create', 'uses' => 'App\Http\Controllers\References\SubActivityController@create']);
+	Route::get('sub-activity/{id}', ['as' => 'sub-activity.index', 'uses' => 'App\Http\Controllers\References\SubActivityController@index']);
+	Route::post('sub-activity/store/{id}', ['as' => 'sub-activity.store', 'uses' => 'App\Http\Controllers\References\SubActivityController@store']);
 });
 

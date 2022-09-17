@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Update Activity')
+        'title' => __('Add Sub Activity for '.$activity->description)
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,9 +12,8 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('activity.update', $activity->id) }}">
+                            <form method="post" action="{{ route('sub-activity.store', $activity->id) }}">
                                 @csrf
-                                @method('put')
                                 
                                 @if (session('status'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,7 +28,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $activity->name) }}">
+                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
        
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +38,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Description') }}</label>
-                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}" value="{{ old('description', $activity->description) }}">
+                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}">
     
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -47,18 +46,18 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="form-group{{ $errors->has('nr_of_points') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Allocated Points') }}</label>
-                                        <input type="text" name="nr_of_points" id="input-name" class="form-control form-control-alternative{{ $errors->has('nr_of_points') ? ' is-invalid' : '' }}" placeholder="{{ __('Allocated Points')}}" value="{{ old('nr_of_points', $activity->nr_of_points) }}">
-    
-                                        @if ($errors->has('nr_of_points'))
+                                    <div class="form-group{{ $errors->has('percentage') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Percentage') }}</label>
+                                        <input type="number" name="percentage" id="input-name" class="form-control form-control-alternative{{ $errors->has('percentage') ? ' is-invalid' : '' }}" placeholder="{{ __('Percentage')}}">
+                                        <input type="hidden" value="{{ $activity->id }}" name="activity_id">
+                                        @if ($errors->has('percentage'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('nr_of_points') }}</strong>
+                                                <strong>{{ $errors->first('percentage') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('activity.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('sub-activity.index', $activity->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

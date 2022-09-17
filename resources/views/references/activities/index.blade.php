@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Has Sub Activity?</th>
                           <th scope="col">Allocated Points</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -68,6 +69,13 @@
                                 {{ $activity->description }}
                               </td>
                               <td class="budget">
+                                @if($activity->has_sub_activities)
+                                  <span class="badge badge-primary">Yes</span>
+                                @else
+                                  <span class="badge badge-danger">None</span>
+                                @endif
+                              </td>
+                              <td class="budget">
                                 {{ $activity->nr_of_points }}
                               </td>
                               <td>
@@ -81,8 +89,11 @@
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a href="{{ route('activity.edit', $activity->id) }}" class="dropdown-item" type="button">Edit</a>
-                                        <a href="{{ route('sub-activity.show', $activity->id) }}" class="dropdown-item" type="button">Sub Activities</a>
-                                        <a href="{{ route('event.subIndex', $activity->id) }}" class="dropdown-item" type="button">Events</a>
+                                        @if($activity->has_sub_activities)
+                                          <a href="{{ route('sub-activity.index', $activity->id) }}" class="dropdown-item" type="button">Sub Activities</a>
+                                        @else
+                                          <a href="{{ route('event.subIndex', $activity->id) }}" class="dropdown-item" type="button">Events</a>
+                                        @endif
                                         <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="dropdown-item">Archive</button>
                                       </div>
                                     </div>
@@ -92,9 +103,9 @@
                             </tr>
                           @endforeach
                         @else
-                            <tr class="text-center">
-                                <td colspan="5">No Available Data</td>
-                            </tr>
+                          <tr class="text-center">
+                            <td colspan="5">No Available Data</td>
+                          </tr>
                         @endif
                       </tbody>
                     </table>

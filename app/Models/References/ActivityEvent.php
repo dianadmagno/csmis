@@ -8,11 +8,11 @@ use App\Models\Transactions\NonAcademicGrade;
 use App\Models\Transactions\EventAverageScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Event extends Model
+class ActivityEvent extends Model
 {
     use HasFactory;
     
-    protected $table = 'rf_events';
+    protected $table = 'rf_activity_events';
     protected $fillable = [
         'name',
         'description',

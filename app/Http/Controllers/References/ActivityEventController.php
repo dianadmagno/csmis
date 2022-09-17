@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
-use App\Models\References\Event;
+use App\Models\References\ActivityEvent;
 use Illuminate\Routing\Controller;
 use App\Models\References\Activity;
-use App\Http\Requests\References\EventRequest;
+use App\Http\Requests\References\ActivityEventRequest;
 
-class EventController extends Controller
+class ActivityEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class EventController extends Controller
     {
         $keyword = $request->keyword;
         return view('references.activities.event', [
-            'events' => Event::where('name', 'LIKE', '%'.$keyword.'%')
+            'events' => ActivityEvent::where('name', 'LIKE', '%'.$keyword.'%')
                         ->where('activity_id', $id)
                         ->paginate(10),
 
@@ -45,10 +45,9 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRequest $eventRequest, $id)
+    public function store(ActivityEventRequest $eventRequest, $id)
     {
-        
-        Event::create([
+        ActivityEvent::create([
             'name' => $eventRequest->name,
             'description' => $eventRequest->description,
             'activity_id' => $id,
@@ -57,14 +56,14 @@ class EventController extends Controller
 
         return view('references.activities.event', [
             'activity' => Activity::find($id),
-            'events' => Event::paginate(10)
+            'events' => ActivityEvent::paginate(10)
         ])->with('Event Created Successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\References\Event  $event
+     * @param  \App\Models\References\ActivityEvent  $event
      * @return \Illuminate\Http\Response
      */
     public function show(Event $event)
@@ -75,13 +74,13 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\References\Event  $event
+     * @param  \App\Models\References\ActivityEvent  $event
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         return view('references.activities.eventEdit', [
-            'event' => Event::find($id)
+            'event' => ActivityEvent::find($id)
         ]);
     }
 
@@ -89,30 +88,30 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\References\Event  $event
+     * @param  \App\Models\References\ActivityEvent  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(EventRequest $eventRequest, $id)
+    public function update(ActivityEventRequest $eventRequest, $id)
     {
-        $data = Event::find($id);
+        $data = ActivityEvent::find($id);
         $data->update($eventRequest->all());
 
-        $events = Event::paginate(10);
+        $events = ActivityEvent::paginate(10);
         return redirect()->route('event.subIndex', [
             'activity' => Activity::find($id),
             'events' => $events
-        ])->with('Event Updated Successfully.'); 
+        ])->with('status', 'Event Updated Successfully.'); 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\References\Event  $event
+     * @param  \App\Models\References\ActivityEvent  $event
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = Event::find($id);
+        $id = ActivityEvent::find($id);
         $id->delete();
         return back()->with('status', 'Event Deleted Successfully');
     }

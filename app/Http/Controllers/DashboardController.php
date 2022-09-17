@@ -94,14 +94,14 @@ class DashboardController extends Controller
             });
         })->orderBy('allocated_points', 'desc')->first();
 
-        $topNonAcademicStudent = NonAcademicGrade::whereHas('student', function($query) {
-            $query->whereHas('studentClasses', function($query) {
-                $query->whereHas('class', function($query) {
-                    $query->whereNull('graduation_date')
-                        ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
-                });
-            });
-        })->orderBy('average', 'desc')->first();
+        // $topNonAcademicStudent = NonAcademicGrade::whereHas('student', function($query) {
+        //     $query->whereHas('studentClasses', function($query) {
+        //         $query->whereHas('class', function($query) {
+        //             $query->whereNull('graduation_date')
+        //                 ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+        //         });
+        //     });
+        // })->orderBy('average', 'desc')->first();
         return view('dashboard', [
             'sex' => $sex,
             'religions' => $religions,
@@ -112,7 +112,7 @@ class DashboardController extends Controller
             'platoonRunByClasses' => $platoonRunByClasses,
             'companyRunByClasses' => $companyRunByClasses,
             'topAcademicStudent' => $topAcademicStudent,
-            'topNonAcademicStudent' => $topNonAcademicStudent
+            // 'topNonAcademicStudent' => $topNonAcademicStudent
         ]);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\References\SubActivity;
+use App\Http\Requests\References\SubActivityRequest;
 
 class SubActivityController extends Controller
 {
@@ -14,9 +15,13 @@ class SubActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
-        
+        $keyword = $request->keyword;
+        return view('references.subactivity.index', [
+            'subActivities' => SubActivity::where('activity_id', $id)->paginate(10),
+            'activity' => Activity::find($id)
+        ]);
     }
 
     /**
@@ -24,9 +29,12 @@ class SubActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $activity = Activity::find($id);
+        return view('references.subactivity.create', [
+            'activity' => $activity
+        ]);
     }
 
     /**
@@ -35,9 +43,10 @@ class SubActivityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubActivityRequest $request, $id)
     {
-        //
+        SubActivity::create($request->all());
+        return redirect()->route('sub-activity.index', $id)->with('status', 'Sub Activity Created Successfully');
     }
 
     /**
@@ -48,11 +57,7 @@ class SubActivityController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $keyword = $request->keyword;
-        return view('references.subactivity.index', [
-            'subActivities' => SubActivity::where('activity_id', $id)->paginate(10),
-            'activity' => Activity::find($id)
-        ]);
+        
     }
 
     /**

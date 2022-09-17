@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('average');
             $table->foreignId('student_id')->constrained('tr_students');
             $table->foreignId('activity_id')->constrained('rf_activities');
+            $table->foreignId('sub_activity_id')->constrained('rf_sub_activities')->nullable();
             $table->foreignId('event_id')->constrained('rf_events');
             $table->timestamps();
         });

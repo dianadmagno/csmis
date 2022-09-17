@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
-use App\Models\References\Event;
+use App\Models\References\ActivityEvent;
 use App\Models\References\Course;
 use App\Models\References\Company;
 use App\Models\References\Subject;
@@ -290,7 +290,7 @@ class StudentController extends Controller
         $keyword = $request->keyword;
         return view('transactions.students.non_academic_events', [
             'student' => Student::find($studentId),
-            'events' => Event::where('activity_id', $activityId)
+            'events' => ActivityEvent::where('activity_id', $activityId)
                             ->where('name', 'like', '%'.$keyword.'%')
                             ->orWhere('description', 'like', '%'.$keyword.'%')
                             ->paginate(10)
@@ -301,14 +301,14 @@ class StudentController extends Controller
     {
         return view('transactions.students.create_non_academic_event_grade', [
             'student' => Student::find($studentId),
-            'event' => Event::find($eventId)
+            'event' => ActivityEvent::find($eventId)
         ]);
     }
 
     public function storeNonAcademicEventGrade(Request $request, $studentId, $eventId)
     {
         $student = Student::find($studentId);
-        $event = Event::find($eventId);
+        $event = ActivityEvent::find($eventId);
 
         EventAverageScore::create([
             'student_id' => $studentId,
