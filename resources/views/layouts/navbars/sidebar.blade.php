@@ -106,6 +106,11 @@
                     <i class="ni ni-shop text-primary"></i>Classes
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.report') }}">
+                    <i class="ni ni-single-copy-04 text-primary"></i>Reports
+                    </a>
+                </li>
             </ul>
 
             <hr class="my-3">
