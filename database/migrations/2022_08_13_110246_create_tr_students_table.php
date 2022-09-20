@@ -59,6 +59,7 @@ return new class extends Migration
             $table->integer('tin')->nullable();
             $table->integer('pagibig')->nullable();
             $table->integer('gsis')->nullable();
+            $table->string('skills')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
