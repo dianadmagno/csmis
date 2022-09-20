@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Non Academic Activities for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
+      'title' => __('List of Events for '.$subActivity->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -36,9 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col-5">
-                          <small>Total Non-Academic Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
-                        </div>
+                        <div class="col text-right">
+                          <a href="{{ route('student.nonacademicsubactivity.index', [$student->id, $subActivity->activity_id]) }}" class="btn btn-danger">Back</a>
+                      </div>
                       </div>
                     </div>
                   </form>
@@ -49,53 +49,42 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Allocated Points</th>
+                          <th scope="col">Repetition/Time</th>
+                          <th scope="col">Score</th>
                           <th scope="col">Average</th>
-                          <th scope="col">Total Points</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($activities) > 0)
-                          @foreach($activities as $activity)
+                        @if (count($events) > 0)
+                          @foreach($events as $event)
+                            @php $eventAverageScore = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)->where('sub_activity_id', $subActivity->id)->sum('average') @endphp
                             <tr>
-                              @php 
-                                $activityEvent = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
-                                                ->whereHas('activityEvent', function($query) use($activity) {
-                                                  $query->where('activity_id', $activity->id);
-                                                })
-                                                ->sum('average');
-
-                                $subActivityEvent = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
-                                                ->whereHas('subActivityEvent', function($query) use($activity) {
-                                                  $query->whereIn('sub_activity_id', $activity->subActivities->pluck('id'));
-                                                });
-                              @endphp
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $activity->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $event->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $activity->description }}
+                                {{ $event->description }}
                               </td>
                               <td class="budget">
-                                {{ $activity->nr_of_points }}
+                                {{ $event->eventAverageScore()->pluck('repetition_time')->first() }}
                               </td>
                               <td class="budget">
-                                {{ $activity->has_sub_activities ? round($subActivityEvent->sum('score') / $subActivityEvent->count(), 0) : $activityEvent }}
+                                {{ $event->eventAverageScore()->pluck('score')->first() }}
                               </td>
                               <td class="budget">
-                                {{ $activity->has_sub_activities ? round(($subActivityEvent->sum('score') / $subActivityEvent->count()) / 100 * $activity->nr_of_points, 0) : $activityEvent / 100 * $activity->nr_of_points }}
+                                {{ $event->eventAverageScore()->pluck('average')->first() }}
                               </td>
                               <td>
-                                <div class="row">
-                                  @if($activity->has_sub_activities)
-                                    <a href="{{ route('student.nonacademicsubactivity.index', [$student->id, $activity->id]) }}" class="btn btn-primary" type="button">Sub Activity</a>
+                                <div class="row text-center">
+                                  @if($event->eventAverageScore()->count() >= 1)
+                                    <a href="" class="btn btn-success" type="button">Edit Score</a>
                                   @else
-                                    <a href="{{ route('student.nonacademics.events', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>
+                                    <a href="{{ route('student.nonacademicsubactivityevents.create', [$student->id, $event->id]) }}" class="btn btn-primary" type="button">Input Score</a>
                                   @endif
                                 </div>
                               </td>
@@ -110,9 +99,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($activities) > 0)
+                  @if (count($events) > 0)
                     <div class="card-footer">
-                      {{ $activities->links() }}
+                      {{ $events->links() }}
                     </div>
                   @endif
                 </div>

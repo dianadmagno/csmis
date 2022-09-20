@@ -32,6 +32,6 @@ class ActivityEvent extends Model
 
     public function eventAverageScore()
     {
-        return $this->hasOne(EventAverageScore::class, 'event_id');
+        return $this->hasOne(EventAverageScore::class, 'activity_event_id');
     }
 }

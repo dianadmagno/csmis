@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Events for '.$student->rank->name.' '.$student->firstname.' '.$student->middlename.' '.$student->lastname)
+      'title' => __('List of Events for '.$activity->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -73,14 +73,14 @@
                                 {{ $event->percentage }}%
                               </td>
                               <td class="budget">
-                                {{ $event->eventAverageScore()->pluck('score')->first() }}
+                                {{ $event->EventAverageScore()->pluck('score')->first() }}
                               </td>
                               <td class="budget">
-                                {{ $event->eventAverageScore()->pluck('average')->first() }}
+                                {{ $event->EventAverageScore()->pluck('average')->first() }}
                               </td>
                               <td>
                                 <div class="row text-center">
-                                  @if($event->eventAverageScore()->count() >= 1)
+                                  @if($event->EventAverageScore()->count() >= 1)
                                     <a href="" class="btn btn-success" type="button">Edit Score</a>
                                   @else
                                     <a href="{{ route('student.nonacademiceventgrade.create', [$student->id, $event->id]) }}" class="btn btn-primary" type="button">Input Score</a>

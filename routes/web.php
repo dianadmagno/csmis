@@ -34,11 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subject/{id}', ['as' => 'subject.subIndex', 'uses' => 'App\Http\Controllers\References\SubjectController@index']);
 	Route::get('subject/create/{id}', ['as' => 'subject.create', 'uses' => 'App\Http\Controllers\References\SubjectController@create']);
 	Route::get('subject/edit/{id}/{subModId}', ['as' => 'subject.edit', 'uses' => 'App\Http\Controllers\References\SubjectController@edit']);
-	Route::get('event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\ActivityEventController@index']);
-	Route::get('event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\ActivityEventController@create']);
-	Route::post('event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\ActivityEventController@store']);
-	Route::delete('event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\ActivityEventController@destroy']);
-	Route::put('event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\ActivityEventController@edit']);
+	Route::get('activity-event/{id}', ['as' => 'event.subIndex', 'uses' => 'App\Http\Controllers\References\ActivityEventController@index']);
+	Route::get('activity-event/create/{id}', ['as' => 'event.create', 'uses' => 'App\Http\Controllers\References\ActivityEventController@create']);
+	Route::post('activity-event/store/{id}', ['as' => 'event.store', 'uses' => 'App\Http\Controllers\References\ActivityEventController@store']);
+	Route::delete('activity-event/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'App\Http\Controllers\References\ActivityEventController@destroy']);
+	Route::put('activity-event/edit/{id}', ['as' => 'event.edit', 'uses' => 'App\Http\Controllers\References\ActivityEventController@edit']);
 	Route::put('user/restore/{id}', ['as' => 'user.restore', 'uses' => 'App\Http\Controllers\UserController@restore']);
 	Route::put('student/photo/{id}', ['as' => 'student.photo', 'uses' => 'App\Http\Controllers\Transactions\StudentController@uploadPhoto']);
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
@@ -51,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/nonacademics/events/{studentId}/{activityId}', ['as' => 'student.nonacademics.events', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademicEvents']);
 	Route::get('student/nonacademics/events/create/{studentId}/{eventId}', ['as' => 'student.nonacademiceventgrade.create', 'uses' => 'App\Http\Controllers\Transactions\StudentController@createNonAcademicEventGrade']);
 	Route::post('student/nonacademics/events/{studentId}/{eventId}', ['as' => 'student.nonacademiceventgrade.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeNonAcademicEventGrade']);
+	Route::get('student/nonacademics/sub-activities/{studentId}/{activityId}', ['as' => 'student.nonacademicsubactivity.index', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademicSubActivity']);
+	Route::get('student/nonacademics/sub-activities/events/{studentId}/{subActivityId}', ['as' => 'student.nonacademicsubactivityevents.index', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademicSubActivityEvents']);
+	Route::get('student/nonacademics/sub-activities/events/create/{studentId}/{eventId}', ['as' => 'student.nonacademicsubactivityevents.create', 'uses' => 'App\Http\Controllers\Transactions\StudentController@createNonAcademicSubActivityEvents']);
+	Route::post('student/nonacademics/sub-activities/events/store/{studentId}/{eventId}', ['as' => 'student.nonacademicsubactivityevents.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeNonAcademicSubActivityEvents']);
 	Route::get('student/terminate/{id}', ['as' => 'student.terminate', 'uses' => 'App\Http\Controllers\Transactions\StudentController@terminate']);
 	Route::put('student/terminate/{id}', ['as' => 'student.terminate.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeTermination']);
 	Route::get('student/add-class/{id}', ['as' => 'student.class.add', 'uses' => 'App\Http\Controllers\Transactions\StudentController@addClass']);
@@ -114,5 +118,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('sub-activity/create/{id}', ['as' => 'sub-activity.create', 'uses' => 'App\Http\Controllers\References\SubActivityController@create']);
 	Route::get('sub-activity/{id}', ['as' => 'sub-activity.index', 'uses' => 'App\Http\Controllers\References\SubActivityController@index']);
 	Route::post('sub-activity/store/{id}', ['as' => 'sub-activity.store', 'uses' => 'App\Http\Controllers\References\SubActivityController@store']);
+	Route::get('sub-activity-event/{id}', ['as' => 'sub-activity-event.index', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@index']);
+	Route::get('sub-activity-event/create/{id}', ['as' => 'sub-activity-event.create', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@create']);
+	Route::post('sub-activity-event/store/{id}', ['as' => 'sub-activity-event.store', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@store']);
 });
 

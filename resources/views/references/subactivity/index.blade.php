@@ -81,7 +81,7 @@
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a href="{{ route('activity.edit', $subActivity->id) }}" class="dropdown-item" type="button">Edit</a>
-                                        <a href="{{ route('event.subIndex', $subActivity->id) }}" class="dropdown-item" type="button">Events</a>
+                                        <a href="{{ route('sub-activity-event.index', $subActivity->id) }}" class="dropdown-item" type="button">Events</a>
                                         <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="dropdown-item">Archive</button>
                                       </div>
                                     </div>

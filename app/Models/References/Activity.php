@@ -2,6 +2,7 @@
 
 namespace App\Models\References;
 
+use App\Models\References\SubActivity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ClassActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,5 +18,10 @@ class Activity extends Model
     public function classActivities()
     {
         return $this->hasMany(ClassActivity::class, 'activity_id');
+    }
+
+    public function subActivities()
+    {
+        return $this->hasMany(SubActivity::class, 'activity_id');
     }
 }

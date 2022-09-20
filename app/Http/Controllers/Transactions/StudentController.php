@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
-use App\Models\References\ActivityEvent;
 use App\Models\References\Course;
 use App\Models\References\Company;
 use App\Models\References\Subject;
@@ -17,11 +16,14 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
+use App\Models\References\SubActivity;
 use App\Models\References\VaccineName;
+use App\Models\References\ActivityEvent;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\AcademicGrade;
+use App\Models\References\SubActivityEvent;
 use App\Models\Transactions\StudentClasses;
 use App\Models\Transactions\EventAverageScore;
 use App\Http\Requests\Transactions\StudentRequest;
@@ -290,6 +292,7 @@ class StudentController extends Controller
         $keyword = $request->keyword;
         return view('transactions.students.non_academic_events', [
             'student' => Student::find($studentId),
+            'activity' => Activity::find($activityId),
             'events' => ActivityEvent::where('activity_id', $activityId)
                             ->where('name', 'like', '%'.$keyword.'%')
                             ->orWhere('description', 'like', '%'.$keyword.'%')
@@ -312,10 +315,9 @@ class StudentController extends Controller
 
         EventAverageScore::create([
             'student_id' => $studentId,
-            'event_id' => $eventId,
+            'activity_event_id' => $eventId,
             'score' => $request->score,
-            'average' => $event->percentage ? $request->score * ('.'.$event->percentage) : null,
-            'activity_id' => $event->activity_id
+            'average' => $event->percentage ? $request->score * ('.'.$event->percentage) : null
         ]);
 
         return redirect()->route('student.nonacademics.events', [$studentId, $eventId])->with('status', 'Event Scored Successfully');
@@ -352,5 +354,48 @@ class StudentController extends Controller
             'class_id' => $request->class_id
         ]);
         return redirect()->route('student.index')->with('status', 'Class Added Successfully');
+    }
+
+    public function nonAcademicSubActivity(Request $request, $studentId, $activityId)
+    {
+        $keyword = $request->keyword;
+        return view('transactions.students.nonAcademicSubActivities', [
+            'activity' => Activity::find($activityId),
+            'subActivities' => SubActivity::where('activity_id', $activityId)->where('description', 'LIKE', '%'.$keyword.'%')->paginate(10),
+            'student' => Student::find($studentId)
+        ]);
+    }
+
+    public function nonAcademicSubActivityEvents(Request $request, $studentId, $subActivityId)
+    {
+        $keyword = $request->keyword;
+        return view('transactions.students.nonAcademicSubActivityEvents', [
+            'subActivity' => SubActivity::find($subActivityId),
+            'events' => SubActivityEvent::where('sub_activity_id', $subActivityId)->where('description', 'LIKE', '%'.$keyword.'%')->paginate(10),
+            'student' => Student::find($studentId)
+        ]);
+    }
+
+    public function createNonAcademicSubActivityEvents($studentId, $eventId)
+    {
+        return view('transactions.students.create_non_academic_sub_activity_events', [
+            'student' => Student::find($studentId),
+            'event' => SubActivityEvent::find($eventId)
+        ]);
+    }
+
+    public function storeNonAcademicSubActivityEvents(Request $request, $studentId, $eventId)
+    {
+        $student = Student::find($studentId);
+        $event = SubActivityEvent::find($eventId);
+
+        EventAverageScore::create([
+            'student_id' => $studentId,
+            'sub_activity_event_id' => $eventId,
+            'score' => $request->score,
+            'average' => $request->score * ('.'.$event->percentage),
+            'repetition_time' => $request->repetition_time
+        ]);
+        return redirect()->route('student.nonacademicsubactivityevents.index', [$studentId, $event->sub_activity_id])->with('status', 'Event Scored Successfully');
     }
 }
