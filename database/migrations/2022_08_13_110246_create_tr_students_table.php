@@ -52,7 +52,7 @@ return new class extends Migration
             $table->foreignId('region_id')->constrained('rf_regions');
             $table->foreignId('island_group_id')->constrained('rf_island_groups');
             $table->foreignId('course_id')->constrained('rf_college_courses');
-            $table->integer('liscense_id')->nullable();
+            $table->integer('license_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();
             $table->integer('philhealth')->nullable();
