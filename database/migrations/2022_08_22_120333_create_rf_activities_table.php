@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('nr_of_points');
             $table->boolean('has_sub_activities')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

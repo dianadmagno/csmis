@@ -21,6 +21,7 @@ return new class extends Migration
                 ->constrained('rf_activities')
                 ->onDelete('cascade');
             $table->integer('percentage')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

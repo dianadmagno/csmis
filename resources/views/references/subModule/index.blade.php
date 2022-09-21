@@ -77,7 +77,7 @@
                                     @method('delete')
                                     <a href="{{ route('sbModule.edit', $subModule->module_id) }}" class="btn btn-success" type="button">Edit</a>
                                     <a href="{{ route('subject.subIndex', $subModule->sub_module_id) }}" class="btn btn-default" type="button">Subjects</a>
-                                    <button type="submit" onclick="return alert('Do you really want to delete this sub module?')" class="btn btn-danger">Delete</button>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this sub module?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>

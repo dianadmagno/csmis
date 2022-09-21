@@ -49,8 +49,17 @@ return new class extends Migration
             $table->foreignId('blood_type_id')->constrained('rf_blood_types');
             $table->foreignId('religion_id')->constrained('rf_religions');
             $table->foreignId('company_id')->constrained('rf_companies');
+            $table->foreignId('region_id')->constrained('rf_regions');
+            $table->foreignId('island_group_id')->constrained('rf_island_groups');
+            $table->foreignId('course_id')->constrained('rf_college_courses');
+            $table->integer('liscense_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();
+            $table->integer('philhealth')->nullable();
+            $table->integer('tin')->nullable();
+            $table->integer('pagibig')->nullable();
+            $table->integer('gsis')->nullable();
+            $table->string('skills')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

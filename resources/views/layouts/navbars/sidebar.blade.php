@@ -106,6 +106,11 @@
                     <i class="ni ni-shop text-primary"></i>Classes
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.report') }}">
+                    <i class="ni ni-single-copy-04 text-primary"></i>Reports
+                    </a>
+                </li>
             </ul>
 
             <hr class="my-3">
@@ -137,13 +142,33 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('islandGroup.index') }}">
+                                    {{ __('Island Group') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('religion.index') }}">
                                     {{ __('Religion') }}
                                 </a>
                             </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('region.index') }}">
+                                    {{ __('Region') }}
+                                </a>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('ethnicGroup.index') }}">
                                     {{ __('Ethnic Group') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('collegeCourse.index') }}">
+                                    {{ __('Courses') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('liscenseExam.index') }}">
+                                    {{ __('Liscense Exam') }}
                                 </a>
                             </li>
                             <li class="nav-item">

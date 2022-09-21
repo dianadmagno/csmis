@@ -42,7 +42,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group{{ $errors->has('vaccine_name_id') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Module') }}</label>
+                                        <label class="form-control-label" for="input-name">{{ __('Vaccine Name') }}</label>
                                         <select name="vaccine_name_id" class="form-control form-control-alternative{{ $errors->has('vaccine_name_id') ? ' is-invalid' : '' }}">
                                             <option value="">Choose Vaccine Name</option>
                                             @foreach($vaccineNames as $vaccineName)

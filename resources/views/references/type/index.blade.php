@@ -72,7 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('type.edit', $type->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to delete this enlistment type?')" class="btn btn-danger">Delete</button>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this enlistment type?')" class="btn btn-danger">Archive</button>
                                   </form>
                                 </div>
                               </td>

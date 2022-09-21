@@ -121,5 +121,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('sub-activity-event/{id}', ['as' => 'sub-activity-event.index', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@index']);
 	Route::get('sub-activity-event/create/{id}', ['as' => 'sub-activity-event.create', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@create']);
 	Route::post('sub-activity-event/store/{id}', ['as' => 'sub-activity-event.store', 'uses' => 'App\Http\Controllers\References\SubActivityEventController@store']);
+	Route::resource('islandGroup', 'App\Http\Controllers\References\IslandGroupController', ['except' => ['show']]);
+	Route::resource('collegeCourse', 'App\Http\Controllers\References\CollegeCourseController', ['except' => ['show']]);
+	Route::resource('liscenseExam', 'App\Http\Controllers\References\LiscenseExamController', ['except' => ['show']]);
+	Route::resource('region', 'App\Http\Controllers\References\RegionController', ['except' => ['show']]);
+
+	// Reports
+	Route::get('reports', ['as' => 'reports.report', 'uses' => 'App\Http\Controllers\Reports\ReportsController@index']);
+	Route::post('reports/generate', ['as' => 'report.generate', 'uses' => 'App\Http\Controllers\Reports\ReportsController@index']);
 });
 

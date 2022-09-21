@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dr_type');
             $table->integer('demerit_points');
             $table->string('remarks');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

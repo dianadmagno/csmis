@@ -29,7 +29,11 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectTableSeeder::class);
         $this->call(SubModuleTableSeeder::class);
         $this->call(StudentsTableSeeder::class);
-        // $this->call(ActivitiesTableSeeder::class);
-        // $this->call(EventTableSeeder::class);
+        $this->call(ActivitiesTableSeeder::class);
+        $this->call(EventTableSeeder::class);
+        $this->call(IslandGroupTableSeeder::class);
+        $this->call(RegionTableSeeder::class);
+        $this->call(LiscenseExamTableSeeder::class);
+        $this->call(CollegeCourseTableSeeder::class);
     }
 }

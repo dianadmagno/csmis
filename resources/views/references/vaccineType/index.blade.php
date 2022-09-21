@@ -72,7 +72,7 @@
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('vaccineType.edit', $vaccineType->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to delete this Vaccine Type?')" class="btn btn-danger">Delete</button>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this Vaccine Type?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>

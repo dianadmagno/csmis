@@ -31,7 +31,12 @@ class ReligionTableSeeder extends Seeder
             'CAMACOP',
             'Church of Christ',
             'Seventh Day Adventist',
-            'Protrestant'
+            'Protrestant',
+            'Mormons',
+            'IC',
+            'EC',
+            'PC',
+            'CE'
         ];
 
         $description = [
@@ -50,7 +55,12 @@ class ReligionTableSeeder extends Seeder
             'CAMACOP',
             'Church of Christ',
             'Seventh Day Adventist',
-            'Protrestant'
+            'Protrestant',
+            'Mormons',
+            'Independent Catholic',
+            'Episcopal Church',
+            'Penticostal Church',
+            'Christian Esperitu'
         ];
 
         foreach($religionName as $key => $name) {

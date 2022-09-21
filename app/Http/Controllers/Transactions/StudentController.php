@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\References\Rank;
 use App\Models\References\Unit;
 use App\Models\References\Course;
+use App\Models\References\Region;
 use App\Models\References\Company;
 use App\Models\References\Subject;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,9 @@ use App\Models\References\EthnicGroup;
 use App\Models\References\SubActivity;
 use App\Models\References\VaccineName;
 use App\Models\References\ActivityEvent;
+use App\Models\References\IslandGroup;
+use App\Models\References\LiscenseExam;
+use App\Models\References\CollegeCourse;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
@@ -73,6 +77,10 @@ class StudentController extends Controller
         $companies = Company::all();
         $vaccines = VaccineName::all();
         $courses = Course::all();
+        $collegeCourses = CollegeCourse::all();
+        $regions = Region::all();
+        $liscenseExams = LiscenseExam::all();
+        $islandGroups = IslandGroup::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
@@ -83,7 +91,11 @@ class StudentController extends Controller
             'ethnicGroups' => $ethnicGroups,
             'companies' => $companies,
             'vaccines' => $vaccines,
-            'courses' => $courses
+            'courses' => $courses,
+            'collegeCourses' => $collegeCourses,
+            'regions' => $regions,
+            'liscenseExams' => $liscenseExams,
+            'islandGroups' => $islandGroups
         ]);
     }
 
@@ -132,6 +144,10 @@ class StudentController extends Controller
         $companies = Company::all();
         $student = Student::find($id);
         $courses = Course::all();
+        $collegeCourses = CollegeCourse::all();
+        $regions = Region::all();
+        $liscenseExams = LiscenseExam::all();
+        $islandGroups = IslandGroup::all();
         return view('transactions.students.edit', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
@@ -142,7 +158,11 @@ class StudentController extends Controller
             'ethnicGroups' => $ethnicGroups,
             'companies' => $companies,
             'student' => $student,
-            'courses' => $courses
+            'courses' => $courses,
+            'collegeCourses' => $collegeCourse,
+            'regions' => $regions,
+            'liscenseExams' => $liscenseExams,
+            'islandGroup' => $islandGroups
         ]);
     }
 
