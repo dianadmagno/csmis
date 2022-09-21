@@ -83,8 +83,8 @@
                                   <form action="{{ route('subjects.destroy', $subject->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('subjects.edit', $subject->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this subject?')" class="btn btn-danger">Archive</button>
+                                    <a href="{{ route('subject.edit', [$subject->id, $subModule->id]) }}" class="btn btn-success" type="button">Edit</a>
+                                    <button type="submit" onclick="return alert('Do you really want to delete this subject?')" class="btn btn-danger">Delete</button>
                                 </form>
                                 </div>
                               </td>

@@ -47,6 +47,16 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('nr_of_points') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Allocated Points') }}</label>
+                                        <input type="text" name="nr_of_points" id="input-name" class="form-control form-control-alternative{{ $errors->has('nr_of_points') ? ' is-invalid' : '' }}" placeholder="{{ __('Allocated Points')}}" value="{{ old('nr_of_points', $activity->nr_of_points) }}">
+    
+                                        @if ($errors->has('nr_of_points'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('nr_of_points') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('activity.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>

@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rf_activities', function (Blueprint $table) {
+        Schema::create('rf_sub_activity_events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('nr_of_points');
-            $table->boolean('has_sub_activities')->default(false);
-            $table->softDeletes();
+            $table->foreignId('sub_activity_id')
+                ->constrained('rf_sub_activities')
+                ->onDelete('cascade');
+            $table->integer('percentage')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_activities');
+        Schema::dropIfExists('rf_sub_activity_events');
     }
 };

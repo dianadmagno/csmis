@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Percentage</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -65,6 +66,9 @@
                               </th>
                               <td class="budget">
                                 {{ $event->description }}
+                              </td>
+                              <td class="budget">
+                                {{ $event->percentage }}
                               </td>
                               <td>
                                 <div class="row">

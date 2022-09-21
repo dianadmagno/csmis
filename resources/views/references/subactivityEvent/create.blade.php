@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Update Unit')
+        'title' => __('Add Event')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,9 +12,8 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('unit.update', $unit->id) }}">
+                            <form method="post" action="{{ route('sub-activity-event.store', $subActivity->id) }}">
                                 @csrf
-                                @method('put')
                                 
                                 @if (session('status'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,7 +28,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $unit->name) }}">
+                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
        
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +38,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Description') }}</label>
-                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}" value="{{ old('description', $unit->description) }}">
+                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}">
     
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -47,8 +46,18 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('percentage') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Percentage') }}</label>
+                                        <input type="number" name="percentage" id="input-name" class="form-control form-control-alternative{{ $errors->has('percentage') ? ' is-invalid' : '' }}" placeholder="{{ __('Percentage')}}">
+    
+                                        @if ($errors->has('percentage'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('percentage') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('unit.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('sub-activity-event.index', $subActivity->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

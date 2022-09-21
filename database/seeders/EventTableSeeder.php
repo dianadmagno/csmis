@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\References\Event;
+use App\Models\References\ActivityEvent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EventTableSeeder extends Seeder
@@ -61,7 +61,7 @@ class EventTableSeeder extends Seeder
         ];
 
         foreach($event as $key => $name) {
-            Event::create([
+            ActivityEvent::create([
                 'name' => $name,
                 'description' => $description[$key],
                 'activity_id' => $activityId[$key]

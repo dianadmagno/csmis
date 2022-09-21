@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Activities')
+      'title' => __('List of Sub Activities for '.$activity->description)
     ])   
 
     <div class="container-fluid mt--7">
@@ -36,9 +36,6 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col text-right">
-                            <a href="{{ route('activity.create') }}" class="btn btn-primary">Add Activity</a>
-                        </div>
                       </div>
                     </div>
                   </form>
@@ -49,71 +46,59 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Has Sub Activity?</th>
-                          <th scope="col">Allocated Points</th>
+                          <th scope="col">Percentage</th>
+                          <th scope="col">Average</th>
+                          <th scope="col">Total</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($activities) > 0)
-                          @foreach($activities as $activity)
+                        @if (count($subActivities) > 0)
+                          @foreach($subActivities as $subActivity)
+                            @php $eventAverageScore = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
+                                                        ->whereHas('subActivityEvent', function($query) use($subActivity) {
+                                                          $query->where('sub_activity_id', $subActivity->id);
+                                                        }) 
+                            @endphp
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $activity->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $subActivity->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $activity->description }}
+                                {{ $subActivity->description }}
                               </td>
                               <td class="budget">
-                                @if($activity->has_sub_activities)
-                                  <span class="badge badge-primary">Yes</span>
-                                @else
-                                  <span class="badge badge-danger">None</span>
-                                @endif
+                                {{ $subActivity->percentage }}%
                               </td>
                               <td class="budget">
-                                {{ $activity->nr_of_points }}
+                                {{ $eventAverageScore->count() > 0 ? round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0) : '' }}
+                              </td>
+                              <td class="budget">
+                                {{ $eventAverageScore->count() > 0 ? round($eventAverageScore->sum('score') / $eventAverageScore->count() * ('.'.$subActivity->percentage), 0) : '' }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('activity.destroy', $activity->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <div class="dropdown">
-                                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Actions
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a href="{{ route('activity.edit', $activity->id) }}" class="dropdown-item" type="button">Edit</a>
-                                        @if($activity->has_sub_activities)
-                                          <a href="{{ route('sub-activity.index', $activity->id) }}" class="dropdown-item" type="button">Sub Activities</a>
-                                        @else
-                                          <a href="{{ route('event.subIndex', $activity->id) }}" class="dropdown-item" type="button">Events</a>
-                                        @endif
-                                        <button type="submit" onclick="return alert('Do you really want to archive this activity?')" class="dropdown-item">Archive</button>
-                                      </div>
-                                    </div>
-                                  </form>
+                                    <a href="{{ route('student.nonacademicsubactivityevents.index', [$student->id, $subActivity->id]) }}" class="btn btn-default" type="button">Events</a>
                                 </div>
                               </td>
                             </tr>
                           @endforeach
                         @else
-                          <tr class="text-center">
-                            <td colspan="5">No Available Data</td>
-                          </tr>
+                            <tr class="text-center">
+                                <td colspan="5">No Available Data</td>
+                            </tr>
                         @endif
                       </tbody>
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($activities) > 0)
+                  @if (count($subActivities) > 0)
                     <div class="card-footer">
-                      {{ $activities->links() }}
+                      {{ $subActivities->links() }}
                     </div>
                   @endif
                 </div>

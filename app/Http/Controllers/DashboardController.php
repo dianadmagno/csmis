@@ -8,6 +8,7 @@ use App\Models\Transactions\Student;
 use App\Models\Transactions\ActivityRun;
 use App\Models\Transactions\AcademicGrade;
 use App\Models\Transactions\StudentClasses;
+use App\Models\Transactions\NonAcademicGrade;
 
 class DashboardController extends Controller
 {
@@ -92,6 +93,15 @@ class DashboardController extends Controller
                 });
             });
         })->orderBy('allocated_points', 'desc')->first();
+
+        // $topNonAcademicStudent = NonAcademicGrade::whereHas('student', function($query) {
+        //     $query->whereHas('studentClasses', function($query) {
+        //         $query->whereHas('class', function($query) {
+        //             $query->whereNull('graduation_date')
+        //                 ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+        //         });
+        //     });
+        // })->orderBy('average', 'desc')->first();
         return view('dashboard', [
             'sex' => $sex,
             'religions' => $religions,
@@ -101,7 +111,8 @@ class DashboardController extends Controller
             'squadRunByClasses' => $squadRunByClasses,
             'platoonRunByClasses' => $platoonRunByClasses,
             'companyRunByClasses' => $companyRunByClasses,
-            'topAcademicStudent' => $topAcademicStudent
+            'topAcademicStudent' => $topAcademicStudent,
+            // 'topNonAcademicStudent' => $topNonAcademicStudent
         ]);
     }
 }

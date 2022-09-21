@@ -42,7 +42,13 @@ class ActivityController extends Controller
      */
     public function store(ActivityRequest $request)
     {
-        Activity::create($request->all());
+        Activity::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'percentage' => $request->percentage,
+            'nr_of_points' => $request->nr_of_points,
+            'has_sub_activities' => $request->has_sub_activities ? true : false
+        ]);
         return redirect()->route('activity.index')->with('status', 'Activity Created Successfully');
     }
 

@@ -106,16 +106,16 @@
                                             Add Course
                                           </a>
                                         @endif
-                                        @if(!$student->termination_remarks)
+                                        @if(!$student->termination_remarks || $student->studentClasses()->latest()->pluck('date_graduated')->first() == NULL || $student->studentClasses()->latest()->pluck('date_graduated')->first() > Carbon\Carbon::now()->parse('Y-m-d'))
                                           <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
                                             Academic
+                                          </a>
+                                          <a href="{{ route('student.nonacademics', $student->id) }}" class="dropdown-item" type="button">
+                                            Non Academic
                                           </a>
                                         @endif
                                         <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
                                           Termination
-                                        </a>
-                                        <a href="{{ route('student.nonacademic', $student->id) }}" class="dropdown-item" type="button">
-                                          Non Academic
                                         </a>
                                         <a href="{{ route('student.vaccine', $student->id) }}" class="dropdown-item" type="button">
                                           Vaccine

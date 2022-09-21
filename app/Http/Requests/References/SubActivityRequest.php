@@ -4,7 +4,7 @@ namespace App\Http\Requests\References;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventRequest extends FormRequest
+class SubActivityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:rf_events,name,'.$this->event,
-            'description' => 'required'
+            'name' => 'required|alpha_dash|unique:rf_sub_activities,name,'.$this->subactivity,
+            'description' => 'required',
+            'percentage' => 'numeric'
         ];
     }
 }

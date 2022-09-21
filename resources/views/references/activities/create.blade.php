@@ -46,8 +46,22 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('nr_of_points') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Allocated Points') }}</label>
+                                        <input type="number" name="nr_of_points" id="input-name" class="form-control form-control-alternative{{ $errors->has('nr_of_points') ? ' is-invalid' : '' }}" placeholder="{{ __('Allocated Points')}}">
+    
+                                        @if ($errors->has('nr_of_points'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('nr_of_points') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input class="custom-control-input" name="has_sub_activities" value="1" id="customCheck1" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck1">has sub activities?</label>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('company.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('activity.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

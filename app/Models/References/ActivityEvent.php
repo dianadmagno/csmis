@@ -5,19 +5,21 @@ namespace App\Models\References;
 use App\Models\References\Activity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\NonAcademicGrade;
+use App\Models\Transactions\EventAverageScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Event extends Model
+class ActivityEvent extends Model
 {
     use HasFactory;
     use SoftDeletes;
     
-    protected $table = 'rf_events';
+    protected $table = 'rf_activity_events';
     protected $fillable = [
         'name',
         'description',
-        'activity_id'
+        'activity_id',
+        'percentage'
     ];
 
     public function nonAcademicGrades()
@@ -28,5 +30,10 @@ class Event extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'activity_id');
+    }
+
+    public function eventAverageScore()
+    {
+        return $this->hasOne(EventAverageScore::class, 'activity_event_id');
     }
 }
