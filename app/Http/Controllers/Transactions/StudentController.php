@@ -159,7 +159,7 @@ class StudentController extends Controller
             'companies' => $companies,
             'student' => $student,
             'courses' => $courses,
-            'collegeCourses' => $collegeCourse,
+            'collegeCourses' => $collegeCourses,
             'regions' => $regions,
             'liscenseExams' => $liscenseExams,
             'islandGroup' => $islandGroups
