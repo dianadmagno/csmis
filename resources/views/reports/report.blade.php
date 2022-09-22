@@ -99,6 +99,8 @@
                         <div class="card-body">
                             @if($report == 10)
                             @include('reports.sex')
+                            @elseif($report == 9)
+                            @include('reports.region')
                             @endif
                         </div>
                     </div>

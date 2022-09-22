@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\References\Region;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Student;
@@ -21,23 +22,36 @@ class ReportsController extends Controller
     {
         $classes = StudentClass::all();
         $classId = $request->class_id;
+        $reportId = $request->report_type;
+        $data = [];
 
         $class = StudentClass::where('id', $classId)->first();
-        $sex = Student::whereHas('studentClasses', function($query) use ($classId) {
-            $query->whereHas('class', function($query) use ($classId) {
-                $query->whereNull('graduation_date')
-                    ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'))
-                    ->where('class_id', $classId);
-            });
-        })
-        ->select('sex', DB::raw('count(*) as total'))
-        ->groupBy('sex')
-        ->get();
+
+        if($reportId == 1) {
+            $data = Student::whereHas('studentClasses', function($query) use ($classId) {
+                $query->whereHas('class', function($query) use ($classId) {
+                    $query->where('class_id', $classId);
+                });
+            })
+            ->select('sex', DB::raw('count(*) as total'))
+            ->groupBy('sex')
+            ->get();
+        } elseif ($reportId == 9) {
+            $data = Region::whereHas('student', function($query) use ($classId) {
+                $query->whereHas('studentClasses', function($query) use ($classId) {
+                    $query->where('class_id', $classId);
+                });
+            })
+            ->select('name', 'description', 'region', DB::raw('count(*) as total'))
+            ->join('tr_students', 'rf_regions.id', '=', 'tr_students.region_id')
+            ->groupBy('region')
+            ->get();
+        }
 
         return view('reports.report', [
             'class' => $class,
             'classes' => $classes,
-            'sex' => $sex,
+            'data' => $data,
             'report' => $request->report_type
         ]);
     }

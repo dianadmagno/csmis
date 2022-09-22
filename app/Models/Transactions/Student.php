@@ -59,7 +59,7 @@ class Student extends Model
         'tesda',
         'termination_remarks',
         'region_id',
-        'liscense_id',
+        'license_id',
         'course_id',
         'island_group_id',
         'pagibig',
