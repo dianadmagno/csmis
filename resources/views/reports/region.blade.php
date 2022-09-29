@@ -11,7 +11,7 @@
             <tr>
                 <th scope="col">Region</th>
                 <th scope="col">Region Name</th>
-                <th scope="col">Total</th>
+                <th scope="col">Count</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $d->name }}</td>
                     <td>{{ $d->description }}</td>
-                    <td>{{ $d->total }}</td>
+                    <td>{{ $d->count }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -37,16 +37,19 @@ class ReportsController extends Controller
             ->groupBy('sex')
             ->get();
         } elseif ($reportId == 9) {
-            $data = Region::whereHas('student', function($query) use ($classId) {
-                $query->whereHas('studentClasses', function($query) use ($classId) {
-                    $query->where('class_id', $classId);
-                });
-            })
-            ->select('name', 'description', 'region', DB::raw('count(*) as total'))
-            ->join('tr_students', 'rf_regions.id', '=', 'tr_students.region_id')
-            ->groupBy('region')
-            ->get();
+            // $regions = Region::all();
+            // foreach($regions as $region) {
+            //     $count = Student::where('region_id', $region['id'])->count();
+
+            //     $array = ['name' => $region['name'], 'desc' => $region['description'], 'count' => $count];
+
+            //     array_push($data, $array);
+            // }
+
+            $data = Region::selectRaw("name, description, count(".DB::table('tr_students')->where('region_id', 'id').") as count")->get();
         }
+
+        return dd($data);
 
         return view('reports.report', [
             'class' => $class,
