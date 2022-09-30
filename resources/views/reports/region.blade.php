@@ -15,11 +15,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $d)
+            @foreach($data as $key => $d)
                 <tr>
-                    <td>{{ $d->name }}</td>
-                    <td>{{ $d->description }}</td>
-                    <td>{{ $d->count }}</td>
+                    @foreach($d as $new)
+                    <td>{{ $new }}</td>
+                    {{-- <td>{{ $d->description }}</td>
+                    <td>{{ $d->count }}</td> --}}
+                    @endforeach
                 </tr>
             @endforeach
         </tbody>

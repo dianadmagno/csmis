@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Reports;
 
+use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Region;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Student;
+use App\Models\References\EthnicGroup;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -24,32 +25,77 @@ class ReportsController extends Controller
         $classId = $request->class_id;
         $reportId = $request->report_type;
         $data = [];
+        $sexes = [
+            ['id' => 1, 'name' => 'Male'],
+            ['id' => 2, 'name' => 'Female']
+        ]; 
+        $highestEducations = [
+            ['id' => 1, 'name' => 'Elementary'],
+            ['id' => 2, 'name' => 'High School'],
+            ['id' => 3, 'name' => 'College'],
+            ['id' => 4, 'name' => 'Undergraduate']
+        ];
 
         $class = StudentClass::where('id', $classId)->first();
 
-        if($reportId == 1) {
-            $data = Student::whereHas('studentClasses', function($query) use ($classId) {
-                $query->whereHas('class', function($query) use ($classId) {
-                    $query->where('class_id', $classId);
-                });
-            })
-            ->select('sex', DB::raw('count(*) as total'))
-            ->groupBy('sex')
-            ->get();
+        if($reportId == 10) {
+            foreach ($sexes as $sex) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('sex', $sex['id'])
+                ->count();
+
+                $array = ['sex' => $sex['name'], 'count' => $count];
+                array_push($data, $array);
+            }
         } elseif ($reportId == 9) {
-            // $regions = Region::all();
-            // foreach($regions as $region) {
-            //     $count = Student::where('region_id', $region['id'])->count();
+            $regions = Region::all();
+            foreach($regions as $region) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('region_id', $region['id'])
+                ->count();
 
-            //     $array = ['name' => $region['name'], 'desc' => $region['description'], 'count' => $count];
+                $array = ['name' => $region['name'], 'desc' => $region['description'], 'count' => $count];
 
-            //     array_push($data, $array);
-            // }
+                array_push($data, $array);
+            }
+        } elseif ($reportId == 3) {
+            $ethnicGroups = EthnicGroup::all();
+            foreach($ethnicGroups as $ethnicGroup) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('ethnic_group_id', $ethnicGroup['id'])
+                ->count();
 
-            $data = Region::selectRaw("name, description, count(".DB::table('tr_students')->where('region_id', 'id').") as count")->get();
+                $array = ['name' => $ethnicGroup['name'], 'desc' => $ethnicGroup['description'], 'count' => $count];
+
+                array_push($data, $array);
+            }
+        } elseif ($reportId == 4) {
+            foreach($highestEducations as $highestEducation) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('educational_attainment', $highestEducation['id'])
+                ->count();
+
+                $array = ['name' => $highestEducation['name'], 'count' => $count];
+
+                array_push($data, $array);
+            }
         }
-
-        return dd($data);
 
         return view('reports.report', [
             'class' => $class,
