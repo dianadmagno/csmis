@@ -121,7 +121,8 @@ class CollegeCourseTableSeeder extends Seeder
             'BS Social Work',
             'BSMT',
             'BS Food Tech',
-            'BS Nutrition and Dietetics'
+            'BS Nutrition and Dietetics',
+            'BS Electronics Engineering'
         ];
 
         $description = [
@@ -231,7 +232,8 @@ class CollegeCourseTableSeeder extends Seeder
             'Bachelor of Science in Social Work',
             'Bachelor of Science in Marine Transportation',
             'Bachelor of Science in Food Tech',
-            'Bachelor of Science in Nutrition and Dietetics'
+            'Bachelor of Science in Nutrition and Dietetics',
+            'Bachelor of Science in Electronics Engineering',
         ];
 
         foreach($course as $key => $name) {
