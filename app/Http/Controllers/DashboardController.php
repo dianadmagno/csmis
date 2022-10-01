@@ -8,6 +8,7 @@ use App\Models\Transactions\Student;
 use App\Models\Transactions\ActivityRun;
 use App\Models\Transactions\AcademicGrade;
 use App\Models\Transactions\StudentClasses;
+use App\Models\Transactions\ActivityAverage;
 use App\Models\Transactions\NonAcademicGrade;
 
 class DashboardController extends Controller
@@ -70,20 +71,29 @@ class DashboardController extends Controller
         ->groupBy('class_id')
         ->get();
 
-        $squadRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
-            $query->whereNull('graduation_date')
-                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
-        })->where('activity_id', 3)->orderBy('time', 'asc')->get();
+        $squadRunByClasses = ActivityRun::whereHas('classActivity', function($query) {
+            $query->where('activity_id', 2)
+                ->whereHas('class', function($query) {
+                    $query->whereNull('graduation_date')
+                            ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+                });
+        })->orderBy('time', 'asc')->get();
 
-        $platoonRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
-            $query->whereNull('graduation_date')
-                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
-        })->where('activity_id', 4)->orderBy('time', 'asc')->get();
+        $platoonRunByClasses = ActivityRun::whereHas('classActivity', function($query) {
+            $query->where('activity_id', 3)
+                ->whereHas('class', function($query) {
+                    $query->whereNull('graduation_date')
+                            ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+                });
+        })->orderBy('time', 'asc')->get();
 
-        $companyRunByClasses = ActivityRun::whereHas('studentClass', function($query) {
-            $query->whereNull('graduation_date')
-                ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
-        })->where('activity_id', 4)->orderBy('time', 'asc')->get();
+        $companyRunByClasses = ActivityRun::whereHas('classActivity', function($query) {
+            $query->where('activity_id', 4)
+                ->whereHas('class', function($query) {
+                    $query->whereNull('graduation_date')
+                            ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+                });
+        })->orderBy('time', 'asc')->get();
 
         $topAcademicStudent = AcademicGrade::whereHas('student', function($query) {
             $query->whereHas('studentClasses', function($query) {
@@ -94,14 +104,29 @@ class DashboardController extends Controller
             });
         })->orderBy('allocated_points', 'desc')->first();
 
-        // $topNonAcademicStudent = NonAcademicGrade::whereHas('student', function($query) {
-        //     $query->whereHas('studentClasses', function($query) {
-        //         $query->whereHas('class', function($query) {
-        //             $query->whereNull('graduation_date')
-        //                 ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
-        //         });
-        //     });
-        // })->orderBy('average', 'desc')->first();
+        $topNonAcademicStudent = ActivityAverage::whereHas('student', function($query) {
+            $query->whereHas('studentClasses', function($query) {
+                $query->whereHas('class', function($query) {
+                    $query->whereNull('graduation_date')
+                        ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+                });
+            });
+        })->orderBy('average', 'desc')->first();
+
+        $topStudent = Student::whereHas('studentClasses', function($query) {
+            $query->whereHas('class', function($query) {
+                $query->whereNull('graduation_date')
+                    ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+            });
+        })->whereNotNull('gwa')->orderBy('gwa', 'asc')->first();
+
+        $topStudents = Student::whereHas('studentClasses', function($query) {
+            $query->whereHas('class', function($query) {
+                $query->whereNull('graduation_date')
+                    ->orWhere('graduation_date', '>', Carbon::parse()->format('Y-m-d'));
+            });
+        })->whereNotNull('gwa')->orderBy('gwa', 'asc')->limit(3)->get();
+
         return view('dashboard', [
             'sex' => $sex,
             'religions' => $religions,
@@ -112,7 +137,9 @@ class DashboardController extends Controller
             'platoonRunByClasses' => $platoonRunByClasses,
             'companyRunByClasses' => $companyRunByClasses,
             'topAcademicStudent' => $topAcademicStudent,
-            // 'topNonAcademicStudent' => $topNonAcademicStudent
+            'topNonAcademicStudent' => $topNonAcademicStudent,
+            'topStudent' => $topStudent,
+            'topStudents' => $topStudents
         ]);
     }
 }

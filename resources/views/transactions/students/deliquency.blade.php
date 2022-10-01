@@ -36,10 +36,8 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
-                        <div class="col-5">
-                          <small>Total Allocation Points: <b>{{ $totalAllocatedPoints }}</b></small> 
-                        </div>
                         <div class="col text-right">
+                          <a href="{{ route('student.nonacademics', $student->id) }}" class="btn btn-danger">Back</a>
                           <a href="{{ route('student.drCreate', $student->id) }}" class="btn btn-primary">Add Deliquency Report</a>
                         </div>
                       </div>

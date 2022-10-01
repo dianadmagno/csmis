@@ -56,6 +56,20 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('performance_type') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Type of Performance') }}</label>
+                                        <select name="performance_type" class="form-control form-control-alternative{{ $errors->has('performance_type') ? ' is-invalid' : '' }}">
+                                            <option value="">Choose Type of Performance</option>
+                                            <option value="1">Individual</option>
+                                            <option value="2">Class</option>
+                                        </select>
+    
+                                        @if ($errors->has('performance_type'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('performance_type') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <div class="custom-control custom-checkbox mb-3">
                                         <input class="custom-control-input" name="has_sub_activities" value="1" id="customCheck1" type="checkbox">
                                         <label class="custom-control-label" for="customCheck1">has sub activities?</label>

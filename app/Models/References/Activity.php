@@ -5,8 +5,9 @@ namespace App\Models\References;
 use App\Models\References\SubActivity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ClassActivity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Transactions\ActivityAverage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Activity extends Model
 {
@@ -15,7 +16,7 @@ class Activity extends Model
 
     protected $table = 'rf_activities';
 
-    protected $fillable = ['name', 'description', 'percentage', 'nr_of_points', 'parent_id', 'has_sub_activities'];
+    protected $fillable = ['name', 'description', 'nr_of_points', 'has_sub_activities', 'performance_type'];
 
     public function classActivities()
     {
@@ -25,5 +26,10 @@ class Activity extends Model
     public function subActivities()
     {
         return $this->hasMany(SubActivity::class, 'activity_id');
+    }
+
+    public function activityAverage()
+    {
+        return $this->hasOne(ActivityAverage::class);
     }
 }

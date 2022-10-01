@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('tr_students');
             $table->foreignId('subject_id')->constrained('rf_subjects');
             $table->tinyInteger('grade');
-            $table->decimal('allocated_points');
+            $table->integer('allocated_points');
             $table->timestamps();
         });
     }
