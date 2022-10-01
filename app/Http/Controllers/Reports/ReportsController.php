@@ -95,6 +95,33 @@ class ReportsController extends Controller
 
                 array_push($data, $array);
             }
+        } elseif ($reportId == 1) {
+            $vaccineTypes = VaccineType::all();
+            $vaccineNames = VaccineName::all();
+
+            foreach($vaccineNames as $vaccineName) {
+                $count = StudentVaccine::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('vaccine_name_id', $vaccineName['id'])
+                ->count();
+
+                $array = ['name' => $vaccineName['name'], 'count' => $count];
+
+                array_push($data, $array);
+            }
+        }
+        elseif ($reportId == 11) {
+            $data = Student::whereHas('studentClasses', function($query) use ($classId) {
+                $query->whereHas('class', function($query) use ($classId) {
+                    $query->where('class_id', $classId);
+                });
+            })
+            ->select( 'rf_ranks.name', 'lastname', 'firstname', 'middlename','mobile_number', 'email')
+            ->join('rf_ranks', 'rf_ranks.id', 'tr_students.rank_id')
+            ->get();
         }
 
         return view('reports.report', [
