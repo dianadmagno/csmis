@@ -62,6 +62,10 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card bg-secondary shadow">
+                    
+                                    
+                    <a class="btn btn-primary" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Export to PDF</a>
+                
                     <div class="card-body">
                         <form method="post" action="{{ route('student.update', $student->id) }}">
                             @csrf

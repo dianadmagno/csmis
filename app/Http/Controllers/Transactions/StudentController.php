@@ -33,6 +33,8 @@ use App\Models\Transactions\EventAverageScore;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
+use PDF;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -58,6 +60,14 @@ class StudentController extends Controller
                                 })
                                 ->paginate(10)
         ]);
+    }
+
+    public function classListPDF()
+    {
+        
+        $student = Student::all();
+       
+        
     }
 
     /**
@@ -143,6 +153,7 @@ class StudentController extends Controller
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
         $student = Student::find($id);
+        $linkId = $id;
         $courses = Course::all();
         $collegeCourses = CollegeCourse::all();
         $regions = Region::all();
@@ -162,9 +173,12 @@ class StudentController extends Controller
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
             'liscenseExams' => $liscenseExams,
+            'linkId' => $linkId,
             'islandGroup' => $islandGroups
         ]);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -179,6 +193,37 @@ class StudentController extends Controller
         $student->update($request->all());
         return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
+
+    // Generate PDF
+    public function individualPDF($id) {
+        // retreive all records from db
+        $bloodTypes = BloodType::all();
+        $religions = Religion::all();
+        $ranks = Rank::all();
+        $enlistmentTypes = EnlistmentType::all();
+        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::now())->orWhereNull('graduation_date')->get();
+        $units = Unit::all();
+        $ethnicGroups = EthnicGroup::all();
+        $companies = Company::all();
+        $students = Student::where('id',$id)->get();
+        $courses = Course::all();
+        $collegeCourses = CollegeCourse::all();
+        $regions = Region::all();
+        $liscenseExams = LiscenseExam::all();
+        $islandGroups = IslandGroup::all();
+
+
+
+
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentIndividual', compact('students'));
+        
+        return $pdf->setPaper("a4")->stream('pdf_file.pdf');
+
+
+       
+      }
+
 
     /**
      * Remove the specified resource from storage.
@@ -374,7 +419,7 @@ class StudentController extends Controller
             'class_id' => $request->class_id
         ]);
         return redirect()->route('student.index')->with('status', 'Class Added Successfully');
-    }
+    } 
 
     public function nonAcademicSubActivity(Request $request, $studentId, $activityId)
     {

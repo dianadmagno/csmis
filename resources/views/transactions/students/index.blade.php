@@ -36,6 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
+                        {{-- <div class="col text-right">
+                          <a href="{{ route('student.create') }}" class="btn btn-success">Generate Report</a>
+                      </div> --}}
                         <div class="col text-right">
                             <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
                         </div>
