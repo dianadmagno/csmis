@@ -26,7 +26,8 @@ class ActivityRequest extends FormRequest
         return [
             'name' => 'required|unique:rf_activities,name,'.$this->activity,
             'description' => 'required',
-            'nr_of_points' => 'numeric|nullable'
+            'nr_of_points' => 'numeric|nullable',
+            'performance_type' => 'required'
         ];
     }
 }

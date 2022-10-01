@@ -54,10 +54,7 @@ class ActivityEventController extends Controller
             'percentage' => $eventRequest->percentage
         ]);
 
-        return view('references.activities.event', [
-            'activity' => Activity::find($id),
-            'events' => ActivityEvent::paginate(10)
-        ])->with('Event Created Successfully.');
+        return redirect()->route('event.subIndex', $id)->with('Event Created Successfully.');
     }
 
     /**

@@ -38,7 +38,7 @@
                         </div>
                         <div class="col text-right">
                           <a href="{{ route('student.nonacademicsubactivity.index', [$student->id, $subActivity->activity_id]) }}" class="btn btn-danger">Back</a>
-                      </div>
+                        </div>
                       </div>
                     </div>
                   </form>

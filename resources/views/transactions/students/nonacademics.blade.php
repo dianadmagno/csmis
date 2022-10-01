@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Non-Academic Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
+                          <small>Total Non-Academic Points: <b>{{ $totalPoints }}</b></small> 
                         </div>
                       </div>
                     </div>
@@ -59,18 +59,6 @@
                         @if (count($activities) > 0)
                           @foreach($activities as $activity)
                             <tr>
-                              @php 
-                                $activityEvent = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
-                                                ->whereHas('activityEvent', function($query) use($activity) {
-                                                  $query->where('activity_id', $activity->id);
-                                                })
-                                                ->sum('average');
-
-                                $subActivityEvent = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
-                                                ->whereHas('subActivityEvent', function($query) use($activity) {
-                                                  $query->whereIn('sub_activity_id', $activity->subActivities->pluck('id'));
-                                                });
-                              @endphp
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
@@ -85,14 +73,22 @@
                                 {{ $activity->nr_of_points }}
                               </td>
                               <td class="budget">
-                                {{ $activity->has_sub_activities ? round($subActivityEvent->sum('score') / $subActivityEvent->count(), 0) : $activityEvent }}
+                                {{ $activity->activityAverage ? $activity->activityAverage->average : '' }}
+                                @if($activity->id == 1)
+                                  100
+                                @endif
                               </td>
                               <td class="budget">
-                                {{ $activity->has_sub_activities ? round(($subActivityEvent->sum('score') / $subActivityEvent->count()) / 100 * $activity->nr_of_points, 0) : $activityEvent / 100 * $activity->nr_of_points }}
+                                {{ $activity->activityAverage ? $activity->activityAverage->total_points : '' }}
+                                @if($activity->id == 1)
+                                  {{ $activity->nr_of_points }}
+                                @endif
                               </td>
                               <td>
-                                <div class="row">
-                                  @if($activity->has_sub_activities)
+                                <div class="text-center">
+                                  @if($activity->id == 1)
+                                    <a href="{{ route('student.drIndex', $student->id) }}" class="btn btn-warning" type="button">Demerit Report</a>
+                                  @elseif($activity->has_sub_activities)
                                     <a href="{{ route('student.nonacademicsubactivity.index', [$student->id, $activity->id]) }}" class="btn btn-primary" type="button">Sub Activity</a>
                                   @else
                                     <a href="{{ route('student.nonacademics.events', [$student->id, $activity->id]) }}" class="btn btn-default" type="button">Events</a>

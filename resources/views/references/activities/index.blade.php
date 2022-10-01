@@ -51,6 +51,7 @@
                           <th scope="col">Description</th>
                           <th scope="col">Has Sub Activity?</th>
                           <th scope="col">Allocated Points</th>
+                          <th scope="col">Type of Performance</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -77,6 +78,13 @@
                               </td>
                               <td class="budget">
                                 {{ $activity->nr_of_points }}
+                              </td>
+                              <td class="budget">
+                                @if($activity->performance_type == 1)
+                                  <span class="badge badge-primary">Individual</span>
+                                @else
+                                  <span class="badge badge-default">Class</span>
+                                @endif
                               </td>
                               <td>
                                 <div class="row">

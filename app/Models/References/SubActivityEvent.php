@@ -2,6 +2,7 @@
 
 namespace App\Models\References;
 
+use App\Models\References\SubActivity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\EventAverageScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,5 +17,10 @@ class SubActivityEvent extends Model
     public function eventAverageScore()
     {
         return $this->hasOne(EventAverageScore::class, 'sub_activity_event_id');
+    }
+
+    public function subActivity()
+    {
+        return $this->belongsTo(SubActivity::class, 'sub_activity_id');
     }
 }

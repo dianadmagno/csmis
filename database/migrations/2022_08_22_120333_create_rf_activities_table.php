@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('nr_of_points');
+            $table->integer('nr_of_points')->nullable();
             $table->boolean('has_sub_activities')->default(false);
+            $table->integer('performance_type');
             $table->softDeletes();
             $table->timestamps();
         });
