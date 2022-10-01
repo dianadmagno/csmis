@@ -32,15 +32,16 @@
                                                 <select name="report_type" class="form-control form-control-alternative{{ $errors->has('report_type') ? ' is-invalid' : '' }}">
                                                     <option value="">Choose Report Type</option>
                                                     <option value="1" {{ old('report_type') == 1 ? 'selected' : '' }}>Reports By Vaccine</option>
-                                                    <option value="2" {{ old('report_type') == 2 ? 'selected' : '' }}>Reports By Location</option>
+                                                    <option value="2" {{ old('report_type') == 2 ? 'selected' : '' }}>Reports By Ranking</option>
                                                     <option value="3" {{ old('report_type') == 3 ? 'selected' : '' }}>Reports By Ethnic Group</option>
                                                     <option value="4" {{ old('report_type') == 4 ? 'selected' : '' }}>Reports By Highest Education</option>
                                                     <option value="5" {{ old('report_type') == 5 ? 'selected' : '' }}>Reports By Course</option>
                                                     <option value="6" {{ old('report_type') == 6 ? 'selected' : '' }}>Reports By Blood Type</option>
                                                     <option value="7" {{ old('report_type') == 7 ? 'selected' : '' }}>Reports By Age</option>
                                                     <option value="8" {{ old('report_type') == 8 ? 'selected' : '' }}>Reports By Liscensed</option>
-                                                    <option value="9" {{ old('report_type') == 9 ? 'selected' : '' }}>Reports By Ranking</option>
+                                                    <option value="9" {{ old('report_type') == 9 ? 'selected' : '' }}>Reports By Location</option>
                                                     <option value="10" {{ old('report_type') == 10 ? 'selected' : '' }}>Reports By Sex</option>
+                                                    <option value="11" {{ old('report_type') == 11 ? 'selected' : '' }}>List of Students per Class</option>
                                                 </select>
             
                                                 @if ($errors->has('report_type'))
@@ -97,8 +98,17 @@
                     <div class="card">
                           <!-- Card header -->
                         <div class="card-body">
+                            {{$class->name}}
                             @if($report == 10)
                             @include('reports.sex')
+                            @elseif($report == 9)
+                            @include('reports.region')
+                            @elseif($report == 3)
+                            @include('reports.ethnicGroup')
+                            @elseif($report == 4)
+                            @include('reports.educationalAttainment')
+                            @elseif($report == 11)
+                            @include('reports.listOfStudents')
                             @endif
                         </div>
                     </div>

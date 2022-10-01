@@ -2,9 +2,10 @@
 
 namespace App\Models\References;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Region extends Model
 {
@@ -16,4 +17,9 @@ class Region extends Model
         'name',
         'description'
     ];
+
+    public function student()
+    {
+        return $this->hasMany(Student::class);
+    }
 }
