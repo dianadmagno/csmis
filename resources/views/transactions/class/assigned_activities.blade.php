@@ -49,6 +49,8 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Group</th>
+                          <th scope="col">Time</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -66,17 +68,23 @@
                               <td class="budget">
                                 {{ $classActivity->activity->description }}
                               </td>
+                              <td class="budget">
+                                {{ $classActivity->activityRun ? $classActivity->activityRun->group : '' }}
+                              </td>
+                              <td class="budget">
+                                {{ $classActivity->activityRun ? $classActivity->activityRun->time : '' }}
+                              </td>
                               <td>
                                 <div class="row text-center">
                                     <form action="{{ route('assign.personnel.destroy', $class->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        @if($classActivity->activity_id == 7 || $classActivity->activity_id == 8 || $classActivity->activity_id == 10)
-                                          @php $activityRun = App\Models\Transactions\ActivityRun::where('class_id', $class->id)->where('activity_id', $classActivity->activity_id)->first(); @endphp
+                                        @if($classActivity->activity_id == 2 || $classActivity->activity_id == 3 || $classActivity->activity_id == 4)
+                                          @php $activityRun = App\Models\Transactions\ActivityRun::where('class_activity_id', $classActivity->id)->first(); @endphp
                                           @if($activityRun)
-                                            <a href="{{ route('class.squadrun.edit', [$classActivity->class_id, $classActivity->activity_id]) }}" type="button" class="btn btn-success">Edit</a>
+                                            <a href="{{ route('class.nonacademic.edit', [$classActivity->class_id, $classActivity->activity_id]) }}" type="button" class="btn btn-success">Edit</a>
                                           @else
-                                            <a href="{{ route('class.squadrun', [$class->id, $classActivity->activity_id]) }}" type="button" class="btn btn-primary">Input Best Time</a>
+                                            <a href="{{ route('class.nonacademic', $classActivity->id) }}" type="button" class="btn btn-primary">Input Time</a>
                                           @endif
                                         @endif
                                         <button type="submit" onclick="return confirm('Do you really want to remove this personnel?')" class="btn btn-danger">Remove</button>

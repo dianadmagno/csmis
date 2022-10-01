@@ -47,7 +47,8 @@ class ActivityController extends Controller
             'description' => $request->description,
             'percentage' => $request->percentage,
             'nr_of_points' => $request->nr_of_points,
-            'has_sub_activities' => $request->has_sub_activities ? true : false
+            'has_sub_activities' => $request->has_sub_activities ? true : false,
+            'performance_type' => $request->performance_type
         ]);
         return redirect()->route('activity.index')->with('status', 'Activity Created Successfully');
     }

@@ -93,10 +93,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('assigned/activities/{id}', ['as' => 'assigned.activities', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignedActivities']);
 	Route::post('assign/activity/{id}', ['as' => 'assign.activity.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeAssignActivity']);
 	Route::get('assign/activity/{id}', ['as' => 'assign.activity', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignActivity']);
-	Route::get('class/squad-run/{classId}/{activityId}', ['as' => 'class.squadrun', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@squadRun']);
-	Route::post('class/squad-run/{classId}/{activityId}', ['as' => 'class.squadrun.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeSquadRun']);
-	Route::get('class/squad-run/edit/{classId}/{activityId}', ['as' => 'class.squadrun.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@editSquadRun']);
-	Route::put('class/squad-run/update/{classId}/{activityId}', ['as' => 'class.squadrun.update', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@updateRun']);
+	Route::get('class/non-academic/{classActivityId}', ['as' => 'class.nonacademic', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@nonAcademics']);
+	Route::post('class/non-academic/{classActivityId}', ['as' => 'class.nonacademic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeNonAcademic']);
+	Route::get('class/non-academic/edit/{classId}/{activityId}', ['as' => 'class.nonacademic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@editNonAcademic']);
+	Route::put('class/non-academic/update/{classId}/{activityId}', ['as' => 'class.nonacademic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@updateNonAcademic']);
 
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);

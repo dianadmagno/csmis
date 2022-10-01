@@ -30,6 +30,30 @@
                     </div>
                 </div>
             </div>
+            @if(isset($topStudent))
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Top Student</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ $topStudent->rank->name }} {{ $topStudent->firstname }} {{ $topStudent->middlename }} {{ $topStudent->lastname }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($totalNewStudents)
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    <span class="text-nowrap">{{ App\Models\Transactions\StudentClass::find($topStudent->studentClasses()->latest()->pluck('class_id')->first())->description }}</span>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if(isset($topAcademicStudent))
                 <div class="col-xl-3 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
@@ -54,7 +78,7 @@
                     </div>
                 </div>
             @endif
-            {{-- @if(isset($topNonAcademicStudent))
+            @if(isset($topNonAcademicStudent))
                 <div class="col-xl-3 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body">
@@ -77,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-            @endif --}}
+            @endif
         </div>
         {{-- <div class="row mt-5">
             <div class="col-xl-8 mb-5 mb-xl-0">
@@ -141,6 +165,38 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
+                                <h5 class="mb-0">Top 3 Students</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Total Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($topStudents as $topStudent)
+                                    <tr>
+                                        <td>{{ $topStudent->rank->name }} {{ $topStudent->firstname }} {{ $topStudent->middlename }} {{ $topStudent->lastname }}</td>
+                                        <td>{{ App\Models\Transactions\StudentClass::find($topStudent->studentClasses()->pluck('class_id')->first())->description }}</td>
+                                        <td>{{ $topStudent->gwa }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 mb-5 mb-xl-0">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
                                 <h5 class="mb-0">Squad Run By Class</h5>
                             </div>
                         </div>
@@ -158,7 +214,7 @@
                             <tbody>
                                 @foreach($squadRunByClasses as $squadRunByClass)
                                     <tr>
-                                        <td>{{ $squadRunByClass->studentClass->description }}</td>
+                                        <td>{{ $squadRunByClass->classActivity->class->description }}</td>
                                         <td>{{ $squadRunByClass->group }}</td>
                                         <td>{{ $squadRunByClass->time }}</td>
                                     </tr>
@@ -168,6 +224,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row mt-5">
             <div class="col-xl-6 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header border-0">
@@ -190,7 +248,7 @@
                             <tbody>
                                 @foreach($platoonRunByClasses as $platoonRunByClass)
                                     <tr>
-                                        <td>{{ $platoonRunByClass->studentClass->description }}</td>
+                                        <td>{{ $platoonRunByClass->classActivity->class->description }}</td>
                                         <td>{{ $platoonRunByClass->group }}</td>
                                         <td>{{ $platoonRunByClass->time }}</td>
                                     </tr>
@@ -200,9 +258,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-xl-3 mb-5 mb-xl-0">
+            <div class="col-xl-6 mb-5 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
@@ -217,118 +273,16 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Class</th>
+                                    <th scope="col">Company</th>
                                     <th scope="col">Best Time</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($companyRunByClasses as $companyRunByClass)
                                     <tr>
-                                        <td>{{ $companyRunByClass->studentClass->description }}</td>
+                                        <td>{{ $companyRunByClass->classActivity->class->description }}</td>
+                                        <td>{{ $companyRunByClass->group }}</td>
                                         <td>{{ $companyRunByClass->time }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-md-6 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">New Students By Class</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Class</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Percentage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($studentsByClasses as $studentsByClass)
-                                    <tr>
-                                        <td>{{ App\Models\Transactions\StudentClass::find($studentsByClass->class_id)->description }}</td>
-                                        <td>{{ $studentsByClass->total }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                @php $studentsByClassPercent = $studentsByClass ? $studentsByClass->total / $totalNewStudents * 100 : '' @endphp
-                                                <span class="mr-2">{{ $studentsByClassPercent }}%</span>
-                                                <div>
-                                                    <div class="progress">
-                                                    <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{ $studentsByClassPercent  }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $studentsByClassPercent }}%;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">Total Current Students By Sex</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <!-- Projects table -->
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Sex</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($sex as $s)
-                                    <tr>
-                                        <td>{{ $s->sex == 1 ? 'Male' : 'Female' }}</td>
-                                        <td>{{ $s->total }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 mb-5 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">Total Current Students By Religion</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <!-- Projects table -->
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Religion</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($religions as $religion)
-                                    <tr>
-                                        <td>{{ App\Models\References\Religion::where('id', $religion->religion_id)->first()->description }}</td>
-                                        <td>{{ $religion->total }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

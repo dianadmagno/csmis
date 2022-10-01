@@ -70,7 +70,7 @@
                                 {{ $event->description }}
                               </td>
                               <td class="budget">
-                                {{ $event->percentage }}%
+                                {{ $event->percentage ? $event->percentage.'%' : '' }}
                               </td>
                               <td class="budget">
                                 {{ $event->EventAverageScore()->pluck('score')->first() }}

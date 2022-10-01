@@ -36,6 +36,9 @@
                         <div class="col-2">
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
+                        <div class="col text-right">
+                          <a href="{{ route('student.nonacademics', $student->id) }}" class="btn btn-danger">Back</a>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -58,7 +61,7 @@
                             @php $eventAverageScore = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)
                                                         ->whereHas('subActivityEvent', function($query) use($subActivity) {
                                                           $query->where('sub_activity_id', $subActivity->id);
-                                                        }) 
+                                                        })
                             @endphp
                             <tr>
                               <th scope="row">
@@ -75,10 +78,10 @@
                                 {{ $subActivity->percentage }}%
                               </td>
                               <td class="budget">
-                                {{ $eventAverageScore->count() > 0 ? round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0) : '' }}
+                                {{ $eventAverageScore->count() > 0 ? $subActivity->subActivityAverage->average : '' }}
                               </td>
                               <td class="budget">
-                                {{ $eventAverageScore->count() > 0 ? round($eventAverageScore->sum('score') / $eventAverageScore->count() * ('.'.$subActivity->percentage), 0) : '' }}
+                                {{ $eventAverageScore->count() > 0 ? $subActivity->subActivityAverage->total : '' }}
                               </td>
                               <td>
                                 <div class="row">

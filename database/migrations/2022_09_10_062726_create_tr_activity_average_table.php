@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tr_activity_average', function (Blueprint $table) {
             $table->id();
             $table->integer('average');
+            $table->integer('total_points');
             $table->foreignId('student_id')->constrained('tr_students');
             $table->foreignId('activity_id')->constrained('rf_activities');
             $table->timestamps();
