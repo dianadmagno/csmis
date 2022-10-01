@@ -35,11 +35,15 @@
 
 <div class="container">
   <div class="header">
+    <div class="section__title">Personal Information</div>
     <div class="full-name">
       <span class="first-name">{{$students[0]->firstname}} {{$students[0]->middlename}} </span> 
       <span class="first-name">{{$students[0]->lastname}}</span>
     </div>
     <div class="contact-info">
+      <span class="email">Age: </span>
+      <span class="email-val">{{$students[0]->age}}</span>
+      <span class="separator"></span>
       <span class="email">Email: </span>
       <span class="email-val">{{$students[0]->email}}</span>
       <span class="separator"></span>
@@ -52,15 +56,99 @@
         <span class="separator"></span>
         <span class="phone">Serial Number: </span>
         <span class="phone-val">{{$students[0]->serial_number}}</span>
+        <span class="separator"></span>
+        <span class="phone">Blood Type: </span>
+        <span class="phone-val">{{$students[0]->bloodType->name}}</span>
       </div>
     
+    
+    <div class="contact-info">
+      <span class="email">Religion: </span>
+      <span class="email-val">{{$students[0]->religion->description}}</span>
+      <span class="separator"></span>
+      <span class="phone">Sex: </span>
+      <span class="phone-val">{{$students[0]->sex}}</span>
+      <span class="separator"></span>
+      <span class="phone">Civil Status: </span>
+      <span class="phone-val">{{$students[0]->civil_status}}</span>
+    </div>
+    <div class="contact-info">
+     
+      <span class="phone">Highest Educational Attainment: </span>
+      <span class="phone-val">{{$students[0]->educational_attatinment}}</span>
+      <span class="separator"></span>
+      <span class="phone">Course: </span>
+      <span class="phone-val">{{$students[0]->course}}</span>
+    </div>
     <div class="about">
-      <span class="position">Address </span>
-      <span class="desc">
+      <span class="email">Address </span>
+      
         {{$students[0]->address}}
     </span>
     </div>
+
+    
   </div>
+  <div class="header">
+    <div class="section__title">Student Information</div>
+    
+    <div class="contact-info">
+      <span class="email">Rank: </span>
+      <span class="email-val">{{$students[0]->rank->description}}</span>
+      <span class="separator"></span>
+      <span class="email">Serial: </span>
+      <span class="email-val">{{$students[0]->serial_number}}</span>
+      <span class="separator"></span>
+      <span class="phone">Enlistment Type: </span>
+      <span class="phone-val">{{$students[0]->enlistmentType->description}}</span>
+    </div>
+    <div class="contact-info">
+      <span class="email">Current Class: </span>
+      <span class="email-val"></span>
+      <span class="separator"></span>
+      <span class="phone">Unit: </span>
+      <span class="phone-val">{{$students[0]->studentClasses->class->description}}</span>
+      <span class="separator"></span>
+      <span class="phone">Company: </span>
+      <span class="phone-val">{{$students[0]->bloodType->name}}</span>
+    </div>
+    <div class="contact-info">
+        <span class="email">Physical Profile: </span>
+        <span class="email-val">{{$students[0]->physical_profile}}</span>
+        <span class="separator"></span>
+        <span class="phone">Ethnic Group: </span>
+        <span class="phone-val">{{$students[0]->ethnicGroup->description}}</span>
+        
+      </div>
+    
+    
+    <div class="contact-info">
+      <span class="email">Religion: </span>
+      <span class="email-val">{{$students[0]->religion->description}}</span>
+      <span class="separator"></span>
+      <span class="phone">Sex: </span>
+      <span class="phone-val">{{$students[0]->sex}}</span>
+      <span class="separator"></span>
+      <span class="phone">Civil Status: </span>
+      <span class="phone-val">{{$students[0]->civil_status}}</span>
+    </div>
+    <div class="contact-info">
+     
+      <span class="phone">Highest Educational Attainment: </span>
+      <span class="phone-val">{{$students[0]->educational_attatinment}}</span>
+      <span class="separator"></span>
+      <span class="phone">Course: </span>
+      <span class="phone-val">{{$students[0]->course}}</span>
+    </div>
+    <div class="about">
+      <span class="email">Address </span>
+      
+        {{$students[0]->address}}
+    </span>
+    </div>
+
+  
+
    <div class="details">
     <div class="section">
       <div class="section__title">Basic Information</div>
@@ -195,6 +283,7 @@
      </div>
      </div>
   </div>
+</div>
 </div>
          
 

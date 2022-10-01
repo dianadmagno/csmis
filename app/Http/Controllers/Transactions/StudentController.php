@@ -199,21 +199,8 @@ class StudentController extends Controller
     // Generate PDF
     public function individualPDF($id) {
         // retreive all records from db
-        $bloodTypes = BloodType::all();
-        $religions = Religion::all();
-        $ranks = Rank::all();
-        $enlistmentTypes = EnlistmentType::all();
-        $studentClasses = StudentClass::where('graduation_date', '<=', Carbon::now())->orWhereNull('graduation_date')->get();
-        $units = Unit::all();
-        $ethnicGroups = EthnicGroup::all();
-        $companies = Company::all();
-        $students = Student::where('id',$id)->get();
-        $courses = Course::all();
-        $collegeCourses = CollegeCourse::all();
-        $regions = Region::all();
-        $liscenseExams = LiscenseExam::all();
-        $islandGroups = IslandGroup::all();
-
+       
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses')->where('id',$id)->get();
 
 
 
