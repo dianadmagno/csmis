@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('tr_activity_runs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activity_id')->constrained('rf_activities');
-            $table->foreignId('class_id')->constrained('tr_classes');
+            $table->foreignId('class_activity_id')->constrained('tr_class_activities');
             $table->string('group')->nullable();
             $table->string('time');
             $table->timestamps();

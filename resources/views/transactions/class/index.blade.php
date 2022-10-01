@@ -97,6 +97,7 @@
                                         <a href="{{ route('assigned.personnels', $class->id) }}" class="dropdown-item" type="button">Assign Personnel</a>
                                         <a href="{{ route('module.class', $class->id) }}" class="dropdown-item" type="button">Assign Module</a>
                                         <a href="{{ route('assigned.activities', $class->id) }}" class="dropdown-item" type="button">Assign Activity</a>
+                                        {{-- <a href="{{ route('class.nonacademic', $class->id) }}" class="dropdown-item" type="button">Non Academic</a> --}}
                                         <button type="submit" onclick="return alert('Do you really want to archive this role?')" class="dropdown-item">Archive</button>
                                       </div>
                                     </div>

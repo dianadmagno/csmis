@@ -4,6 +4,8 @@ namespace App\Models\Transactions;
 
 use App\Models\References\Activity;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transactions\ActivityRun;
+use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassActivity extends Model
@@ -16,5 +18,15 @@ class ClassActivity extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'activity_id');
+    }
+
+    public function activityRun()
+    {
+        return $this->hasOne(ActivityRun::class);
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(StudentClass::class);
     }
 }

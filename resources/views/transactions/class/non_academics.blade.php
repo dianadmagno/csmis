@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Input Time for '.$class->description)
+        'title' => __('Input Time for '.$classActivity->class->description)
     ])
 
     <div class="container-fluid mt--7">
@@ -13,7 +13,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('class.squadrun.store', [$class->id, $activity->id]) }}">
+                            <form method="post" action="{{ route('class.nonacademic.store', $classActivity->id) }}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -26,7 +26,7 @@
                                 @endif
     
                                 <div class="pl-lg-4">
-                                    @if($activity->id == 3)
+                                    @if($classActivity->activity->id == 2)
                                         <div class="form-group{{ $errors->has('group') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Squad') }}</label>
                                             <select name="group" class="form-control form-control-alternative{{ $errors->has('group') ? ' is-invalid' : '' }}" required>
@@ -55,7 +55,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                    @elseif($activity->id == 4)
+                                    @elseif($classActivity->activity->id == 3)
                                         <div class="form-group{{ $errors->has('group') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Platoon') }}</label>
                                             <select name="group" class="form-control form-control-alternative{{ $errors->has('group') ? ' is-invalid' : '' }}" required>
@@ -64,6 +64,22 @@
                                                 <option>2nd Platoon</option>
                                                 <option>3rd Platoon</option>
                                                 <option>4th Platoon</option>
+                                            </select>
+        
+                                            @if ($errors->has('group'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('group') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    @elseif($classActivity->activity->id == 4)
+                                        <div class="form-group{{ $errors->has('group') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Company') }}</label>
+                                            <select name="group" class="form-control form-control-alternative{{ $errors->has('group') ? ' is-invalid' : '' }}" required>
+                                                <option value="">Choose Company</option>
+                                                @foreach($companies as $company)
+                                                    <option>{{ $company->description }}</option>
+                                                @endforeach
                                             </select>
         
                                             @if ($errors->has('group'))
@@ -84,7 +100,7 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('assigned.activities', $class->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('assigned.activities', $classActivity->class->id) }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>

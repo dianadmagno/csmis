@@ -17,11 +17,11 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
+use App\Models\References\IslandGroup;
 use App\Models\References\SubActivity;
 use App\Models\References\VaccineName;
-use App\Models\References\ActivityEvent;
-use App\Models\References\IslandGroup;
 use App\Models\References\LiscenseExam;
+use App\Models\References\ActivityEvent;
 use App\Models\References\CollegeCourse;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
@@ -29,7 +29,9 @@ use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\AcademicGrade;
 use App\Models\References\SubActivityEvent;
 use App\Models\Transactions\StudentClasses;
+use App\Models\Transactions\ActivityAverage;
 use App\Models\Transactions\EventAverageScore;
+use App\Models\Transactions\SubActivityAverage;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
@@ -269,7 +271,14 @@ class StudentController extends Controller
             'subject_id' => $subjectId,
             'average' => $average,
             'grade' => $request->grade,
-            'allocated_points' => $average / 100 * $subject->nr_of_points
+            'allocated_points' => round($average / 100 * $subject->nr_of_points, 0)
+        ]);
+
+        $totalAcademicGrade = AcademicGrade::where('student_id', $studentId)->sum('allocated_points');
+        $totalNonAcademicGrade = ActivityAverage::where('student_id', $studentId)->sum('total_points');
+
+        Student::find($studentId)->update([
+            'gwa' => round($totalAcademicGrade + $totalNonAcademicGrade, 0)
         ]);
         return redirect()->route('student.academic', $studentId)->with('status', 'Grade Submitted Successfully');
     }
@@ -299,11 +308,13 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $keyword = $request->keyword;
+        $conduct = Activity::where('id', 1)->first();
         return view('transactions.students.nonacademics', [
             'student' => $student,
             'activities' => Activity::whereHas('classActivities', function($query) use($student) {
                 $query->where('class_id', $student->studentClasses()->latest()->pluck('class_id')->first());
-            })->where('name', 'like', '%'.$keyword.'%')->orWhere('description', 'like', '%'.$keyword.'%')->paginate(10),
+            })->where('name', 'like', '%'.$keyword.'%')->where('performance_type', 1)->orWhere('description', 'like', '%'.$keyword.'%')->where('performance_type', 1)->paginate(10),
+            'totalPoints' => ActivityAverage::where('student_id', $id)->sum('total_points') + $conduct->nr_of_points
         ]);
     }
 
@@ -316,6 +327,7 @@ class StudentController extends Controller
             'events' => ActivityEvent::where('activity_id', $activityId)
                             ->where('name', 'like', '%'.$keyword.'%')
                             ->orWhere('description', 'like', '%'.$keyword.'%')
+                            ->where('activity_id', $activityId)
                             ->paginate(10)
         ]);
     }
@@ -340,7 +352,36 @@ class StudentController extends Controller
             'average' => $event->percentage ? $request->score * ('.'.$event->percentage) : null
         ]);
 
-        return redirect()->route('student.nonacademics.events', [$studentId, $eventId])->with('status', 'Event Scored Successfully');
+        $eventAverageScore = EventAverageScore::where('student_id', $student->id)
+                                                ->whereHas('activityEvent', function($query) use($event) {
+                                                    $query->where('activity_id', $event->activity_id);
+                                                });
+
+        $hasActivityAverage = ActivityAverage::where('student_id', $studentId)->where('activity_id', $event->activity_id)->first();
+        if(!$hasActivityAverage) {
+            ActivityAverage::create([
+                'student_id' => $studentId,
+                'activity_id' => $event->activity_id,
+                'average' => $event->percentage ? round($eventAverageScore->sum('average'), 0) : round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0),
+                'total_points' => $event->percentage ? round(($eventAverageScore->sum('average')) / 100 * $event->activity->nr_of_points, 0) : round(($eventAverageScore->sum('score') / $eventAverageScore->count()) / 100 * $event->activity->nr_of_points, 0)
+            ]);
+        }
+
+        ActivityAverage::where('student_id', $studentId)->where('activity_id', $event->activity_id)->update([
+            'student_id' => $studentId,
+            'activity_id' => $event->activity_id,
+            'average' => $event->percentage ? round($eventAverageScore->sum('average'), 0) : round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0),
+            'total_points' => $event->percentage ? round(($eventAverageScore->sum('average')) / 100 * $event->activity->nr_of_points, 0) : round(($eventAverageScore->sum('score') / $eventAverageScore->count()) / 100 * $event->activity->nr_of_points, 0)
+        ]);
+
+        $totalAcademicGrade = AcademicGrade::where('student_id', $studentId)->sum('allocated_points');
+        $totalNonAcademicGrade = ActivityAverage::where('student_id', $studentId)->sum('total_points');
+
+        Student::find($studentId)->update([
+            'gwa' => round($totalAcademicGrade + $totalNonAcademicGrade, 0)
+        ]);
+
+        return redirect()->route('student.nonacademics.events', [$studentId, $event->activity_id])->with('status', 'Event Scored Successfully');
     }
 
     public function terminate($id)
@@ -409,13 +450,74 @@ class StudentController extends Controller
         $student = Student::find($studentId);
         $event = SubActivityEvent::find($eventId);
 
+        $eventPercentage = ('.'.$event->percentage);
+        if($event->percentage == 100) {
+            $eventPercentage = 1;
+        }
+
+        $subActivityPercentage = ('.'.$event->subActivity->percentage);
+        if($event->subActivity->percentage == 100) {
+            $subActivityPercentage = 1;
+        }
+
         EventAverageScore::create([
             'student_id' => $studentId,
             'sub_activity_event_id' => $eventId,
             'score' => $request->score,
-            'average' => $request->score * ('.'.$event->percentage),
+            'average' => $request->score * $eventPercentage,
             'repetition_time' => $request->repetition_time
         ]);
+
+        $eventAverageScore = EventAverageScore::where('student_id', $student->id)
+                                                ->whereHas('subActivityEvent', function($query) use($event) {
+                                                    $query->where('sub_activity_id', $event->sub_activity_id);
+                                                });
+
+        $hasSubActivityAverage = SubActivityAverage::where('student_id', $studentId)->where('sub_activity_id', $event->sub_activity_id)->first();
+        if(!$hasSubActivityAverage) {
+            SubActivityAverage::create([
+                'student_id' => $studentId,
+                'sub_activity_id' => $event->sub_activity_id,
+                'average' => round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0),
+                'total' => round($eventAverageScore->sum('score') / $eventAverageScore->count() * $subActivityPercentage, 0)
+            ]);
+        }
+
+        SubActivityAverage::where('student_id', $studentId)->where('sub_activity_id', $event->sub_activity_id)->update([
+            'student_id' => $studentId,
+            'sub_activity_id' => $event->sub_activity_id,
+            'average' => round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0),
+            'total' => round($eventAverageScore->sum('score') / $eventAverageScore->count() * $subActivityPercentage, 0)
+        ]);
+
+        $subActivityAverage = SubActivityAverage::where('student_id', $studentId)->whereHas('subActivity', function($query) use($event) {
+            $query->where('activity_id', $event->subActivity->activity_id);
+        });
+
+        $hasActivityAverage = ActivityAverage::where('student_id', $studentId)->where('activity_id', $event->subActivity->activity_id)->first();
+        if(!$hasActivityAverage) {
+            ActivityAverage::create([
+                'student_id' => $studentId,
+                'activity_id' => $event->subActivity->activity_id,
+                'average' => round($subActivityAverage->sum('total'), 0),
+                'total_points' => round(($subActivityAverage->sum('total')) / 100 * $event->subActivity->activity->nr_of_points, 0)
+            ]);
+        }
+
+        ActivityAverage::where('student_id', $studentId)->where('activity_id', $event->subActivity->activity_id)->update([
+            'student_id' => $studentId,
+            'activity_id' => $event->subActivity->activity_id,
+            'average' => round($subActivityAverage->sum('total'), 0),
+            'total_points' => round(($subActivityAverage->sum('total')) / 100 * $event->subActivity->activity->nr_of_points, 0)
+        ]);
+
+        $totalAcademicGrade = AcademicGrade::where('student_id', $studentId)->sum('allocated_points');
+        $totalNonAcademicGrade = ActivityAverage::where('student_id', $studentId)->sum('total_points');
+
+        Student::find($studentId)->update([
+            'gwa' => round($totalAcademicGrade + $totalNonAcademicGrade, 0)
+        ]);
+
         return redirect()->route('student.nonacademicsubactivityevents.index', [$studentId, $event->sub_activity_id])->with('status', 'Event Scored Successfully');
     }
 }

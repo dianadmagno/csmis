@@ -17,7 +17,8 @@ class StudentDeliquencyReportController extends Controller
     public function index(Request $request, $id)
     {
         $keyword = $request->keyword;
-        $totalAllocatedPoints = 120;
+        $activity = Activity::where('id', 1)->first();
+        $totalAllocatedPoints = $activity->nr_of_points;
         $drs = StudentDeliquencyReport::where('student_id', $id)->get()->pluck('demerit_points');
 
         if(count($drs) > 0) {

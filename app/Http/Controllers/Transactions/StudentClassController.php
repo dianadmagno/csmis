@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
 use App\Models\References\Course;
+use App\Models\References\Company;
 use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Personnel;
@@ -188,7 +189,7 @@ class StudentClassController extends Controller
     public function assignActivity($id)
     {
         $class = StudentClass::find($id);
-        $activities = Activity::all();
+        $activities = Activity::where('performance_type', 2)->get();
         return view('transactions.class.assign_activity', [
             'class' => $class,
             'activities' => $activities
@@ -204,26 +205,26 @@ class StudentClassController extends Controller
         return redirect()->route('assigned.activities', $id)->with('status', 'Activity Assigned Successfully');
     }
 
-    public function squadRun($classId, $activityId)
+    public function nonAcademics($classActivityId)
     {
-        return view('transactions.class.squad_run', [
-            'class' => StudentClass::find($classId),
-            'activity' => Activity::find($activityId)
+        return view('transactions.class.non_academics', [
+            'classActivity' => ClassActivity::find($classActivityId),
+            'companies' => Company::all()
         ]);
     }
 
-    public function storeSquadRun(Request $request, $classId, $activityId)
+    public function storeNonAcademic(Request $request, $classActivityId)
     {
+        $classActivity = ClassActivity::find($classActivityId);
         ActivityRun::create([
-            'class_id' => $classId,
-            'activity_id' => $activityId,
+            'class_activity_id' => $classActivityId,
             'group' => $request->group,
             'time' => $request->time
         ]);
-        return redirect()->route('assigned.activities', $classId)->with('status', 'Time Submitted Successfully');
+        return redirect()->route('assigned.activities', $classActivity->class->id)->with('status', 'Time Submitted Successfully');
     }
 
-    public function editSquadRun($classId, $activityId)
+    public function editNonAcademic($classId, $activityId)
     {
         return view('transactions.class.edit_run', [
             'activityRun' => ActivityRun::where('activity_id', $activityId)->first(),
@@ -231,7 +232,7 @@ class StudentClassController extends Controller
         ]);
     }
 
-    public function updateRun(Request $request, $classId, $activityId)
+    public function updateNonAcademic(Request $request, $classId, $activityId)
     {
         ActivityRun::where('activity_id', $activityId)->where('class_id', $classId)->update([
             'group' => $request->group,
