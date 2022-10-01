@@ -2,9 +2,10 @@
 
 namespace App\Models\Transactions;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transactions\StudentClasses;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentVaccine extends Model
 {
@@ -20,4 +21,9 @@ class StudentVaccine extends Model
         'place',
         'remarks'
     ];
+
+    public function studentClass()
+    {
+        return $this->hasOne(StudentClasses::class, 'student_id');
+    }
 }

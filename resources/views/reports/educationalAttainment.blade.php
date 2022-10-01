@@ -18,8 +18,6 @@
                 <tr>
                     @foreach($d as $new)
                     <td>{{ $new }}</td>
-                    {{-- <td>{{ $d->description }}</td>
-                    <td>{{ $d->count }}</td> --}}
                     @endforeach
                 </tr>
             @endforeach
