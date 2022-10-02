@@ -104,6 +104,8 @@
                             @include('reports.sex')
                             @elseif($report == 9)
                             @include('reports.region')
+                            @elseif($report == 8)
+                            @include('reports.license')
                             @elseif($report == 3)
                             @include('reports.ethnicGroup')
                             @elseif($report == 4)

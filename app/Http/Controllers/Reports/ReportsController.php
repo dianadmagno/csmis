@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
+use App\Models\References\LicenseExam;
 use App\Models\References\VaccineName;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Builder;
@@ -137,6 +138,22 @@ class ReportsController extends Controller
                 ->count();
 
                 $array = ['name' => $bloodType['name'], 'count' => $count];
+
+                array_push($data, $array);
+            }
+        } elseif ($reportId == 8) {
+            $licenseExams = LicenseExam::all();
+
+            foreach ($licenseExams as $licenseExam) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('license_id', $licenseExam['id'])
+                ->count();
+
+                $array = ['name' => $licenseExam['name'], 'count' => $count];
 
                 array_push($data, $array);
             }
