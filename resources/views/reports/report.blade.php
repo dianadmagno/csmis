@@ -117,6 +117,8 @@
                             @include('reports.bloodType')
                             @elseif($report == 11)
                             @include('reports.listOfStudents')
+                            @elseif($report == 12)
+                            @include('reports.class')
                             @endif
                         </div>
                     </div>
