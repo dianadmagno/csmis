@@ -78,6 +78,7 @@ class CollegeCourseTableSeeder extends Seeder
             'BS Rad Tech',
             'BSRT',
             'BSED',
+            'BEED',
             'BSED Major in TLE',
             'BSED Major in BS',
             'BSED Major in English',

@@ -26,7 +26,7 @@
     
     
                                 <div class="pl-lg-4">
-                                    <div class="form-group{{ $errors->has('vaccine_type_id') ? ' has-danger' : '' }}">
+                                    {{-- <div class="form-group{{ $errors->has('vaccine_type_id') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Vaccine Type') }}</label>
                                         <select name="vaccine_type_id" class="form-control form-control-alternative{{ $errors->has('vaccine_type_id') ? ' is-invalid' : '' }}">
                                             <option value="">Choose Vaccine Type</option>
@@ -40,7 +40,7 @@
                                                 <strong>{{ $errors->first('vaccine_type_id') }}</strong>
                                             </span>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group{{ $errors->has('vaccine_name_id') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Vaccine Name') }}</label>
                                         <select name="vaccine_name_id" class="form-control form-control-alternative{{ $errors->has('vaccine_name_id') ? ' is-invalid' : '' }}">

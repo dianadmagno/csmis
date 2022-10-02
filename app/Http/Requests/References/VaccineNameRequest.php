@@ -26,6 +26,7 @@ class VaccineNameRequest extends FormRequest
         return [
             'name' => 'required|unique:rf_vaccine_names,name,'.$this->vaccineName,
             'description' => 'required',
+            'vaccine_type_id' => 'required'
         ];
     }
 }

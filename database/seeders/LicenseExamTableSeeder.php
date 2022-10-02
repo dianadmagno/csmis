@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\References\LiscenseExam;
+use App\Models\References\LicenseExam;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class LiscenseExamTableSeeder extends Seeder
+class LicenseExamTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class LiscenseExamTableSeeder extends Seeder
         ];
 
         $description = [
-            'Licensure Exam for Teacher',
+            'Licensure Professional for Teacher',
             'Registered Civil Engineer',
             'Certified Public Accoutancy',
             'Medical Doctor',
@@ -34,7 +34,7 @@ class LiscenseExamTableSeeder extends Seeder
         ];
 
         foreach($exam as $key => $name) {
-            LiscenseExam::create([
+            LicenseExam::create([
                 'name' => $name,
                 'description' => $description[$key]
             ]);
