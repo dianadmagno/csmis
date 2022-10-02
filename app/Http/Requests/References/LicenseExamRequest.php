@@ -4,7 +4,7 @@ namespace App\Http\Requests\References;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LiscenseExamRequest extends FormRequest
+class LicenseExamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class LiscenseExamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:rf_liscense_exams,name,'.$this->liscensureExam,
+            'name' => 'required|unique:rf_license_exams,name,'.$this->licensureExam,
             'description' => 'required',
         ];
     }

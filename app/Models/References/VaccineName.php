@@ -14,6 +14,7 @@ class VaccineName extends Model
     protected $table = 'rf_vaccine_names';
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'vaccine_type_id'
     ];
 }

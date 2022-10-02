@@ -167,8 +167,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('liscenseExam.index') }}">
-                                    {{ __('Liscense Exam') }}
+                                <a class="nav-link" href="{{ route('licenseExam.index') }}">
+                                    {{ __('License Exam') }}
                                 </a>
                             </li>
                             <li class="nav-item">

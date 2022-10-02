@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventTableSeeder::class);
         $this->call(IslandGroupTableSeeder::class);
         $this->call(RegionTableSeeder::class);
-        $this->call(LiscenseExamTableSeeder::class);
+        $this->call(LicenseExamTableSeeder::class);
         $this->call(CollegeCourseTableSeeder::class);
     }
 }
