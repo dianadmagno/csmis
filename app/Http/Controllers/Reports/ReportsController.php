@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
+use App\Models\References\VaccineName;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Transactions\StudentVaccine;
 
 class ReportsController extends Controller
 {
@@ -95,11 +97,13 @@ class ReportsController extends Controller
                 array_push($data, $array);
             }
         } elseif ($reportId == 1) {
-            $vaccineTypes = VaccineType::all();
-            $vaccineNames = VaccineName::all();
+            $vaccineNames = VaccineName::select('rf_vaccine_names.id as id', 'rf_vaccine_names.name as vaccine_name', 'rf_vaccine_types.name as vaccine_type')
+                        ->leftJoin('rf_vaccine_types', 'rf_vaccine_types.id', '=', 'rf_vaccine_names.vaccine_type_id')
+                        ->groupBy('vaccine_type')
+                        ->get();
 
             foreach($vaccineNames as $vaccineName) {
-                $count = StudentVaccine::whereHas('studentClasses', function($query) use ($classId) {
+                $count = StudentVaccine::whereHas('studentClass', function($query) use ($classId) {
                     $query->whereHas('class', function($query) use ($classId) {
                         $query->where('class_id', $classId);
                     });
@@ -107,7 +111,7 @@ class ReportsController extends Controller
                 ->where('vaccine_name_id', $vaccineName['id'])
                 ->count();
 
-                $array = ['name' => $vaccineName['name'], 'count' => $count];
+                $array = ['vaccine_type' => $vaccineName['vaccine_type'], 'name' => $vaccineName['vaccine_name'], 'count' => $count];
 
                 array_push($data, $array);
             }
