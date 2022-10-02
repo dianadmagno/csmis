@@ -107,7 +107,7 @@
       <span class="email-val"></span>
       <span class="separator"></span>
       <span class="phone">Unit: </span>
-      <span class="phone-val">{{$students[0]->studentClasses->class->description}}</span>
+      <span class="phone-val"></span>
       <span class="separator"></span>
       <span class="phone">Company: </span>
       <span class="phone-val">{{$students[0]->bloodType->name}}</span>
