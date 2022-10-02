@@ -106,6 +106,8 @@
                             @include('reports.ethnicGroup')
                             @elseif($report == 4)
                             @include('reports.educationalAttainment')
+                            @elseif($report == 6)
+                            @include('reports.bloodType')
                             @elseif($report == 11)
                             @include('reports.listOfStudents')
                             @endif

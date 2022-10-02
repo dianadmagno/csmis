@@ -20,8 +20,8 @@ class StudentVaccineController extends Controller
     {
         $keyword = $request->keyword;
         return view('transactions.students.vaccine', [
-            'vaccines' => StudentVaccine::join('rf_vaccine_types', 'rf_vaccine_types.id', '=', 'rf_vaccine_names.vaccine_type_id')
-                        ->join('rf_vaccine_names', 'rf_vaccine_names.id', '=', 'tr_student_vaccines.vaccine_name_id')
+            'vaccines' => StudentVaccine::join('rf_vaccine_names', 'rf_vaccine_names.id', '=', 'tr_student_vaccines.vaccine_name_id')
+                        ->join('rf_vaccine_types', 'rf_vaccine_types.id', '=', 'rf_vaccine_names.vaccine_type_id')
                         ->select('rf_vaccine_names.description as vaccine_name', 'rf_vaccine_types.description as vaccine_type', 'date', 'place', 'student_id', 'tr_student_vaccines.id as id', 'remarks')
                         ->where('student_id', $id)
                         ->paginate(10),

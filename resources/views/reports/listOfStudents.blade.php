@@ -2,7 +2,7 @@
       <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
-                <center><h5 class="mb-0">List of Students of Class {{ $class->description }}</h5></center>
+                <center><h5 class="mb-0">List of Students of Class {{ $className->description }}</h5></center>
             </div>
         </div>
       </div>
