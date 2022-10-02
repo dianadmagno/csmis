@@ -115,18 +115,18 @@
                                                 @endif
                                             </div>
 
-                                            <div class="form-group{{ $errors->has('liscense_id') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-name">{{ __('Liscensed Exam') }}</label>
-                                                <select name="liscense_id" class="form-control form-control-alternative{{ $errors->has('liscense_id') ? ' is-invalid' : '' }}">
-                                                    <option value="">Choose Liscenced Exam</option>
-                                                    @foreach($liscenseExams as $liscenseExam)
-                                                        <option value="{{ $liscenseExam->id }}" {{ old('liscense_id') == $liscenseExam->id ? 'selected' : '' }}>{{ $liscenseExam->description }}</option>
+                                            <div class="form-group{{ $errors->has('license_id') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Licensed Exam') }}</label>
+                                                <select name="license_id" class="form-control form-control-alternative{{ $errors->has('license_id') ? ' is-invalid' : '' }}">
+                                                    <option value="">Choose Licenced Exam</option>
+                                                    @foreach($licenseExams as $licenseExam)
+                                                        <option value="{{ $licenseExam->id }}" {{ old('license_id') == $licenseExam->id ? 'selected' : '' }}>{{ $licenseExam->description }}</option>
                                                     @endforeach
                                                 </select>
             
-                                                @if ($errors->has('liscense_id'))
+                                                @if ($errors->has('license_id'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('liscense_id') }}</strong>
+                                                        <strong>{{ $errors->first('license_id') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -291,6 +291,17 @@
                                                 @if ($errors->has('course_id'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('course_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('tesda') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="input-name">{{ __('Tesda Course') }}</label>
+                                                <input type="text" value="{{ old('tesda') }}" name="tesda" class="form-control form-control-alternative{{ $errors->has('tesda') ? ' is-invalid' : '' }}" placeholder="{{ __('Tesda Course') }}">
+            
+                                                @if ($errors->has('tesda'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('tesda') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

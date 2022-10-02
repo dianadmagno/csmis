@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\References\Region;
 use App\Http\Controllers\Controller;
+use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
 use App\Models\Transactions\StudentClass;
@@ -35,8 +36,6 @@ class ReportsController extends Controller
             ['id' => 3, 'name' => 'College'],
             ['id' => 4, 'name' => 'Undergraduate']
         ];
-
-        $class = StudentClass::where('id', $classId)->first();
 
         if($reportId == 10) {
             foreach ($sexes as $sex) {
@@ -112,8 +111,7 @@ class ReportsController extends Controller
 
                 array_push($data, $array);
             }
-        }
-        elseif ($reportId == 11) {
+        } elseif ($reportId == 11) {
             $data = Student::whereHas('studentClasses', function($query) use ($classId) {
                 $query->whereHas('class', function($query) use ($classId) {
                     $query->where('class_id', $classId);
@@ -122,10 +120,26 @@ class ReportsController extends Controller
             ->select( 'rf_ranks.name', 'lastname', 'firstname', 'middlename','mobile_number', 'email')
             ->join('rf_ranks', 'rf_ranks.id', 'tr_students.rank_id')
             ->get();
+        } elseif ($reportId == 6) {
+            $bloodTypes = BloodType::all();
+
+            foreach ($bloodTypes as $bloodType) {
+                $count = Student::whereHas('studentClasses', function($query) use ($classId) {
+                    $query->whereHas('class', function($query) use ($classId) {
+                        $query->where('class_id', $classId);
+                    });
+                })
+                ->where('blood_type_id', $bloodType['id'])
+                ->count();
+
+                $array = ['name' => $bloodType['name'], 'count' => $count];
+
+                array_push($data, $array);
+            }
         }
 
         return view('reports.report', [
-            'class' => $class,
+            'className' => StudentClass::where('id', $classId)->first(),
             'classes' => $classes,
             'data' => $data,
             'report' => $request->report_type

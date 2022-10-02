@@ -44,7 +44,8 @@ class UnitTableSeeder extends Seeder
             'Finance Center',
             'APMC',
             'Accounting Service',
-            'APAO'
+            'APAO',
+            '54EBde'
         ];
 
         $description = [
@@ -76,7 +77,8 @@ class UnitTableSeeder extends Seeder
             'Finance Center',
             'APMC',
             'Accounting Service',
-            'APAO'
+            'APAO',
+            '54EBde'
         ];
 
         foreach($unit as $key => $name) {

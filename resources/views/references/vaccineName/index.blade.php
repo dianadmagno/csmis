@@ -49,6 +49,7 @@
                         <tr>
                           <th scope="col">Name</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Vaccine Type</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -59,16 +60,19 @@
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $vaccineName->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $vaccineName->vaccine_name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $vaccineName->description }}
+                                {{ $vaccineName->vaccine_description }}
+                              </td>
+                              <td class="budget">
+                                {{ $vaccineName->vaccine_type }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('ranks.destroy', $vaccineName->id) }}" method="post">
+                                  <form action="{{ route('vaccineName.destroy', $vaccineName->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <a href="{{ route('vaccineName.edit', $vaccineName->id) }}" class="btn btn-success" type="button">Edit</a>

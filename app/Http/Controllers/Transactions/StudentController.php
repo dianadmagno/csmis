@@ -17,11 +17,11 @@ use App\Http\Controllers\Controller;
 use App\Models\References\BloodType;
 use App\Models\Transactions\Student;
 use App\Models\References\EthnicGroup;
-use App\Models\References\IslandGroup;
 use App\Models\References\SubActivity;
 use App\Models\References\VaccineName;
-use App\Models\References\LiscenseExam;
 use App\Models\References\ActivityEvent;
+use App\Models\References\IslandGroup;
+use App\Models\References\LicenseExam;
 use App\Models\References\CollegeCourse;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Models\References\EnlistmentType;
@@ -81,7 +81,7 @@ class StudentController extends Controller
         $courses = Course::all();
         $collegeCourses = CollegeCourse::all();
         $regions = Region::all();
-        $liscenseExams = LiscenseExam::all();
+        $licenseExams = LicenseExam::all();
         $islandGroups = IslandGroup::all();
         return view('transactions.students.create', [
             'bloodTypes' => $bloodTypes,
@@ -96,7 +96,7 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
-            'liscenseExams' => $liscenseExams,
+            'licenseExams' => $licenseExams,
             'islandGroups' => $islandGroups
         ]);
     }
@@ -148,7 +148,7 @@ class StudentController extends Controller
         $courses = Course::all();
         $collegeCourses = CollegeCourse::all();
         $regions = Region::all();
-        $liscenseExams = LiscenseExam::all();
+        $licenseExams = LicenseExam::all();
         $islandGroups = IslandGroup::all();
         return view('transactions.students.edit', [
             'bloodTypes' => $bloodTypes,
@@ -163,7 +163,7 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
-            'liscenseExams' => $liscenseExams,
+            'licenseExams' => $licenseExams,
             'islandGroup' => $islandGroups
         ]);
     }

@@ -46,6 +46,21 @@
                                             </span>
                                         @endif
                                     </div>
+                                    <div class="form-group{{ $errors->has('vaccine_type_id') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Vaccine Type') }}</label>
+                                        <select name="vaccine_type_id" class="form-control form-control-alternative{{ $errors->has('vaccine_type_id') ? ' is-invalid' : '' }}">
+                                            <option value="">Choose Vaccine Type</option>
+                                            @foreach($vaccineTypes as $vaccineType)
+                                                <option value="{{ $vaccineType->id }}">{{ $vaccineType->description }}</option>
+                                            @endforeach
+                                        </select>
+    
+                                        @if ($errors->has('vaccine_type_id'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('vaccine_type_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('vaccineName.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>

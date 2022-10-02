@@ -38,7 +38,7 @@
                                                     <option value="5" {{ old('report_type') == 5 ? 'selected' : '' }}>Reports By Course</option>
                                                     <option value="6" {{ old('report_type') == 6 ? 'selected' : '' }}>Reports By Blood Type</option>
                                                     <option value="7" {{ old('report_type') == 7 ? 'selected' : '' }}>Reports By Age</option>
-                                                    <option value="8" {{ old('report_type') == 8 ? 'selected' : '' }}>Reports By Liscensed</option>
+                                                    <option value="8" {{ old('report_type') == 8 ? 'selected' : '' }}>Reports By Licensed</option>
                                                     <option value="9" {{ old('report_type') == 9 ? 'selected' : '' }}>Reports By Location</option>
                                                     <option value="10" {{ old('report_type') == 10 ? 'selected' : '' }}>Reports By Sex</option>
                                                     <option value="11" {{ old('report_type') == 11 ? 'selected' : '' }}>List of Students per Class</option>
@@ -98,7 +98,6 @@
                     <div class="card">
                           <!-- Card header -->
                         <div class="card-body">
-                            {{$class->name}}
                             @if($report == 10)
                             @include('reports.sex')
                             @elseif($report == 9)
@@ -107,6 +106,8 @@
                             @include('reports.ethnicGroup')
                             @elseif($report == 4)
                             @include('reports.educationalAttainment')
+                            @elseif($report == 6)
+                            @include('reports.bloodType')
                             @elseif($report == 11)
                             @include('reports.listOfStudents')
                             @endif

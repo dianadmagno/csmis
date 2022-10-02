@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->foreignId('vaccine_type_id')
+                    ->constrained('rf_vaccine_types')
+                    ->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-        'title' => __('Update Liscense Exam')
+        'title' => __('Add License Exam')
     ])
     <div class="container-fluid mt--7">
           <!-- Page content -->
@@ -12,9 +12,8 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('liscenseExam.update', $liscenseExam->id) }}">
+                            <form method="post" action="{{ route('licenseExam.store') }}">
                                 @csrf
-                                @method('put')
                                 
                                 @if (session('status'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,7 +28,7 @@
                                 <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $liscenseExam->name) }}">
+                                        <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
        
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +38,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Description') }}</label>
-                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}" value="{{ old('description', $liscenseExam->description) }}">
+                                        <input type="text" name="description" id="input-name" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description')}}">
     
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -48,7 +47,7 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('liscenseExam.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a type="button" href="{{ route('licenseExam.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
                             </form>
                         </div>
