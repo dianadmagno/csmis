@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Liscense Exam')
+      'title' => __('List of License Exam')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
-                  <form action="{{ route('liscenseExam.index') }}">
+                  <form action="{{ route('licenseExam.index') }}">
                       <div class="card-header border-0">
                           @if (session('status'))
                               <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
                           <div class="col text-right">
-                              <a href="{{ route('liscenseExam.create') }}" class="btn btn-primary">Add Liscense Exam</a>
+                              <a href="{{ route('licenseExam.create') }}" class="btn btn-primary">Add License Exam</a>
                           </div>
                         </div>
                       </div>
@@ -53,26 +53,26 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($liscenseExams) > 0)
-                          @foreach($liscenseExams as $liscenseExam)
-                            <tr>
+                        @if (count($licenseExams) > 0)
+                          @foreach($licenseExams as $licenseExam)
+                            <tr> 
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $liscenseExam->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $licenseExam->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $liscenseExam->description }}
+                                {{ $licenseExam->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('liscenseExam.destroy', $liscenseExam->id) }}" method="post">
+                                  <form action="{{ route('licenseExam.destroy', $licenseExam->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{ route('liscenseExam.edit', $liscenseExam->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this Liscense Exam?')" class="btn btn-danger">Archive</button>
+                                    <a href="{{ route('licenseExam.edit', $licenseExam->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this License Exam?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>
@@ -87,9 +87,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($liscenseExams) > 0)
+                  @if (count($licenseExams) > 0)
                     <div class="card-footer">
-                      {{ $liscenseExams->links() }}
+                      {{ $licenseExams->links() }}
                     </div>
                   @endif
                 </div>

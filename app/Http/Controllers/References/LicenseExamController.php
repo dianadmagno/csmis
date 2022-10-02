@@ -4,10 +4,10 @@ namespace App\Http\Controllers\References;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Models\References\LiscenseExam;
-use App\Http\Requests\References\LiscenseExamRequest;
+use App\Models\References\LicenseExam;
+use App\Http\Requests\References\LicenseExamRequest;
 
-class LiscenseExamController extends Controller
+class LicenseExamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class LiscenseExamController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        return view('references.liscenseExam.index', [
-            'liscenseExams' => LiscenseExam::where('name', 'LIKE', '%'.$keyword.'%')
+        return view('references.licenseExam.index', [
+            'licenseExams' => LicenseExam::where('name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
@@ -31,7 +31,7 @@ class LiscenseExamController extends Controller
      */
     public function create()
     {
-        return view('references.liscenseExam.create');
+        return view('references.licenseExam.create');
     }
 
     /**
@@ -40,19 +40,19 @@ class LiscenseExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LiscenseExamRequest $liscenseExamRequest)
+    public function store(LicenseExamRequest $licenseExamRequest)
     {
-        LiscenseExam::create($liscenseExamRequest->all());
-        return redirect()->route('liscenseExam.index')->with('status', 'Liscense Exam Created Successfully');
+        LicenseExam::create($licenseExamRequest->all());
+        return redirect()->route('licenseExam.index')->with('status', 'License Exam Created Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\References\LiscenseExam  $liscenseExam
+     * @param  \App\Models\References\LicenseExam  $licenseExam
      * @return \Illuminate\Http\Response
      */
-    public function show(LiscenseExam $liscenseExam)
+    public function show(LicenseExam $licenseExam)
     {
         //
     }
@@ -60,13 +60,13 @@ class LiscenseExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\References\LiscenseExam  $liscenseExam
+     * @param  \App\Models\References\LicenseExam  $licenseExam
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('references.liscenseExam.edit', [
-            'liscenseExam' => LiscenseExam::find($id)
+        return view('references.licenseExam.edit', [
+            'licenseExam' => LicenseExam::find($id)
         ]);
     }
 
@@ -74,26 +74,26 @@ class LiscenseExamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\References\LiscenseExam  $liscenseExam
+     * @param  \App\Models\References\LicenseExam  $licenseExam
      * @return \Illuminate\Http\Response
      */
-    public function update(LiscenseExamRequest $liscenseExamRequest, $id)
+    public function update(LicenseExamRequest $licenseExamRequest, $id)
     {
-        $liscenseExam = LiscenseExam::find($id);
-        $liscenseExam->update($liscenseExamRequest->all());
-        return redirect()->route('liscenseExam.index')->with('status', 'Liscense Exam Updated Successfully.');
+        $licenseExam = LicenseExam::find($id);
+        $licenseExam->update($licenseExamRequest->all());
+        return redirect()->route('licenseExam.index')->with('status', 'License Exam Updated Successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\References\LiscenseExam  $liscenseExam
+     * @param  \App\Models\References\LicenseExam  $licenseExam
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $id = LiscenseExam::find($id);
+        $id = LicenseExam::find($id);
         $id->delete();
-        return back()->with('status', 'Liscense Exam Deleted Successfully');
+        return back()->with('status', 'License Exam Deleted Successfully');
     }
 }

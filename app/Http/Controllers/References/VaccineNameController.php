@@ -5,6 +5,7 @@ namespace App\Http\Controllers\References;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\References\VaccineName;
+use App\Models\References\VaccineType;
 use App\Http\Requests\References\VaccineNameRequest;
 
 class VaccineNameController extends Controller
@@ -18,8 +19,10 @@ class VaccineNameController extends Controller
     {
         $keyword = $request->keyword;
         return view('references.vaccineName.index', [
-            'vaccineNames' => VaccineName::where('name', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('description', 'LIKE', '%'.$keyword.'%')
+            'vaccineNames' => VaccineName::select('rf_vaccine_names.id as id', 'rf_vaccine_types.description as vaccine_type', 'rf_vaccine_names.name as vaccine_name', 'rf_vaccine_names.description as vaccine_description')
+                        ->join('rf_vaccine_types', 'rf_vaccine_names.vaccine_type_id', '=', 'rf_vaccine_types.id')
+                        ->where('rf_vaccine_names.name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('rf_vaccine_names.description', 'LIKE', '%'.$keyword.'%')
                         ->paginate(10)
         ]);
     }
@@ -31,7 +34,9 @@ class VaccineNameController extends Controller
      */
     public function create()
     {
-        return view('references.vaccineName.create');
+        return view('references.vaccineName.create', [
+            'vaccineTypes' => VaccineType::all()
+        ]);
     }
 
     /**
