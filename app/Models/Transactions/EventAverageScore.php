@@ -23,4 +23,9 @@ class EventAverageScore extends Model
     {
         return $this->belongsTo(ActivityEvent::class, 'activity_event_id');
     }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
