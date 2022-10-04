@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
+use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Student;
 use App\Models\Transactions\StudentDeliquencyReport;
@@ -26,6 +27,7 @@ class StudentDeliquencyReportController extends Controller
                 $totalAllocatedPoints = $totalAllocatedPoints - $value;
             }
         }
+        
         return view('transactions.students.deliquency', [
             'drs' => StudentDeliquencyReport::where('student_id', $id)
                         ->paginate(10),
