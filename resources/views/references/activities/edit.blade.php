@@ -56,7 +56,25 @@
                                                 <strong>{{ $errors->first('nr_of_points') }}</strong>
                                             </span>
                                         @endif
+                                    </div><div class="form-group{{ $errors->has('performance_type') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Type of Performance') }}</label>
+                                        <select name="performance_type" class="form-control form-control-alternative{{ $errors->has('performance_type') ? ' is-invalid' : '' }}">
+                                            <option value="">Choose Type of Performance</option>
+                                            <option value="1" {{ $activity->performance_type == 1 ? 'selected' : '' }}>Individual</option>
+                                            <option value="2" {{ $activity->performance_type == 2 ? 'selected' : '' }}>Class</option>
+                                        </select>
+    
+                                        @if ($errors->has('performance_type'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('performance_type') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input class="custom-control-input" name="has_sub_activities" value="1" id="customCheck1" type="checkbox" {{ $activity->has_sub_activities ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheck1">has sub activities?</label>
+                                    </div>
+                                    
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
                                     <a type="button" href="{{ route('activity.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
                                 </div>
