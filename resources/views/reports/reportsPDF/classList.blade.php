@@ -25,7 +25,7 @@
                  <b>SCHOOL FOR CANDIDATE SOLDIER</b>
                  <br>INITIAL MILITARY TRAINING CENTER (P) </b>
                  <br>TRAINING AND DOCTRINE COMMAND, PHILIPPINE ARMY
-                 <br>Camp O’Donnell, Sta. Lucia, Capas, Tarlac</p><br></td>
+                 <br><i>Camp O’Donnell, Sta. Lucia, Capas, Tarlac</i></p><br></td>
                  <td rowspan = "4" style="text-align:center;"><img src="https://i.ibb.co/VD27cBt/scs.png" width="100" height="100" /></td>
              
           </tr>
@@ -40,7 +40,7 @@
             <tr>
                 <th>Class</th>
                 <th>Class Name</th>
-                <th>No. f Students</th>
+                <th>No. of Students</th>
                 <th>Graduation Date</th>
             </tr>
         </thead>
