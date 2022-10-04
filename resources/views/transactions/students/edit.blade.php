@@ -526,7 +526,7 @@
 
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                                 <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
-                                <a type="button" class="btn btn-primary mt-4" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Print to PDF</a>
+                                <a type="button" class="btn btn-primary mt-4" target="_blank" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Print to PDF</a>
                 
                             </div>
                         </form>

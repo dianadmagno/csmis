@@ -48,7 +48,7 @@
         </thead>
         <tbody>
             @foreach ($students as $student)
-                <tr>
+                <tr align="center">
                     <td>{{ $student->rank->name }} {{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}</td>
                     <td>{{ $student->studentClasses->pluck('class')->first()->description }}</td>
                     <td>{{ $student->company->description }}</td>

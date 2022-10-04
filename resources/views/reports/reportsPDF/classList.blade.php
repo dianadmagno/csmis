@@ -40,7 +40,7 @@
             <tr>
                 <th>Class</th>
                 <th>Class Name</th>
-                <th>No. of Students</th>
+                <th>No. f Students</th>
                 <th>Graduation Date</th>
             </tr>
         </thead>
