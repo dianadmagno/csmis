@@ -37,7 +37,8 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('sub-activity-event.create', $subActivity->id) }}" class="btn btn-primary">Add Event</a>
+                          <a href="{{ route('sub-activity.index', $subActivity->activity_id) }}" class="btn btn-danger">Back</a>
+                          <a href="{{ route('sub-activity-event.create', $subActivity->id) }}" class="btn btn-primary">Add Event</a>
                         </div>
                       </div>
                     </div>
@@ -68,7 +69,7 @@
                                 {{ $event->description }}
                               </td>
                               <td class="budget">
-                                {{ $event->percentage }}%
+                                {{ $event->percentage ? $event->percentage.'%' : '' }}
                               </td>
                               <td>
                                 <div class="row">

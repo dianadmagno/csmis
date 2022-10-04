@@ -556,7 +556,9 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a href="{{ route('student.index') }}">
+                                        <button type="button" class="btn btn-danger mt-4">{{ __('Back') }}</button>
+                                    </a>
                                 </div>
                             </form>
                         </div>
