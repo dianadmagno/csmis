@@ -37,6 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
+                            <a type="button" class="btn btn-success" href="{{ route('class.listPDF') }}">Print to PDF</a>
                             <a href="{{ route('class.create') }}" class="btn btn-primary">Add Class</a>
                         </div>
                       </div>

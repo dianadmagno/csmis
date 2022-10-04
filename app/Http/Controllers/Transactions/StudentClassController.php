@@ -13,6 +13,7 @@ use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\ClassActivity;
 use App\Models\Transactions\PersonnelClass;
 use App\Http\Requests\Transactions\StudentClassRequest;
+use PDF;
 
 class StudentClassController extends Controller
 {
@@ -239,5 +240,14 @@ class StudentClassController extends Controller
             'time' => $request->time
         ]);
         return redirect()->route('assigned.activities', $classId)->with('status', 'Time Updated Successfully');
+    }
+
+    public function classListPDF()
+    {
+        $classes = StudentClass::with('personnelClasses', 'course', 'studentClasses')->get();
+        view()->share('classes', $classes);
+        $pdf = PDF::loadView('reports.reportsPDF.classList', compact('classes'));
+        
+        return $pdf->setPaper("a4","landscape")->stream('personnel_list.pdf');        
     }
 }

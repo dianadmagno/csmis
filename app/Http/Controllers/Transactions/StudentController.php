@@ -66,19 +66,11 @@ class StudentController extends Controller
 
     public function studentListPDF()
     {
-        
-        // $student = Student::all();
         $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses.class', 'company', 'unit')->get();
-
-    
-
         view()->share('students', $students);
         $pdf = PDF::loadView('reports.reportsPDF.studentList', compact('students'));
         
-        return $pdf->setPaper("a4","landscape")->stream('pdf_file.pdf');
-
-       
-        
+        return $pdf->setPaper("a4","landscape")->stream('student_list.pdf');        
     }
 
     /**

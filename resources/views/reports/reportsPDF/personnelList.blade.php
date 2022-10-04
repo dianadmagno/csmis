@@ -33,30 +33,22 @@
         
          
        </table>
-       <p style="text-align:center;"><b>List of Students</b></p><br>
+       <p style="text-align:center;"><b>List of Personnel</b></p><br>
 
     <table border="1" align="center" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
         <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Class</th>
-                <th>Company</th>
-                <th>Unit</th>
-                <th>Email</th>
-                
+                <th>Personnel Name</th>
+                <th>Position</th>
+                <th>Serial Number</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($students as $student)
-                <tr>
-                    <td>{{ $student->rank->name }} {{ $student->firstname }} {{ $student->middlename }} {{ $student->lastname }}</td>
-                    <td>{{ $student->studentClasses->pluck('class')->first()->description }}</td>
-                    <td>{{ $student->company->description }}</td>
-                    <td>{{ $student->unit->description }}</td>
-                    <td data-column="Email" style="color: dodgerblue;">
-                        {{ $student->email }}
-                    </td>
-                    
+            @foreach ($personnels as $personnel)
+                <tr align="center">
+                     <td>{{ $personnel->rank->name }} {{ $personnel->firstname }} {{ $personnel->middlename }} {{ $personnel->lastname }}</td>
+                     <td>{{ $personnel->personnelCategory->description }}</td>
+                     <td>{{ $personnel->serial_number }}</td>
                 </tr>
             @endforeach
         </tbody>
