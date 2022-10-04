@@ -40,7 +40,6 @@ return new class extends Migration
             $table->integer('sex');
             $table->string('mobile_number');
             $table->integer('educational_attainment');
-            $table->string('course')->nullable();
             $table->integer('physical_profile');
             $table->foreignId('ethnic_group_id')->constrained('rf_ethnic_groups');
             $table->foreignId('unit_id')->constrained('rf_units');
@@ -51,7 +50,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('rf_companies');
             $table->foreignId('region_id')->constrained('rf_regions');
             $table->foreignId('island_group_id')->constrained('rf_island_groups');
-            $table->foreignId('course_id')->nullable()->constrained('rf_college_courses');
+            $table->integer('course_id')->nullable();
             $table->integer('license_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();

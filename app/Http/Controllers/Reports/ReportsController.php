@@ -157,6 +157,21 @@ class ReportsController extends Controller
 
                 array_push($data, $array);
             }
+        } elseif ($reportId == 12) {
+            $studentClasses = StudentClass::all();
+
+            foreach ($studentClasses as $studentClass) {
+                $count = Student::whereHas('studentClasses', function($query) use ($studentClass) {
+                    $query->whereHas('class', function($query) use ($studentClass) {
+                        $query->where('class_id', $studentClass['id']);
+                    });
+                })
+                ->count();
+
+                $array = ['name' => $studentClass['description'], 'count' => $count];
+
+                array_push($data, $array);
+            }
         }
 
         return view('reports.report', [

@@ -37,7 +37,8 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('sub-activity.create', $activity->id) }}" class="btn btn-primary">Add Sub Activity</a>
+                          <a href="{{ route('activity.index') }}" class="btn btn-danger">Back</a>
+                          <a href="{{ route('sub-activity.create', $activity->id) }}" class="btn btn-primary">Add Sub Activity</a>
                         </div>
                       </div>
                     </div>
