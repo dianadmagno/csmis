@@ -64,10 +64,19 @@ class StudentController extends Controller
         ]);
     }
 
-    public function classListPDF()
+    public function studentListPDF()
     {
         
-        $student = Student::all();
+        // $student = Student::all();
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses.class', 'company', 'unit')->get();
+
+    
+
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentList', compact('students'));
+        
+        return $pdf->setPaper("a4","landscape")->stream('pdf_file.pdf');
+
        
         
     }
@@ -161,6 +170,7 @@ class StudentController extends Controller
         $regions = Region::all();
         $licenseExams = LicenseExam::all();
         $islandGroups = IslandGroup::all();
+        $linkId = $id;
         return view('transactions.students.edit', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
@@ -174,13 +184,9 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
-<<<<<<< HEAD
-            'liscenseExams' => $liscenseExams,
-            'linkId' => $linkId,
-=======
             'licenseExams' => $licenseExams,
->>>>>>> develop
-            'islandGroup' => $islandGroups
+            'islandGroup' => $islandGroups,
+            'linkId' => $linkId
         ]);
     }
 
@@ -202,9 +208,8 @@ class StudentController extends Controller
 
     // Generate PDF
     public function individualPDF($id) {
-        // retreive all records from db
-       
-        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses')->where('id',$id)->get();
+
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses', 'company')->where('id',$id)->get();
 
 
 

@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show', 'create', 'store']]);
 	Route::post('student/academic/{studentId}/{subjectId}', ['as' => 'student.academic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeAcademicGrade']);
 	Route::get('student/individual/PDF/{studentId}', ['as' => 'student.individualPDF', 'uses' => 'App\Http\Controllers\Transactions\StudentController@individualPDF']);
+	Route::get('student/list/PDF', ['as' => 'student.studentListPDF', 'uses' => 'App\Http\Controllers\Transactions\StudentController@studentListPDF']);
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
 	Route::get('student/academic/edit/{id}', ['as' => 'student.academic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editAcademicGrade']);
 	Route::put('student/academic/{id}', ['as' => 'student.academic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateAcademicGrade']);

@@ -15,12 +15,14 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
     
          <tr> 
-            <td rowspan = "4" style="text-align:center;"><img src="" width="65" height="65" /></td>
+            <td rowspan = "4" style="text-align:center;"><img src="https://i.ibb.co/z6BGzN6/imtc-removebg-preview.png" width="100" height="100" /></td>
             <td rowspan = "4" style="text-align:center;">
-                <p style="text-align:center;">H E A D Q U A R T E R S
-                <br><b>SCS, IMTC, TRADOC</b>
-                <br>Camp O'Donell Tarlac</p><br></td>
-                <td rowspan = "4" style="text-align:center;"><img src="" width="65" height="65" /></td>
+                <p style="text-align:center;">
+                <b>SCHOOL FOR CANDIDATE SOLDIER</b>
+                <br>INITIAL MILITARY TRAINING CENTER (P) </b>
+                <br>TRAINING AND DOCTRINE COMMAND, PHILIPPINE ARMY
+                <br>Camp O’Donnell, Sta. Lucia, Capas, Tarlac</p><br></td>
+                <td rowspan = "4" style="text-align:center;"><img src="https://i.ibb.co/VD27cBt/scs.png" width="100" height="100" /></td>
             
          </tr>
     
@@ -33,288 +35,200 @@
     
          <link href='https://fonts.googleapis.com/css?family=Arial:400,300,700' rel='stylesheet' type='text/css'>
 
-<div class="container">
-  <div class="header">
-    <div class="section__title">Personal Information</div>
-    <div class="full-name">
-      <span class="first-name">{{$students[0]->firstname}} {{$students[0]->middlename}} </span> 
-      <span class="first-name">{{$students[0]->lastname}}</span>
-    </div>
-    <div class="contact-info">
-      <span class="email">Age: </span>
-      <span class="email-val">{{$students[0]->age}}</span>
-      <span class="separator"></span>
-      <span class="email">Email: </span>
-      <span class="email-val">{{$students[0]->email}}</span>
-      <span class="separator"></span>
-      <span class="phone">Phone: </span>
-      <span class="phone-val">{{$students[0]->mobile_number}}</span>
-    </div>
-    <div class="contact-info">
-        <span class="email">Birthday: </span>
-        <span class="email-val">{{$students[0]->birthdate}}</span>
-        <span class="separator"></span>
-        <span class="phone">Serial Number: </span>
-        <span class="phone-val">{{$students[0]->serial_number}}</span>
-        <span class="separator"></span>
-        <span class="phone">Blood Type: </span>
-        <span class="phone-val">{{$students[0]->bloodType->name}}</span>
-      </div>
-    
-    
-    <div class="contact-info">
-      <span class="email">Religion: </span>
-      <span class="email-val">{{$students[0]->religion->description}}</span>
-      <span class="separator"></span>
-      <span class="phone">Sex: </span>
-      <span class="phone-val">{{$students[0]->sex}}</span>
-      <span class="separator"></span>
-      <span class="phone">Civil Status: </span>
-      <span class="phone-val">{{$students[0]->civil_status}}</span>
-    </div>
-    <div class="contact-info">
-     
-      <span class="phone">Highest Educational Attainment: </span>
-      <span class="phone-val">{{$students[0]->educational_attatinment}}</span>
-      <span class="separator"></span>
-      <span class="phone">Course: </span>
-      <span class="phone-val">{{$students[0]->course}}</span>
-    </div>
-    <div class="about">
-      <span class="email">Address </span>
-      
-        {{$students[0]->address}}
-    </span>
-    </div>
+          <div class="container">
+            <div class="header">
+              <div class="section__title">Personal Information</div>
+              <div class="full-name">
+                <span class="first-name">{{$students[0]->firstname}} {{$students[0]->middlename}} </span> 
+                <span class="first-name">{{$students[0]->lastname}}</span>
+              </div>
+              <div class="contact-info">
+                <span class="email">Age: </span>
+                <span class="email-val">{{$students[0]->age}}</span>
+                <span class="separator"></span>
+                <span class="email">Email: </span>
+                <span class="email-val">{{$students[0]->email}}</span>
+                <span class="separator"></span>
+                <span class="phone">Phone: </span>
+                <span class="phone-val">{{$students[0]->mobile_number}}</span>
+              </div>
+              <div class="contact-info">
+                  <span class="email">Birthday: </span>
+                  <span class="email-val">{{$students[0]->birthdate}}</span>
+                  <span class="separator"></span>
+                  <span class="phone">Serial Number: </span>
+                  <span class="phone-val">{{$students[0]->serial_number}}</span>
+                  <span class="separator"></span>
+                  <span class="phone">Blood Type: </span>
+                  <span class="phone-val">{{$students[0]->bloodType->name}}</span>
+                </div>
+              
+              
+              <div class="contact-info">
+                <span class="email">Religion: </span>
+                <span class="email-val">{{$students[0]->religion->description}}</span>
+                <span class="separator"></span>
+                <span class="phone">Sex: </span>
+                @if ($students[0]->sex == 1) 
+                <span class="phone-val">
+                  Male
+                </span>
+                @else
+                <span class="phone-val">
+                  Female
+                </span>
+                @endif
+                <span class="separator"></span>
+                <span class="phone">Civil Status: </span>
+                @if ($students[0]->civil_status == 1) 
+                <span class="phone-val">
+                  Single
+                </span>
+                @elseif ($students[0]->civil_status == 2)
+                <span class="phone-val">
+                  Married
+                </span>
+                @elseif ($students[0]->civil_status == 3)
+                <span class="phone-val">
+                  Widowed
+                </span>
+                @elseif ($students[0]->civil_status == 4)
+                <span class="phone-val">
+                  Separated
+                </span>
+                @elseif ($students[0]->civil_status == 5)
+                <span class="phone-val">
+                  Divorced
+                </span>
+                @endif
+                
+              </div>
+              <div class="contact-info">
+              
+                <span class="phone">Highest Educational Attainment: </span>
+                <span class="phone-val">{{$students[0]->educational_attatinment}}</span>
+                <span class="separator"></span>
+                <span class="phone">Course: </span>
+                <span class="phone-val">{{$students[0]->course}}</span>
+              </div>
+              <div class="about">
+                <span class="email">Address </span>
+                
+                  {{$students[0]->address}}
+              </span>
+              </div>
 
-    
-  </div>
-  <div class="header">
-    <div class="section__title">Student Information</div>
-    
-    <div class="contact-info">
-      <span class="email">Rank: </span>
-      <span class="email-val">{{$students[0]->rank->description}}</span>
-      <span class="separator"></span>
-      <span class="email">Serial: </span>
-      <span class="email-val">{{$students[0]->serial_number}}</span>
-      <span class="separator"></span>
-      <span class="phone">Enlistment Type: </span>
-      <span class="phone-val">{{$students[0]->enlistmentType->description}}</span>
-    </div>
-    <div class="contact-info">
-      <span class="email">Current Class: </span>
-      <span class="email-val"></span>
-      <span class="separator"></span>
-      <span class="phone">Unit: </span>
-      <span class="phone-val"></span>
-      <span class="separator"></span>
-      <span class="phone">Company: </span>
-      <span class="phone-val">{{$students[0]->bloodType->name}}</span>
-    </div>
-    <div class="contact-info">
-        <span class="email">Physical Profile: </span>
-        <span class="email-val">{{$students[0]->physical_profile}}</span>
-        <span class="separator"></span>
-        <span class="phone">Ethnic Group: </span>
-        <span class="phone-val">{{$students[0]->ethnicGroup->description}}</span>
-        
-      </div>
-    
-    
-    <div class="contact-info">
-      <span class="email">Religion: </span>
-      <span class="email-val">{{$students[0]->religion->description}}</span>
-      <span class="separator"></span>
-      <span class="phone">Sex: </span>
-      <span class="phone-val">{{$students[0]->sex}}</span>
-      <span class="separator"></span>
-      <span class="phone">Civil Status: </span>
-      <span class="phone-val">{{$students[0]->civil_status}}</span>
-    </div>
-    <div class="contact-info">
-     
-      <span class="phone">Highest Educational Attainment: </span>
-      <span class="phone-val">{{$students[0]->educational_attatinment}}</span>
-      <span class="separator"></span>
-      <span class="phone">Course: </span>
-      <span class="phone-val">{{$students[0]->course}}</span>
-    </div>
-    <div class="about">
-      <span class="email">Address </span>
-      
-        {{$students[0]->address}}
-    </span>
-    </div>
+              
+            </div>
+            &nbsp;
+            <div class="header">
+              <div class="section__title">Student Information</div>
+              
+              <div class="contact-info">
+                <span class="email">Rank: </span>
+                <span class="email-val">{{$students[0]->rank->description}}</span>
+                <span class="separator"></span>
+                <span class="email">Serial: </span>
+                <span class="email-val">{{$students[0]->serial_number}}</span>
+                <span class="separator"></span>
+                <span class="phone">Enlistment Type: </span>
+                <span class="phone-val">{{$students[0]->enlistmentType->description}}</span>
+              </div>
+              <div class="contact-info">
+                {{-- <span class="email">Current Class: </span>
+                <span class="email-val"></span>
+                <span class="separator"></span> --}}
+                <span class="phone">Unit: </span>
+                <span class="phone-val">{{$students[0]->unit->description}}</span>
+                <span class="separator"></span>
+                <span class="phone">Company: </span>
+                <span class="phone-val">{{$students[0]->company->description}}</span>
+              </div>
+              <div class="contact-info"> 
+                <span class="phone">Physical Profile: </span>
+                @if ($students[0]->physical_profile == 1) 
+                <span class="phone-val">
+                  P1
+                </span>
+                @elseif ($students[0]->physical_profile == 2)
+                <span class="phone-val">
+                  P2
+                </span>
+                @elseif ($students[0]->physical_profile == 3)
+                <span class="phone-val">
+                  P3
+                </span>
+                @elseif ($students[0]->civil_status == 4)
+                <span class="phone-val">
+                  P4
+                </span>
+                @endif
+                  <span class="separator"></span>
+                  <span class="phone">Ethnic Group: </span>
+                  <span class="phone-val">{{$students[0]->ethnicGroup->description}}</span>
+                  
+                </div>
+                      
+              <div class="section__list-item">
+                <div class="">
+                  <div class="section__title">Tariff Sizes</div>
+                  <div>
+                    <span class="phone">Headgear Size: </span>
+                    <span class="phone-val">{{$students[0]->headgear}}</span>
+                    <span class="separator"></span>
+                    <span class="phone">BDA Size: </span>
+                    <span class="phone-val">{{$students[0]->bda}}</span>
+                    <span class="separator"></span>
+                    <span class="phone">GOA Chest Size: </span>
+                    <span class="phone-val">{{$students[0]->goa_chest}}</span>
+                  </div>
+                  <div>
+                    <span class="phone">GOA Waist Size: </span>
+                    <span class="phone-val">{{$students[0]->goa_waist}}</span>
+                    <span class="separator"></span>
+                    <span class="phone">Shoe Size: </span>
+                    <span class="phone-val">{{$students[0]->shoe_size}}</span>
+                    <span class="separator"></span>
+                    <span class="phone">Shoe Width: </span>
+                    <span class="phone-val">{{$students[0]->shoe_width}}</span>
+                  </div>
+                  <div>
+                    <span class="phone">Shoe Size: </span>
+                    <span class="phone-val">{{$students[0]->shoe_size}}</span>
+                    <span class="separator"></span>
+                    <span class="phone">Shoe Width: </span>
+                    <span class="phone-val">{{$students[0]->shoe_width}}</span>
+                    </div>
+                  
+                </div>
+                  &nbsp;
+                  <div class="section__list-item">
+                    <div class="left">
+                      <div class="section__title">Emergency Contact Person</div>
+                      <div class="addr">{{$students[0]->emergency_contact_person}}</div>
+                      <div class="addr">{{$students[0]->emergency_contact_relationship}}</div>
+                      <div class="duration">{{$students[0]->emergency_contact_number}}</div>
+                    </div>
+                
+                </div>
 
-  
-
-   <div class="details">
-    <div class="section">
-      <div class="section__title">Basic Information</div>
-      <div class="section__list">
-        <div class="section__list-item">
-          <div class="left">
-            <div class="name">Emergency Contact Person</div>
-            <div class="addr">{{$students[0]->emergency_contact_person}}</div>
-            <div class="addr">{{$students[0]->emergency_contact_relationship}}</div>
-            <div class="duration">{{$students[0]->emergency_contact_number}}</div>
+            
+              </div>
+            </div>
           </div>
-          <div class="right">
-            <div class="name">Fr developer</div>
-            <div class="desc">did This and that</div>
           </div>
-        </div>
-                <div class="section__list-item">
-          <div class="left">
-            <div class="name">Akount</div>
-            <div class="addr">San Monica, CA</div>
-            <div class="duration">Jan 2011 - Feb 2015</div>
-          </div>
-          <div class="right">
-            <div class="name">Fr developer</div>
-            <div class="desc">did This and that</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="section">
-      <div class="section__title">Education</div>
-      <div class="section__list">
-        <div class="section__list-item">
-          <div class="left">
-            <div class="name">Sample Institute of technology</div>
-            <div class="addr">San Fr, CA</div>
-            <div class="duration">Jan 2011 - Feb 2015</div>
-          </div>
-          <div class="right">
-            <div class="name">Fr developer</div>
-            <div class="desc">did This and that</div>
-          </div>
-        </div>
-        <div class="section__list-item">
-          <div class="left">
-            <div class="name">Akount</div>
-            <div class="addr">San Monica, CA</div>
-            <div class="duration">Jan 2011 - Feb 2015</div>
-          </div>
-          <div class="right">
-            <div class="name">Fr developer</div>
-            <div class="desc">did This and that</div>
-          </div>
-        </div>
-
-      </div>
-      
-  </div>
-     <div class="section">
-      <div class="section__title">Projects</div> 
-       <div class="section__list">
-         <div class="section__list-item">
-           <div class="name">DSP</div>
-           <div class="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow.</div>
-         </div>
-         
-         <div class="section__list-item">
-                    <div class="name">DSP</div>
-           <div class="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow. <a href="/login">link</a>
-           </div>
-         </div>
-       </div>
-    </div>
-     <div class="section">
-       <div class="section__title">Skills</div>
-       <div class="skills">
-         <div class="skills__item">
-           <div class="left"><div class="name">
-             Javascript
-             </div></div>
-           <div class="right">
-                          <input  id="ck1" type="checkbox" checked/>
-
-             <label for="ck1"></label>
-                          <input id="ck2" type="checkbox" checked/>
-
-              <label for="ck2"></label>
-                         <input id="ck3" type="checkbox" />
-
-              <label for="ck3"></label>
-                           <input id="ck4" type="checkbox" />
-            <label for="ck4"></label>
-                          <input id="ck5" type="checkbox" />
-              <label for="ck5"></label>
-
-           </div>
-         </div>
-         
-       </div>
-       <div class="skills__item">
-           <div class="left"><div class="name">
-             CSS</div></div>
-           <div class="right">
-                          <input  id="ck1" type="checkbox" checked/>
-
-             <label for="ck1"></label>
-                          <input id="ck2" type="checkbox" checked/>
-
-              <label for="ck2"></label>
-                         <input id="ck3" type="checkbox" />
-
-              <label for="ck3"></label>
-                           <input id="ck4" type="checkbox" />
-            <label for="ck4"></label>
-                          <input id="ck5" type="checkbox" />
-              <label for="ck5"></label>
-
-           </div>
-         </div>
-         
-       </div>
-     <div class="section">
-     <div class="section__title">
-       Interests
-       </div>
-       <div class="section__list">
-         <div class="section__list-item">
-                  Football, programming.
-          </div>
-       </div>
-     </div>
-     </div>
-  </div>
-</div>
-</div>
-         
-
-    &nbsp;
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you for giving us the opportunity to serve you better. Please help us by taking a few 
-        minutes to tell us about the service that you have received so far. We appreciate your concern and want 
-        to mke sure we meet your expectations and improve our services.</p>
-
-        <table border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
-       
- 
-        @foreach ($students as $data)
-        <tr>
-            <td>{{ $data->lastname }}</td>
-            <td>{{ $data->lastname }}</td>
-            <td>{{ $data->firstname }}</td>
-        </tr>
-        @endforeach
-  
-    </table>
-    <br><br>
-    <footer id="footer">
-        <img  id="imgfooter" src="{{ public_path('storage/img/footer.jpg') }}"  />
-  
-        <center id="txtfooter">
-           <span>Honor. Patriotism. Duty.</span>
-        </center>
-  </footer>
-   
-</body>
-</html>
+                  
+            
+              {{-- <footer>
+                  <img  id="imgfooter" src="{{ public_path('storage/img/footer.jpg') }}"  />
+            
+                  <center id="txtfooter">
+                    <span align=center>Honor. Patriotism. Duty.</span>
+                  </center>
+            </footer> --}}
+            
+          </body>
+          </html>
 
 <style>
 * {
@@ -472,6 +386,32 @@
       input:checked + label {
         background: #79A9CE;
       }
+      
+
+   #imgfooter{
+      position: fixed;
+      bottom:0;
+      width:50;
+   }
+   #txtfooter{
+      position: fixed;
+      bottom: 0;
+      font-style: italic
+      text-align: center;
+   }
+   #header1 {
+      position: fixed;
+      top: -30;
+      width: 100%;
+      height: 100px;
+   }
+
+   #footer1 {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+   }
     }
   }
   
