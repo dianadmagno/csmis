@@ -39,7 +39,7 @@
             <div class="header">
               <div class="section__title">Personal Information</div>
               <div class="full-name">
-                <span class="first-name">{{$students[0]->firstname}} {{$students[0]->middlename}} </span> 
+                <span class="first-name">{{ $students[0]->rank->name }} {{$students[0]->firstname}} {{$students[0]->middlename}} </span> 
                 <span class="first-name">{{$students[0]->lastname}}</span>
               </div>
               <div class="contact-info">
