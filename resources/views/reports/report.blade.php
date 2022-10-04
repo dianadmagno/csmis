@@ -42,6 +42,7 @@
                                                     <option value="9" {{ old('report_type') == 9 ? 'selected' : '' }}>Reports By Location</option>
                                                     <option value="10" {{ old('report_type') == 10 ? 'selected' : '' }}>Reports By Sex</option>
                                                     <option value="11" {{ old('report_type') == 11 ? 'selected' : '' }}>List of Students per Class</option>
+                                                    <option value="12" {{ old('report_type') == 12 ? 'selected' : '' }}>Count of students per Class</option>
                                                 </select>
             
                                                 @if ($errors->has('report_type'))
@@ -51,6 +52,7 @@
                                                 @endif
                                             </div>
 
+                                            @if('report_type' != 12)
                                             <div class="form-group{{ $errors->has('class_id') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Class') }}</label>
                                                 <select name="class_id" class="form-control form-control-alternative{{ $errors->has('class_id') ? ' is-invalid' : '' }}">
@@ -66,6 +68,7 @@
                                                     </span>
                                                 @endif
                                             </div>
+                                            @endif
 
                                             {{-- <div class="form-group{{ $errors->has('start_date') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="input-name">{{ __('Start Date') }}</label>
@@ -114,6 +117,8 @@
                             @include('reports.bloodType')
                             @elseif($report == 11)
                             @include('reports.listOfStudents')
+                            @elseif($report == 12)
+                            @include('reports.class')
                             @endif
                         </div>
                     </div>
