@@ -10,6 +10,7 @@ use App\Models\Transactions\StudentClass;
 use App\Models\Transactions\PersonnelClass;
 use App\Models\References\PersonnelCategory;
 use App\Http\Requests\Transactions\PersonnelRequest;
+use PDF;
 
 class PersonnelController extends Controller
 { 
@@ -151,4 +152,15 @@ class PersonnelController extends Controller
         ]);
         return redirect()->route('personnel.index')->with('status', 'Class Assigned Successfully');
     }
+
+    public function personnelListPDF()
+    {
+        $personnels = Personnel::with('rank', 'personnelCategory', 'personnelClasses')->get();
+        view()->share('personnels', $personnels);
+        $pdf = PDF::loadView('reports.reportsPDF.personnelList', compact('personnels'));
+        
+        // return($personnels);
+        return $pdf->setPaper("a4","landscape")->stream('personnel_list.pdf');        
+    }
+
 }

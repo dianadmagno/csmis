@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/academic/{id}', ['as' => 'student.academic', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academic']);
 	Route::resource('student', 'App\Http\Controllers\Transactions\StudentController', ['except' => ['show', 'create', 'store']]);
 	Route::post('student/academic/{studentId}/{subjectId}', ['as' => 'student.academic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeAcademicGrade']);
+	Route::get('student/individual/PDF/{studentId}', ['as' => 'student.individualPDF', 'uses' => 'App\Http\Controllers\Transactions\StudentController@individualPDF']);
+	Route::get('student/list/PDF', ['as' => 'student.studentListPDF', 'uses' => 'App\Http\Controllers\Transactions\StudentController@studentListPDF']);
 	Route::get('student/academic/input-grade/{studentId}/{subjectId}', ['as' => 'student.academic.input_grade', 'uses' => 'App\Http\Controllers\Transactions\StudentController@academicInputGrade']);
 	Route::get('student/academic/edit/{id}', ['as' => 'student.academic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editAcademicGrade']);
 	Route::put('student/academic/{id}', ['as' => 'student.academic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateAcademicGrade']);
@@ -83,10 +85,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('assign/instructor/{id}', ['as' => 'assigned.instructor', 'uses' => 'App\Http\Controllers\References\ModuleController@updateInstructor']);
 	Route::post('add/instructor/{id}', ['as' => 'instructor.add', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedInstructor']);
 	Route::resource('personnel', 'App\Http\Controllers\Transactions\PersonnelController', ['except' => ['show']]);
+	Route::get('personnel/list/PDF', ['as' => 'personnel.listPDF', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@personnelListPDF']);
 	Route::get('assign/class/{id}', ['as' => 'assign.class', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@assignClass']);
 	Route::post('assign/class/{id}', ['as' => 'assign.class.store', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@storeAssignClass']);
 	Route::get('assigned/classes/{id}', ['as' => 'assigned.classes', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@assignedClasses']);
 	Route::resource('class', 'App\Http\Controllers\Transactions\StudentClassController', ['except' => ['show']]);
+	Route::get('class/list/PDF', ['as' => 'class.listPDF', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@classListPDF']);
 	Route::get('assigned/personnels/{id}', ['as' => 'assigned.personnels', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignedPersonnels']);
 	Route::get('assign/personnel/{id}', ['as' => 'assign.personnel', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@assignPersonnel']);
 	Route::post('assign/personnel/{id}', ['as' => 'assign.personnel.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeAssignPersonnel']);

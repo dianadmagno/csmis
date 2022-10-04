@@ -62,6 +62,10 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card bg-secondary shadow">
+                    
+                                    
+                    {{-- <a class="btn btn-primary" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Export to PDF</a>
+                 --}}
                     <div class="card-body">
                         <form method="post" action="{{ route('student.update', $student->id) }}">
                             @csrf
@@ -627,6 +631,8 @@
 
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                                 <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                <a type="button" class="btn btn-primary mt-4" target="_blank" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Print to PDF</a>
+                
                             </div>
                         </form>
                     </div>

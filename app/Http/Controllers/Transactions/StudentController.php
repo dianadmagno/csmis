@@ -35,6 +35,8 @@ use App\Models\Transactions\SubActivityAverage;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
+use PDF;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -60,6 +62,15 @@ class StudentController extends Controller
                                 })
                                 ->paginate(10)
         ]);
+    }
+
+    public function studentListPDF()
+    {
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses.class', 'company', 'unit')->get();
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentList', compact('students'));
+        
+        return $pdf->setPaper("a4","landscape")->stream('student_list.pdf');        
     }
 
     /**
@@ -145,6 +156,7 @@ class StudentController extends Controller
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
         $student = Student::find($id);
+        $linkId = $id;
         $courses = Course::all();
         $collegeCourses = CollegeCourse::all();
         $regions = Region::all();
@@ -165,9 +177,12 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
+            'linkId' => $linkId,
             'islandGroups' => $islandGroups
         ]);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -182,6 +197,23 @@ class StudentController extends Controller
         $student->update($request->all());
         return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
+
+    // Generate PDF
+    public function individualPDF($id) {
+
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses', 'company')->where('id',$id)->get();
+
+
+
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentIndividual', compact('students'));
+        
+        return $pdf->setPaper("a4")->stream('pdf_file.pdf');
+
+
+       
+      }
+
 
     /**
      * Remove the specified resource from storage.
@@ -416,7 +448,7 @@ class StudentController extends Controller
             'class_id' => $request->class_id
         ]);
         return redirect()->route('student.index')->with('status', 'Class Added Successfully');
-    }
+    } 
 
     public function nonAcademicSubActivity(Request $request, $studentId, $activityId)
     {
