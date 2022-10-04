@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
+use App\Models\References\Activity;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Student;
 use App\Models\Transactions\StudentDeliquencyReport;
@@ -59,6 +60,11 @@ class StudentDeliquencyReportController extends Controller
             'dr_type' => $request->dr_type,
             'demerit_points' => $request->demerit_points,
             'remarks' => $request->remarks            
+        ]);
+
+        $activity = Activity::where('id', 1)->first();
+        $activity->update([
+            'nr_of_points' => $activity->nr_of_points - $request->demerit_points
         ]);
         return redirect()->route('student.drIndex', $id)->with('status', 'Deliquency Report Created Successfully');
     }
