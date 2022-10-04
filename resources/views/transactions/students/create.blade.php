@@ -162,6 +162,17 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group{{ $errors->has('pagibig') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Pagibig Number') }}</label>
+                                        <input type="text" value="{{ old('pagibig') }}" name="pagibig" class="form-control form-control-alternative{{ $errors->has('pagibig') ? ' is-invalid' : '' }}" placeholder="{{ __('Pagibig Number') }}">
+    
+                                        @if ($errors->has('pagibig'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('pagibig') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                     <div class="form-group{{ $errors->has('mobile_number') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Mobile Number') }}</label>
                                         <input type="text" value="{{ old('mobile_number') }}" name="mobile_number" class="form-control form-control-alternative{{ $errors->has('mobile_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Mobile Number') }}">
@@ -276,7 +287,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group{{ $errors->has('course_id') ? ' has-danger' : '' }}">
+                                    {{-- <div class="form-group{{ $errors->has('course_id') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Course') }}</label>
                                         <select name="course_id" class="form-control form-control-alternative{{ $errors->has('course_id') ? ' is-invalid' : '' }}">
                                             <option value="">Choose Course</option>
@@ -290,6 +301,17 @@
                                                 <strong>{{ $errors->first('course_id') }}</strong>
                                             </span>
                                         @endif
+                                    </div> --}}
+
+                                    <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Course') }}</label>
+                                        <input type="text" value="{{ old('course') }}" name="course" class="form-control form-control-alternative{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Course') }}">
+    
+                                        @if ($errors->has('course'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('course') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
 
                                     <div class="form-group{{ $errors->has('tesda') ? ' has-danger' : '' }}">
@@ -299,17 +321,6 @@
                                         @if ($errors->has('tesda'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('tesda') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('pagibig') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Pagibig Number') }}</label>
-                                        <input type="text" value="{{ old('pagibig') }}" name="pagibig" class="form-control form-control-alternative{{ $errors->has('pagibig') ? ' is-invalid' : '' }}" placeholder="{{ __('Pagibig Number') }}">
-    
-                                        @if ($errors->has('pagibig'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('pagibig') }}</strong>
                                             </span>
                                         @endif
                                     </div>   
@@ -556,7 +567,9 @@
                                         @endif
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4">{{ __('Submit') }}</button>
-                                    <a type="button" href="{{ route('student.index') }}" class="btn btn-danger mt-4">{{ __('Back') }}</a>
+                                    <a href="{{ route('student.index') }}">
+                                        <button type="button" class="btn btn-danger mt-4">{{ __('Back') }}</button>
+                                    </a>
                                 </div>
                             </form>
                         </div>

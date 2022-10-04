@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('student/nonacademics/sub-activities/events/{studentId}/{subActivityId}', ['as' => 'student.nonacademicsubactivityevents.index', 'uses' => 'App\Http\Controllers\Transactions\StudentController@nonAcademicSubActivityEvents']);
 	Route::get('student/nonacademics/sub-activities/events/create/{studentId}/{eventId}', ['as' => 'student.nonacademicsubactivityevents.create', 'uses' => 'App\Http\Controllers\Transactions\StudentController@createNonAcademicSubActivityEvents']);
 	Route::post('student/nonacademics/sub-activities/events/store/{studentId}/{eventId}', ['as' => 'student.nonacademicsubactivityevents.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeNonAcademicSubActivityEvents']);
+	Route::get('student/nonacademics/sub-activities/events/edit/score/{id}', ['as' => 'student.nonacademicsubactivityevents.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentController@editNonAcademicSubActivityEvents']);
+	Route::put('student/nonacademics/sub-activities/events/update/{id}', ['as' => 'student.nonacademicsubactivityevents.update', 'uses' => 'App\Http\Controllers\Transactions\StudentController@updateNonAcademicSubActivityEvents']);
 	Route::get('student/terminate/{id}', ['as' => 'student.terminate', 'uses' => 'App\Http\Controllers\Transactions\StudentController@terminate']);
 	Route::put('student/terminate/{id}', ['as' => 'student.terminate.store', 'uses' => 'App\Http\Controllers\Transactions\StudentController@storeTermination']);
 	Route::get('student/add-class/{id}', ['as' => 'student.class.add', 'uses' => 'App\Http\Controllers\Transactions\StudentController@addClass']);
