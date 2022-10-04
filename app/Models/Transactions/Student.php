@@ -9,6 +9,7 @@ use App\Models\References\Company;
 use App\Models\References\Religion;
 use App\Models\References\BloodType;
 use App\Models\References\EthnicGroup;
+use App\Models\References\LicenseExam;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
@@ -99,6 +100,11 @@ class Student extends Model
     public function ethnicGroup()
     {
         return $this->belongsTo(EthnicGroup::class);
+    }
+
+    public function licenseExam()
+    {
+        return $this->belongsTo(LicenseExam::class);
     }
 
     public function studentClasses()

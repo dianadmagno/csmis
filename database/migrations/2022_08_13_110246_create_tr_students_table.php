@@ -27,7 +27,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('birthplace');
             $table->string('region');
-            $table->string('tesda');
+            $table->string('tesda')->nullable();
             $table->string('address');
             $table->string('headgear');
             $table->string('bda');
@@ -50,7 +50,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('rf_companies');
             $table->foreignId('region_id')->constrained('rf_regions');
             $table->foreignId('island_group_id')->constrained('rf_island_groups');
-            $table->integer('course_id')->nullable();
+            $table->string('course')->nullable();
             $table->integer('license_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('gwa')->nullable();

@@ -150,11 +150,13 @@ class StudentController extends Controller
         $regions = Region::all();
         $licenseExams = LicenseExam::all();
         $islandGroups = IslandGroup::all();
+        
         return view('transactions.students.edit', [
             'bloodTypes' => $bloodTypes,
             'religions' => $religions,
             'ranks' => $ranks,
             'enlistmentTypes' => $enlistmentTypes,
+            'licenseExams' => $licenseExams,
             'studentClasses' => $studentClasses,
             'units' => $units,
             'ethnicGroups' => $ethnicGroups,
@@ -163,8 +165,7 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
-            'licenseExams' => $licenseExams,
-            'islandGroup' => $islandGroups
+            'islandGroups' => $islandGroups
         ]);
     }
 

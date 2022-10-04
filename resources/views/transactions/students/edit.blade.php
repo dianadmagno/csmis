@@ -168,7 +168,57 @@
                                                 </span>
                                             @endif
                                         </div>
+
+                                        <div class="form-group{{ $errors->has('license_id') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Licensed Exam') }}</label>
+                                            <select name="license_id" class="form-control form-control-alternative{{ $errors->has('license_id') ? ' is-invalid' : '' }}">
+                                                <option value="">Choose Licensed Exam</option>
+                                                @foreach($licenseExams as $licenseExam)
+                                                    <option value="{{ $licenseExam->id }}" {{ $student->license_id == $licenseExam->id ? 'selected' : '' }}>{{ $licenseExam->description }}</option>
+                                                @endforeach
+                                            </select>
+        
+                                            @if ($errors->has('license_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('license_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('philhealth') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Philhealth') }}</label>
+                                            <input type="text" value="{{ old('philhealth', $student->philhealth) }}" name="philhealth" class="form-control form-control-alternative{{ $errors->has('philhealth') ? ' is-invalid' : '' }}" placeholder="{{ __('Philhealth') }}">
+        
+                                            @if ($errors->has('philhealth'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('philhealth') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+    
+                                        <div class="form-group{{ $errors->has('tin') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('TIN') }}</label>
+                                            <input type="text" value="{{ old('tin', $student->tin) }}" name="tin" class="form-control form-control-alternative{{ $errors->has('tin') ? ' is-invalid' : '' }}" placeholder="{{ __('TIN') }}">
+        
+                                            @if ($errors->has('tin'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('tin') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+    
+                                        <div class="form-group{{ $errors->has('gsis') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('GSIS Number') }}</label>
+                                            <input type="text" value="{{ old('gsis', $student->gsis) }}" name="gsis" class="form-control form-control-alternative{{ $errors->has('gsis') ? ' is-invalid' : '' }}" placeholder="{{ __('GSIS Number') }}">
+        
+                                            @if ($errors->has('gsis'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('gsis') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
+
                                     <div class="col">
                                         <div class="form-group{{ $errors->has('mobile_number') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Mobile Number') }}</label>
@@ -177,6 +227,38 @@
                                             @if ($errors->has('mobile_number'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('mobile_number') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('island_group_id') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Island Group') }}</label>
+                                            <select name="island_group_id" class="form-control form-control-alternative{{ $errors->has('island_group_id') ? ' is-invalid' : '' }}">
+                                                <option value="">Choose Island Group</option>
+                                                @foreach($islandGroups as $islandGroup)
+                                                    <option value="{{ $islandGroup->id }}" {{ $student->island_group_id == $islandGroup->id ? 'selected' : '' }}>{{ $islandGroup->description }}</option>
+                                                @endforeach
+                                            </select>
+        
+                                            @if ($errors->has('island_group_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('island_group_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('region_id') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Island Group') }}</label>
+                                            <select name="region_id" class="form-control form-control-alternative{{ $errors->has('region_id') ? ' is-invalid' : '' }}">
+                                                <option value="">Choose Region</option>
+                                                @foreach($regions as $region)
+                                                    <option value="{{ $region->id }}" {{ $student->region_id == $region->id ? 'selected' : '' }}>{{ $region->description }}</option>
+                                                @endforeach
+                                            </select>
+        
+                                            @if ($errors->has('region_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('region_id') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -202,6 +284,7 @@
                                                 </span>
                                             @endif
                                         </div>
+
                                         <div class="form-group{{ $errors->has('blood_type_id') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Blood Type') }}</label>
                                             <select name="blood_type_id" class="form-control form-control-alternative{{ $errors->has('blood_type_id') ? ' is-invalid' : '' }}">
@@ -258,6 +341,28 @@
                                             @if ($errors->has('course'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('course') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('tesda') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Tesda') }}</label>
+                                            <input type="text" value="{{ old('tesda', $student->tesda) }}" name="tesda" class="form-control form-control-alternative{{ $errors->has('tesda') ? ' is-invalid' : '' }}" placeholder="{{ __('Tesda (if applicable)') }}">
+        
+                                            @if ($errors->has('tesda'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('tesda') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('pagibig') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Pagibig Number') }}</label>
+                                            <input type="text" value="{{ old('pagibig', $student->pagibig) }}" name="pagibig" class="form-control form-control-alternative{{ $errors->has('pagibig') ? ' is-invalid' : '' }}" placeholder="{{ __('Pagibig Number') }}">
+        
+                                            @if ($errors->has('pagibig'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('pagibig') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
