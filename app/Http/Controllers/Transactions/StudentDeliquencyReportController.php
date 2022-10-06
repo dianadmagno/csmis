@@ -62,6 +62,11 @@ class StudentDeliquencyReportController extends Controller
             'demerit_points' => $request->demerit_points,
             'remarks' => $request->remarks            
         ]);
+
+        $activity = Activity::where('id', 1)->first();
+        $activity->update([
+            'nr_of_points' => $activity->nr_of_points - $request->demerit_points
+        ]);
         return redirect()->route('student.drIndex', $id)->with('status', 'Deliquency Report Created Successfully');
     }
 
