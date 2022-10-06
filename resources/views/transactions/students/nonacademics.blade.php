@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Non-Academic Points: <b>{{ $totalPoints }}</b></small> 
+                          <small>Total Non-Academic Points: <b>{{ $totalPoints }} / 300</b></small> 
                         </div>
                       </div>
                     </div>

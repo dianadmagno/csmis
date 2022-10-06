@@ -68,7 +68,7 @@
                               </td>
                               <td>
                                 <div class="row">
-                                  <a href="{{ route('assign.subModule', $module->module_id) }}" class="btn btn-success" type="button">Sub Module</a>
+                                  <a href="" class="btn btn-danger" type="button">Delete</a>
                                 </div>
                               </td>
                             </tr>

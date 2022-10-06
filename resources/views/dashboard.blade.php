@@ -103,7 +103,7 @@
                 </div>
             @endif
         </div>
-        <div class="row mt-5">
+        {{-- <div class="row mt-5">
             <div class="col-xl-8 mb-5 mb-xl-0">
                 <div class="card bg-gradient-default shadow">
                     <div class="card-header bg-transparent">
@@ -120,12 +120,6 @@
                                             <span class="d-md-none">M</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
-                                        <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                                            <span class="d-none d-md-block">Week</span>
-                                            <span class="d-md-none">W</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -139,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-4">
+            <div class="col-xl-4">
                 <div class="card shadow">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
@@ -156,8 +150,8 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
-        </div>
+            </div>
+        </div> --}}
         
         <div class="row mt-5">
             <div class="col-xl-6 mb-5 mb-xl-0">

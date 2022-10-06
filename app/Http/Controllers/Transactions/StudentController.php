@@ -125,7 +125,11 @@ class StudentController extends Controller
             'student_id' => $student->id,
             'class_id' => $request->class_id
         ]);
-        return redirect()->route('student.index')->with('status', 'Student Created Successfully');
+        if(Auth::user()) {
+            return redirect()->route('student.index')->with('status', 'Student Created Successfully');
+        }
+
+        return back()->with('status', 'Student Created Successfully');
     }
 
     /**

@@ -2,7 +2,7 @@
       <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
-                <center><h5 class="mb-0">Reports of {{ $className->description }} By Blood Type</h5></center>
+                <center><h5 class="mb-0">Reports of {{ $className->description }} By License</h5></center>
             </div>
         </div>
       </div>

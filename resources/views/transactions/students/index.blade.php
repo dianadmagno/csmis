@@ -107,12 +107,7 @@
                                         <a href="{{ route('student.edit', $student->id) }}" class="dropdown-item" type="button">
                                           Edit
                                         </a>
-                                        @if($student->studentClasses()->latest()->first()->class->graduation_date || $student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::parse()->format('Y-m-d'))
-                                          <a href="{{ route('student.class.add', $student->id) }}" class="dropdown-item" type="button">
-                                            Add Course
-                                          </a>
-                                        @endif
-                                        @if(!$student->termination_remarks || $student->studentClasses()->latest()->pluck('date_graduated')->first() == NULL || $student->studentClasses()->latest()->pluck('date_graduated')->first() > Carbon\Carbon::now()->parse('Y-m-d'))
+                                        @if(!$student->termination_remarks && $student->studentClasses()->latest()->first()->class->graduation_date == NULL && $student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::now()->parse()->format('Y-m-d'))
                                           <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
                                             Academic
                                           </a>
