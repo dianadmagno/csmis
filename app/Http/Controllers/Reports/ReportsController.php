@@ -172,7 +172,27 @@ class ReportsController extends Controller
 
                 array_push($data, $array);
             }
+        } elseif ($reportId == 13) {
+            $data = Student::whereHas('studentClasses', function($query) use($classId) {
+                $query->whereHas('class', function($query) use($classId) {
+                    $query->where('class_id', $classId);
+                });
+            })
+            ->join('rf_ranks', 'tr_students.rank_id', '=', 'rf_ranks.id')
+            ->whereNull('termination_remarks')
+            ->orderBy('gwa', 'asc')
+            ->get();
+        } elseif ($reportId == 14) {
+            $data = Student::whereHas('studentClasses', function($query) use($classId) {
+                $query->whereHas('class', function($query) use($classId) {
+                    $query->where('class_id', $classId);
+                });
+            })
+            ->whereNotNull('termination_remarks')
+            ->join('rf_ranks', 'tr_students.rank_id', '=', 'rf_ranks.id')
+            ->get();
         }
+
 
         return view('reports.report', [
             'className' => StudentClass::where('id', $classId)->first(),

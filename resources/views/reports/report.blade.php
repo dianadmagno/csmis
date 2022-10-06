@@ -43,6 +43,8 @@
                                                     <option value="10" {{ old('report_type') == 10 ? 'selected' : '' }}>Reports By Sex</option>
                                                     <option value="11" {{ old('report_type') == 11 ? 'selected' : '' }}>List of Students per Class</option>
                                                     <option value="12" {{ old('report_type') == 12 ? 'selected' : '' }}>Count of students per Class</option>
+                                                    <option value="13" {{ old('report_type') == 13 ? 'selected' : '' }}>Order of Merit per Class</option>
+                                                    <option value="14" {{ old('report_type') == 14 ? 'selected' : '' }}>List of Terminated Students per Class</option>
                                                 </select>
             
                                                 @if ($errors->has('report_type'))
@@ -119,6 +121,10 @@
                             @include('reports.listOfStudents')
                             @elseif($report == 12)
                             @include('reports.class')
+                            @elseif($report == 13)
+                            @include('reports.orderOfMerit')
+                            @elseif($report == 14)
+                            @include('reports.listOfTerminated')
                             @endif
                         </div>
                     </div>
