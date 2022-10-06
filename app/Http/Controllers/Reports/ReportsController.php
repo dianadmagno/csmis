@@ -15,6 +15,7 @@ use App\Models\References\VaccineName;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Transactions\StudentVaccine;
+use PDF;
 
 class ReportsController extends Controller
 {
@@ -173,10 +174,40 @@ class ReportsController extends Controller
                 array_push($data, $array);
             }
         }
+        
+        
+        $action = '';
+        switch ($request->input('action')) {
+            case 'save':
+                
+                $className = StudentClass::where('id', $classId)->first();
+                $classes = $classes;
+                $data = $data;
+                $report = $request->report_type;
+                view()->share('data', $data);
+                $pdf = PDF::loadView('reports.reportsPDF.reports', compact('data','className','classes','report'));
+        
+                return $pdf->setPaper("a4")->stream('pdf_file.pdf');
 
+                break;
+    
+           
+        }
+       
+      
+        $action = '';
+        // if ($request->input('action') == 'save') {
+        //     return 123;
+        // }
+        // elseif ($request->input('action') == 'generate') {
+        //     return 321;
+        // }
+
+        
         return view('reports.report', [
             'className' => StudentClass::where('id', $classId)->first(),
             'classes' => $classes,
+            'action' => $request->input('action'),
             'data' => $data,
             'report' => $request->report_type
         ]);

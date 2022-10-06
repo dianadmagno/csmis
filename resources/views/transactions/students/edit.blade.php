@@ -62,8 +62,8 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card bg-secondary shadow">
-                <div>
-                    <a type="button" class="btn btn-primary mt-2 mr-4" target="_blank" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Print to PDF</a>
+                <div align="right">
+                    <a type="button" class="btn btn-primary mt-2 mr-2" target="_blank" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Print to PDF</a>
                 </div>
                                     
                     {{-- <a class="btn btn-primary" href="{{ URL::to('/student/individual/PDF/'.$linkId)  }}">Export to PDF</a>

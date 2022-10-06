@@ -242,7 +242,7 @@
   
   body {
     min-height: 100%;  
-    background: #eee;
+    background: #fff;
     font-family: 'Arial', sans-serif;
     font-weight: 400;
     color: #222;
