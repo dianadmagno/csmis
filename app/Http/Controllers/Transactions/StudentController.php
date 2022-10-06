@@ -35,6 +35,8 @@ use App\Models\Transactions\SubActivityAverage;
 use App\Http\Requests\Transactions\StudentRequest;
 use App\Models\Transactions\ClassSubjectInstructor;
 use App\Http\Requests\Transactions\AcademicGradeRequest;
+use PDF;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -60,6 +62,15 @@ class StudentController extends Controller
                                 })
                                 ->paginate(10)
         ]);
+    }
+
+    public function studentListPDF()
+    {
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses.class', 'company', 'unit')->get();
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentList', compact('students'));
+        
+        return $pdf->setPaper("a4","landscape")->stream('student_list.pdf');        
     }
 
     /**
@@ -145,6 +156,7 @@ class StudentController extends Controller
         $ethnicGroups = EthnicGroup::all();
         $companies = Company::all();
         $student = Student::find($id);
+        $linkId = $id;
         $courses = Course::all();
         $collegeCourses = CollegeCourse::all();
         $regions = Region::all();
@@ -165,9 +177,12 @@ class StudentController extends Controller
             'courses' => $courses,
             'collegeCourses' => $collegeCourses,
             'regions' => $regions,
+            'linkId' => $linkId,
             'islandGroups' => $islandGroups
         ]);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -182,6 +197,23 @@ class StudentController extends Controller
         $student->update($request->all());
         return redirect()->route('student.edit', $id)->with('status', 'Student Updated Successfully');
     }
+
+    // Generate PDF
+    public function individualPDF($id) {
+
+        $students = Student::with('bloodType', 'religion', 'rank', 'enlistmentType', 'ethnicGroup','studentClasses', 'company')->where('id',$id)->get();
+
+
+
+        view()->share('students', $students);
+        $pdf = PDF::loadView('reports.reportsPDF.studentIndividual', compact('students'));
+        
+        return $pdf->setPaper("a4")->stream('pdf_file.pdf');
+
+
+       
+      }
+
 
     /**
      * Remove the specified resource from storage.
@@ -416,7 +448,7 @@ class StudentController extends Controller
             'class_id' => $request->class_id
         ]);
         return redirect()->route('student.index')->with('status', 'Class Added Successfully');
-    }
+    } 
 
     public function nonAcademicSubActivity(Request $request, $studentId, $activityId)
     {
@@ -452,12 +484,12 @@ class StudentController extends Controller
         $event = SubActivityEvent::find($eventId);
 
         $eventPercentage = ('.'.$event->percentage);
-        if($event->percentage == 100) {
+        if($event->percentage == null) {
             $eventPercentage = 1;
         }
 
         $subActivityPercentage = ('.'.$event->subActivity->percentage);
-        if($event->subActivity->percentage == 100) {
+        if($event->subActivity->percentage == null) {
             $subActivityPercentage = 1;
         }
 
@@ -520,5 +552,56 @@ class StudentController extends Controller
         ]);
 
         return redirect()->route('student.nonacademicsubactivityevents.index', [$studentId, $event->sub_activity_id])->with('status', 'Event Scored Successfully');
+    }
+
+    public function editNonAcademicSubActivityEvents($id)
+    {
+        return view('transactions.students.edit_non_academic_sub_activity_events', [
+            'eventAverageScore' => EventAverageScore::find($id)
+        ]);
+    }
+
+    public function updateNonAcademicSubActivityEvents(Request $request, $id)
+    {
+        $eventAverageScore = EventAverageScore::find($id);
+
+        $eventPercentage = ('.'.$eventAverageScore->subActivityEvent->percentage);
+        if($eventAverageScore->subActivityEvent->percentage == null) {
+            $eventPercentage = 1;
+        }
+
+        $subActivityPercentage = ('.'.$eventAverageScore->subActivityEvent->percentage);
+        if($eventAverageScore->subActivityEvent->percentage == null) {
+            $subActivityPercentage = 1;
+        }
+
+        $eventAverageScore->update([
+            'score' => $request->score,
+            'average' => $request->score * $eventPercentage,
+            'repetition_time' => $request->repetition_time
+        ]);
+
+        SubActivityAverage::where('student_id', $eventAverageScore->student->id)->where('sub_activity_id', $eventAverageScore->subActivityEvent->sub_activity_id)->update([
+            'average' => round($eventAverageScore->sum('score') / $eventAverageScore->count(), 0),
+            'total' => round($eventAverageScore->sum('score') / $eventAverageScore->count() * $subActivityPercentage, 0)
+        ]);
+
+        $subActivityAverage = SubActivityAverage::where('student_id', $eventAverageScore->student->id)->whereHas('subActivity', function($query) use($eventAverageScore) {
+            $query->where('activity_id', $eventAverageScore->subActivityEvent->subActivity->activity_id);
+        });
+
+        ActivityAverage::where('student_id', $eventAverageScore->student->id)->where('activity_id', $eventAverageScore->subActivityEvent->subActivity->activity_id)->update([
+            'average' => round($subActivityAverage->sum('total'), 0),
+            'total_points' => round(($subActivityAverage->sum('total')) / 100 * $eventAverageScore->subActivityEvent->subActivity->activity->nr_of_points, 0)
+        ]);
+
+        $totalAcademicGrade = AcademicGrade::where('student_id', $eventAverageScore->student->id)->sum('allocated_points');
+        $totalNonAcademicGrade = ActivityAverage::where('student_id', $eventAverageScore->student->id)->sum('total_points');
+
+        Student::find($eventAverageScore->student->id)->update([
+            'gwa' => round($totalAcademicGrade + $totalNonAcademicGrade, 0)
+        ]);
+
+        return redirect()->route('student.nonacademicsubactivityevents.index', [$eventAverageScore->student->id, $eventAverageScore->subActivityEvent->sub_activity_id])->with('status', 'Event Scored Successfully');
     }
 }

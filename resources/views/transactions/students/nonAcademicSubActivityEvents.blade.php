@@ -58,7 +58,6 @@
                       <tbody class="list">
                         @if (count($events) > 0)
                           @foreach($events as $event)
-                            @php $eventAverageScore = App\Models\Transactions\EventAverageScore::where('student_id', $student->id)->where('sub_activity_id', $subActivity->id)->sum('average') @endphp
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
@@ -82,7 +81,7 @@
                               <td>
                                 <div class="row text-center">
                                   @if($event->eventAverageScore()->count() >= 1)
-                                    <a href="" class="btn btn-success" type="button">Edit Score</a>
+                                    <a href="{{ route('student.nonacademicsubactivityevents.edit', $event->eventAverageScore()->pluck('id')->first()) }}" class="btn btn-success" type="button">Edit Score</a>
                                   @else
                                     <a href="{{ route('student.nonacademicsubactivityevents.create', [$student->id, $event->id]) }}" class="btn btn-primary" type="button">Input Score</a>
                                   @endif
