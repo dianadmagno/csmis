@@ -107,13 +107,15 @@
                                         <a href="{{ route('student.edit', $student->id) }}" class="dropdown-item" type="button">
                                           Edit
                                         </a>
-                                        @if(!$student->termination_remarks && $student->studentClasses()->latest()->first()->class->graduation_date == NULL && $student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::now()->parse()->format('Y-m-d'))
-                                          <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
-                                            Academic
-                                          </a>
-                                          <a href="{{ route('student.nonacademics', $student->id) }}" class="dropdown-item" type="button">
-                                            Non Academic
-                                          </a>
+                                        @if(!$student->termination_remarks)
+                                          @if($student->studentClasses()->latest()->first()->class->graduation_date == NULL || $student->studentClasses()->latest()->first()->class->graduation_date > Carbon\Carbon::now()->parse()->format('Y-m-d'))
+                                            <a href="{{ route('student.academic', $student->id) }}" class="dropdown-item" type="button">
+                                              Academic
+                                            </a>
+                                            <a href="{{ route('student.nonacademics', $student->id) }}" class="dropdown-item" type="button">
+                                              Non Academic
+                                            </a>
+                                          @endif
                                         @endif
                                         <a href="{{ route('student.terminate', $student->id) }}" class="dropdown-item" type="button">
                                           Termination
