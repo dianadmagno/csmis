@@ -12,7 +12,18 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('report.generate') }}">
+                            
+                            {{-- @if($action == "save")
+                            @php 
+                            $action = "reports/PDF"
+                            @endphp
+                            @elseif($action == "generate")
+                            @php
+                            $action = "reports/generate"
+                            @endphp
+                            @endif --}}
+
+                            <form method="post" action="{{isset($action) ? 'generate' : route('report.generate')}}">
                                 @csrf
                                 
                                 @if (session('status'))
@@ -93,7 +104,9 @@
                                                     </span>
                                                 @endif
                                             </div> --}}
-                                            <button type="submit" class="btn btn-primary mt-4">{{ __('Generate') }}</button>
+                                            <button type="submit" class="btn btn-primary mt-4" name="action" value="generate">{{ __('Generate') }}</button>
+                                            <button type="submit" target="_blank" class="btn btn-success mt-4" name="action" value="save">{{ __('Print to PDF') }}</button>
+                                                
                                         </div>  
                                     </div>
                                 </div>  

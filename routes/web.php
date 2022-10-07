@@ -134,6 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Reports
 	Route::get('reports', ['as' => 'reports.report', 'uses' => 'App\Http\Controllers\Reports\ReportsController@index']);
+	Route::post('reports/PDF', ['as' => 'report.pdf', 'uses' => 'App\Http\Controllers\Reports\ReportsController@index']);
 	Route::post('reports/generate', ['as' => 'report.generate', 'uses' => 'App\Http\Controllers\Reports\ReportsController@index']);
 });
 
