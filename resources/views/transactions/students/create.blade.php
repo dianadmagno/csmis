@@ -418,30 +418,6 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group{{ $errors->has('bda') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('BDA Size') }}</label>
-                                        <select name="bda" class="form-control form-control-alternative{{ $errors->has('bda') ? ' is-invalid' : '' }}">
-                                            <option value="">Choose BDA Size</option>
-                                            <option value="1" {{ old('bda') == '1' ? 'selected' : '' }}>Extra Small Short</option>
-                                            <option value="2" {{ old('bda') == '2' ? 'selected' : '' }}>Extra Small Regular</option>
-                                            <option value="3" {{ old('bda') == '3' ? 'selected' : '' }}>Small Short</option>
-                                            <option value="4" {{ old('bda') == '4' ? 'selected' : '' }}>Small Regular</option>
-                                            <option value="5" {{ old('bda') == '5' ? 'selected' : '' }}>Medium Short</option>
-                                            <option value="6" {{ old('bda') == '6' ? 'selected' : '' }}>Medium Regular</option>
-                                            <option value="7" {{ old('bda') == '7' ? 'selected' : '' }}>Large Short</option>
-                                            <option value="8" {{ old('bda') == '8' ? 'selected' : '' }}>Large Regular</option>
-                                            <option value="9" {{ old('bda') == '9' ? 'selected' : '' }}>Extra Large Short</option>
-                                            <option value="10" {{ old('bda') == '10' ? 'selected' : '' }}>Extra Large Regular</option>
-                                            <option value="11" {{ old('bda') == '11' ? 'selected' : '' }}>XXL Short</option>
-                                            <option value="12" {{ old('bda') == '12' ? 'selected' : '' }}>XXL Regular</option>
-                                        </select>
-    
-                                        @if ($errors->has('bda'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('bda') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
                                     <div class="form-group{{ $errors->has('physical_profile') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Physical Profile') }}</label>
                                         <select name="physical_profile" class="form-control form-control-alternative{{ $errors->has('physical_profile') ? ' is-invalid' : '' }}">
@@ -471,6 +447,31 @@
                                         @if ($errors->has('ethnic_group_id'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('ethnic_group_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('bda') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('BDA Size') }}</label>
+                                        <select name="bda" class="form-control form-control-alternative{{ $errors->has('bda') ? ' is-invalid' : '' }}">
+                                            <option value="">Choose BDA Size</option>
+                                            <option value="1" {{ old('bda') == '1' ? 'selected' : '' }}>Extra Small Short</option>
+                                            <option value="2" {{ old('bda') == '2' ? 'selected' : '' }}>Extra Small Regular</option>
+                                            <option value="3" {{ old('bda') == '3' ? 'selected' : '' }}>Small Short</option>
+                                            <option value="4" {{ old('bda') == '4' ? 'selected' : '' }}>Small Regular</option>
+                                            <option value="5" {{ old('bda') == '5' ? 'selected' : '' }}>Medium Short</option>
+                                            <option value="6" {{ old('bda') == '6' ? 'selected' : '' }}>Medium Regular</option>
+                                            <option value="7" {{ old('bda') == '7' ? 'selected' : '' }}>Large Short</option>
+                                            <option value="8" {{ old('bda') == '8' ? 'selected' : '' }}>Large Regular</option>
+                                            <option value="9" {{ old('bda') == '9' ? 'selected' : '' }}>Extra Large Short</option>
+                                            <option value="10" {{ old('bda') == '10' ? 'selected' : '' }}>Extra Large Regular</option>
+                                            <option value="11" {{ old('bda') == '11' ? 'selected' : '' }}>XXL Short</option>
+                                            <option value="12" {{ old('bda') == '12' ? 'selected' : '' }}>XXL Regular</option>
+                                        </select>
+    
+                                        @if ($errors->has('bda'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('bda') }}</strong>
                                             </span>
                                         @endif
                                     </div>

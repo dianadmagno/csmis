@@ -37,7 +37,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                         </div>
                         <div class="col-5">
-                          <small>Total Academic Points: <b>{{ round($totalAllocatedPoints) }}</b></small> 
+                          <small>Total Academic Points: <b>{{ round($totalAllocatedPoints) }} / 700</b></small> 
                         </div>
                       </div>
                     </div>
@@ -48,9 +48,11 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">Subject</th>
+                          <th scope="col">No. of Items</th>
+                          <th scope="col">Allocated Points</th>
                           <th scope="col">Grade/Score</th>
                           <th scope="col">Average</th>
-                          <th scope="col">Allocated Points</th>
+                          <th scope="col">Total Points</th>
                           <th scope="col">Input Grade</th>
                         </tr>
                       </thead>
@@ -64,6 +66,8 @@
                                 <td>
                                     {{ $classSubjectInstructor->subject->description }}
                                 </td>
+                                <td>{{ $classSubjectInstructor->subject->nr_of_items }}</td>
+                                <td>{{ $classSubjectInstructor->subject->nr_of_points }}</td>
                                 <td>
                                   @if (isset($AcademicGrade))
                                     {{ $AcademicGrade->grade }}
@@ -72,7 +76,7 @@
                                 <td>
                                   @if (isset($AcademicGrade))
                                     @php $average = $AcademicGrade->grade / $classSubjectInstructor->subject->nr_of_items * 100 @endphp
-                                    {{ $average }}%
+                                    {{ round($average, 0) }}%
                                   @endif
                                 </td>
                                 <td>
