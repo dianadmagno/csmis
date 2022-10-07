@@ -111,6 +111,11 @@
                     <i class="ni ni-single-copy-04 text-primary"></i>Reports
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                    <i class="ni ni-archive-2 text-primary"></i>Audit Log
+                    </a>
+                </li>
             </ul>
 
             <hr class="my-3">
