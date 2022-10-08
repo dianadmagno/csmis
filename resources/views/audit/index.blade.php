@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Units')
+      'title' => __('Audit Logs')
     ])   
 
     <div class="container-fluid mt--7">
@@ -36,60 +36,63 @@
                           <div class="col-2">
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
-                          <div class="col text-right">
-                              <a href="{{ route('unit.create') }}" class="btn btn-primary">Add Unit</a>
-                          </div>
+                          
                         </div>
                       </div>
                   </form>
                   <!-- Light table -->
                   <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
-                      <thead class="thead-light">
+                    <table class="table align-items-center table-flush" >
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Model</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Old Values</th>
+                        <th scope="col">New Values</th>
+                      </tr>
+                    </thead>
+                    <tbody id="audits">
+                      @foreach($audits as $audit)
                         <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Action</th>
+                          <td>{{ $audit->auditable_type }} (id: {{ $audit->auditable_id }})</td>
+                          <td>{{ $audit->event }}</td>
+                          <td>{{ $audit->user->lastname }}</td>
+                          <td>{{ $audit->created_at }}</td>
+                          <td>
+                            <table class="table align-items-center table-flush">
+                              @foreach($audit->old_values as $attribute => $value)
+                                <tr>
+                                  <td><b>{{ $attribute }}</b></td>
+                                  <td>{{ $value }}</td>
+                                </tr>
+                              @endforeach
+                            </table>
+                          </td>
+                          <td>
+                            <table class="table align-items-center table-flush">
+                              @foreach($audit->new_values as $attribute => $value)
+                                <tr>
+                                  <td><b>{{ $attribute }}</b></td>
+                                  <td>{{ $value }}</td>
+                                </tr>
+                              @endforeach
+                            </table>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody class="list">
-                        @if (count($units) > 0)
-                          @foreach($units as $unit)
-                            <tr>
-                              <th scope="row">
-                                <div class="media align-items-center">
-                                  <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $unit->name }}</span>
-                                  </div>
-                                </div>
-                              </th>
-                              <td class="budget">
-                                {{ $unit->description }}
-                              </td>
-                              <td>
-                                <div class="row">
-                                  <form action="{{ route('unit.destroy', $unit->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <a href="{{ route('unit.edit', $unit->id) }}" class="btn btn-success" type="button">Edit</a>
-                                    <button type="submit" onclick="return alert('Do you really want to archive this unit?')" class="btn btn-danger">Archive</button>
-                                </form>
-                                </div>
-                              </td>
-                            </tr>
-                          @endforeach
-                        @else
-                            <tr class="text-center">
-                                <td colspan="5">No Available Data</td>
-                            </tr>
-                        @endif
-                      </tbody>
-                    </table>
+                      @endforeach
+                    </tbody>
+                  </table>
+              
+                </div>
+              
+       
                   </div>
                   <!-- Card footer -->
-                  @if (count($units) > 0)
+                  @if (count($audits) > 0)
                     <div class="card-footer">
-                      {{ $units->links() }}
+                      {{-- {{ $audits->links() }} --}}
                     </div>
                   @endif
                 </div>

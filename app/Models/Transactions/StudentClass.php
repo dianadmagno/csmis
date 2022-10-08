@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\PersonnelClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class StudentClass extends Model
+class StudentClass extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
 

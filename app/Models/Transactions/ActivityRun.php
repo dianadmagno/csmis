@@ -5,9 +5,11 @@ namespace App\Models\Transactions;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ClassActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class ActivityRun extends Model
+class ActivityRun extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
     protected $table = 'tr_activity_runs';

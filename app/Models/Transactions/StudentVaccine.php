@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\StudentClasses;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class StudentVaccine extends Model
+class StudentVaccine extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
     use SoftDeletes;
 

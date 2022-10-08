@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('add/instructor/{id}', ['as' => 'instructor.add', 'uses' => 'App\Http\Controllers\References\ModuleController@assignedInstructor']);
 	Route::resource('personnel', 'App\Http\Controllers\Transactions\PersonnelController', ['except' => ['show']]);
 	Route::get('personnel/list/PDF', ['as' => 'personnel.listPDF', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@personnelListPDF']);
+	Route::get('audit', ['as' => 'audit.index', 'uses' => 'App\Http\Controllers\AuditController@index']);
 	Route::get('assign/class/{id}', ['as' => 'assign.class', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@assignClass']);
 	Route::post('assign/class/{id}', ['as' => 'assign.class.store', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@storeAssignClass']);
 	Route::get('assigned/classes/{id}', ['as' => 'assigned.classes', 'uses' => 'App\Http\Controllers\Transactions\PersonnelController@assignedClasses']);

@@ -89,22 +89,81 @@
                @elseif($report == 12)
                <th>Class</th>
                <th>Total</th>
+               @elseif($report == 13)
+               <th>Nr</th>
+               <th>Rank</th>
+               <th>Last Name</th>
+               <th>First Name</th>
+               <th>Middle Name</th>
+               <th>GWA</th>
+               @elseif($report == 14)
+               <th>Nr</th>
+               <th>Rank</th>
+               <th>Last Name</th>
+               <th>First Name</th>
+               <th>Middle Name</th>
+               <th>Mobile Number</th>
+               <th>Email</th>
+               <th>Remarks</th>
               
                @endif
                 
                
             </tr>
         </thead>
-        <tbody>
-            @foreach ($data as $key => $e)
-                <tr align="center">
-                    @foreach($e as $new)
-                    <td>{{ $new }}</td>
-                @endforeach
-                    
+         @if($report == 1||$report == 2||$report == 3||$report == 4||$report == 5||$report == 6||$report == 7||$report == 8||$report == 9||$report == 10)
+            <tbody>
+                  @foreach ($data as $key => $e)
+                     <tr align="center">
+                        @foreach($e as $new)
+                        <td>{{ $new }}</td>
+                     @endforeach
+                        
+                     </tr>
+                  @endforeach
+            </tbody>
+         @elseif($report == 11)
+         <tbody>
+            @foreach($data as $key => $d)
+                <tr>
+                    <td>{{ $d->name }}</td>
+                    <td>{{ $d->lastname }}</td>
+                    <td>{{ $d->firstname }}</td>
+                    <td>{{ $d->middlename }}</td>
+                    <td>{{ $d->mobile_number }}</td>
+                    <td>{{ $d->email }}</td>
                 </tr>
             @endforeach
         </tbody>
+        @elseif($report == 13)
+        <tbody>
+               @foreach($data as $key => $d)
+                  <tr>
+                     <td>{{ $key+1 }}</td>
+                     <td>{{ $d->name }}</td>
+                     <td>{{ $d->lastname }}</td>
+                     <td>{{ $d->firstname }}</td>
+                     <td>{{ $d->middlename }}</td>
+                     <td>{{ $d->gwa }}</td>
+                  </tr>
+               @endforeach
+         </tbody>
+         @elseif($report == 14)
+         <tbody>
+            @foreach($data as $key => $d)
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $d->name }}</td>
+                    <td>{{ $d->lastname }}</td>
+                    <td>{{ $d->firstname }}</td>
+                    <td>{{ $d->middlename }}</td>
+                    <td>{{ $d->mobile_number }}</td>
+                    <td>{{ $d->email }}</td>
+                    <td>{{ $d->termination_remarks }}</td>
+                </tr>
+            @endforeach
+         </tbody>
+         @endif
     </table>
 
 </body>

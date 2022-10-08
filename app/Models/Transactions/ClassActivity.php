@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ActivityRun;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class ClassActivity extends Model
+class ClassActivity extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
     protected $table = 'tr_class_activities';

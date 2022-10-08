@@ -112,7 +112,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ route('audit.index') }}">
                     <i class="ni ni-archive-2 text-primary"></i>Audit Log
                     </a>
                 </li>

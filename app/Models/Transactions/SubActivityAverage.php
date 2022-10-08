@@ -5,9 +5,11 @@ namespace App\Models\Transactions;
 use App\Models\References\SubActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class SubActivityAverage extends Model
+class SubActivityAverage extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
     protected $table = 'tr_sub_activity_average';

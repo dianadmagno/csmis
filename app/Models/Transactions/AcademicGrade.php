@@ -7,9 +7,11 @@ use App\Models\Transactions\Student;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transactions\ClassSubjectInstructor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class AcademicGrade extends Model
+class AcademicGrade extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
     protected $table = 'tr_academic_grades';

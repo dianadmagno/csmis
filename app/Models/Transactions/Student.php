@@ -15,9 +15,11 @@ use App\Models\References\EnlistmentType;
 use App\Models\Transactions\StudentClass;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Student extends Model
+class Student extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use HasFactory, SoftDeletes;
 
     protected $table = 'tr_students';
