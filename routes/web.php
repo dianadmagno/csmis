@@ -103,6 +103,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('class/non-academic/{classActivityId}', ['as' => 'class.nonacademic.store', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@storeNonAcademic']);
 	Route::get('class/non-academic/edit/{classId}/{activityId}', ['as' => 'class.nonacademic.edit', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@editNonAcademic']);
 	Route::put('class/non-academic/update/{classId}/{activityId}', ['as' => 'class.nonacademic.update', 'uses' => 'App\Http\Controllers\Transactions\StudentClassController@updateNonAcademic']);
+	Route::get('class/platoon/{id}', ['as' => 'platoon.index', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@index']);
+	Route::get('class/platoon/create/{id}', ['as' => 'platoon.create', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@create']);
+	Route::get('class/platoon/edit/{id}', ['as' => 'platoon.edit', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@edit']);
+	Route::put('class/platoon/update/{id}', ['as' => 'platoon.update', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@update']);
+	Route::delete('class/platoon/destroy/{id}', ['as' => 'platoon.destroy', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@destroy']);
+	Route::post('class/platoon/store/{id}', ['as' => 'platoon.store', 'uses' => 'App\Http\Controllers\Transactions\ClassPlatoonController@store']);
+
+	Route::get('class/squad/{id}', ['as' => 'squad.index', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@index']);
+	Route::get('class/squad/create/{id}', ['as' => 'squad.create', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@create']);
+	Route::get('class/squad/edit/{id}', ['as' => 'squad.edit', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@edit']);
+	Route::put('class/squad/update/{id}', ['as' => 'squad.update', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@update']);
+	Route::delete('class/squad/destroy/{id}', ['as' => 'squad.destroy', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@destroy']);
+	Route::post('class/squad/store/{id}', ['as' => 'squad.store', 'uses' => 'App\Http\Controllers\Transactions\ClassSquadController@store']);
 
 	//References
 	Route::resource('ranks', 'App\Http\Controllers\References\RankController', ['except' => ['show']]);
