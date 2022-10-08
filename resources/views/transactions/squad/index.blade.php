@@ -2,7 +2,7 @@
 
 @section('content')
     @include('users.partials.header', [
-      'title' => __('List of Platoons')
+      'title' => __('List of Squad')
     ])   
 
     <div class="container-fluid mt--7">
@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
-                  <form action="{{ route('platoon.create', $company->id) }}">
+                  <form action="{{ route('squad.create', $platoon->id) }}">
                       <div class="card-header border-0">
                           @if (session('status'))
                               <div class="col mt-1 alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default">Search</button>
                           </div>
                           <div class="col text-right">
-                              <a href="{{ route('platoon.create', $company->id) }}" class="btn btn-primary">Add Platoon</a>
+                              <a href="{{ route('squad.create', $platoon->id) }}" class="btn btn-primary">Add Squad</a>
                           </div>
                         </div>
                       </div>
@@ -53,34 +53,26 @@
                         </tr>
                       </thead>
                       <tbody class="list">
-                        @if (count($platoons) > 0)
-                          @foreach($platoons as $platoon)
+                        @if (count($squads) > 0)
+                          @foreach($squads as $squad)
                             <tr>
                               <th scope="row">
                                 <div class="media align-items-center">
                                   <div class="media-body">
-                                    <span class="name mb-0 text-sm">{{ $platoon->name }}</span>
+                                    <span class="name mb-0 text-sm">{{ $squad->name }}</span>
                                   </div>
                                 </div>
                               </th>
                               <td class="budget">
-                                {{ $platoon->description }}
+                                {{ $squad->description }}
                               </td>
                               <td>
                                 <div class="row">
-                                  <form action="{{ route('platoon.destroy', $platoon->id) }}" method="post">
+                                  <form action="{{ route('squad.destroy', $squad->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <div class="dropdown">
-                                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Actions
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a href="{{ route('platoon.edit', $platoon->id) }}" class="dropdown-item" type="button">Edit</a>
-                                        <a href="{{ route('squad.index', $platoon->id) }}" class="dropdown-item" type="button">Squad</a>
-                                        <button type="submit" onclick="return alert('Do you really want to archive this Platoon?')" class="dropdown-item">Archive</button>
-                                      </div>
-                                    </div>
+                                    <a href="{{ route('squad.edit', $squad->id) }}" class="btn btn-success" type="button">Edit</a>
+                                    <button type="submit" onclick="return alert('Do you really want to archive this Squad?')" class="btn btn-danger">Archive</button>
                                 </form>
                                 </div>
                               </td>
@@ -95,9 +87,9 @@
                     </table>
                   </div>
                   <!-- Card footer -->
-                  @if (count($platoons) > 0)
+                  @if (count($squads) > 0)
                     <div class="card-footer">
-                      {{ $platoons->links() }}
+                      {{ $squads->links() }}
                     </div>
                   @endif
                 </div>

@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('platoon.store') }}">
+                            <form method="post" action="{{ route('platoon.store', $company->id) }}">
                                 @csrf
                                 
                                 @if (session('status'))

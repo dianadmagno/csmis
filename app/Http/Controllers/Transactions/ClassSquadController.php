@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Transactions;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\Transactions\ClassSquad;
 use App\Models\Transactions\ClassPlatoon;
-use App\Models\Transactions\StudentClass;
-use App\Http\Requests\Transactions\ClassPlatoonRequest;
+use App\Http\Requests\Transactions\ClassSquadRequest;
 
-class ClassPlatoonController extends Controller
+class ClassSquadController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $companyId)
+    public function index(Request $request, $platoonId)
     {
-        return view('transactions.platoon.index', [
-            'platoons' => ClassPlatoon::where('class_id', $companyId)
+        return view('transactions.squad.index', [
+            'squads' => ClassSquad::where('platoon_id', $platoonId)
                     ->paginate(10),
-            'company' => StudentClass::find($companyId)
+            'platoon' => ClassPlatoon::find($platoonId)
         ]);
     }
 
@@ -31,8 +31,8 @@ class ClassPlatoonController extends Controller
      */
     public function create($id)
     {
-        return view('transactions.platoon.create', [
-            'company' => StudentClass::find($id)
+        return view('transactions.squad.create', [
+            'platoon' => ClassPlatoon::find($id)
         ]);
     }
 
@@ -42,14 +42,14 @@ class ClassPlatoonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $classPlatoonRequest, $id)
+    public function store(Request $classSquadRequest, $id)
     {
-        ClassPlatoon::create([
-            'name' => $classPlatoonRequest->name,
-            'description' => $classPlatoonRequest->description,
-            'class_id' => $id
+        ClassSquad::create([
+            'name' => $classSquadRequest->name,
+            'description' => $classSquadRequest->description,
+            'platoon_id' => $id
         ]);
-        return redirect()->route('platoon.index',$id)->with('status', 'Platoon Created Successfully');
+        return redirect()->route('squad.index', $id)->with('status', 'Squad Created Successfully');
     }
 
     /**
@@ -69,10 +69,10 @@ class ClassPlatoonController extends Controller
      * @param  \App\Models\Transactions\ClassPlatoon  $classPlatoon
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClassPlatoon $classPlatoon, $id)
+    public function edit(ClassSquad $classSquad, $id)
     {
-        return view('transactions.platoon.edit', [
-            'platoon' => ClassPlatoon::find($id)
+        return view('transactions.squad.edit', [
+            'squad' => ClassSquad::find($id)
         ]);
     }
 
@@ -83,14 +83,13 @@ class ClassPlatoonController extends Controller
      * @param  \App\Models\Transactions\ClassPlatoon  $classPlatoon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $classPlatoonRequest, $id)
+    public function update(Request $classSquadRequest, $id)
     {
+        $data = ClassSquad::find($id);
+        $data->update($classSquadRequest->all());
 
-        $data = ClassPlatoon::find($id);
-        $data->update($classPlatoonRequest->all());
-
-        $platoons = ClassPlatoon::paginate(10);
-        return redirect()->route('platoon.index', $data->class_id)->with('Platoon Updated Successfully.');
+        $squads = ClassSquad::paginate(10);
+        return redirect()->route('squad.index', $data->platoon_id)->with('Squad Updated Successfully.');
     }
 
     /**
@@ -99,10 +98,10 @@ class ClassPlatoonController extends Controller
      * @param  \App\Models\Transactions\ClassPlatoon  $classPlatoon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClassPlatoon $classPlatoon, $id)
+    public function destroy(ClassSquad $classSquad, $id)
     {
-        $id = ClassPlatoon::find($id);
+        $id = ClassSquad::find($id);
         $id->delete();
-        return back()->with('status', 'Platoon Deleted Successfully');
+        return back()->with('status', 'Squad Deleted Successfully');
     }
 }
